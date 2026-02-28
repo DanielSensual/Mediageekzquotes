@@ -109,9 +109,9 @@
           </div>
         </div>
 
-        <!-- Turnaround Selector -->
+        <!-- Global Turnaround (default) -->
         <div class="field turnaround-field">
-          <label for="turnaround">⏱ Turnaround Speed</label>
+          <label for="turnaround">⏱ Default Turnaround Speed</label>
           <select id="turnaround">
             <option value="standard">Standard — 2 weeks (no surcharge)</option>
             <option value="expedited">Expedited — 1 week (+20%)</option>
@@ -119,95 +119,194 @@
             <option value="nextDay">Next-Day — 24 hours (+60%)</option>
             <option value="sameDay">Same-Day delivery (+100%)</option>
           </select>
+          <span class="turnaround-hint">Each deliverable can override this individually below</span>
         </div>
 
         <div class="deliverables-section">
           <h3 class="section-subtitle">🎥 Reels & Teasers</h3>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Social Media Teaser (60s)</span>
-              <span class="toggle-price" data-price-key="socialTeaser">$350 / $500</span>
+          <!-- Social Teaser -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Social Media Teaser (60s)</span>
+                <span class="toggle-price" data-price-key="socialTeaser">$350 / $500</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="socialTeaser" data-deliverable>
+                <span class="slider"></span>
+              </label>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="socialTeaser" data-deliverable>
-              <span class="slider"></span>
-            </label>
+            <div class="turnaround-override" id="turnaroundOverride_socialTeaser" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="socialTeaser">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Basic Recap Reel</span>
-              <span class="toggle-price" data-price-key="basicRecapReel">$600 / $900</span>
-              <span class="toggle-detail">1-2 min — clean edit, music bed</span>
+          <!-- Basic Recap -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Basic Recap Reel</span>
+                <span class="toggle-price" data-price-key="basicRecapReel">$600 / $900</span>
+                <span class="toggle-detail">1-2 min — clean edit, music bed</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="basicRecapReel" data-deliverable>
+                <span class="slider"></span>
+              </label>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="basicRecapReel" data-deliverable>
-              <span class="slider"></span>
-            </label>
+            <div class="turnaround-override" id="turnaroundOverride_basicRecapReel" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="basicRecapReel">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Premium Recap Reel ✦</span>
-              <span class="toggle-price" data-price-key="premiumRecapReel">$1,200 / $1,800</span>
-              <span class="toggle-detail">3-5 min — color graded, motion graphics, sound design</span>
+          <!-- Premium Recap -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Premium Recap Reel ✦</span>
+                <span class="toggle-price" data-price-key="premiumRecapReel">$1,200 / $1,800</span>
+                <span class="toggle-detail">3-5 min — color graded, motion graphics, sound design</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="premiumRecapReel" data-deliverable>
+                <span class="slider"></span>
+              </label>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="premiumRecapReel" data-deliverable>
-              <span class="slider"></span>
-            </label>
+            <div class="turnaround-override" id="turnaroundOverride_premiumRecapReel" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="premiumRecapReel">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Basic Highlight Reel</span>
-              <span class="toggle-price" data-price-key="basicHighlight">$800 / $1,200</span>
-              <span class="toggle-detail">2-3 min — clean cuts, branded intro/outro</span>
+          <!-- Basic Highlight -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Basic Highlight Reel</span>
+                <span class="toggle-price" data-price-key="basicHighlight">$800 / $1,200</span>
+                <span class="toggle-detail">2-3 min — clean cuts, branded intro/outro</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="basicHighlight" data-deliverable>
+                <span class="slider"></span>
+              </label>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="basicHighlight" data-deliverable>
-              <span class="slider"></span>
-            </label>
+            <div class="turnaround-override" id="turnaroundOverride_basicHighlight" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="basicHighlight">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Premium Highlight Reel ✦</span>
-              <span class="toggle-price" data-price-key="premiumHighlight">$1,500 / $2,500</span>
-              <span class="toggle-detail">3-5 min — cinematic color, custom transitions, sound mix</span>
+          <!-- Premium Highlight -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Premium Highlight Reel ✦</span>
+                <span class="toggle-price" data-price-key="premiumHighlight">$1,500 / $2,500</span>
+                <span class="toggle-detail">3-5 min — cinematic color, custom transitions, sound mix</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="premiumHighlight" data-deliverable>
+                <span class="slider"></span>
+              </label>
             </div>
-            <label class="switch">
-              <input type="checkbox" id="premiumHighlight" data-deliverable>
-              <span class="slider"></span>
-            </label>
+            <div class="turnaround-override" id="turnaroundOverride_premiumHighlight" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="premiumHighlight">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
+            </div>
           </div>
 
           <h3 class="section-subtitle">📂 Session & Raw Footage</h3>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Full Session Recording</span>
-              <span class="toggle-price" data-price-key="sessionRecording">$200 / $300 per session</span>
-              <span class="toggle-detail">Light color correction & audio sync</span>
+          <!-- Session Recording -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Full Session Recording</span>
+                <span class="toggle-price" data-price-key="sessionRecording">$200 / $300 per session</span>
+                <span class="toggle-detail">Light color correction & audio sync</span>
+              </div>
+              <div class="stepper">
+                <button type="button" class="stepper-btn" data-action="dec" data-target="sessionCount">−</button>
+                <span id="sessionCount" class="stepper-value">0</span>
+                <button type="button" class="stepper-btn" data-action="inc" data-target="sessionCount">+</button>
+              </div>
             </div>
-            <div class="stepper">
-              <button type="button" class="stepper-btn" data-action="dec" data-target="sessionCount">−</button>
-              <span id="sessionCount" class="stepper-value">0</span>
-              <button type="button" class="stepper-btn" data-action="inc" data-target="sessionCount">+</button>
+            <div class="turnaround-override" id="turnaroundOverride_sessionRecording" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="sessionRecording">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
             </div>
           </div>
 
-          <div class="toggle-row">
-            <div class="toggle-info">
-              <span class="toggle-label">Second Camera Angle Edit</span>
-              <span class="toggle-price" data-price-key="secondCameraEdit">$300 / $400 per session</span>
-              <span class="toggle-detail">Multi-angle sync & best-angle selection</span>
+          <!-- Second Camera -->
+          <div class="toggle-row-wrap">
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <span class="toggle-label">Second Camera Angle Edit</span>
+                <span class="toggle-price" data-price-key="secondCameraEdit">$300 / $400 per session</span>
+                <span class="toggle-detail">Multi-angle sync & best-angle selection</span>
+              </div>
+              <div class="stepper">
+                <button type="button" class="stepper-btn" data-action="dec" data-target="secondCameraCount">−</button>
+                <span id="secondCameraCount" class="stepper-value">0</span>
+                <button type="button" class="stepper-btn" data-action="inc" data-target="secondCameraCount">+</button>
+              </div>
             </div>
-            <div class="stepper">
-              <button type="button" class="stepper-btn" data-action="dec" data-target="secondCameraCount">−</button>
-              <span id="secondCameraCount" class="stepper-value">0</span>
-              <button type="button" class="stepper-btn" data-action="inc" data-target="secondCameraCount">+</button>
+            <div class="turnaround-override" id="turnaroundOverride_secondCameraEdit" style="display:none;">
+              <label>⏱</label>
+              <select data-turnaround-for="secondCameraEdit">
+                <option value="">Use default</option>
+                <option value="standard">Standard — 2 weeks</option>
+                <option value="expedited">Expedited — 1 week (+20%)</option>
+                <option value="rush">Rush — 48h (+35%)</option>
+                <option value="nextDay">Next-Day (+60%)</option>
+                <option value="sameDay">Same-Day (+100%)</option>
+              </select>
             </div>
           </div>
 
@@ -230,10 +329,11 @@
           <span class="step-number step-number-premium">4</span>
           <div>
             <h2 class="card-title">Premium Add-Ons</h2>
-            <p class="card-subtitle">Enhance your production</p>
+            <p class="card-subtitle">Enhance your production — select which days</p>
           </div>
         </div>
 
+        <!-- Drone — stays hour-based -->
         <div class="toggle-row">
           <div class="toggle-info">
             <span class="toggle-label">🚁 Drone Aerial Coverage</span>
@@ -246,48 +346,64 @@
           </div>
         </div>
 
-        <div class="toggle-row">
-          <div class="toggle-info">
-            <span class="toggle-label">📡 Multi-Platform Livestreaming</span>
-            <span class="toggle-price">$800 / day — YouTube, LinkedIn, or custom RTMP</span>
+        <!-- Livestreaming — per-day -->
+        <div class="toggle-row-wrap">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">📡 Multi-Platform Livestreaming</span>
+              <span class="toggle-price">$800 / day — YouTube, LinkedIn, or custom RTMP</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="livestreaming" data-addon data-per-day>
+              <span class="slider"></span>
+            </label>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="livestreaming" data-addon>
-            <span class="slider"></span>
-          </label>
+          <div class="day-pills" id="dayPills_livestreaming" style="display:none;"></div>
         </div>
 
-        <div class="toggle-row">
-          <div class="toggle-info">
-            <span class="toggle-label">📸 Event Photo Coverage</span>
-            <span class="toggle-price">$600 / day — dedicated stills photographer</span>
+        <!-- Photo Coverage — per-day -->
+        <div class="toggle-row-wrap">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">📸 Event Photo Coverage</span>
+              <span class="toggle-price">$600 / day — dedicated stills photographer</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="photoCoverage" data-addon data-per-day>
+              <span class="slider"></span>
+            </label>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="photoCoverage" data-addon>
-            <span class="slider"></span>
-          </label>
+          <div class="day-pills" id="dayPills_photoCoverage" style="display:none;"></div>
         </div>
 
-        <div class="toggle-row">
-          <div class="toggle-info">
-            <span class="toggle-label">📋 Teleprompter Operator</span>
-            <span class="toggle-price">$350 / day — operator + professional gear</span>
+        <!-- Teleprompter — per-day -->
+        <div class="toggle-row-wrap">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">📋 Teleprompter Operator</span>
+              <span class="toggle-price">$350 / day — operator + professional gear</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="teleprompterOp" data-addon data-per-day>
+              <span class="slider"></span>
+            </label>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="teleprompterOp" data-addon>
-            <span class="slider"></span>
-          </label>
+          <div class="day-pills" id="dayPills_teleprompterOp" style="display:none;"></div>
         </div>
 
-        <div class="toggle-row">
-          <div class="toggle-info">
-            <span class="toggle-label">🎬 On-Site Creative Director</span>
-            <span class="toggle-price">$500 / day — shot planning & talent direction</span>
+        <!-- Creative Director — per-day -->
+        <div class="toggle-row-wrap">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">🎬 On-Site Creative Director</span>
+              <span class="toggle-price">$500 / day — shot planning & talent direction</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="onSiteDirector" data-addon data-per-day>
+              <span class="slider"></span>
+            </label>
           </div>
-          <label class="switch">
-            <input type="checkbox" id="onSiteDirector" data-addon>
-            <span class="slider"></span>
-          </label>
+          <div class="day-pills" id="dayPills_onSiteDirector" style="display:none;"></div>
         </div>
       </div>
 

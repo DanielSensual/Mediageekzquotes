@@ -433,6 +433,97 @@ body {
     border-radius: var(--radius-sm);
 }
 
+.turnaround-hint {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* ─── Toggle Row Wrap (for expandable sub-options) ────────────── */
+.toggle-row-wrap {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.toggle-row-wrap .toggle-row {
+    border-bottom: none;
+}
+
+.toggle-row-wrap:last-child {
+    border-bottom: none;
+}
+
+/* ─── Per-Deliverable Turnaround Override ─────────────────────── */
+.turnaround-override {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0 12px 0;
+    animation: slideIn 0.3s ease;
+}
+
+.turnaround-override label {
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.turnaround-override select {
+    flex: 1;
+    padding: 6px 10px;
+    background: var(--bg-input);
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.turnaround-override select:focus {
+    border-color: rgba(255, 140, 0, 0.4);
+}
+
+/* ─── Per-Day Add-On Pills ────────────────────────────────────── */
+.day-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 6px 0 14px 0;
+    animation: slideIn 0.3s ease;
+}
+
+.day-pill {
+    padding: 5px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition);
+    user-select: none;
+    border: 1px solid;
+}
+
+.day-pill.active {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
+    border-color: var(--gold-400);
+    color: var(--gold-300);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.12);
+}
+
+.day-pill:not(.active) {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.day-pill:hover {
+    border-color: var(--gold-500);
+    color: var(--gold-300);
+}
+
 .toggle-detail {
     font-size: 0.7rem;
     color: var(--text-muted);

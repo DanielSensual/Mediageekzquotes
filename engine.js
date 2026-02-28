@@ -1,7 +1,8 @@
 /**
- * MediaGeekz Videography Quotes — Pricing Engine v3
+ * MediaGeekz Videography Quotes — Pricing Engine v4
  * ===================================================
- * Two editor tiers, tiered deliverables, and multi-level turnaround pricing.
+ * Two editor tiers, tiered deliverables, per-deliverable turnaround,
+ * and per-day add-on selection.
  */
 
 const DEFAULT_RATES = {
@@ -90,6 +91,18 @@ const DELIVERABLE_LABELS = {
     rawFootage: 'Raw Footage Handover (includes hard drive)',
 };
 
+/**
+ * Resolve how many days an add-on covers.
+ * Accepts:
+ *   - true/false (boolean) → all days / 0
+ *   - array of day indices  → length of array
+ */
+function resolveAddOnDayCount(value, totalDays) {
+    if (Array.isArray(value)) return value.length;
+    if (value === true) return totalDays;
+    return 0;
+}
+
 // ─── Main Calculation ────────────────────────────────────────────
 
 function calculateQuote(request, rateOverrides = {}) {
@@ -103,8 +116,7 @@ function calculateQuote(request, rateOverrides = {}) {
     const editorTier = request.editorTier || 'standard';
     const editorRates = rates[editorTier] || rates.standard;
     const editorLabel = editorTier === 'senior' ? 'Senior Editor' : 'Standard Editor';
-    const turnaroundKey = request.turnaround || 'standard';
-    const turnaroundMult = rates.turnaround[turnaroundKey] || 0;
+    const globalTurnaround = request.turnaround || 'standard';
     const dayCount = (request.days || []).length || 1;
 
     // ──── Coverage ───────────────────────────────────────────────
@@ -126,27 +138,55 @@ function calculateQuote(request, rateOverrides = {}) {
         lineItems.push({ category: 'Coverage', description: desc, qty: operators, unitPrice, total });
     });
 
-    // ──── Deliverables (tiered by editor) ────────────────────────
+    // ──── Deliverables (tiered by editor) with per-item turnaround ──
     let deliverablesTotal = 0;
+    let turnaroundFee = 0;
     const del = request.deliverables || {};
 
     const qtyItems = ['sessionRecording', 'secondCameraEdit'];
     const boolItems = ['socialTeaser', 'basicRecapReel', 'premiumRecapReel', 'basicHighlight', 'premiumHighlight', 'rawFootage'];
 
     for (const key of boolItems) {
-        if (del[key]) {
-            const price = editorRates[key];
+        const val = del[key];
+        // Support both boolean and object { enabled, turnaround }
+        const enabled = typeof val === 'object' ? val.enabled : val;
+        if (!enabled) continue;
+
+        const price = editorRates[key];
+        lineItems.push({
+            category: 'Deliverable',
+            description: `${DELIVERABLE_LABELS[key]} [${editorLabel}]`,
+            qty: 1, unitPrice: price, total: price,
+        });
+        deliverablesTotal += price;
+
+        // Per-deliverable turnaround
+        const itemTurnaround = (typeof val === 'object' && val.turnaround) ? val.turnaround : globalTurnaround;
+        const mult = rates.turnaround[itemTurnaround] || 0;
+        if (mult > 0) {
+            const fee = Math.round(price * mult);
+            const pct = Math.round(mult * 100);
             lineItems.push({
-                category: 'Deliverable',
-                description: `${DELIVERABLE_LABELS[key]} [${editorLabel}]`,
-                qty: 1, unitPrice: price, total: price,
+                category: 'Turnaround',
+                description: `${TURNAROUND_LABELS[itemTurnaround]} for ${DELIVERABLE_LABELS[key].split(' (')[0]} (+${pct}%)`,
+                qty: 1, unitPrice: fee, total: fee,
             });
-            deliverablesTotal += price;
+            turnaroundFee += fee;
         }
     }
 
     for (const key of qtyItems) {
-        const count = parseInt(del[key], 10) || 0;
+        const val = del[key];
+        let count = 0;
+        let itemTurnaround = globalTurnaround;
+
+        if (typeof val === 'object') {
+            count = parseInt(val.count || val.qty || 0, 10);
+            if (val.turnaround) itemTurnaround = val.turnaround;
+        } else {
+            count = parseInt(val, 10) || 0;
+        }
+
         if (count > 0) {
             const price = editorRates[key];
             const total = price * count;
@@ -156,22 +196,22 @@ function calculateQuote(request, rateOverrides = {}) {
                 qty: count, unitPrice: price, total,
             });
             deliverablesTotal += total;
+
+            const mult = rates.turnaround[itemTurnaround] || 0;
+            if (mult > 0) {
+                const fee = Math.round(total * mult);
+                const pct = Math.round(mult * 100);
+                lineItems.push({
+                    category: 'Turnaround',
+                    description: `${TURNAROUND_LABELS[itemTurnaround]} for ${DELIVERABLE_LABELS[key].split(' (')[0]} (+${pct}%)`,
+                    qty: 1, unitPrice: fee, total: fee,
+                });
+                turnaroundFee += fee;
+            }
         }
     }
 
-    // ──── Turnaround Fee ─────────────────────────────────────────
-    let turnaroundFee = 0;
-    if (turnaroundMult > 0 && deliverablesTotal > 0) {
-        turnaroundFee = Math.round(deliverablesTotal * turnaroundMult);
-        const pct = Math.round(turnaroundMult * 100);
-        lineItems.push({
-            category: 'Turnaround',
-            description: `${TURNAROUND_LABELS[turnaroundKey]} (+${pct}% of editing)`,
-            qty: 1, unitPrice: turnaroundFee, total: turnaroundFee,
-        });
-    }
-
-    // ──── Premium Add-Ons ────────────────────────────────────────
+    // ──── Premium Add-Ons (per-day selection) ────────────────────
     let addOnsTotal = 0;
     const addOns = request.addOns || {};
 
@@ -181,25 +221,29 @@ function calculateQuote(request, rateOverrides = {}) {
         lineItems.push({ category: 'Add-On', description: 'Drone Aerial Coverage (FAA Part 107)', qty: droneHours, unitPrice: rates.droneCoverage, total: t });
         addOnsTotal += t;
     }
-    if (addOns.livestreaming) {
-        const t = rates.livestreaming * dayCount;
-        lineItems.push({ category: 'Add-On', description: 'Multi-Platform Livestreaming', qty: dayCount, unitPrice: rates.livestreaming, total: t });
-        addOnsTotal += t;
-    }
-    if (addOns.photoCoverage) {
-        const t = rates.photoCoverage * dayCount;
-        lineItems.push({ category: 'Add-On', description: 'Event Photo Coverage', qty: dayCount, unitPrice: rates.photoCoverage, total: t });
-        addOnsTotal += t;
-    }
-    if (addOns.teleprompterOp) {
-        const t = rates.teleprompterOp * dayCount;
-        lineItems.push({ category: 'Add-On', description: 'Teleprompter Operator + Gear', qty: dayCount, unitPrice: rates.teleprompterOp, total: t });
-        addOnsTotal += t;
-    }
-    if (addOns.onSiteDirector) {
-        const t = rates.onSiteDirector * dayCount;
-        lineItems.push({ category: 'Add-On', description: 'On-Site Creative Director', qty: dayCount, unitPrice: rates.onSiteDirector, total: t });
-        addOnsTotal += t;
+
+    // Per-day add-ons
+    const perDayAddOns = [
+        { key: 'livestreaming', rate: 'livestreaming', label: 'Multi-Platform Livestreaming' },
+        { key: 'photoCoverage', rate: 'photoCoverage', label: 'Event Photo Coverage' },
+        { key: 'teleprompterOp', rate: 'teleprompterOp', label: 'Teleprompter Operator + Gear' },
+        { key: 'onSiteDirector', rate: 'onSiteDirector', label: 'On-Site Creative Director' },
+    ];
+
+    for (const addon of perDayAddOns) {
+        const val = addOns[addon.key];
+        const count = resolveAddOnDayCount(val, dayCount);
+        if (count > 0) {
+            const t = rates[addon.rate] * count;
+            lineItems.push({
+                category: 'Add-On',
+                description: addon.label,
+                qty: count,
+                unitPrice: rates[addon.rate],
+                total: t,
+            });
+            addOnsTotal += t;
+        }
     }
 
     // ──── Logistics ──────────────────────────────────────────────
@@ -228,7 +272,7 @@ function calculateQuote(request, rateOverrides = {}) {
         eventName: request.eventName || '',
         location: request.location || '',
         editorTier,
-        turnaround: turnaroundKey,
+        turnaround: globalTurnaround,
         lineItems,
         coverageTotal,
         deliverablesTotal,

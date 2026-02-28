@@ -1,7 +1,7 @@
 /**
- * MediaGeekz Videography Quotes — Client-Side App v3
+ * MediaGeekz Videography Quotes — Client-Side App v4
  * ====================================================
- * Two editor tiers, tiered deliverables, turnaround pricing.
+ * Per-deliverable turnaround, per-day add-on selection.
  */
 
 (function () {
@@ -51,8 +51,20 @@
         sameDay: 'Same-Day',
     };
 
+    const LABELS = {
+        socialTeaser: 'Social Media Teaser (60s)',
+        basicRecapReel: 'Basic Recap Reel (1-2 min)',
+        premiumRecapReel: 'Premium Recap Reel (3-5 min)',
+        basicHighlight: 'Basic Highlight Reel (2-3 min)',
+        premiumHighlight: 'Premium Highlight Reel (cinematic)',
+        sessionRecording: 'Full Session Recording',
+        secondCameraEdit: 'Second Camera Angle Edit',
+        rawFootage: 'Raw Footage Handover',
+    };
+
     // ─── State ───────────────────────────────────────────────────
     let nextDayId = 0;
+    const PER_DAY_ADDONS = ['livestreaming', 'photoCoverage', 'teleprompterOp', 'onSiteDirector'];
 
     // ─── DOM refs ────────────────────────────────────────────────
     const $ = id => document.getElementById(id);
@@ -94,6 +106,10 @@
         return document.querySelector('input[name="editorTier"]:checked')?.value || 'standard';
     }
 
+    function getDayCount() {
+        return daysContainer.querySelectorAll('.day-row').length || 1;
+    }
+
     // ─── Dynamic Price Labels ────────────────────────────────────
     function updatePriceLabels() {
         const tier = getEditorTier();
@@ -105,6 +121,86 @@
                 el.textContent = fmt(r[key]) + (isPerSession ? ' / session' : '');
             }
         });
+    }
+
+    // ─── Day Pills Management ────────────────────────────────────
+    function rebuildAllDayPills() {
+        const dayCount = getDayCount();
+        const dayRows = daysContainer.querySelectorAll('.day-row');
+
+        PER_DAY_ADDONS.forEach(addonId => {
+            const container = $(`dayPills_${addonId}`);
+            if (!container) return;
+
+            // Get currently active indices to preserve state
+            const wasActive = new Set();
+            container.querySelectorAll('.day-pill.active').forEach(pill => {
+                wasActive.add(parseInt(pill.dataset.dayIndex, 10));
+            });
+            const hadPills = container.querySelectorAll('.day-pill').length > 0;
+
+            container.innerHTML = '';
+            for (let i = 0; i < dayCount; i++) {
+                const pill = document.createElement('span');
+                pill.className = 'day-pill';
+                pill.dataset.dayIndex = i;
+
+                // Get the day label from the row
+                const dayRow = dayRows[i];
+                const dateInput = dayRow?.querySelector('input[type="date"]');
+                const dateVal = dateInput?.value || '';
+                const shortDate = dateVal ? ` (${dateVal.slice(5)})` : '';
+                pill.textContent = `Day ${i + 1}${shortDate}`;
+
+                // If had pills before, preserve state; otherwise default to active
+                if (hadPills) {
+                    if (wasActive.has(i)) pill.classList.add('active');
+                } else {
+                    pill.classList.add('active'); // default all on
+                }
+
+                pill.addEventListener('click', () => {
+                    pill.classList.toggle('active');
+                    recalc();
+                });
+                container.appendChild(pill);
+            }
+        });
+    }
+
+    function showHideDayPills(addonId, show) {
+        const container = $(`dayPills_${addonId}`);
+        if (!container) return;
+        if (show) {
+            rebuildAllDayPills();
+            container.style.display = 'flex';
+        } else {
+            container.style.display = 'none';
+        }
+    }
+
+    function getSelectedDayIndices(addonId) {
+        const container = $(`dayPills_${addonId}`);
+        if (!container) return [];
+        const indices = [];
+        container.querySelectorAll('.day-pill.active').forEach(pill => {
+            indices.push(parseInt(pill.dataset.dayIndex, 10));
+        });
+        return indices;
+    }
+
+    // ─── Turnaround Override Management ──────────────────────────
+    const BOOL_DELIVERABLES = ['socialTeaser', 'basicRecapReel', 'premiumRecapReel', 'basicHighlight', 'premiumHighlight'];
+    const QTY_DELIVERABLES = ['sessionRecording', 'secondCameraEdit'];
+
+    function showHideTurnaroundOverride(delivId, show) {
+        const el = $(`turnaroundOverride_${delivId}`);
+        if (el) el.style.display = show ? 'flex' : 'none';
+    }
+
+    function getTurnaroundOverride(delivId) {
+        const select = document.querySelector(`select[data-turnaround-for="${delivId}"]`);
+        return select ? select.value : ''; // '' means use default
     }
 
     // ─── Initialize ──────────────────────────────────────────────
@@ -143,12 +239,38 @@
         if (btn.dataset.action === 'inc') val++;
         if (btn.dataset.action === 'dec' && val > 0) val--;
         target.textContent = val;
+
+        // Show/hide turnaround override for qty deliverables
+        if (btn.dataset.target === 'sessionCount') showHideTurnaroundOverride('sessionRecording', val > 0);
+        if (btn.dataset.target === 'secondCameraCount') showHideTurnaroundOverride('secondCameraEdit', val > 0);
+
         recalc();
     });
 
-    // Toggle changes
+    // Toggle changes — deliverables, add-ons, logistics
     document.addEventListener('change', (e) => {
-        if (e.target.matches('[data-deliverable], [data-logistics], [data-addon]')) recalc();
+        const el = e.target;
+
+        // Deliverable toggles → show/hide turnaround override
+        if (el.matches('[data-deliverable]') && el.type === 'checkbox') {
+            const delivId = el.id;
+            if (BOOL_DELIVERABLES.includes(delivId)) {
+                showHideTurnaroundOverride(delivId, el.checked);
+            }
+        }
+
+        // Per-day add-on toggles → show/hide day pills
+        if (el.matches('[data-per-day]') && el.type === 'checkbox') {
+            showHideDayPills(el.id, el.checked);
+        }
+
+        // Turnaround override selects
+        if (el.matches('[data-turnaround-for]')) {
+            recalc();
+            return;
+        }
+
+        if (el.matches('[data-deliverable], [data-logistics], [data-addon]')) recalc();
     });
 
     // ─── Day Management ──────────────────────────────────────────
@@ -197,9 +319,17 @@
         row.querySelector('.remove-day').addEventListener('click', () => {
             row.remove();
             renumberDays();
+            rebuildAllDayPills();
             recalc();
         });
-        row.querySelectorAll('[data-day-input]').forEach(input => input.addEventListener('change', recalc));
+        row.querySelectorAll('[data-day-input]').forEach(input => {
+            input.addEventListener('change', () => {
+                rebuildAllDayPills();
+                recalc();
+            });
+        });
+
+        rebuildAllDayPills();
         recalc();
     }
 
@@ -222,30 +352,70 @@
             });
         });
 
+        const globalTurnaround = turnaroundSelect.value;
+
+        // Build deliverables with per-item turnaround
+        const deliverables = {};
+        for (const key of BOOL_DELIVERABLES) {
+            const checked = $(key)?.checked;
+            if (checked) {
+                const override = getTurnaroundOverride(key);
+                deliverables[key] = override
+                    ? { enabled: true, turnaround: override }
+                    : true;
+            } else {
+                deliverables[key] = false;
+            }
+        }
+
+        // Qty items with optional turnaround
+        const sessionCount = parseInt($('sessionCount').textContent, 10) || 0;
+        if (sessionCount > 0) {
+            const override = getTurnaroundOverride('sessionRecording');
+            deliverables.sessionRecording = override
+                ? { count: sessionCount, turnaround: override }
+                : sessionCount;
+        } else {
+            deliverables.sessionRecording = 0;
+        }
+
+        const secondCameraCount = parseInt($('secondCameraCount').textContent, 10) || 0;
+        if (secondCameraCount > 0) {
+            const override = getTurnaroundOverride('secondCameraEdit');
+            deliverables.secondCameraEdit = override
+                ? { count: secondCameraCount, turnaround: override }
+                : secondCameraCount;
+        } else {
+            deliverables.secondCameraEdit = 0;
+        }
+
+        // Raw footage (no turnaround override — no editing needed)
+        deliverables.rawFootage = $('rawFootage')?.checked || false;
+
+        // Build add-ons with per-day selection
+        const addOns = {
+            droneHours: parseInt($('droneHours').textContent, 10) || 0,
+        };
+
+        for (const addonId of PER_DAY_ADDONS) {
+            const checked = $(addonId)?.checked;
+            if (checked) {
+                const indices = getSelectedDayIndices(addonId);
+                addOns[addonId] = indices.length > 0 ? indices : true;
+            } else {
+                addOns[addonId] = false;
+            }
+        }
+
         return {
             clientName: $('clientName').value,
             eventName: $('eventName').value,
             location: $('location').value,
             editorTier: getEditorTier(),
-            turnaround: turnaroundSelect.value,
+            turnaround: globalTurnaround,
             days,
-            deliverables: {
-                socialTeaser: $('socialTeaser').checked,
-                basicRecapReel: $('basicRecapReel').checked,
-                premiumRecapReel: $('premiumRecapReel').checked,
-                basicHighlight: $('basicHighlight').checked,
-                premiumHighlight: $('premiumHighlight').checked,
-                sessionRecording: parseInt($('sessionCount').textContent, 10) || 0,
-                secondCameraEdit: parseInt($('secondCameraCount').textContent, 10) || 0,
-                rawFootage: $('rawFootage').checked,
-            },
-            addOns: {
-                droneHours: parseInt($('droneHours').textContent, 10) || 0,
-                livestreaming: $('livestreaming').checked,
-                photoCoverage: $('photoCoverage').checked,
-                teleprompterOp: $('teleprompterOp').checked,
-                onSiteDirector: $('onSiteDirector').checked,
-            },
+            deliverables,
+            addOns,
             occcParking: $('occcParking').checked,
             coi: $('coiFee').checked,
             travelFee: $('travelFee').checked,
@@ -278,7 +448,7 @@
 
         if (result.turnaroundFee > 0) {
             turnaroundRow.style.display = 'flex';
-            turnaroundLabel.textContent = `Turnaround (${TURNAROUND_SHORT[req.turnaround]})`;
+            turnaroundLabel.textContent = 'Turnaround Fees';
             totalTurnaround.textContent = fmt(result.turnaroundFee);
         } else {
             turnaroundRow.style.display = 'none';
@@ -299,14 +469,14 @@
         const lineItems = [];
         let coverageTotal = 0;
         let deliverablesTotal = 0;
+        let turnaroundFee = 0;
         let addOnsTotal = 0;
         let logisticsTotal = 0;
 
         const tier = req.editorTier || 'standard';
         const editorRates = RATES[tier] || RATES.standard;
         const editorLabel = tier === 'senior' ? 'Senior' : 'Standard';
-        const turnaroundKey = req.turnaround || 'standard';
-        const turnaroundMult = RATES.turnaround[turnaroundKey] || 0;
+        const globalTurnaround = req.turnaround || 'standard';
         const dayCount = (req.days || []).length || 1;
 
         // ── Coverage ──
@@ -330,55 +500,101 @@
             lineItems.push({ category: 'Coverage', description: desc, qty: operators, unitPrice, total });
         });
 
-        // ── Deliverables (tiered) ──
+        // ── Deliverables with per-deliverable turnaround ──
         const del = req.deliverables || {};
-        const boolItems = ['socialTeaser', 'basicRecapReel', 'premiumRecapReel', 'basicHighlight', 'premiumHighlight', 'rawFootage'];
-        const qtyItems = ['sessionRecording', 'secondCameraEdit'];
 
-        const LABELS = {
-            socialTeaser: 'Social Media Teaser (60s)',
-            basicRecapReel: 'Basic Recap Reel (1-2 min)',
-            premiumRecapReel: 'Premium Recap Reel (3-5 min)',
-            basicHighlight: 'Basic Highlight Reel (2-3 min)',
-            premiumHighlight: 'Premium Highlight Reel (cinematic)',
-            sessionRecording: 'Full Session Recording',
-            secondCameraEdit: 'Second Camera Angle Edit',
-            rawFootage: 'Raw Footage Handover',
-        };
+        for (const key of BOOL_DELIVERABLES) {
+            const val = del[key];
+            const enabled = typeof val === 'object' ? val.enabled : val;
+            if (!enabled) continue;
 
-        for (const key of boolItems) {
-            if (del[key]) {
-                const price = editorRates[key];
-                lineItems.push({ category: 'Editing', description: `${LABELS[key]} [${editorLabel}]`, qty: 1, unitPrice: price, total: price });
-                deliverablesTotal += price;
+            const price = editorRates[key];
+            lineItems.push({ category: 'Editing', description: `${LABELS[key]} [${editorLabel}]`, qty: 1, unitPrice: price, total: price });
+            deliverablesTotal += price;
+
+            // Per-item turnaround
+            const itemTurnaround = (typeof val === 'object' && val.turnaround) ? val.turnaround : globalTurnaround;
+            const mult = RATES.turnaround[itemTurnaround] || 0;
+            if (mult > 0) {
+                const fee = Math.round(price * mult);
+                const pct = Math.round(mult * 100);
+                const shortLabel = LABELS[key].split(' (')[0];
+                lineItems.push({ category: 'Turnaround', description: `${TURNAROUND_SHORT[itemTurnaround]} — ${shortLabel} (+${pct}%)`, qty: 1, unitPrice: fee, total: fee });
+                turnaroundFee += fee;
             }
         }
-        for (const key of qtyItems) {
-            const count = parseInt(del[key], 10) || 0;
+
+        for (const key of QTY_DELIVERABLES) {
+            const val = del[key];
+            let count = 0;
+            let itemTurnaround = globalTurnaround;
+            if (typeof val === 'object') {
+                count = parseInt(val.count || val.qty || 0, 10);
+                if (val.turnaround) itemTurnaround = val.turnaround;
+            } else {
+                count = parseInt(val, 10) || 0;
+            }
+
             if (count > 0) {
                 const price = editorRates[key];
                 const total = price * count;
                 lineItems.push({ category: 'Editing', description: `${LABELS[key]} [${editorLabel}]`, qty: count, unitPrice: price, total });
                 deliverablesTotal += total;
+
+                const mult = RATES.turnaround[itemTurnaround] || 0;
+                if (mult > 0) {
+                    const fee = Math.round(total * mult);
+                    const pct = Math.round(mult * 100);
+                    const shortLabel = LABELS[key].split(' (')[0];
+                    lineItems.push({ category: 'Turnaround', description: `${TURNAROUND_SHORT[itemTurnaround]} — ${shortLabel} (+${pct}%)`, qty: 1, unitPrice: fee, total: fee });
+                    turnaroundFee += fee;
+                }
             }
         }
 
-        // ── Turnaround Fee ──
-        let turnaroundFee = 0;
-        if (turnaroundMult > 0 && deliverablesTotal > 0) {
-            turnaroundFee = Math.round(deliverablesTotal * turnaroundMult);
-            const pct = Math.round(turnaroundMult * 100);
-            lineItems.push({ category: 'Turnaround', description: `${TURNAROUND_SHORT[turnaroundKey]} delivery (+${pct}%)`, qty: 1, unitPrice: turnaroundFee, total: turnaroundFee });
+        // Raw footage (no turnaround)
+        if (del.rawFootage) {
+            const price = editorRates.rawFootage;
+            lineItems.push({ category: 'Editing', description: `${LABELS.rawFootage} [${editorLabel}]`, qty: 1, unitPrice: price, total: price });
+            deliverablesTotal += price;
         }
 
-        // ── Add-Ons ──
+        // ── Add-Ons (per-day) ──
         const addOns = req.addOns || {};
         const droneHrs = parseInt(addOns.droneHours, 10) || 0;
-        if (droneHrs > 0) { const t = RATES.droneCoverage * droneHrs; lineItems.push({ category: 'Add-On', description: 'Drone Coverage (FAA Part 107)', qty: droneHrs, unitPrice: RATES.droneCoverage, total: t }); addOnsTotal += t; }
-        if (addOns.livestreaming) { const t = RATES.livestreaming * dayCount; lineItems.push({ category: 'Add-On', description: 'Multi-Platform Livestreaming', qty: dayCount, unitPrice: RATES.livestreaming, total: t }); addOnsTotal += t; }
-        if (addOns.photoCoverage) { const t = RATES.photoCoverage * dayCount; lineItems.push({ category: 'Add-On', description: 'Event Photo Coverage', qty: dayCount, unitPrice: RATES.photoCoverage, total: t }); addOnsTotal += t; }
-        if (addOns.teleprompterOp) { const t = RATES.teleprompterOp * dayCount; lineItems.push({ category: 'Add-On', description: 'Teleprompter Operator', qty: dayCount, unitPrice: RATES.teleprompterOp, total: t }); addOnsTotal += t; }
-        if (addOns.onSiteDirector) { const t = RATES.onSiteDirector * dayCount; lineItems.push({ category: 'Add-On', description: 'On-Site Creative Director', qty: dayCount, unitPrice: RATES.onSiteDirector, total: t }); addOnsTotal += t; }
+        if (droneHrs > 0) {
+            const t = RATES.droneCoverage * droneHrs;
+            lineItems.push({ category: 'Add-On', description: 'Drone Coverage (FAA Part 107)', qty: droneHrs, unitPrice: RATES.droneCoverage, total: t });
+            addOnsTotal += t;
+        }
+
+        const PER_DAY_LABELS = {
+            livestreaming: 'Multi-Platform Livestreaming',
+            photoCoverage: 'Event Photo Coverage',
+            teleprompterOp: 'Teleprompter Operator',
+            onSiteDirector: 'On-Site Creative Director',
+        };
+        const PER_DAY_RATES = {
+            livestreaming: RATES.livestreaming,
+            photoCoverage: RATES.photoCoverage,
+            teleprompterOp: RATES.teleprompterOp,
+            onSiteDirector: RATES.onSiteDirector,
+        };
+
+        for (const addonKey of PER_DAY_ADDONS) {
+            const val = addOns[addonKey];
+            let count = 0;
+            if (Array.isArray(val)) count = val.length;
+            else if (val === true) count = dayCount;
+
+            if (count > 0) {
+                const rate = PER_DAY_RATES[addonKey];
+                const t = rate * count;
+                const dayNote = count < dayCount ? ` (${count} of ${dayCount} days)` : '';
+                lineItems.push({ category: 'Add-On', description: `${PER_DAY_LABELS[addonKey]}${dayNote}`, qty: count, unitPrice: rate, total: t });
+                addOnsTotal += t;
+            }
+        }
 
         // ── Logistics ──
         if (req.occcParking) { const t = RATES.occcParking * dayCount; lineItems.push({ category: 'Logistics', description: 'OCCC/Resort Parking', qty: dayCount, unitPrice: RATES.occcParking, total: t }); logisticsTotal += t; }
@@ -437,7 +653,6 @@
             const blob = await res.blob();
             const url = URL.createObjectURL(blob);
 
-            // Extract filename from Content-Disposition header
             const cd = res.headers.get('Content-Disposition') || '';
             const match = cd.match(/filename="?([^"]+)"?/);
             const filename = match ? match[1] : 'MediaGeekz-Quote.pdf';
