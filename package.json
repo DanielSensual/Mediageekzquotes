@@ -1,0 +1,14 @@
+{
+    "name": "mediageekz-quotes",
+    "version": "1.0.0",
+    "description": "MediaGeekz Videography Quotes — API-first quoting system for B2B convention videography",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "pdfkit": "^0.17.2"
+    }
+}
