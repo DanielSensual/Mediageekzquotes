@@ -8,6 +8,7 @@ const express = require('express');
 const path = require('path');
 const { calculateQuote } = require('./engine');
 const { generatePDF } = require('./pdf-generator');
+const { validateQuoteRequest } = require('./validate');
 
 const app = express();
 const PORT = process.env.PORT || 3050;
@@ -25,23 +26,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/api/quote', (req, res) => {
     try {
         const request = req.body;
+        const { valid, errors } = validateQuoteRequest(request);
 
-        // Basic validation
-        if (!request || !request.days || !Array.isArray(request.days) || request.days.length === 0) {
+        if (!valid) {
             return res.status(400).json({
-                error: 'Invalid request. "days" must be a non-empty array.',
+                error: 'Validation failed.',
+                details: errors,
                 example: {
                     clientName: 'Acme Corp',
                     eventName: 'TechConnect 2026',
                     location: 'OCCC',
+                    editorTier: 'standard',
+                    turnaround: 'standard',
                     days: [{ date: '2026-03-15', hours: 8, operators: 2 }],
                     deliverables: {
                         socialTeaser: true,
-                        highlightReel: false,
-                        fullSessionRecording: 0,
-                        rawFootageHandover: false,
+                        basicRecapReel: false,
+                        sessionRecording: 2,
+                        rawFootage: false,
                     },
-                    rushTurnaround: false,
+                    addOns: { droneHours: 0, livestreaming: false },
                     occcParking: true,
                     coi: true,
                 },
@@ -63,9 +67,10 @@ app.post('/api/quote', (req, res) => {
 app.post('/api/quote/pdf', async (req, res) => {
     try {
         const request = req.body;
+        const { valid, errors } = validateQuoteRequest(request);
 
-        if (!request || !request.days || !Array.isArray(request.days) || request.days.length === 0) {
-            return res.status(400).json({ error: 'Invalid request. "days" must be a non-empty array.' });
+        if (!valid) {
+            return res.status(400).json({ error: 'Validation failed.', details: errors });
         }
 
         const quote = calculateQuote(request);

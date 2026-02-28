@@ -2,46 +2,30 @@
  * MediaGeekz Videography Quotes — Client-Side App v4
  * ====================================================
  * Per-deliverable turnaround, per-day add-on selection.
+ * Rates are fetched from the API (single source of truth: engine.js).
  */
 
-(function () {
+(async function () {
     'use strict';
 
-    // ─── Rates (mirrored from engine.js) ─────────────────────────
-    const RATES = {
-        halfDay: 850,
-        fullDay: 1600,
-        overtime: 300,
-        standard: {
-            socialTeaser: 350,
-            basicRecapReel: 600,
-            premiumRecapReel: 1200,
-            basicHighlight: 800,
-            premiumHighlight: 1500,
-            sessionRecording: 200,
-            secondCameraEdit: 300,
-            rawFootage: 250,
-        },
-        senior: {
-            socialTeaser: 500,
-            basicRecapReel: 900,
-            premiumRecapReel: 1800,
-            basicHighlight: 1200,
-            premiumHighlight: 2500,
-            sessionRecording: 300,
-            secondCameraEdit: 400,
-            rawFootage: 250,
-        },
-        turnaround: { standard: 0, expedited: 0.20, rush: 0.35, nextDay: 0.60, sameDay: 1.00 },
-        droneCoverage: 450,
-        livestreaming: 800,
-        photoCoverage: 600,
-        teleprompterOp: 350,
-        onSiteDirector: 500,
-        occcParking: 75,
-        coiFee: 50,
-        travelFee: 150,
-    };
+    // ─── Rates (loaded from API — single source of truth) ────────
+    let RATES = null;
+
+    try {
+        const res = await fetch('/api/rates');
+        RATES = await res.json();
+    } catch (e) {
+        console.error('Failed to load rates from API, using fallback.');
+        // Fallback so the page doesn't completely break if API is down
+        RATES = {
+            halfDay: 850, fullDay: 1600, overtime: 300,
+            standard: { socialTeaser: 350, basicRecapReel: 600, premiumRecapReel: 1200, basicHighlight: 800, premiumHighlight: 1500, sessionRecording: 200, secondCameraEdit: 300, rawFootage: 250 },
+            senior: { socialTeaser: 500, basicRecapReel: 900, premiumRecapReel: 1800, basicHighlight: 1200, premiumHighlight: 2500, sessionRecording: 300, secondCameraEdit: 400, rawFootage: 250 },
+            turnaround: { standard: 0, expedited: 0.20, rush: 0.35, nextDay: 0.60, sameDay: 1.00 },
+            droneCoverage: 450, livestreaming: 800, photoCoverage: 600, teleprompterOp: 350, onSiteDirector: 500,
+            occcParking: 75, coiFee: 50, travelFee: 150,
+        };
+    }
 
     const TURNAROUND_SHORT = {
         standard: '2 Weeks',

@@ -1,5 +1,6 @@
 const { calculateQuote } = require('../engine');
 const { generatePDF } = require('../pdf-generator');
+const { validateQuoteRequest } = require('../validate');
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
@@ -8,9 +9,10 @@ module.exports = async (req, res) => {
 
     try {
         const request = req.body;
+        const { valid, errors } = validateQuoteRequest(request);
 
-        if (!request || !request.days || !Array.isArray(request.days) || request.days.length === 0) {
-            return res.status(400).json({ error: 'Invalid request. "days" must be a non-empty array.' });
+        if (!valid) {
+            return res.status(400).json({ error: 'Validation failed.', details: errors });
         }
 
         const quote = calculateQuote(request);

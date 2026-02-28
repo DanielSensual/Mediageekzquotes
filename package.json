@@ -5,7 +5,9 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "dev": "node server.js"
+        "dev": "node server.js",
+        "test": "node --test test/*.test.js",
+        "smoke:api": "bash scripts/smoke-api.sh"
     },
     "dependencies": {
         "express": "^4.18.2",
