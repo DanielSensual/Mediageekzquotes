@@ -37,17 +37,25 @@
     <!-- ─── Form Panel ─── -->
     <section class="form-panel">
 
-      <!-- Client Details -->
-      <div class="card">
-        <h2 class="card-title">Client Details</h2>
-        <div class="field-group">
-          <div class="field">
-            <label for="clientName">Company Name</label>
-            <input type="text" id="clientName" placeholder="e.g. Acme Corp">
+      <!-- ──────── STEP 1 ──────── -->
+      <div class="card" id="step1">
+        <div class="step-indicator">
+          <span class="step-number">1</span>
+          <div>
+            <h2 class="card-title">Client Details</h2>
+            <p class="card-subtitle">Who is this quote for?</p>
           </div>
-          <div class="field">
-            <label for="eventName">Event Name</label>
-            <input type="text" id="eventName" placeholder="e.g. TechConnect 2026">
+        </div>
+        <div class="field-group">
+          <div class="field-row-2">
+            <div class="field">
+              <label for="clientName">Company Name</label>
+              <input type="text" id="clientName" placeholder="e.g. Acme Corp">
+            </div>
+            <div class="field">
+              <label for="eventName">Event Name</label>
+              <input type="text" id="eventName" placeholder="e.g. TechConnect 2026">
+            </div>
           </div>
           <div class="field">
             <label for="location">Location</label>
@@ -56,10 +64,14 @@
         </div>
       </div>
 
-      <!-- Coverage Builder -->
-      <div class="card">
-        <div class="card-header-row">
-          <h2 class="card-title">Coverage</h2>
+      <!-- ──────── STEP 2 ──────── -->
+      <div class="card" id="step2">
+        <div class="step-indicator">
+          <span class="step-number">2</span>
+          <div class="step-header-content">
+            <h2 class="card-title">Coverage Days</h2>
+            <p class="card-subtitle">How many days of on-site filming?</p>
+          </div>
           <button type="button" id="addDayBtn" class="btn-sm">+ Add Day</button>
         </div>
         <div id="daysContainer">
@@ -67,15 +79,22 @@
         </div>
       </div>
 
-      <!-- ══════ EDITING QUOTE ══════ -->
-      <div class="card card-editing">
-        <h2 class="card-title">✂️ Editing & Post-Production</h2>
+      <!-- ──────── STEP 3: Editing ──────── -->
+      <div class="card card-editing" id="step3">
+        <div class="step-indicator">
+          <span class="step-number step-number-editing">3</span>
+          <div>
+            <h2 class="card-title">Editing & Post-Production</h2>
+            <p class="card-subtitle">Choose your editor level and deliverables</p>
+          </div>
+        </div>
 
         <!-- Editor Tier Selector -->
         <div class="tier-selector">
           <div class="tier-option" data-tier="standard">
             <input type="radio" name="editorTier" id="tierStandard" value="standard" checked>
             <label for="tierStandard" class="tier-label">
+              <span class="tier-icon">🎞️</span>
               <span class="tier-name">Standard Editor</span>
               <span class="tier-desc">~5 yrs experience • Clean, polished edits</span>
             </label>
@@ -83,6 +102,7 @@
           <div class="tier-option" data-tier="senior">
             <input type="radio" name="editorTier" id="tierSenior" value="senior">
             <label for="tierSenior" class="tier-label">
+              <span class="tier-icon">🎬</span>
               <span class="tier-name">Senior Editor</span>
               <span class="tier-desc">10+ yrs experience • Cinematic, premium quality</span>
             </label>
@@ -90,8 +110,8 @@
         </div>
 
         <!-- Turnaround Selector -->
-        <div class="field" style="margin-top: 16px;">
-          <label for="turnaround">Turnaround Speed</label>
+        <div class="field turnaround-field">
+          <label for="turnaround">⏱ Turnaround Speed</label>
           <select id="turnaround">
             <option value="standard">Standard — 2 weeks (no surcharge)</option>
             <option value="expedited">Expedited — 1 week (+20%)</option>
@@ -102,7 +122,7 @@
         </div>
 
         <div class="deliverables-section">
-          <h3 class="section-subtitle">Reels & Teasers</h3>
+          <h3 class="section-subtitle">🎥 Reels & Teasers</h3>
 
           <div class="toggle-row">
             <div class="toggle-info">
@@ -163,7 +183,7 @@
             </label>
           </div>
 
-          <h3 class="section-subtitle">Session & Raw Footage</h3>
+          <h3 class="section-subtitle">📂 Session & Raw Footage</h3>
 
           <div class="toggle-row">
             <div class="toggle-info">
@@ -204,9 +224,15 @@
         </div>
       </div>
 
-      <!-- Premium Add-Ons -->
-      <div class="card card-premium">
-        <h2 class="card-title">✦ Premium Add-Ons</h2>
+      <!-- ──────── STEP 4: Add-Ons ──────── -->
+      <div class="card card-premium" id="step4">
+        <div class="step-indicator">
+          <span class="step-number step-number-premium">4</span>
+          <div>
+            <h2 class="card-title">Premium Add-Ons</h2>
+            <p class="card-subtitle">Enhance your production</p>
+          </div>
+        </div>
 
         <div class="toggle-row">
           <div class="toggle-info">
@@ -265,9 +291,15 @@
         </div>
       </div>
 
-      <!-- Logistics & Extras -->
-      <div class="card">
-        <h2 class="card-title">Logistics & Extras</h2>
+      <!-- ──────── STEP 5: Logistics ──────── -->
+      <div class="card" id="step5">
+        <div class="step-indicator">
+          <span class="step-number">5</span>
+          <div>
+            <h2 class="card-title">Logistics & Extras</h2>
+            <p class="card-subtitle">Fees and on-site requirements</p>
+          </div>
+        </div>
 
         <div class="toggle-row">
           <div class="toggle-info">
