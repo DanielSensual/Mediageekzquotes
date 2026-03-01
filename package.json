@@ -1,16 +1,27 @@
 {
-    "name": "mediageekz-quotes",
-    "version": "1.0.0",
-    "description": "MediaGeekz Videography Quotes — API-first quoting system for B2B convention videography",
-    "main": "server.js",
+    "name": "videoquoter",
+    "version": "2.0.0",
+    "private": true,
+    "description": "Multi-tenant video production quoting SaaS — conventions, weddings, social media, restaurants",
     "scripts": {
-        "start": "node server.js",
-        "dev": "node server.js",
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
         "test": "node --test test/*.test.js",
-        "smoke:api": "bash scripts/smoke-api.sh"
+        "smoke:api": "bash scripts/smoke-api.sh",
+        "db:generate": "npx prisma generate",
+        "db:push": "npx prisma db push",
+        "db:seed": "node prisma/seed.js",
+        "db:studio": "npx prisma studio"
     },
     "dependencies": {
-        "express": "^4.18.2",
-        "pdfkit": "^0.17.2"
+        "@prisma/client": "^6.4.1",
+        "next": "^16.1.6",
+        "pdfkit": "^0.17.2",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3"
+    },
+    "devDependencies": {
+        "prisma": "^6.4.1"
     }
 }

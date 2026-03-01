@@ -1,0 +1,178 @@
+// ─── Prisma Schema — VideoQuoter SaaS ─────────────────────────
+// Multi-tenant video production quoting platform.
+// Shares the GhostAI Supabase instance — tables prefixed with vq_
+//
+// Run: npx prisma db push
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+}
+
+// ─── Tenant (video production company) ─────────────────────────
+
+model Tenant {
+    id        String   @id @default(cuid())
+    slug      String   @unique
+    name      String
+    plan      String   @default("starter")
+
+    // Branding
+    logoUrl        String? @map("logo_url")
+    colorPrimary   String  @default("#F97316") @map("color_primary")
+    colorBg        String  @default("#05060A") @map("color_bg")
+    fontFamily     String  @default("Montserrat") @map("font_family")
+
+    // Contact
+    email     String?
+    phone     String?
+    city      String?
+    state     String?
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    verticals  Vertical[]
+    quotes     Quote[]
+    users      TenantUser[]
+
+    @@map("vq_tenants")
+}
+
+// ─── Vertical (service category) ───────────────────────────────
+
+model Vertical {
+    id        String   @id @default(cuid())
+    tenantId  String   @map("tenant_id")
+    tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+    slug      String
+    name      String
+    icon      String   @default("🎥")
+    enabled   Boolean  @default(true)
+
+    // Coverage rates
+    halfDayRate   Int   @default(850) @map("half_day_rate")
+    fullDayRate   Int   @default(1600) @map("full_day_rate")
+    overtimeRate  Int   @default(300) @map("overtime_rate")
+
+    // Turnaround multipliers (percentages)
+    turnaroundExpedited  Int   @default(20) @map("turnaround_expedited")
+    turnaroundRush       Int   @default(35) @map("turnaround_rush")
+    turnaroundNextDay    Int   @default(60) @map("turnaround_next_day")
+    turnaroundSameDay    Int   @default(100) @map("turnaround_same_day")
+
+    // Logistics
+    parkingFee    Int   @default(75) @map("parking_fee")
+    coiFee        Int   @default(50) @map("coi_fee")
+    travelFee     Int   @default(150) @map("travel_fee")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    services  ServiceItem[]
+    addOns    AddOnItem[]
+    quotes    Quote[]
+
+    @@unique([tenantId, slug])
+    @@map("vq_verticals")
+}
+
+// ─── Service Item (deliverable) ────────────────────────────────
+
+model ServiceItem {
+    id         String   @id @default(cuid())
+    verticalId String   @map("vertical_id")
+    vertical   Vertical @relation(fields: [verticalId], references: [id], onDelete: Cascade)
+
+    slug        String
+    name        String
+    description String?
+    category    String  @default("deliverable")
+
+    standardPrice  Int  @map("standard_price")
+    seniorPrice    Int  @map("senior_price")
+
+    mode        String  @default("boolean")
+    sortOrder   Int     @default(0) @map("sort_order")
+    enabled     Boolean @default(true)
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([verticalId, slug])
+    @@map("vq_service_items")
+}
+
+// ─── Add-On Item ───────────────────────────────────────────────
+
+model AddOnItem {
+    id         String   @id @default(cuid())
+    verticalId String   @map("vertical_id")
+    vertical   Vertical @relation(fields: [verticalId], references: [id], onDelete: Cascade)
+
+    slug          String
+    name          String
+    description   String?
+    pricePerUnit  Int      @map("price_per_unit")
+    unitType      String   @default("day") @map("unit_type")
+
+    sortOrder   Int     @default(0) @map("sort_order")
+    enabled     Boolean @default(true)
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([verticalId, slug])
+    @@map("vq_addon_items")
+}
+
+// ─── Quote ─────────────────────────────────────────────────────
+
+model Quote {
+    id         String   @id @default(cuid())
+    quoteId    String   @unique @map("quote_id")
+    tenantId   String   @map("tenant_id")
+    tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+    verticalId String   @map("vertical_id")
+    vertical   Vertical @relation(fields: [verticalId], references: [id], onDelete: Cascade)
+
+    clientName  String? @map("client_name")
+    eventName   String? @map("event_name")
+    location    String?
+
+    requestJson  Json   @map("request_json")
+    resultJson   Json   @map("result_json")
+
+    total        Int
+    status       String  @default("draft")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@index([tenantId])
+    @@map("vq_quotes")
+}
+
+// ─── Tenant User ───────────────────────────────────────────────
+
+model TenantUser {
+    id        String   @id @default(cuid())
+    tenantId  String   @map("tenant_id")
+    tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+    email     String   @unique
+    name      String?
+    role      String   @default("admin")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("vq_tenant_users")
+}
