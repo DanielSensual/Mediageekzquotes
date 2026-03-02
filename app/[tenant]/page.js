@@ -304,10 +304,10 @@ function TenantQuotePageInner() {
             {/* Header */}
             <header className="site-header">
                 <div className="header-inner">
-                    <div className="brand">
+                    <a href="/" className="brand" style={{ textDecoration: 'none', color: 'inherit' }}>
                         <span className="brand-icon">🎬</span>
                         <span className="brand-name">{tenant.name}</span>
-                    </div>
+                    </a>
                     <span className="header-tagline">Quote Builder</span>
                 </div>
             </header>
