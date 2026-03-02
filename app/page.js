@@ -7,6 +7,14 @@ const VERTICALS = [
     { slug: 'weddings', icon: '💒', name: 'Weddings', desc: 'Cinematic films & highlight reels' },
     { slug: 'social-media', icon: '📱', name: 'Social Media', desc: 'Reels, TikToks & digital content' },
     { slug: 'restaurants', icon: '🍽️', name: 'Restaurants', desc: 'Menu showcases & ambiance films' },
+    { slug: 'real-estate', icon: '🏠', name: 'Real Estate', desc: 'Walkthroughs, drones & listing videos' },
+    { slug: 'music-videos', icon: '🎵', name: 'Music Videos', desc: 'Cinematic performances & narrative films' },
+    { slug: 'podcasts', icon: '🎙️', name: 'Podcasts', desc: 'Multi-cam recording & social clips' },
+    { slug: 'fitness', icon: '💪', name: 'Fitness & Gym', desc: 'High-energy promos & trainer spotlights' },
+    { slug: 'nightlife', icon: '🌃', name: 'Nightlife', desc: 'Clubs, events & highlight reels' },
+    { slug: 'corporate', icon: '🏢', name: 'Corporate', desc: 'Interviews, training & brand films' },
+    { slug: 'medical', icon: '🏥', name: 'Medical / MedSpa', desc: 'Procedure explainers & testimonials' },
+    { slug: 'education', icon: '🎓', name: 'Education', desc: 'Campus tours & course promos' },
 ];
 
 export default function HomePage() {

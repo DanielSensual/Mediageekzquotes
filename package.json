@@ -2,7 +2,7 @@
     "name": "videoquoter",
     "version": "2.0.0",
     "private": true,
-    "description": "Multi-tenant video production quoting SaaS — conventions, weddings, social media, restaurants",
+    "description": "Multi-tenant video production quoting SaaS — 12 verticals: conventions, weddings, social media, restaurants, real estate, music videos, podcasts, fitness, nightlife, corporate, medical, education",
     "scripts": {
         "dev": "next dev",
         "build": "next build",

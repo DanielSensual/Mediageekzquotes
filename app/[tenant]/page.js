@@ -37,6 +37,22 @@ const SLUG_MAP = {
     'social-media-content': 'social-media',
     'restaurants': 'restaurants',
     'restaurant-video': 'restaurants',
+    'real-estate': 'real-estate',
+    'real-estate-video': 'real-estate',
+    'music-videos': 'music-videos',
+    'music-video-production': 'music-videos',
+    'podcasts': 'podcasts',
+    'podcast-production': 'podcasts',
+    'fitness': 'fitness',
+    'fitness-gym': 'fitness',
+    'nightlife': 'nightlife',
+    'nightlife-events': 'nightlife',
+    'corporate': 'corporate',
+    'corporate-video': 'corporate',
+    'medical': 'medical',
+    'medical-medspa': 'medical',
+    'education': 'education',
+    'education-video': 'education',
 };
 
 // ─── Component ───────────────────────────────────────────────────
