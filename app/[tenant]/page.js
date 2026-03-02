@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'next/navigation';
+import { useEffect, useState, useCallback, Suspense } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
 
 // ─── Helpers ─────────────────────────────────────────────────────
 
@@ -27,11 +27,25 @@ const TURNAROUND_OPTIONS = [
     { value: 'sameDay', label: 'Same-Day delivery (+100%)' },
 ];
 
+// ─── Slug mapping (URL slugs → DB vertical slugs) ───────────────
+const SLUG_MAP = {
+    'conventions': 'conventions',
+    'convention-videography': 'conventions',
+    'weddings': 'weddings',
+    'wedding-films': 'weddings',
+    'social-media': 'social-media',
+    'social-media-content': 'social-media',
+    'restaurants': 'restaurants',
+    'restaurant-video': 'restaurants',
+};
+
 // ─── Component ───────────────────────────────────────────────────
 
-export default function TenantQuotePage() {
+function TenantQuotePageInner() {
     const params = useParams();
+    const searchParams = useSearchParams();
     const tenantSlug = params.tenant;
+    const requestedVertical = searchParams.get('v');
 
     const [loading, setLoading] = useState(true);
     const [tenant, setTenant] = useState(null);
@@ -63,11 +77,23 @@ export default function TenantQuotePage() {
                 setTenant(data.tenant);
                 setRateCards(data.rateCards || {});
                 const verticals = Object.keys(data.rateCards || {});
-                if (verticals.length > 0) setActiveVertical(verticals[0]);
+
+                // Match ?v= param to a vertical slug
+                if (requestedVertical && verticals.length > 0) {
+                    const mapped = SLUG_MAP[requestedVertical] || requestedVertical;
+                    const match = verticals.find(v =>
+                        v === mapped ||
+                        v.toLowerCase().includes(mapped.toLowerCase()) ||
+                        mapped.toLowerCase().includes(v.toLowerCase())
+                    );
+                    setActiveVertical(match || verticals[0]);
+                } else if (verticals.length > 0) {
+                    setActiveVertical(verticals[0]);
+                }
                 setLoading(false);
             })
             .catch(() => setLoading(false));
-    }, [tenantSlug]);
+    }, [tenantSlug, requestedVertical]);
 
     const rc = rateCards[activeVertical] || {};
     const services = rc.services || [];
@@ -554,5 +580,14 @@ export default function TenantQuotePage() {
                 <p>© 2026 {tenant.name} — Powered by VideoQuoter</p>
             </footer>
         </div>
+    );
+}
+
+// Wrap in Suspense for useSearchParams
+export default function TenantQuotePage() {
+    return (
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+            <TenantQuotePageInner />
+        </Suspense>
     );
 }
