@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   VideoQuoter — Cyber Dark Design System
-   Migrated from MediaGeekz Quote Builder for multi-tenant SaaS
+   VideoQuoter V3 — Premium Cyber Dark Design System
+   Glassmorphism • Micro-animations • Scrollable Tabs
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── Reset & Tokens ──────────────────────────────────────────── */
@@ -241,15 +241,23 @@ body {
 .vertical-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 16px;
     margin-top: 24px;
 }
 
+@media (min-width: 901px) and (max-width: 1100px) {
+    .vertical-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .vertical-card-preview {
-    background: var(--bg-card);
+    background: rgba(12, 13, 20, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 32px 20px 24px;
+    padding: 28px 16px 22px;
     text-align: center;
     text-decoration: none;
     color: inherit;
@@ -420,43 +428,93 @@ body {
     color: var(--text-muted);
 }
 
-/* ─── Vertical Tabs ───────────────────────────────────────────── */
-.vertical-tabs {
-    display: flex;
-    gap: 4px;
+/* ─── Vertical Tabs (V3 — Scrollable Pills) ─────────────────── */
+.vertical-tabs-wrapper {
+    position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 12px 24px 0;
+    padding: 0 24px;
+}
+
+.vertical-tabs-wrapper::before,
+.vertical-tabs-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.vertical-tabs-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg-page), transparent);
+}
+
+.vertical-tabs-wrapper::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--bg-page), transparent);
+}
+
+.vertical-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 14px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     border-bottom: 1px solid var(--border);
+    scroll-behavior: smooth;
+}
+
+.vertical-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .vtab {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 18px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 100px;
     color: var(--text-muted);
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     transition: all var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .vtab:hover {
     color: var(--text-secondary);
+    background: rgba(249, 115, 22, 0.06);
+    border-color: rgba(249, 115, 22, 0.15);
 }
 
 .vtab-active {
-    color: var(--gold-400);
-    border-bottom-color: var(--gold-400);
+    color: #0a0a0a;
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-300));
+    border-color: var(--gold-400);
+    box-shadow: 0 2px 16px rgba(249, 115, 22, 0.3);
+    font-weight: 700;
+}
+
+.vtab-active:hover {
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-300));
+    color: #0a0a0a;
 }
 
 .vtab-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
+}
+
+.vtab-name {
+    font-size: 0.8rem;
 }
 
 /* ─── Header ──────────────────────────────────────────────────── */
@@ -936,19 +994,22 @@ input:checked+.slider::before {
     box-shadow: 0 0 16px rgba(249, 115, 22, 0.12);
 }
 
-/* ─── Quote Panel ─────────────────────────────────────────────── */
+/* ─── Quote Panel (V3 — Glassmorphism) ────────────────────────── */
 .quote-panel {
     position: sticky;
     top: 80px;
 }
 
 .quote-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    background: rgba(12, 13, 20, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    border-radius: 16px;
     padding: 28px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 80px rgba(249, 115, 22, 0.04);
 }
 
 .quote-card::before {
@@ -1045,7 +1106,19 @@ input:checked+.slider::before {
     align-items: flex-start;
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    animation: fadeIn 0.3s ease;
+    animation: lineItemSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes lineItemSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .line-item:last-child {
@@ -1101,19 +1174,24 @@ input:checked+.slider::before {
 }
 
 .grand-total {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
     color: var(--gold-300);
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
-    margin-top: 8px;
+    border-top: 2px solid rgba(249, 115, 22, 0.3);
+    padding-top: 14px;
+    margin-top: 10px;
+    letter-spacing: -0.3px;
 }
 
 .grand-total span:last-child {
-    color: var(--gold-300);
+    background: linear-gradient(135deg, var(--gold-200), var(--gold-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.4rem;
 }
 
-/* ─── Buttons ─────────────────────────────────────────────────── */
+/* ─── Buttons (V3 — Shimmer Hover) ────────────────────────────── */
 .btn-primary {
     width: 100%;
     padding: 14px 24px;
@@ -1130,11 +1208,29 @@ input:checked+.slider::before {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover::after {
+    left: 120%;
 }
 
 .btn-primary:hover {
-    box-shadow: 0 4px 24px rgba(249, 115, 22, 0.3);
-    transform: translateY(-1px);
+    box-shadow: 0 4px 30px rgba(249, 115, 22, 0.4), 0 0 60px rgba(249, 115, 22, 0.1);
+    transform: translateY(-2px);
 }
 
 .btn-primary:disabled {
@@ -1143,8 +1239,30 @@ input:checked+.slider::before {
     transform: none;
 }
 
+.btn-primary:disabled::after {
+    display: none;
+}
+
 .btn-icon {
     font-size: 1.1rem;
+}
+
+/* ─── Progress Bar (V3) ──────────────────────────────────────── */
+.progress-bar {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 3px;
+    margin-bottom: 28px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-500), var(--gold-400), var(--gold-300));
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 12px rgba(249, 115, 22, 0.4);
 }
 
 .btn-pdf {
@@ -1254,18 +1372,103 @@ input:checked+.slider::before {
     }
 }
 
-/* ─── Responsive ──────────────────────────────────────────────── */
+/* ─── Responsive (V3 — Mobile-First Enhancements) ────────────── */
+
+/* ── Tablet ── */
 @media (max-width: 900px) {
     .layout {
         grid-template-columns: 1fr;
+        padding: 20px 16px 100px;
+        gap: 20px;
     }
 
     .quote-panel {
-        position: static;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 90;
+        padding: 0;
+    }
+
+    .quote-card {
+        border-radius: 16px 16px 0 0;
+        padding: 16px 20px;
+        box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(249, 115, 22, 0.06);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .quote-card::before {
+        display: none;
+    }
+
+    /* Collapsed mobile summary — show only total + button */
+    .quote-badges {
+        display: none;
+    }
+
+    .quote-lines {
+        display: none;
+    }
+
+    .quote-totals .total-row {
+        display: none;
+    }
+
+    .quote-totals .grand-total {
+        display: flex;
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+        font-size: 1.2rem;
+    }
+
+    .quote-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .quote-totals {
+        border-top: none;
+        padding-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .btn-primary {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .btn-pdf {
+        display: none;
+    }
+
+    .quote-result {
+        display: none;
     }
 
     .vertical-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .vertical-tabs-wrapper {
+        padding: 0 12px;
+    }
+
+    .vertical-tabs-wrapper::before,
+    .vertical-tabs-wrapper::after {
+        width: 20px;
+    }
+
+    .vertical-tabs {
+        padding: 10px 4px;
+    }
+
+    .vtab {
+        padding: 6px 12px;
+        font-size: 0.75rem;
     }
 
     .hero-title {
@@ -1278,20 +1481,242 @@ input:checked+.slider::before {
 
     .day-row {
         grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 12px;
     }
 
     .field-row-2 {
         grid-template-columns: 1fr;
     }
+
+    .card {
+        padding: 20px 16px;
+        margin-bottom: 16px;
+        border-radius: 10px;
+    }
+
+    .step-indicator {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .step-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .toggle-row {
+        padding: 12px 0;
+    }
+
+    .toggle-label {
+        font-size: 0.85rem;
+    }
+
+    .toggle-price {
+        font-size: 0.72rem;
+    }
+
+    /* Bigger touch targets for switches */
+    .switch {
+        width: 52px;
+        height: 28px;
+    }
+
+    .slider::before {
+        width: 22px;
+        height: 22px;
+    }
+
+    input:checked+.slider::before {
+        transform: translateX(24px);
+    }
+
+    .site-header {
+        position: sticky;
+    }
+
+    .header-inner {
+        padding: 12px 16px;
+    }
+
+    .brand-name {
+        font-size: 1.2rem;
+    }
+
+    .header-tagline {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+    }
+
+    .landing-main {
+        padding: 0 16px 60px;
+    }
+
+    .tier-selector {
+        gap: 8px;
+    }
+
+    .tier-label {
+        padding: 14px 12px;
+    }
+
+    .tier-icon {
+        font-size: 1.3rem;
+    }
+
+    .tier-name {
+        font-size: 0.82rem;
+    }
+
+    .tier-desc {
+        font-size: 0.68rem;
+    }
+
+    .stepper-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .stepper-value {
+        width: 40px;
+        line-height: 38px;
+    }
+
+    .progress-bar {
+        margin-bottom: 18px;
+    }
 }
 
+/* ── Phone ── */
 @media (max-width: 520px) {
     .vertical-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .vertical-card-preview {
+        padding: 20px 10px 16px;
+    }
+
+    .vc-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .vc-name {
+        font-size: 0.82rem;
+    }
+
+    .vc-desc {
+        font-size: 0.65rem;
+        margin-bottom: 6px;
     }
 
     .landing-header {
         padding: 48px 16px 24px;
+    }
+
+    .landing-brand {
+        gap: 8px;
+    }
+
+    .landing-icon {
+        font-size: 2.2rem;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .landing-tagline {
+        font-size: 0.9rem;
+    }
+
+    .hero-cta {
+        font-size: 1.2rem;
+    }
+
+    .hero-sub {
+        font-size: 0.82rem;
+        margin-bottom: 20px;
+    }
+
+    .day-row {
+        grid-template-columns: 1fr;
+    }
+
+    .remove-day {
+        width: 100%;
+        height: 32px;
+        margin-top: 4px;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.72rem;
+    }
+
+    .turnaround-field {
+        padding: 12px;
+    }
+}
+
+/* ── Small Phone (iPhone SE) ── */
+@media (max-width: 375px) {
+    .vertical-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .vertical-card-preview {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        text-align: left;
+    }
+
+    .vc-icon {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .vc-name,
+    .vc-desc {
+        display: inline;
+    }
+
+    .vc-name {
+        font-size: 0.85rem;
+    }
+
+    .vc-desc {
+        font-size: 0.7rem;
+        display: block;
+    }
+
+    .vc-arrow {
+        margin-left: auto;
+        opacity: 0.5;
+    }
+
+    .layout {
+        padding: 16px 12px 100px;
+    }
+
+    .card {
+        padding: 16px 12px;
+    }
+
+    .hero-title {
+        font-size: 1.4rem;
     }
 }

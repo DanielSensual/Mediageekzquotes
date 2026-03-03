@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState, useCallback, Suspense } from 'react';
+import { useEffect, useState, useCallback, useRef, Suspense } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 
 // ─── Helpers ─────────────────────────────────────────────────────
 
 function fmt(n) {
-    return '$' + (n || 0).toLocaleString('en-US');
+    return '$' + (n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function getLocalDateString(offset) {
@@ -67,6 +67,7 @@ function TenantQuotePageInner() {
     const [tenant, setTenant] = useState(null);
     const [rateCards, setRateCards] = useState({});
     const [activeVertical, setActiveVertical] = useState('');
+    const tabsRef = useRef(null);
 
     // Form State
     const [clientName, setClientName] = useState('');
@@ -84,6 +85,25 @@ function TenantQuotePageInner() {
     // Quote result
     const [quoteResult, setQuoteResult] = useState(null);
     const [generating, setGenerating] = useState(false);
+
+    // V3: Auto-scroll active tab into view
+    useEffect(() => {
+        if (!tabsRef.current || !activeVertical) return;
+        const activeBtn = tabsRef.current.querySelector(`[data-slug="${activeVertical}"]`);
+        if (activeBtn) {
+            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }, [activeVertical]);
+
+    // V3: Progress bar calculation
+    const progressPct = (() => {
+        let steps = 0;
+        if (clientName || eventName || location) steps++;
+        if (days.length > 0) steps++;
+        if (Object.values(deliverables).some(v => v)) steps++;
+        if (Object.values(addOns).some(v => v) || parking || coi || travelFee) steps++;
+        return Math.round((steps / 4) * 100);
+    })();
 
     // ─── Load Rates ──────────────────────────────────────────────
     useEffect(() => {
@@ -328,26 +348,34 @@ function TenantQuotePageInner() {
                 </div>
             </header>
 
-            {/* Vertical Tabs */}
+            {/* Vertical Tabs — Scrollable Pills */}
             {verticalSlugs.length > 1 && (
-                <nav className="vertical-tabs">
-                    {verticalSlugs.map(slug => (
-                        <button
-                            key={slug}
-                            className={`vtab ${slug === activeVertical ? 'vtab-active' : ''}`}
-                            onClick={() => { setActiveVertical(slug); setDeliverables({}); setAddOns({}); }}
-                        >
-                            <span className="vtab-icon">{rateCards[slug].icon}</span>
-                            <span className="vtab-name">{rateCards[slug].name}</span>
-                        </button>
-                    ))}
-                </nav>
+                <div className="vertical-tabs-wrapper">
+                    <nav className="vertical-tabs" ref={tabsRef}>
+                        {verticalSlugs.map(slug => (
+                            <button
+                                key={slug}
+                                className={`vtab ${slug === activeVertical ? 'vtab-active' : ''}`}
+                                onClick={() => { setActiveVertical(slug); setDeliverables({}); setAddOns({}); }}
+                                data-slug={slug}
+                            >
+                                <span className="vtab-icon">{rateCards[slug].icon}</span>
+                                <span className="vtab-name">{rateCards[slug].name}</span>
+                            </button>
+                        ))}
+                    </nav>
+                </div>
             )}
 
             <main className="layout">
 
                 {/* ─── Form Panel ─── */}
                 <section className="form-panel">
+
+                    {/* Progress Bar */}
+                    <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: `${progressPct}%` }} />
+                    </div>
 
                     {/* Step 1: Client Details */}
                     <div className="card">
