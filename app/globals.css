@@ -576,12 +576,15 @@ body {
 
 /* ─── Cards ───────────────────────────────────────────────────── */
 .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: rgba(18, 18, 23, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 28px;
     margin-bottom: 24px;
     transition: border-color var(--transition);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
@@ -992,6 +995,46 @@ input:checked+.slider::before {
     background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(249, 115, 22, 0.15));
     border-color: var(--gold-400);
     box-shadow: 0 0 16px rgba(249, 115, 22, 0.12);
+}
+
+/* ─── Payment Alerts ────────────────────────────────────────────── */
+.payment-alert {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    margin: 0 0 24px 0;
+    border-radius: var(--radius-sm);
+    border: 1px solid;
+    animation: slideIn 0.4s ease-out;
+}
+
+.payment-alert.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.payment-alert.canceled {
+    background: rgba(244, 63, 94, 0.1);
+    border-color: rgba(244, 63, 94, 0.3);
+    color: #f43f5e;
+}
+
+.payment-alert strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.payment-alert p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.alert-icon {
+    font-size: 1.5rem;
 }
 
 /* ─── Quote Panel (V3 — Glassmorphism) ────────────────────────── */
