@@ -56,6 +56,7 @@ export function QuoteProvider({ children }) {
 
     // Form State
     const [clientName, setClientName] = useState('');
+    const [email, setEmail] = useState('');
     const [eventName, setEventName] = useState('');
     const [location, setLocation] = useState('');
     const [editorTier, setEditorTier] = useState('standard');
@@ -230,7 +231,7 @@ export function QuoteProvider({ children }) {
         setGenerating(true);
         const requestBody = {
             vertical: activeVertical,
-            clientName, eventName, location, editorTier, turnaround, days,
+            clientName, email, eventName, location, editorTier, turnaround, days,
             deliverables: buildDeliverablesPayload(),
             addOns: buildAddOnsPayload(),
             parking, coi, travelFee,
@@ -253,7 +254,7 @@ export function QuoteProvider({ children }) {
     const handleDownloadPDF = async () => {
         const requestBody = {
             vertical: activeVertical,
-            clientName, eventName, location, editorTier, turnaround, days,
+            clientName, email, eventName, location, editorTier, turnaround, days,
             deliverables: buildDeliverablesPayload(),
             addOns: buildAddOnsPayload(),
             parking, coi, travelFee,
@@ -304,7 +305,7 @@ export function QuoteProvider({ children }) {
 
     const value = {
         loading, tenant, rateCards, activeVertical, setActiveVertical,
-        clientName, setClientName, eventName, setEventName, location, setLocation,
+        clientName, setClientName, email, setEmail, eventName, setEventName, location, setLocation,
         editorTier, setEditorTier, turnaround, setTurnaround,
         days, addDay, removeDay, updateDay,
         deliverables, toggleDeliverable, setDeliverableQty, setDeliverables,

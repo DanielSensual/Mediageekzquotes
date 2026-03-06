@@ -51,6 +51,7 @@ export async function POST(request, { params }) {
                 tenantId: tenant.id,
                 verticalId: vertical.id,
                 clientName: quote.clientName || null,
+                email: quote.email || null,
                 eventName: quote.eventName || null,
                 location: quote.location || null,
                 requestJson: body,
@@ -59,6 +60,26 @@ export async function POST(request, { params }) {
                 status: 'draft',
             },
         });
+
+        // ──── HYDRA CRM Integration ──────────────────────────────────
+        // If a HYDRA webhook is configured, asynchronously push the lead data
+        const hydraUrl = process.env.HYDRA_WEBHOOK_URL;
+        if (hydraUrl && quote.email) {
+            fetch(hydraUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    source: 'VideoQuoter',
+                    tenantSlug,
+                    vertical: quote.vertical,
+                    quoteId: quote.quoteId,
+                    email: quote.email,
+                    clientName: quote.clientName,
+                    eventName: quote.eventName,
+                    total: quote.total,
+                }),
+            }).catch(e => console.error('Failed to ping HYDRA:', e));
+        }
 
         return NextResponse.json(quote);
     } catch (err) {

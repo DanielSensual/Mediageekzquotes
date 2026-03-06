@@ -144,6 +144,7 @@ model Quote {
     vertical   Vertical @relation(fields: [verticalId], references: [id], onDelete: Cascade)
 
     clientName  String? @map("client_name")
+    email       String?
     eventName   String? @map("event_name")
     location    String?
 
@@ -167,9 +168,10 @@ model TenantUser {
     tenantId  String   @map("tenant_id")
     tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-    email     String   @unique
-    name      String?
-    role      String   @default("admin")
+    email        String   @unique
+    passwordHash String?  @map("password_hash")
+    name         String?
+    role         String   @default("admin")
 
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")

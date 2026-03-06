@@ -17,7 +17,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export function QuoteForm() {
     const {
         progressPct, activeVertical,
-        clientName, setClientName, eventName, setEventName, location, setLocation,
+        clientName, setClientName, email, setEmail, eventName, setEventName, location, setLocation,
         days, addDay, updateDay, removeDay,
         editorTier, setEditorTier, turnaround, setTurnaround,
         services, deliverables, toggleDeliverable, setDeliverableQty, editorRates,
@@ -50,17 +50,23 @@ export function QuoteForm() {
                         <div className="field-group">
                             <div className="field-row-2">
                                 <div className="field">
-                                    <label>Company Name</label>
+                                    <label>Company/Client Name</label>
                                     <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder="e.g. Acme Corp" />
                                 </div>
+                                <div className="field">
+                                    <label>Email Address</label>
+                                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="e.g. hello@example.com" />
+                                </div>
+                            </div>
+                            <div className="field-row-2">
                                 <div className="field">
                                     <label>Event Name</label>
                                     <input type="text" value={eventName} onChange={e => setEventName(e.target.value)} placeholder="e.g. TechConnect 2026" />
                                 </div>
-                            </div>
-                            <div className="field">
-                                <label>Location</label>
-                                <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g. Convention Center" />
+                                <div className="field">
+                                    <label>Location</label>
+                                    <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g. Convention Center" />
+                                </div>
                             </div>
                         </div>
                     </div>
