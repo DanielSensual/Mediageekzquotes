@@ -45,27 +45,27 @@ export function QuoteForm() {
                     <div className="card">
                         <div className="step-indicator">
                             <span className="step-number">1</span>
-                            <div><h2 className="card-title">Client Details</h2><p className="card-subtitle">Who is this quote for?</p></div>
+                            <div><h2 className="card-title">{activeVertical === 'weddings' ? 'Couple Details' : 'Client Details'}</h2><p className="card-subtitle">{activeVertical === 'weddings' ? 'Tell us about the happy couple' : 'Who is this quote for?'}</p></div>
                         </div>
                         <div className="field-group">
                             <div className="field-row-2">
                                 <div className="field">
-                                    <label>Company/Client Name</label>
-                                    <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder="e.g. Acme Corp" />
+                                    <label>{activeVertical === 'weddings' ? "Bride's Name" : 'Company/Client Name'}</label>
+                                    <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder={activeVertical === 'weddings' ? 'e.g. Sarah' : 'e.g. Acme Corp'} />
                                 </div>
                                 <div className="field">
-                                    <label>Email Address</label>
-                                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="e.g. hello@example.com" />
+                                    <label>{activeVertical === 'weddings' ? "Groom's Name" : 'Email Address'}</label>
+                                    <input type={activeVertical === 'weddings' ? 'text' : 'email'} value={activeVertical === 'weddings' ? eventName : email} onChange={e => activeVertical === 'weddings' ? setEventName(e.target.value) : setEmail(e.target.value)} placeholder={activeVertical === 'weddings' ? 'e.g. Michael' : 'e.g. hello@example.com'} />
                                 </div>
                             </div>
                             <div className="field-row-2">
                                 <div className="field">
-                                    <label>Event Name</label>
-                                    <input type="text" value={eventName} onChange={e => setEventName(e.target.value)} placeholder="e.g. TechConnect 2026" />
+                                    <label>{activeVertical === 'weddings' ? 'Email Address' : 'Event Name'}</label>
+                                    <input type={activeVertical === 'weddings' ? 'email' : 'text'} value={activeVertical === 'weddings' ? email : eventName} onChange={e => activeVertical === 'weddings' ? setEmail(e.target.value) : setEventName(e.target.value)} placeholder={activeVertical === 'weddings' ? 'e.g. sarah@email.com' : 'e.g. TechConnect 2026'} />
                                 </div>
                                 <div className="field">
-                                    <label>Location</label>
-                                    <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g. Convention Center" />
+                                    <label>{activeVertical === 'weddings' ? 'Venue' : 'Location'}</label>
+                                    <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder={activeVertical === 'weddings' ? 'e.g. The Grand Ballroom, Orlando' : 'e.g. Convention Center'} />
                                 </div>
                             </div>
                         </div>

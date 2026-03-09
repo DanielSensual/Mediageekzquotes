@@ -1769,13 +1769,10 @@ input:checked+.slider::before {
    and adapt all child elements to match the light or dark palette */
 .quote-builder-container[style*="--color-bg"] {
     --bg-page: var(--color-bg);
-    --bg-card: color-mix(in srgb, var(--color-bg) 90%, #000 10%);
-    --bg-card-hover: color-mix(in srgb, var(--color-bg) 82%, #000 18%);
-    --bg-input: color-mix(in srgb, var(--color-bg) 95%, #000 5%);
-    --border: color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%);
-    --border-focus: color-mix(in srgb, var(--color-primary, #C5A55A) 45%, transparent 55%);
     --gold-300: var(--color-primary, #C5A55A);
     --gold-400: var(--color-primary, #C5A55A);
+    --gold-500: var(--color-primary, #C5A55A);
+    --gold-600: var(--color-primary, #C5A55A);
     --text-primary: #1A1A1A;
     --text-secondary: #4A4A4A;
     --text-muted: #8A8A8A;
@@ -1784,15 +1781,197 @@ input:checked+.slider::before {
     background: var(--color-bg) !important;
 }
 
-.quote-builder-container[style*="--color-bg"]~footer,
-.quote-builder-container[style*="--color-bg"] .site-footer {
-    background: var(--color-bg);
+/* Body-level overrides */
+.quote-builder-container[style*="--color-bg"] .tenant-name {
+    color: var(--color-primary, #C5A55A) !important;
 }
 
-.quote-builder-container[style*="--color-bg"] .site-header {
-    background: color-mix(in srgb, var(--color-bg) 85%, transparent 15%);
+/* ─── Cards ─────────────────── */
+.quote-builder-container[style*="--color-bg"] .card {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04) !important;
 }
 
+.quote-builder-container[style*="--color-bg"] .card:hover {
+    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 35%, transparent 65%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .card-editing {
+    border-image: none !important;
+    border: 1px solid color-mix(in srgb, var(--color-primary, #C5A55A) 20%, transparent 80%) !important;
+    background: linear-gradient(170deg, color-mix(in srgb, var(--color-primary, #C5A55A) 3%, white 97%) 0%, rgba(255, 255, 255, 0.92) 40%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .card-premium {
+    border-image: none !important;
+    border: 1px solid color-mix(in srgb, var(--color-primary, #C5A55A) 25%, transparent 75%) !important;
+    background: linear-gradient(170deg, color-mix(in srgb, var(--color-primary, #C5A55A) 4%, white 96%) 0%, rgba(255, 255, 255, 0.92) 40%) !important;
+}
+
+/* ─── Text ──────────────────── */
+.quote-builder-container[style*="--color-bg"] .card-title {
+    color: var(--color-primary, #C5A55A) !important;
+    -webkit-text-fill-color: var(--color-primary, #C5A55A) !important;
+    background: none !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .card-editing .card-title,
+.quote-builder-container[style*="--color-bg"] .card-premium .card-title {
+    color: var(--color-primary, #C5A55A) !important;
+    -webkit-text-fill-color: var(--color-primary, #C5A55A) !important;
+    background: none !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .card-subtitle {
+    color: #8A8A8A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] label {
+    color: #4A4A4A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] h1,
+.quote-builder-container[style*="--color-bg"] h2,
+.quote-builder-container[style*="--color-bg"] h3 {
+    color: #1A1A1A !important;
+}
+
+/* ─── Step Numbers ──────────── */
+.quote-builder-container[style*="--color-bg"] .step-number {
+    background: linear-gradient(135deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 80%, #8B6914 20%)) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--color-primary, #C5A55A) 30%, transparent 70%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .step-number-editing,
+.quote-builder-container[style*="--color-bg"] .step-number-premium {
+    background: linear-gradient(135deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 80%, #8B6914 20%)) !important;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--color-primary, #C5A55A) 30%, transparent 70%) !important;
+}
+
+/* ─── Inputs ────────────────── */
+.quote-builder-container[style*="--color-bg"] input,
+.quote-builder-container[style*="--color-bg"] select,
+.quote-builder-container[style*="--color-bg"] textarea {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    color: #1A1A1A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] input::placeholder {
+    color: #B0B0B0 !important;
+}
+
+.quote-builder-container[style*="--color-bg"] input:focus,
+.quote-builder-container[style*="--color-bg"] select:focus {
+    border-color: var(--color-primary, #C5A55A) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #C5A55A) 12%, transparent 88%) !important;
+}
+
+/* ─── Toggle Rows ───────────── */
+.quote-builder-container[style*="--color-bg"] .toggle-row {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .toggle-row:hover {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 3%, white 97%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .toggle-label {
+    color: #2A2A2A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .toggle-price {
+    color: #6A6A6A !important;
+}
+
+/* ─── Tier Selector ─────────── */
+.quote-builder-container[style*="--color-bg"] .tier-label {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .tier-label:hover {
+    border-color: var(--color-primary, #C5A55A) !important;
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 4%, white 96%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .tier-option input:checked~.tier-label {
+    border-color: var(--color-primary, #C5A55A) !important;
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 6%, white 94%) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .tier-name {
+    color: #1A1A1A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .tier-desc {
+    color: #8A8A8A !important;
+}
+
+/* ─── Day Rows ──────────────── */
+.quote-builder-container[style*="--color-bg"] .day-row {
+    background: rgba(0, 0, 0, 0.015) !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .day-label {
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .remove-day {
+    color: #CC5555 !important;
+    background: rgba(204, 85, 85, 0.08) !important;
+    border-color: rgba(204, 85, 85, 0.15) !important;
+}
+
+/* ─── Section Subtitles ─────── */
+.quote-builder-container[style*="--color-bg"] .section-subtitle {
+    color: #4A4A4A !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ─── Steppers ──────────────── */
+.quote-builder-container[style*="--color-bg"] .stepper-btn {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #4A4A4A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .stepper-btn:hover {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 10%, white 90%) !important;
+    border-color: var(--color-primary, #C5A55A) !important;
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .stepper-value {
+    color: #1A1A1A !important;
+}
+
+/* ─── Switches / Sliders ────── */
+.quote-builder-container[style*="--color-bg"] .switch .slider {
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .switch input:checked+.slider {
+    background: var(--color-primary, #C5A55A) !important;
+}
+
+/* ─── Small Buttons ─────────── */
+.quote-builder-container[style*="--color-bg"] .btn-sm {
+    background: transparent !important;
+    border-color: var(--color-primary, #C5A55A) !important;
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .btn-sm:hover {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 8%, white 92%) !important;
+}
+
+/* ─── Vertical Tabs ─────────── */
 .quote-builder-container[style*="--color-bg"] .vtab {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.06);
@@ -1816,96 +1995,130 @@ input:checked+.slider::before {
     color: #FFFFFF;
 }
 
-/* Cards — override hardcoded dark bg */
-.quote-builder-container[style*="--color-bg"] .card {
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+/* ─── Quote Panel (Sidebar) ── */
+.quote-builder-container[style*="--color-bg"] .quote-panel {
+    background: transparent !important;
 }
 
-.quote-builder-container[style*="--color-bg"] .card:hover {
-    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 35%, transparent 65%);
+.quote-builder-container[style*="--color-bg"] .quote-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Text colors — dark text on light bg */
-.quote-builder-container[style*="--color-bg"] .card-title {
+.quote-builder-container[style*="--color-bg"] .quote-card::before {
+    background: linear-gradient(90deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 60%, #8B6914 40%)) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .quote-title {
+    color: #1A1A1A !important;
+    -webkit-text-fill-color: #1A1A1A !important;
+    background: none !important;
+}
+
+/* ─── Badges ────────────────── */
+.quote-builder-container[style*="--color-bg"] .badge {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: #6A6A6A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .badge-senior {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 8%, white 92%) !important;
+    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 20%, transparent 80%) !important;
     color: var(--color-primary, #C5A55A) !important;
 }
 
-.quote-builder-container[style*="--color-bg"] .card-subtitle,
-.quote-builder-container[style*="--color-bg"] .card-desc {
-    color: #8A8A8A !important;
+.quote-builder-container[style*="--color-bg"] .badge-active {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 8%, white 92%) !important;
+    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 20%, transparent 80%) !important;
+    color: var(--color-primary, #C5A55A) !important;
 }
 
-.quote-builder-container[style*="--color-bg"] label {
+/* ─── Line Items & Totals ──── */
+.quote-builder-container[style*="--color-bg"] .line-item {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .line-desc {
     color: #4A4A4A !important;
 }
 
-.quote-builder-container[style*="--color-bg"] h1,
-.quote-builder-container[style*="--color-bg"] h2,
-.quote-builder-container[style*="--color-bg"] h3 {
-    color: #1A1A1A !important;
-}
-
-.quote-builder-container[style*="--color-bg"] .tenant-name {
+.quote-builder-container[style*="--color-bg"] .line-cat {
     color: var(--color-primary, #C5A55A) !important;
 }
 
-/* Inputs — light background */
-.quote-builder-container[style*="--color-bg"] input,
-.quote-builder-container[style*="--color-bg"] select,
-.quote-builder-container[style*="--color-bg"] textarea {
-    background: rgba(0, 0, 0, 0.03) !important;
-    border-color: rgba(0, 0, 0, 0.1) !important;
+.quote-builder-container[style*="--color-bg"] .line-amount {
     color: #1A1A1A !important;
 }
 
-.quote-builder-container[style*="--color-bg"] input::placeholder {
+.quote-builder-container[style*="--color-bg"] .total-row {
+    color: #4A4A4A !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .grand-total {
+    color: #1A1A1A !important;
+    border-color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .empty-state {
     color: #B0B0B0 !important;
 }
 
-.quote-builder-container[style*="--color-bg"] input:focus,
-.quote-builder-container[style*="--color-bg"] select:focus {
-    border-color: var(--color-primary, #C5A55A) !important;
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%) !important;
-}
-
-/* Sidebar / quote summary */
-.quote-builder-container[style*="--color-bg"] .sidebar,
-.quote-builder-container[style*="--color-bg"] .quote-sidebar {
-    background: rgba(255, 255, 255, 0.9) !important;
-    border-color: rgba(0, 0, 0, 0.06) !important;
-}
-
-/* Line items */
-.quote-builder-container[style*="--color-bg"] .line-item,
-.quote-builder-container[style*="--color-bg"] .addon-item,
-.quote-builder-container[style*="--color-bg"] .deliverable-item {
-    border-color: rgba(0, 0, 0, 0.06) !important;
-    color: #4A4A4A !important;
-}
-
-/* Buttons */
+/* ─── Buttons ───────────────── */
 .quote-builder-container[style*="--color-bg"] .btn-primary,
 .quote-builder-container[style*="--color-bg"] button[type="submit"],
 .quote-builder-container[style*="--color-bg"] .generate-btn {
-    background: var(--color-primary, #C5A55A) !important;
+    background: linear-gradient(135deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 80%, #8B6914 20%)) !important;
     color: #FFFFFF !important;
-    border-color: var(--color-primary, #C5A55A) !important;
+    border-color: transparent !important;
 }
 
-/* Footer */
-.quote-builder-container[style*="--color-bg"] .site-footer {
-    background: var(--color-bg) !important;
+.quote-builder-container[style*="--color-bg"] .btn-pdf {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #4A4A4A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .btn-pdf:hover {
+    border-color: var(--color-primary, #C5A55A) !important;
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+/* ─── Progress Bar ──────────── */
+.quote-builder-container[style*="--color-bg"] .progress-bar {
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .progress-fill {
+    background: linear-gradient(90deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 70%, #8B6914 30%)) !important;
+}
+
+/* ─── Quote Results ─────────── */
+.quote-builder-container[style*="--color-bg"] .quote-result {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .result-badge {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 10%, white 90%) !important;
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .quote-json {
+    background: rgba(0, 0, 0, 0.03) !important;
+    color: #4A4A4A !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .quote-id {
     color: #8A8A8A !important;
 }
 
-/* Progress bar */
-.quote-builder-container[style*="--color-bg"] .progress-fill {
-    background: var(--color-primary, #C5A55A) !important;
-}
-
-.quote-builder-container[style*="--color-bg"] .progress-bar {
-    background: rgba(0, 0, 0, 0.06) !important;
+/* ─── Footer ────────────────── */
+.quote-builder-container[style*="--color-bg"]~footer,
+.quote-builder-container[style*="--color-bg"] .site-footer {
+    background: var(--color-bg) !important;
+    color: #8A8A8A !important;
 }
