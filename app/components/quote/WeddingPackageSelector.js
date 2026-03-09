@@ -74,7 +74,7 @@ export function WeddingPackageSelector() {
     const {
         activeVertical,
         setEditorTier, setDeliverables, setAddOns,
-        setDays, setParking, setCoi
+        setDays, setParking, setCoi, setSelectedPackage
     } = useQuote();
 
     const [selected, setSelected] = useState(null);
@@ -84,6 +84,9 @@ export function WeddingPackageSelector() {
 
     const handleSelect = (pkg) => {
         setSelected(pkg.slug);
+
+        // Store the selected package for the sidebar display
+        setSelectedPackage({ name: pkg.name, displayPrice: pkg.price });
 
         // Set editor tier
         setEditorTier(pkg.editorTier || 'standard');

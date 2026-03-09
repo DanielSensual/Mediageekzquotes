@@ -4,56 +4,86 @@ import { useQuote } from '../../context/QuoteContext';
 import { AnimatedNumber } from './AnimatedNumber';
 
 const fmt = (n) => '$' + (n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const TURNAROUND_SHORT = {
-    standard: '2 Weeks', expedited: '1 Week', rush: '48 Hours', nextDay: 'Next-Day', sameDay: 'Same-Day',
-};
 
 export function QuoteSidebar() {
     const {
-        editorTier, turnaround, calc, generating, handleGenerate, quoteResult, handleDownloadPDF, handleCheckout, checkoutLoading
+        editorTier, calc, generating, handleGenerate,
+        quoteResult, handleDownloadPDF, handleCheckout, checkoutLoading,
+        selectedPackage
     } = useQuote();
+
+    const hasItems = calc.total > 0;
 
     return (
         <aside className="quote-panel">
             <div className="quote-card">
-                <h2 className="quote-title">Quote Summary</h2>
+                <h2 className="quote-title">Your Investment</h2>
 
-                <div className="quote-badges">
-                    <span className={`badge badge-editor ${editorTier === 'senior' ? 'badge-senior' : ''}`}>
-                        {editorTier === 'senior' ? 'Senior Editor' : 'Standard Editor'}
-                    </span>
-                    <span className={`badge badge-turnaround ${turnaround !== 'standard' ? 'badge-active' : ''}`}>
-                        {TURNAROUND_SHORT[turnaround]}
-                    </span>
-                </div>
+                {/* Package badge when a quick-pick is selected */}
+                {selectedPackage && (
+                    <div className="package-badge-container">
+                        <span className="package-badge-name">{selectedPackage.name} Package</span>
+                    </div>
+                )}
 
-                <div className="quote-lines">
-                    {calc.lineItems.length === 0 ? (
-                        <p className="empty-state">Configure your project to see the breakdown.</p>
-                    ) : (
-                        calc.lineItems.map((item, i) => (
-                            <div key={i} className="line-item">
-                                <div className="line-desc">
-                                    <span className="line-cat">{item.category}</span><br />
-                                    {item.description}
-                                    {item.qty > 1 && <span style={{ opacity: 0.5 }}> ×{item.qty}</span>}
+                {!hasItems ? (
+                    <div className="empty-quote-state">
+                        <div className="empty-icon">💍</div>
+                        <p className="empty-heading">Choose a package above</p>
+                        <p className="empty-sub">Select a quick-pick package or customize your own to see your investment.</p>
+                    </div>
+                ) : (
+                    <>
+                        {/* Clean category summary — just 3-4 rows max */}
+                        <div className="quote-summary-rows">
+                            {calc.coverageTotal > 0 && (
+                                <div className="summary-row">
+                                    <span className="summary-label">📹 Coverage & Crew</span>
+                                    <span className="summary-value">{fmt(calc.coverageTotal)}</span>
                                 </div>
-                                <span className="line-amount">{fmt(item.total)}</span>
-                            </div>
-                        ))
-                    )}
-                </div>
+                            )}
+                            {calc.deliverablesTotal > 0 && (
+                                <div className="summary-row">
+                                    <span className="summary-label">🎬 Editing & Deliverables</span>
+                                    <span className="summary-value">{fmt(calc.deliverablesTotal)}</span>
+                                </div>
+                            )}
+                            {calc.addOnsTotal > 0 && (
+                                <div className="summary-row">
+                                    <span className="summary-label">✨ Premium Add-Ons</span>
+                                    <span className="summary-value">{fmt(calc.addOnsTotal)}</span>
+                                </div>
+                            )}
+                            {calc.logisticsTotal > 0 && (
+                                <div className="summary-row">
+                                    <span className="summary-label">🚗 Logistics</span>
+                                    <span className="summary-value">{fmt(calc.logisticsTotal)}</span>
+                                </div>
+                            )}
+                            {calc.turnaroundFee > 0 && (
+                                <div className="summary-row">
+                                    <span className="summary-label">⚡ Rush Delivery</span>
+                                    <span className="summary-value">{fmt(calc.turnaroundFee)}</span>
+                                </div>
+                            )}
+                        </div>
 
-                <div className="quote-totals">
-                    <div className="total-row"><span>Coverage</span><AnimatedNumber value={calc.coverageTotal} /></div>
-                    <div className="total-row"><span>Editing</span><AnimatedNumber value={calc.deliverablesTotal} /></div>
-                    {calc.turnaroundFee > 0 && <div className="total-row turnaround-total"><span>Turnaround Fees</span><AnimatedNumber value={calc.turnaroundFee} /></div>}
-                    {calc.addOnsTotal > 0 && <div className="total-row addon-total"><span>Add-Ons</span><AnimatedNumber value={calc.addOnsTotal} /></div>}
-                    <div className="total-row"><span>Logistics</span><AnimatedNumber value={calc.logisticsTotal} /></div>
-                    <div className="total-row grand-total"><span>Total</span><AnimatedNumber value={calc.total} /></div>
-                </div>
+                        {/* Grand total — big and prominent */}
+                        <div className="grand-total-box">
+                            <span className="grand-total-label">Total Investment</span>
+                            <span className="grand-total-amount"><AnimatedNumber value={calc.total} /></span>
+                        </div>
 
-                <button type="button" className="btn-primary" onClick={handleGenerate} disabled={generating}>
+                        {/* Editor tier badge */}
+                        <div className="quote-badges">
+                            <span className={`badge badge-editor ${editorTier === 'senior' ? 'badge-senior' : ''}`}>
+                                {editorTier === 'senior' ? '⭐ Senior Editor' : 'Standard Editor'}
+                            </span>
+                        </div>
+                    </>
+                )}
+
+                <button type="button" className="btn-primary" onClick={handleGenerate} disabled={generating || !hasItems}>
                     <span className="btn-icon">{generating ? '⏳' : '⚡'}</span> {generating ? 'Generating...' : 'Generate Quote'}
                 </button>
 
@@ -65,13 +95,6 @@ export function QuoteSidebar() {
                         <button type="button" className="btn-pdf" onClick={handleDownloadPDF}>
                             <span className="btn-icon">📄</span> Download PDF Quote
                         </button>
-                        <div className="quote-result">
-                            <div className="result-header">
-                                <span className="result-badge">Quote Generated</span>
-                                <span className="quote-id">{quoteResult.quoteId}</span>
-                            </div>
-                            <pre className="quote-json">{JSON.stringify(quoteResult, null, 2)}</pre>
-                        </div>
                     </>
                 )}
             </div>
