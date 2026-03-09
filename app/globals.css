@@ -1763,3 +1763,149 @@ input:checked+.slider::before {
         font-size: 1.4rem;
     }
 }
+
+/* ─── Tenant Theme Overrides ──────────────────────────────────── */
+/* When a tenant sets --color-bg, apply it as the page background
+   and adapt all child elements to match the light or dark palette */
+.quote-builder-container[style*="--color-bg"] {
+    --bg-page: var(--color-bg);
+    --bg-card: color-mix(in srgb, var(--color-bg) 90%, #000 10%);
+    --bg-card-hover: color-mix(in srgb, var(--color-bg) 82%, #000 18%);
+    --bg-input: color-mix(in srgb, var(--color-bg) 95%, #000 5%);
+    --border: color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%);
+    --border-focus: color-mix(in srgb, var(--color-primary, #C5A55A) 45%, transparent 55%);
+    --gold-300: var(--color-primary, #C5A55A);
+    --gold-400: var(--color-primary, #C5A55A);
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-muted: #8A8A8A;
+    position: relative;
+    min-height: 100vh;
+    background: var(--color-bg) !important;
+}
+
+.quote-builder-container[style*="--color-bg"]~footer,
+.quote-builder-container[style*="--color-bg"] .site-footer {
+    background: var(--color-bg);
+}
+
+.quote-builder-container[style*="--color-bg"] .site-header {
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent 15%);
+}
+
+.quote-builder-container[style*="--color-bg"] .vtab {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
+    color: #8A8A8A;
+}
+
+.quote-builder-container[style*="--color-bg"] .vtab:hover {
+    color: #4A4A4A;
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 6%, transparent 94%);
+    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%);
+}
+
+.quote-builder-container[style*="--color-bg"] .vtab-active {
+    color: #FFFFFF;
+    background: var(--color-primary, #C5A55A);
+    border-color: var(--color-primary, #C5A55A);
+}
+
+.quote-builder-container[style*="--color-bg"] .vtab-active:hover {
+    background: var(--color-primary, #C5A55A);
+    color: #FFFFFF;
+}
+
+/* Cards — override hardcoded dark bg */
+.quote-builder-container[style*="--color-bg"] .card {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+}
+
+.quote-builder-container[style*="--color-bg"] .card:hover {
+    border-color: color-mix(in srgb, var(--color-primary, #C5A55A) 35%, transparent 65%);
+}
+
+/* Text colors — dark text on light bg */
+.quote-builder-container[style*="--color-bg"] .card-title {
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .card-subtitle,
+.quote-builder-container[style*="--color-bg"] .card-desc {
+    color: #8A8A8A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] label {
+    color: #4A4A4A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] h1,
+.quote-builder-container[style*="--color-bg"] h2,
+.quote-builder-container[style*="--color-bg"] h3 {
+    color: #1A1A1A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .tenant-name {
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+/* Inputs — light background */
+.quote-builder-container[style*="--color-bg"] input,
+.quote-builder-container[style*="--color-bg"] select,
+.quote-builder-container[style*="--color-bg"] textarea {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #1A1A1A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] input::placeholder {
+    color: #B0B0B0 !important;
+}
+
+.quote-builder-container[style*="--color-bg"] input:focus,
+.quote-builder-container[style*="--color-bg"] select:focus {
+    border-color: var(--color-primary, #C5A55A) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%) !important;
+}
+
+/* Sidebar / quote summary */
+.quote-builder-container[style*="--color-bg"] .sidebar,
+.quote-builder-container[style*="--color-bg"] .quote-sidebar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Line items */
+.quote-builder-container[style*="--color-bg"] .line-item,
+.quote-builder-container[style*="--color-bg"] .addon-item,
+.quote-builder-container[style*="--color-bg"] .deliverable-item {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    color: #4A4A4A !important;
+}
+
+/* Buttons */
+.quote-builder-container[style*="--color-bg"] .btn-primary,
+.quote-builder-container[style*="--color-bg"] button[type="submit"],
+.quote-builder-container[style*="--color-bg"] .generate-btn {
+    background: var(--color-primary, #C5A55A) !important;
+    color: #FFFFFF !important;
+    border-color: var(--color-primary, #C5A55A) !important;
+}
+
+/* Footer */
+.quote-builder-container[style*="--color-bg"] .site-footer {
+    background: var(--color-bg) !important;
+    color: #8A8A8A !important;
+}
+
+/* Progress bar */
+.quote-builder-container[style*="--color-bg"] .progress-fill {
+    background: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .progress-bar {
+    background: rgba(0, 0, 0, 0.06) !important;
+}

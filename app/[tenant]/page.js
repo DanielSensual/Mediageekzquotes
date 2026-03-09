@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { QuoteProvider, useQuote } from '../context/QuoteContext';
 import { QuoteTabs } from '../components/quote/QuoteTabs';
 import { QuoteForm } from '../components/quote/QuoteForm';
@@ -13,6 +13,15 @@ function QuoteBuilderContent() {
     const searchParams = useSearchParams();
     const isSuccess = searchParams?.get('success') === 'true';
     const isCanceled = searchParams?.get('canceled') === 'true';
+
+    // Apply tenant background color to body for white-themed tenants
+    useEffect(() => {
+        if (tenant?.colorBg) {
+            const originalBg = document.body.style.background;
+            document.body.style.background = tenant.colorBg;
+            return () => { document.body.style.background = originalBg; };
+        }
+    }, [tenant]);
 
     if (loading) {
         return (

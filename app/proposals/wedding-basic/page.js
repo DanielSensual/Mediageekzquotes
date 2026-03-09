@@ -445,6 +445,31 @@ export default function WeddingBasicProposal() {
                 .w-package-features li.excluded { opacity: 0.35; }
                 .w-package-features li.excluded::before { content: '—'; color: var(--text-light); }
 
+                .w-package-delivery {
+                    margin-top: 20px; padding-top: 16px;
+                    border-top: 1px solid var(--border);
+                    font-size: 11px; letter-spacing: 1px;
+                    color: var(--accent); text-transform: uppercase;
+                }
+
+                .w-custom-cta {
+                    display: inline-block;
+                    padding: 14px 40px;
+                    background: var(--accent);
+                    color: #FFFFFF;
+                    font-size: 12px; font-weight: 600;
+                    letter-spacing: 2px; text-transform: uppercase;
+                    text-decoration: none;
+                    border-radius: 60px;
+                    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .w-custom-cta:hover {
+                    background: #B89545;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 24px rgba(197, 165, 90, 0.3);
+                }
+
                 /* ─── Deliverables ────────────────────────────── */
                 .w-deliverable-grid {
                     display: grid; grid-template-columns: 1fr 1fr 1fr;
@@ -774,63 +799,84 @@ export default function WeddingBasicProposal() {
                             <br /><span style={{ fontSize: 11, color: 'var(--text-light)' }}>single shooter · 5 hours</span>
                         </div>
                         <ul className="w-package-features">
-                            <li>5 hours of coverage</li>
+                            <li>Up to 5 hours of coverage</li>
                             <li>1 videographer</li>
-                            <li>Highlight film (3–5 min, color graded)</li>
-                            <li>2 social teaser clips (IG/TikTok)</li>
+                            <li>Simple highlight edit (3–5 min)</li>
+                            <li>Color graded + music</li>
+                            <li>2 social teaser clips</li>
                             <li>Digital delivery via private link</li>
                             <li>1 revision round</li>
-                            <li className="excluded">Full ceremony edit</li>
-                            <li className="excluded">Getting ready coverage</li>
                             <li className="excluded">Second shooter</li>
+                            <li className="excluded">Interviews</li>
                             <li className="excluded">Drone coverage</li>
                             <li className="excluded">Raw footage</li>
                         </ul>
+                        <div className="w-package-delivery">
+                            <span>Delivery: 3–4 weeks</span>
+                        </div>
                     </div>
                     <div className="w-package recommended">
                         <div className="w-recommended-badge">Most Popular</div>
                         <div className="w-package-name">Classic</div>
                         <div className="w-package-price">
-                            <span className="amount">$3,800</span>
-                            <br /><span style={{ fontSize: 11, color: 'var(--text-light)' }}>single shooter · 8 hours</span>
+                            <span className="amount">$4,500</span>
+                            <br /><span style={{ fontSize: 11, color: 'var(--text-light)' }}>two shooters · 5 hours</span>
                         </div>
                         <ul className="w-package-features">
-                            <li>8 hours of coverage</li>
-                            <li>1 videographer</li>
-                            <li>Highlight film (3–5 min, motion GFX)</li>
-                            <li>Full ceremony edit (multi-angle)</li>
+                            <li>Up to 5 hours of coverage</li>
+                            <li>2 videographers</li>
+                            <li>Simple recap edit (3–5 min)</li>
+                            <li>Color graded + licensed music</li>
+                            <li>Full ceremony edit</li>
                             <li>Getting ready coverage</li>
                             <li>5 social teaser clips</li>
-                            <li>Golden hour portrait session</li>
                             <li>Digital delivery + USB keepsake</li>
                             <li>2 revision rounds</li>
-                            <li className="excluded">Second shooter</li>
+                            <li className="excluded">Interviews</li>
                             <li className="excluded">Drone coverage</li>
                             <li className="excluded">Raw footage</li>
                         </ul>
+                        <div className="w-package-delivery">
+                            <span>Delivery: 2–3 weeks</span>
+                        </div>
                     </div>
                     <div className="w-package">
                         <div className="w-package-name">Cinematic</div>
                         <div className="w-package-price">
-                            <span className="amount">$6,500</span>
-                            <br /><span style={{ fontSize: 11, color: 'var(--text-light)' }}>two shooters · 12 hours</span>
+                            <span className="amount">$7,000</span>
+                            <br /><span style={{ fontSize: 11, color: 'var(--text-light)' }}>two shooters · 8 hours</span>
                         </div>
                         <ul className="w-package-features">
-                            <li>12 hours of full-day coverage</li>
+                            <li>Up to 8 hours of coverage</li>
                             <li>2 videographers</li>
-                            <li>Cinematic highlight film (5–8 min)</li>
+                            <li>Cinematic video (up to 5 min)</li>
+                            <li>Interviews included</li>
+                            <li>Cinema drone coverage</li>
                             <li>Full ceremony edit (multi-angle)</li>
-                            <li>Reception speeches + toasts edit</li>
+                            <li>Reception speeches + toasts</li>
                             <li>Getting ready (bride + groom)</li>
                             <li>Golden hour portrait session</li>
-                            <li>Drone aerial coverage</li>
                             <li>10 social teaser clips</li>
-                            <li>Same-week Instagram teaser</li>
                             <li>All raw footage</li>
                             <li>USB + digital delivery</li>
                             <li>3 revision rounds</li>
                         </ul>
+                        <div className="w-package-delivery">
+                            <span>Recap: 1 week · Final film: 2–3 weeks</span>
+                        </div>
                     </div>
+                </div>
+
+                {/* Custom Packages CTA */}
+                <div style={{ textAlign: 'center', marginTop: 60 }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 24, color: 'var(--text-dark)', marginBottom: 12 }}>Need something different?</p>
+                    <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 28, maxWidth: 500, margin: '0 auto 28px' }}>Build a fully custom wedding package with our interactive quote builder. Mix and match services, add-ons, and coverage hours.</p>
+                    <a
+                        href="/mediageekz-weddings?v=weddings"
+                        className="w-custom-cta"
+                    >
+                        Build a Custom Package →
+                    </a>
                 </div>
             </section>
 
