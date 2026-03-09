@@ -43,7 +43,14 @@ export async function GET(request, { params }) {
         }
 
         return NextResponse.json({
-            tenant: { slug: tenant.slug, name: tenant.name, colorPrimary: tenant.colorPrimary },
+            tenant: {
+                slug: tenant.slug,
+                name: tenant.name,
+                colorPrimary: tenant.colorPrimary,
+                colorBg: tenant.colorBg,
+                fontFamily: tenant.fontFamily,
+                logoUrl: tenant.logoUrl,
+            },
             rateCards,
         });
     } catch (err) {
