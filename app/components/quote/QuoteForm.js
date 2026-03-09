@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuote } from '../../context/QuoteContext';
+import { WeddingPackageSelector } from './WeddingPackageSelector';
 
 const fmt = (n) => '$' + (n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -41,6 +42,9 @@ export function QuoteForm() {
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="form-content-wrapper"
                 >
+                    {/* Quick-Pick Packages (wedding only) */}
+                    <WeddingPackageSelector />
+
                     {/* Step 1: Client Details */}
                     <div className="card">
                         <div className="step-indicator">

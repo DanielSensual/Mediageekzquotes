@@ -94,6 +94,8 @@ const ADD_ONS = [
     { slug: 'photo-coverage', name: 'Photo Coverage (stills photographer)', pricePerUnit: 600, unitType: 'day', sortOrder: 2 },
     { slug: 'livestreaming', name: 'Livestreaming (ceremony)', pricePerUnit: 400, unitType: 'day', sortOrder: 3 },
     { slug: 'photo-booth', name: 'Photo/Video Booth', pricePerUnit: 350, unitType: 'day', sortOrder: 4 },
+    { slug: 'finale-reel', name: 'The Finale Reel — Same-Day Reception Edit (1 min, 16:9, played at reception)', pricePerUnit: 2500, unitType: 'day', sortOrder: 5 },
+    { slug: 'dawn-cut', name: 'The Dawn Cut — Next-Day Edit (1 min, 16:9, delivered within 24hrs)', pricePerUnit: 2000, unitType: 'day', sortOrder: 6 },
 ];
 
 // ─── Main ────────────────────────────────────────────────────────

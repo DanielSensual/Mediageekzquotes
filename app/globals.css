@@ -574,6 +574,151 @@ body {
     align-items: start;
 }
 
+/* ─── Wedding Package Selector ────────────────────────────────── */
+.wpkg-card {
+    padding: 28px !important;
+}
+
+.wpkg-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.wpkg-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    text-align: center;
+}
+
+.wpkg-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.wpkg-active {
+    border-color: var(--gold-400) !important;
+    background: rgba(197, 165, 90, 0.06) !important;
+    box-shadow: 0 0 0 2px rgba(197, 165, 90, 0.15), 0 4px 16px rgba(197, 165, 90, 0.1);
+}
+
+.wpkg-badge {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-600));
+    color: #0a0a0a;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.wpkg-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-300);
+    letter-spacing: -0.3px;
+}
+
+.wpkg-price {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-primary, #f0f0f0);
+    letter-spacing: -0.5px;
+}
+
+.wpkg-tagline {
+    font-size: 0.68rem;
+    color: var(--text-muted, #888);
+    line-height: 1.35;
+}
+
+.wpkg-details {
+    font-size: 0.65rem;
+    color: var(--text-muted, #888);
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.wpkg-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--gold-400);
+    margin: 18px 0 0;
+    font-weight: 500;
+}
+
+/* Light-mode overrides for package selector */
+.quote-builder-container[style*="--color-bg"] .wpkg-option {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-option:hover {
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 5%, white 95%) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-active {
+    border-color: var(--color-primary, #C5A55A) !important;
+    background: color-mix(in srgb, var(--color-primary, #C5A55A) 6%, white 94%) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary, #C5A55A) 15%, transparent 85%), 0 4px 16px color-mix(in srgb, var(--color-primary, #C5A55A) 10%, transparent 90%) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-name {
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-price {
+    color: #1A1A1A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-tagline,
+.quote-builder-container[style*="--color-bg"] .wpkg-details {
+    color: #8A8A8A !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-badge {
+    background: linear-gradient(135deg, var(--color-primary, #C5A55A), color-mix(in srgb, var(--color-primary, #C5A55A) 80%, #8B6914 20%)) !important;
+    color: #FFFFFF !important;
+}
+
+.quote-builder-container[style*="--color-bg"] .wpkg-hint {
+    color: var(--color-primary, #C5A55A) !important;
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 900px) {
+    .wpkg-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .wpkg-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* ─── Cards ───────────────────────────────────────────────────── */
 .card {
     background: rgba(18, 18, 23, 0.55);
