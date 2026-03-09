@@ -74,7 +74,7 @@ export function WeddingPackageSelector() {
     const {
         activeVertical,
         setEditorTier, setDeliverables, setAddOns,
-        days, updateDay
+        setDays, setParking, setCoi
     } = useQuote();
 
     const [selected, setSelected] = useState(null);
@@ -88,19 +88,24 @@ export function WeddingPackageSelector() {
         // Set editor tier
         setEditorTier(pkg.editorTier || 'standard');
 
-        // Update first day with package hours + operators
-        updateDay(0, 'hours', pkg.hours || 8);
-        updateDay(0, 'operators', pkg.operators || 2);
+        // Set the coverage day with package-specific hours + operators
+        const d = new Date();
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        setDays([{ date: dateStr, hours: pkg.hours || 8, operators: pkg.operators || 2 }]);
 
         // Set deliverables
         const delivObj = {};
         (pkg.deliverables || []).forEach(slug => { delivObj[slug] = true; });
         setDeliverables(delivObj);
 
-        // Set add-ons (1 = enabled for boolean-style add-ons)
+        // Set add-ons (true = enabled for day-type, number for hour-type)
         const aoObj = {};
-        (pkg.addOns || []).forEach(slug => { aoObj[slug] = 1; });
+        (pkg.addOns || []).forEach(slug => { aoObj[slug] = true; });
         setAddOns(aoObj);
+
+        // Enable standard logistics
+        setParking(true);
+        setCoi(true);
     };
 
     return (

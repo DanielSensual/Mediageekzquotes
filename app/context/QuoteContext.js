@@ -61,11 +61,11 @@ export function QuoteProvider({ children }) {
     const [location, setLocation] = useState('');
     const [editorTier, setEditorTier] = useState('standard');
     const [turnaround, setTurnaround] = useState('standard');
-    const [days, setDays] = useState([{ date: getLocalDateString(0), hours: 8, operators: 2 }]);
+    const [days, setDays] = useState([]);
     const [deliverables, setDeliverables] = useState({});
     const [addOns, setAddOns] = useState({});
-    const [parking, setParking] = useState(true);
-    const [coi, setCoi] = useState(true);
+    const [parking, setParking] = useState(false);
+    const [coi, setCoi] = useState(false);
     const [travelFee, setTravelFee] = useState(false);
 
     // Quote result
@@ -178,7 +178,7 @@ export function QuoteProvider({ children }) {
             const val = addOns[addon.slug];
             let count = 0;
             if (addon.unitType === 'hour' && typeof val === 'number') count = val;
-            else if (val === true) count = days.length;
+            else if (val) count = Math.max(days.length, 1);
             if (count > 0) {
                 const t = addon.pricePerUnit * count;
                 lineItems.push({ category: 'Add-On', description: addon.name, qty: count, total: t });
@@ -307,7 +307,7 @@ export function QuoteProvider({ children }) {
         loading, tenant, rateCards, activeVertical, setActiveVertical,
         clientName, setClientName, email, setEmail, eventName, setEventName, location, setLocation,
         editorTier, setEditorTier, turnaround, setTurnaround,
-        days, addDay, removeDay, updateDay,
+        days, setDays, addDay, removeDay, updateDay,
         deliverables, toggleDeliverable, setDeliverableQty, setDeliverables,
         addOns, toggleAddOn, setAddOnQty, setAddOns,
         parking, setParking, coi, setCoi, travelFee, setTravelFee,
