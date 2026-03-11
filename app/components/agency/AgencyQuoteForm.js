@@ -272,6 +272,28 @@ export function AgencyQuoteForm() {
                         </button>
                     </div>
 
+                    {markupType === 'percentage' && (
+                        <div className="markup-presets">
+                            {[
+                                { label: 'Pass-Through', value: 10, desc: 'minimal handling' },
+                                { label: 'Managed', value: 20, desc: 'vendor management' },
+                                { label: 'White-Label', value: 25, desc: 'fully managed' },
+                                { label: 'Strategy-Led', value: 35, desc: 'strategy + risk' },
+                            ].map(preset => (
+                                <button
+                                    key={preset.value}
+                                    type="button"
+                                    className={`markup-preset-btn ${markupValue === preset.value ? 'markup-preset-active' : ''}`}
+                                    onClick={() => setMarkupValue(preset.value)}
+                                >
+                                    <span className="preset-pct">{preset.value}%</span>
+                                    <span className="preset-label">{preset.label}</span>
+                                    <span className="preset-desc">{preset.desc}</span>
+                                </button>
+                            ))}
+                        </div>
+                    )}
+
                     <div className="markup-input-row">
                         <div className="markup-slider-group">
                             {markupType === 'percentage' ? (
@@ -286,6 +308,12 @@ export function AgencyQuoteForm() {
                             )}
                         </div>
                     </div>
+
+                    {markupType === 'percentage' && markupValue > 0 && (
+                        <div className="markup-margin-note">
+                            Effective margin: {(markupValue / (100 + markupValue) * 100).toFixed(1)}%
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

@@ -2647,6 +2647,73 @@ input:checked+.slider::before {
     border-color: #10b981 !important;
 }
 
+/* ─── Markup Presets ──────────────────────────────────────────── */
+.markup-presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.markup-preset-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.markup-preset-btn:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.04);
+}
+
+.markup-preset-active {
+    border-color: rgba(16, 185, 129, 0.5) !important;
+    background: rgba(16, 185, 129, 0.08) !important;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+}
+
+.preset-pct {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #10b981;
+    font-family: var(--font-sans);
+}
+
+.preset-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.preset-desc {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.markup-margin-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 6px 0;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .markup-presets {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* ─── Agency Sidebar ──────────────────────────────────────────── */
 .agency-quote-panel {
     position: sticky;
