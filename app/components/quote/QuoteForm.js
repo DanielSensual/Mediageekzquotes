@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useQuote } from '../../context/QuoteContext';
 import { WeddingPackageSelector } from './WeddingPackageSelector';
 
@@ -23,11 +24,42 @@ export function QuoteForm() {
         editorTier, setEditorTier, turnaround, setTurnaround,
         services, deliverables, toggleDeliverable, setDeliverableQty, editorRates,
         rcAddOns, addOns, toggleAddOn, setAddOnQty,
-        parking, setParking, coi, setCoi, travelFee, setTravelFee, rc
+        parking, setParking, coi, setCoi, travelFee, setTravelFee, rc,
+        setMobileInputActive
     } = useQuote();
 
+    useEffect(() => {
+        if (activeVertical !== 'weddings') {
+            setMobileInputActive(false);
+        }
+
+        return () => setMobileInputActive(false);
+    }, [activeVertical, setMobileInputActive]);
+
+    const syncMobileInputState = () => {
+        if (typeof window === 'undefined') return;
+
+        if (window.innerWidth > 900 || activeVertical !== 'weddings') {
+            setMobileInputActive(false);
+            return;
+        }
+
+        const activeEl = document.activeElement;
+        const tag = activeEl?.tagName;
+        const type = activeEl?.getAttribute?.('type');
+        const isEditableField = tag === 'TEXTAREA'
+            || tag === 'SELECT'
+            || (tag === 'INPUT' && !['checkbox', 'radio', 'range', 'button', 'submit'].includes(type || 'text'));
+
+        setMobileInputActive(!!isEditableField);
+    };
+
     return (
-        <section className="form-panel">
+        <section
+            className="form-panel"
+            onFocusCapture={syncMobileInputState}
+            onBlurCapture={() => requestAnimationFrame(syncMobileInputState)}
+        >
             {/* Progress Bar */}
             <div className="progress-bar">
                 <div className="progress-fill" style={{ width: `${progressPct}%` }} />

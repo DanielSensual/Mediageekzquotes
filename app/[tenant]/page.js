@@ -9,7 +9,7 @@ import { QuoteSidebar } from '../components/quote/QuoteSidebar';
 import { useSearchParams } from 'next/navigation';
 
 function QuoteBuilderContent() {
-    const { loading, tenant } = useQuote();
+    const { loading, tenant, activeVertical, mobileInputActive } = useQuote();
     const searchParams = useSearchParams();
     const isSuccess = searchParams?.get('success') === 'true';
     const isCanceled = searchParams?.get('canceled') === 'true';
@@ -48,7 +48,7 @@ function QuoteBuilderContent() {
             '--color-primary': tenant.colorPrimary,
             '--color-bg': tenant.colorBg,
             '--font-family': tenant.fontFamily
-        }}>
+        }} data-active-vertical={activeVertical || ''} data-mobile-editing={mobileInputActive ? 'true' : 'false'}>
             <header className="tenant-header">
                 {tenant.logoUrl ? (
                     <img src={tenant.logoUrl} alt={tenant.name} className="tenant-logo" />

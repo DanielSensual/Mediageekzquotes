@@ -9,13 +9,14 @@ export function QuoteSidebar() {
     const {
         editorTier, calc, generating, handleGenerate,
         quoteResult, handleDownloadPDF, handleCheckout, checkoutLoading,
-        selectedPackage
+        selectedPackage, activeVertical, mobileInputActive
     } = useQuote();
 
     const hasItems = calc.total > 0;
+    const mobileDockHidden = activeVertical === 'weddings' && mobileInputActive;
 
     return (
-        <aside className="quote-panel">
+        <aside className={`quote-panel ${mobileDockHidden ? 'quote-panel-mobile-hidden' : ''}`}>
             <div className="quote-card">
                 <h2 className="quote-title">Your Investment</h2>
 

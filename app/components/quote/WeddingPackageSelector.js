@@ -74,7 +74,7 @@ export function WeddingPackageSelector() {
     const {
         activeVertical,
         setEditorTier, setDeliverables, setAddOns,
-        setDays, setParking, setCoi, setSelectedPackage
+        setDays, setParking, setCoi, setTravelFee, setSelectedPackage, rcAddOns
     } = useQuote();
 
     const [selected, setSelected] = useState(null);
@@ -103,12 +103,16 @@ export function WeddingPackageSelector() {
 
         // Set add-ons (true = enabled for day-type, number for hour-type)
         const aoObj = {};
-        (pkg.addOns || []).forEach(slug => { aoObj[slug] = true; });
+        (pkg.addOns || []).forEach(slug => {
+            const addon = rcAddOns.find(item => item.slug === slug);
+            aoObj[slug] = addon?.unitType === 'hour' ? 1 : true;
+        });
         setAddOns(aoObj);
 
         // Enable standard logistics
         setParking(true);
         setCoi(true);
+        setTravelFee(false);
     };
 
     return (

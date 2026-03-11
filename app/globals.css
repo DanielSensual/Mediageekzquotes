@@ -1779,6 +1779,57 @@ input:checked+.slider::before {
     .progress-bar {
         margin-bottom: 18px;
     }
+
+    /* Wedding-only mobile dock: keep it compact and let the form scroll clear */
+    .quote-builder-container[data-active-vertical="weddings"] .quote-main {
+        padding-bottom: calc(220px + env(safe-area-inset-bottom));
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"][data-mobile-editing="true"] .quote-main {
+        padding-bottom: 24px;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .quote-panel {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 0;
+        transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .quote-card {
+        border-radius: 18px;
+        padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+        max-height: min(44vh, 320px);
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .quote-title {
+        margin-bottom: 10px;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .package-badge-container,
+    .quote-builder-container[data-active-vertical="weddings"] .quote-summary-rows {
+        margin-bottom: 12px;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .summary-row {
+        padding: 10px 0;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .grand-total-box {
+        padding: 14px;
+        margin-bottom: 12px;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .grand-total-amount {
+        font-size: 1.65rem;
+    }
+
+    .quote-builder-container[data-active-vertical="weddings"] .quote-panel.quote-panel-mobile-hidden {
+        transform: translateY(calc(100% + env(safe-area-inset-bottom) + 12px));
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 /* ── Phone ── */

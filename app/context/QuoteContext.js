@@ -68,6 +68,7 @@ export function QuoteProvider({ children }) {
     const [coi, setCoi] = useState(false);
     const [travelFee, setTravelFee] = useState(false);
     const [selectedPackage, setSelectedPackage] = useState(null);
+    const [mobileInputActive, setMobileInputActive] = useState(false);
 
     // Quote result
     const [quoteResult, setQuoteResult] = useState(null);
@@ -312,6 +313,7 @@ export function QuoteProvider({ children }) {
         deliverables, toggleDeliverable, setDeliverableQty, setDeliverables,
         addOns, toggleAddOn, setAddOnQty, setAddOns,
         parking, setParking, coi, setCoi, travelFee, setTravelFee,
+        mobileInputActive, setMobileInputActive,
         selectedPackage, setSelectedPackage,
         quoteResult, generating, progressPct, rc, services, rcAddOns, editorRates, calc,
         handleGenerate, handleDownloadPDF, handleCheckout, checkoutLoading
