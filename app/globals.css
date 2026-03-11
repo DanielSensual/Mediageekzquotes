@@ -2389,3 +2389,495 @@ input:checked+.slider::before {
     background: var(--color-bg) !important;
     color: #8A8A8A !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   AGENCY QUOTE BUILDER — Private Partner Pricing Tool
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Agency Container ────────────────────────────────────────── */
+.agency-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Agency Header ───────────────────────────────────────────── */
+.agency-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    background: rgba(5, 6, 10, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.agency-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.agency-brand-icon {
+    font-size: 2rem;
+}
+
+.agency-brand-name {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.agency-header-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-400);
+    opacity: 0.85;
+}
+
+.agency-lock-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 6px 14px;
+    border-radius: 100px;
+}
+
+/* ─── Agency Main Layout ──────────────────────────────────────── */
+.agency-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 32px;
+    align-items: start;
+    width: 100%;
+}
+
+.agency-form-panel {
+    min-width: 0;
+}
+
+/* ─── Textarea ────────────────────────────────────────────────── */
+.agency-form-panel textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    resize: vertical;
+    transition: border-color var(--transition);
+}
+
+.agency-form-panel textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+}
+
+.agency-form-panel textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.field-hint {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.empty-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* ─── Crew Role Descriptions ──────────────────────────────────── */
+.toggle-row-detailed .toggle-info {
+    gap: 3px;
+}
+
+.toggle-desc {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    opacity: 0.65;
+    margin-bottom: 2px;
+}
+
+/* ─── Agency Progress Bar ─────────────────────────────────────── */
+.agency-progress .progress-fill {
+    background: linear-gradient(90deg, #10b981, #059669) !important;
+}
+
+/* ─── Agency Markup Card ──────────────────────────────────────── */
+.agency-markup-card {
+    border-image: linear-gradient(135deg, #10b981, #059669, #10b981) 1;
+    background: linear-gradient(170deg, rgba(16, 185, 129, 0.04) 0%, var(--bg-card) 40%);
+}
+
+.agency-markup-title {
+    background: linear-gradient(135deg, #34d399, #10b981) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.agency-step-markup {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+}
+
+.markup-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.markup-type-toggle {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 100px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.markup-type-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.markup-type-btn:hover {
+    color: var(--text-secondary);
+}
+
+.markup-type-active {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.3);
+}
+
+.markup-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.markup-slider-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.markup-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    outline: none;
+}
+
+.markup-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.markup-range::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.markup-display {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #10b981;
+    min-width: 60px;
+    text-align: right;
+    font-family: var(--font-sans);
+}
+
+.markup-fixed-input {
+    background: var(--bg-input) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-primary) !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 10px 14px !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+.markup-fixed-input:focus {
+    border-color: #10b981 !important;
+}
+
+/* ─── Agency Sidebar ──────────────────────────────────────────── */
+.agency-quote-panel {
+    position: sticky;
+    top: 84px;
+}
+
+.agency-quote-card {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+.agency-sidebar-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 12px;
+}
+
+.agency-badge-icon {
+    font-size: 0.85rem;
+}
+
+/* ─── Agency Line Items ───────────────────────────────────────── */
+.agency-line-items {
+    margin: 16px 0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.agency-line-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    gap: 12px;
+}
+
+.agency-line-row:last-child {
+    border-bottom: none;
+}
+
+.agency-line-row:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.agency-line-turnaround {
+    background: rgba(99, 102, 241, 0.04) !important;
+}
+
+.agency-line-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.agency-line-category {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold-400);
+    opacity: 0.7;
+}
+
+.agency-line-name {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.agency-line-numbers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.agency-line-qty {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.agency-line-total {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Agency Subtotals ────────────────────────────────────────── */
+.agency-subtotals {
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.agency-subtotal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.agency-subtotal-amount {
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Markup Row ──────────────────────────────────────────────── */
+.agency-markup-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #34d399;
+}
+
+.agency-markup-amount {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Agency Grand Total ──────────────────────────────────────── */
+.agency-grand-total {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.06)) !important;
+    border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
+.agency-grand-total .grand-total-label {
+    color: #34d399 !important;
+}
+
+/* ─── Agency Copy Button ──────────────────────────────────────── */
+.agency-copy-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-secondary) !important;
+    margin-top: 12px;
+    font-size: 0.82rem !important;
+}
+
+.agency-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ─── Agency Disclaimer ───────────────────────────────────────── */
+.agency-disclaimer {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    opacity: 0.7;
+}
+
+/* ─── Agency Footer ───────────────────────────────────────────── */
+.agency-footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+.agency-footer p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.agency-footer-sub {
+    margin-top: 4px !important;
+    font-size: 0.65rem !important;
+    opacity: 0.6;
+}
+
+/* ─── Agency Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .agency-main {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 60px;
+    }
+
+    .agency-quote-panel {
+        position: relative;
+        top: 0;
+    }
+
+    .agency-header {
+        padding: 16px 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .agency-brand-name {
+        font-size: 1.2rem;
+    }
+
+    .agency-lock-badge {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+
+    .markup-type-toggle {
+        flex-direction: column;
+    }
+}
