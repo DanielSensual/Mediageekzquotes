@@ -73,11 +73,17 @@ export function AgencyQuoteForm() {
                 <div className="step-indicator">
                     <span className="step-number">2</span>
                     <div className="step-header-content">
-                        <h2 className="card-title">Production Days</h2>
-                        <p className="card-subtitle">DP / Lead Camera — {fmt(rc.coverage?.fullDay)}/day, {fmt(rc.coverage?.halfDay)}/half</p>
+                        <h2 className="card-title">Base Production Days</h2>
+                        <p className="card-subtitle">Includes 1 Lead Cinematographer (DP) to shoot the project</p>
                     </div>
                     <button type="button" className="btn-sm" onClick={addDay}>+ Add Day</button>
                 </div>
+                
+                <div className="coverage-hint" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '15px', padding: '0 5px' }}>
+                    <strong>Base Rate:</strong> {fmt(rc.coverage?.fullDay)}/full day (8h), {fmt(rc.coverage?.halfDay)}/half day (4h). <br/>
+                    <em>Note: This is the required base coverage. You can add a dedicated Creative Director or extra crew in Step 4.</em>
+                </div>
+
                 {days.length === 0 && (
                     <p className="empty-hint">No shoot days added. Click "+ Add Day" to start.</p>
                 )}
