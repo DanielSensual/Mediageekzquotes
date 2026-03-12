@@ -4,6 +4,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { calculateQuote, verticalToRateCard } from '@/lib/engine';
+import { getFallbackVertical, isRecoverableDatabaseError } from '@/lib/fallback-data';
 import { generatePDF } from '@/lib/pdf-generator';
 import { NextResponse } from 'next/server';
 
@@ -18,24 +19,45 @@ export async function POST(request, { params }) {
             return NextResponse.json({ error: '"vertical" is required.' }, { status: 400 });
         }
 
-        const tenant = await prisma.tenant.findUnique({ where: { slug: tenantSlug } });
-        if (!tenant) {
-            return NextResponse.json({ error: 'Tenant not found' }, { status: 404 });
+        let tenant = null;
+        let vertical = null;
+        let rateCard = null;
+
+        try {
+            tenant = await prisma.tenant.findUnique({ where: { slug: tenantSlug } });
+
+            if (tenant) {
+                vertical = await prisma.vertical.findUnique({
+                    where: { tenantId_slug: { tenantId: tenant.id, slug: verticalSlug } },
+                    include: {
+                        services: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
+                        addOns: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
+                    },
+                });
+            }
+        } catch (err) {
+            console.error('PDF lookup error:', err);
+            if (!isRecoverableDatabaseError(err)) {
+                return NextResponse.json({ error: 'Failed to generate PDF.' }, { status: 500 });
+            }
         }
 
-        const vertical = await prisma.vertical.findUnique({
-            where: { tenantId_slug: { tenantId: tenant.id, slug: verticalSlug } },
-            include: {
-                services: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
-                addOns: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
-            },
-        });
+        if (tenant && vertical?.enabled) {
+            rateCard = verticalToRateCard(vertical);
+        } else {
+            const fallback = getFallbackVertical(tenantSlug, verticalSlug);
+            if (!fallback) {
+                return NextResponse.json(
+                    { error: tenant ? `Vertical "${verticalSlug}" not found.` : 'Tenant not found' },
+                    { status: 404 }
+                );
+            }
 
-        if (!vertical || !vertical.enabled) {
-            return NextResponse.json({ error: `Vertical "${verticalSlug}" not found.` }, { status: 404 });
+            tenant = fallback.tenant;
+            vertical = fallback.vertical;
+            rateCard = fallback.rateCard;
         }
 
-        const rateCard = verticalToRateCard(vertical);
         const quote = calculateQuote(body, rateCard);
         quote.tenantSlug = tenantSlug;
         quote.vertical = verticalSlug;

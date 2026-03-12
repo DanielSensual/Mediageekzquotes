@@ -1477,6 +1477,27 @@ input:checked+.slider::before {
     border-color: var(--gold-400);
 }
 
+.quote-status-note,
+.quote-status-error {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.quote-status-note {
+    background: rgba(249, 115, 22, 0.08);
+    border: 1px solid rgba(249, 115, 22, 0.22);
+    color: var(--text);
+}
+
+.quote-status-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.24);
+    color: #fca5a5;
+}
+
 /* ─── Quote Result ────────────────────────────────────────────── */
 .quote-result {
     margin-top: 16px;

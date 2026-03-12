@@ -73,6 +73,7 @@ export function QuoteProvider({ children }) {
     // Quote result
     const [quoteResult, setQuoteResult] = useState(null);
     const [generating, setGenerating] = useState(false);
+    const [quoteError, setQuoteError] = useState('');
 
     // V3: Progress bar calculation
     const progressPct = (() => {
@@ -231,6 +232,8 @@ export function QuoteProvider({ children }) {
 
     const handleGenerate = async () => {
         setGenerating(true);
+        setQuoteError('');
+        setQuoteResult(null);
         const requestBody = {
             vertical: activeVertical,
             clientName, email, eventName, location, editorTier, turnaround, days,
@@ -246,11 +249,15 @@ export function QuoteProvider({ children }) {
                 body: JSON.stringify(requestBody),
             });
             const data = await res.json();
+            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
             setQuoteResult(data);
         } catch (err) {
             console.error('Quote error:', err);
+            setQuoteError(err.message || 'Unable to generate quote right now.');
+            setQuoteResult(null);
+        } finally {
+            setGenerating(false);
         }
-        setGenerating(false);
     };
 
     const handleDownloadPDF = async () => {
@@ -280,12 +287,14 @@ export function QuoteProvider({ children }) {
             URL.revokeObjectURL(url);
         } catch (err) {
             console.error('PDF error:', err);
+            setQuoteError('Failed to download the PDF quote.');
         }
     };
 
     const [checkoutLoading, setCheckoutLoading] = useState(false);
 
     const handleCheckout = async (quoteId) => {
+        setQuoteError('');
         setCheckoutLoading(true);
         try {
             const res = await fetch(`/api/${tenantSlug}/checkout`, {
@@ -294,13 +303,18 @@ export function QuoteProvider({ children }) {
                 body: JSON.stringify({ quoteId }),
             });
             const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.error || `HTTP ${res.status}`);
+            }
+
             if (data.url) {
                 window.location.href = data.url;
             } else {
-                console.error('Checkout failed:', data.error);
+                throw new Error('Checkout session could not be created.');
             }
         } catch (err) {
             console.error('Checkout error:', err);
+            setQuoteError(err.message || 'Checkout failed.');
         }
         setCheckoutLoading(false);
     };
@@ -315,7 +329,7 @@ export function QuoteProvider({ children }) {
         parking, setParking, coi, setCoi, travelFee, setTravelFee,
         mobileInputActive, setMobileInputActive,
         selectedPackage, setSelectedPackage,
-        quoteResult, generating, progressPct, rc, services, rcAddOns, editorRates, calc,
+        quoteResult, quoteError, generating, progressPct, rc, services, rcAddOns, editorRates, calc,
         handleGenerate, handleDownloadPDF, handleCheckout, checkoutLoading
     };
 

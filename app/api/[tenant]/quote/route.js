@@ -4,6 +4,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { calculateQuote, verticalToRateCard } from '@/lib/engine';
+import { getFallbackVertical, isRecoverableDatabaseError } from '@/lib/fallback-data';
 import { NextResponse } from 'next/server';
 
 export async function POST(request, { params }) {
@@ -17,49 +18,87 @@ export async function POST(request, { params }) {
             return NextResponse.json({ error: '"vertical" is required in the request body.' }, { status: 400 });
         }
 
-        // Look up tenant
-        const tenant = await prisma.tenant.findUnique({ where: { slug: tenantSlug } });
-        if (!tenant) {
-            return NextResponse.json({ error: 'Tenant not found' }, { status: 404 });
+        let tenant = null;
+        let vertical = null;
+        let rateCard = null;
+        let usingFallback = false;
+
+        try {
+            tenant = await prisma.tenant.findUnique({ where: { slug: tenantSlug } });
+
+            if (tenant) {
+                vertical = await prisma.vertical.findUnique({
+                    where: { tenantId_slug: { tenantId: tenant.id, slug: verticalSlug } },
+                    include: {
+                        services: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
+                        addOns: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
+                    },
+                });
+            }
+        } catch (err) {
+            console.error('Quote lookup error:', err);
+            if (!isRecoverableDatabaseError(err)) {
+                return NextResponse.json({ error: 'Internal server error during quote calculation.' }, { status: 500 });
+            }
         }
 
-        // Look up vertical with services + addons
-        const vertical = await prisma.vertical.findUnique({
-            where: { tenantId_slug: { tenantId: tenant.id, slug: verticalSlug } },
-            include: {
-                services: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
-                addOns: { where: { enabled: true }, orderBy: { sortOrder: 'asc' } },
-            },
-        });
+        if (tenant && vertical?.enabled) {
+            rateCard = verticalToRateCard(vertical);
+        } else {
+            const fallback = getFallbackVertical(tenantSlug, verticalSlug);
+            if (!fallback) {
+                return NextResponse.json(
+                    { error: tenant ? `Vertical "${verticalSlug}" not found or disabled.` : 'Tenant not found' },
+                    { status: 404 }
+                );
+            }
 
-        if (!vertical || !vertical.enabled) {
-            return NextResponse.json({ error: `Vertical "${verticalSlug}" not found or disabled.` }, { status: 404 });
+            tenant = fallback.tenant;
+            vertical = fallback.vertical;
+            rateCard = fallback.rateCard;
+            usingFallback = true;
         }
 
-        // Build rate card from DB
-        const rateCard = verticalToRateCard(vertical);
-
-        // Calculate
         const quote = calculateQuote(body, rateCard);
         quote.tenantSlug = tenantSlug;
         quote.vertical = verticalSlug;
+        quote.persistence = 'ephemeral';
+        quote.checkoutAvailable = false;
 
-        // Save to DB
-        await prisma.quote.create({
-            data: {
-                quoteId: quote.quoteId,
-                tenantId: tenant.id,
-                verticalId: vertical.id,
-                clientName: quote.clientName || null,
-                email: quote.email || null,
-                eventName: quote.eventName || null,
-                location: quote.location || null,
-                requestJson: body,
-                resultJson: quote,
-                total: quote.total,
-                status: 'draft',
-            },
-        });
+        if (!usingFallback && tenant.id && vertical.id) {
+            try {
+                await prisma.quote.create({
+                    data: {
+                        quoteId: quote.quoteId,
+                        tenantId: tenant.id,
+                        verticalId: vertical.id,
+                        clientName: quote.clientName || null,
+                        email: quote.email || null,
+                        eventName: quote.eventName || null,
+                        location: quote.location || null,
+                        requestJson: body,
+                        resultJson: quote,
+                        total: quote.total,
+                        status: 'draft',
+                    },
+                });
+
+                quote.persistence = 'stored';
+                quote.checkoutAvailable = Boolean(process.env.STRIPE_SECRET_KEY);
+                if (!quote.checkoutAvailable) {
+                    quote.notice = 'Checkout is temporarily disabled until Stripe is configured.';
+                }
+            } catch (err) {
+                console.error('Quote persistence error:', err);
+                if (!isRecoverableDatabaseError(err)) {
+                    return NextResponse.json({ error: 'Internal server error during quote calculation.' }, { status: 500 });
+                }
+
+                quote.notice = 'Quote generated successfully, but checkout is temporarily disabled because the database is unavailable.';
+            }
+        } else {
+            quote.notice = 'Quote generated from built-in rate cards while the database is unavailable. PDF download works, but checkout is temporarily disabled.';
+        }
 
         // ──── HYDRA CRM Integration ──────────────────────────────────
         // If a HYDRA webhook is configured, asynchronously push the lead data

@@ -5,6 +5,7 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { isRecoverableDatabaseError } from '@/lib/fallback-data';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
     apiVersion: '2023-10-16',
@@ -19,6 +20,10 @@ export async function POST(request, { params }) {
 
         if (!quoteId) {
             return NextResponse.json({ error: '"quoteId" is required.' }, { status: 400 });
+        }
+
+        if (!process.env.STRIPE_SECRET_KEY) {
+            return NextResponse.json({ error: 'Checkout is not configured.' }, { status: 503 });
         }
 
         // Look up quote
@@ -70,6 +75,9 @@ export async function POST(request, { params }) {
         return NextResponse.json({ url: session.url, sessionId: session.id });
     } catch (err) {
         console.error('Stripe Checkout error:', err);
+        if (isRecoverableDatabaseError(err)) {
+            return NextResponse.json({ error: 'Checkout is temporarily unavailable because the database is unavailable.' }, { status: 503 });
+        }
         return NextResponse.json({ error: 'Internal server error generating checkout session.' }, { status: 500 });
     }
 }

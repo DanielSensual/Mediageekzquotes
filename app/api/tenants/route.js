@@ -3,6 +3,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
+import { getFallbackTenants, isRecoverableDatabaseError } from '@/lib/fallback-data';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -23,6 +24,10 @@ export async function GET() {
         });
     } catch (err) {
         console.error('Tenants list error:', err);
-        return NextResponse.json({ tenants: [] });
+        if (!isRecoverableDatabaseError(err)) {
+            return NextResponse.json({ tenants: [] }, { status: 500 });
+        }
     }
+
+    return NextResponse.json({ tenants: getFallbackTenants() });
 }

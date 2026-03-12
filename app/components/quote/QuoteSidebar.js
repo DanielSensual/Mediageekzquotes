@@ -8,12 +8,13 @@ const fmt = (n) => '$' + (n || 0).toLocaleString('en-US', { minimumFractionDigit
 export function QuoteSidebar() {
     const {
         editorTier, calc, generating, handleGenerate,
-        quoteResult, handleDownloadPDF, handleCheckout, checkoutLoading,
+        quoteResult, quoteError, handleDownloadPDF, handleCheckout, checkoutLoading,
         selectedPackage, activeVertical, mobileInputActive
     } = useQuote();
 
     const hasItems = calc.total > 0;
     const mobileDockHidden = activeVertical === 'weddings' && mobileInputActive;
+    const canCheckout = Boolean(quoteResult?.quoteId) && quoteResult?.checkoutAvailable !== false;
 
     return (
         <aside className={`quote-panel ${mobileDockHidden ? 'quote-panel-mobile-hidden' : ''}`}>
@@ -88,11 +89,20 @@ export function QuoteSidebar() {
                     <span className="btn-icon">{generating ? '⏳' : '⚡'}</span> {generating ? 'Generating...' : 'Generate Quote'}
                 </button>
 
+                {quoteError && (
+                    <p className="quote-status-error">{quoteError}</p>
+                )}
+
                 {quoteResult && (
                     <>
-                        <button type="button" className="btn-primary" style={{ marginTop: '12px', background: 'linear-gradient(135deg, #10b981, #059669)' }} onClick={() => handleCheckout(quoteResult.quoteId)} disabled={checkoutLoading}>
-                            <span className="btn-icon">{checkoutLoading ? '💳' : '🔒'}</span> {checkoutLoading ? 'Loading Checkout...' : 'Secure Your Date (Pay Deposit)'}
-                        </button>
+                        {quoteResult.notice && (
+                            <p className="quote-status-note">{quoteResult.notice}</p>
+                        )}
+                        {canCheckout && (
+                            <button type="button" className="btn-primary" style={{ marginTop: '12px', background: 'linear-gradient(135deg, #10b981, #059669)' }} onClick={() => handleCheckout(quoteResult.quoteId)} disabled={checkoutLoading}>
+                                <span className="btn-icon">{checkoutLoading ? '💳' : '🔒'}</span> {checkoutLoading ? 'Loading Checkout...' : 'Secure Your Date (Pay Deposit)'}
+                            </button>
+                        )}
                         <button type="button" className="btn-pdf" onClick={handleDownloadPDF}>
                             <span className="btn-icon">📄</span> Download PDF Quote
                         </button>
