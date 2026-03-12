@@ -1,0 +1,87 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: 🎬
+        - heading "VideoQuoter" [level=1] [ref=e6]
+      - paragraph [ref=e7]: Professional video production quoting for every vertical
+    - main [ref=e8]:
+      - generic [ref=e9]:
+        - heading "Select your project type." [level=2] [ref=e10]
+        - paragraph [ref=e11]: Choose a vertical to start building your quote instantly.
+        - generic [ref=e12]:
+          - link "🎤 Conventions Trade shows, expos & conference coverage →" [ref=e13] [cursor=pointer]:
+            - /url: /mediageekz?v=conventions
+            - generic [ref=e14]: 🎤
+            - generic [ref=e15]: Conventions
+            - generic [ref=e16]: Trade shows, expos & conference coverage
+            - generic [ref=e17]: →
+          - link "💒 Weddings Cinematic films & highlight reels →" [ref=e18] [cursor=pointer]:
+            - /url: /mediageekz?v=weddings
+            - generic [ref=e19]: 💒
+            - generic [ref=e20]: Weddings
+            - generic [ref=e21]: Cinematic films & highlight reels
+            - generic [ref=e22]: →
+          - link "📱 Social Media Reels, TikToks & digital content →" [ref=e23] [cursor=pointer]:
+            - /url: /mediageekz?v=social-media
+            - generic [ref=e24]: 📱
+            - generic [ref=e25]: Social Media
+            - generic [ref=e26]: Reels, TikToks & digital content
+            - generic [ref=e27]: →
+          - link "🍽️ Restaurants Menu showcases & ambiance films →" [ref=e28] [cursor=pointer]:
+            - /url: /mediageekz?v=restaurants
+            - generic [ref=e29]: 🍽️
+            - generic [ref=e30]: Restaurants
+            - generic [ref=e31]: Menu showcases & ambiance films
+            - generic [ref=e32]: →
+          - link "🏠 Real Estate Walkthroughs, drones & listing videos →" [ref=e33] [cursor=pointer]:
+            - /url: /mediageekz?v=real-estate
+            - generic [ref=e34]: 🏠
+            - generic [ref=e35]: Real Estate
+            - generic [ref=e36]: Walkthroughs, drones & listing videos
+            - generic [ref=e37]: →
+          - link "🎵 Music Videos Cinematic performances & narrative films →" [ref=e38] [cursor=pointer]:
+            - /url: /mediageekz?v=music-videos
+            - generic [ref=e39]: 🎵
+            - generic [ref=e40]: Music Videos
+            - generic [ref=e41]: Cinematic performances & narrative films
+            - generic [ref=e42]: →
+          - link "🎙️ Podcasts Multi-cam recording & social clips →" [ref=e43] [cursor=pointer]:
+            - /url: /mediageekz?v=podcasts
+            - generic [ref=e44]: 🎙️
+            - generic [ref=e45]: Podcasts
+            - generic [ref=e46]: Multi-cam recording & social clips
+            - generic [ref=e47]: →
+          - link "💪 Fitness & Gym High-energy promos & trainer spotlights →" [ref=e48] [cursor=pointer]:
+            - /url: /mediageekz?v=fitness
+            - generic [ref=e49]: 💪
+            - generic [ref=e50]: Fitness & Gym
+            - generic [ref=e51]: High-energy promos & trainer spotlights
+            - generic [ref=e52]: →
+          - link "🌃 Nightlife Clubs, events & highlight reels →" [ref=e53] [cursor=pointer]:
+            - /url: /mediageekz?v=nightlife
+            - generic [ref=e54]: 🌃
+            - generic [ref=e55]: Nightlife
+            - generic [ref=e56]: Clubs, events & highlight reels
+            - generic [ref=e57]: →
+          - link "🏢 Corporate Interviews, training & brand films →" [ref=e58] [cursor=pointer]:
+            - /url: /mediageekz?v=corporate
+            - generic [ref=e59]: 🏢
+            - generic [ref=e60]: Corporate
+            - generic [ref=e61]: Interviews, training & brand films
+            - generic [ref=e62]: →
+          - link "🏥 Medical / MedSpa Procedure explainers & testimonials →" [ref=e63] [cursor=pointer]:
+            - /url: /mediageekz?v=medical
+            - generic [ref=e64]: 🏥
+            - generic [ref=e65]: Medical / MedSpa
+            - generic [ref=e66]: Procedure explainers & testimonials
+            - generic [ref=e67]: →
+          - link "🎓 Education Campus tours & course promos →" [ref=e68] [cursor=pointer]:
+            - /url: /mediageekz?v=education
+            - generic [ref=e69]: 🎓
+            - generic [ref=e70]: Education
+            - generic [ref=e71]: Campus tours & course promos
+            - generic [ref=e72]: →
+    - contentinfo [ref=e73]:
+      - paragraph [ref=e74]: © 2026 VideoQuoter — A Ghost AI Systems Product
+  - alert [ref=e75]

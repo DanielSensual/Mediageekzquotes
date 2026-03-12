@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useQuote } from '../../context/QuoteContext';
 import { AnimatedNumber } from './AnimatedNumber';
 
@@ -12,13 +13,32 @@ export function QuoteSidebar() {
         selectedPackage, activeVertical, mobileInputActive
     } = useQuote();
 
+    const [isDismissed, setIsDismissed] = useState(false);
+
+    // Re-show sidebar when a new quote is being generated or result changes
+    useEffect(() => {
+        if (generating || quoteResult) {
+            setIsDismissed(false);
+        }
+    }, [generating, quoteResult]);
+
     const hasItems = calc.total > 0;
-    const mobileDockHidden = activeVertical === 'weddings' && mobileInputActive;
+    const mobileDockHidden = (activeVertical === 'weddings' && mobileInputActive) || isDismissed;
     const canCheckout = Boolean(quoteResult?.quoteId) && quoteResult?.checkoutAvailable !== false;
 
     return (
         <aside className={`quote-panel ${mobileDockHidden ? 'quote-panel-mobile-hidden' : ''}`}>
             <div className="quote-card">
+                {/* Close Button (X) */}
+                <button 
+                    type="button" 
+                    className="quote-card-close" 
+                    onClick={() => setIsDismissed(true)}
+                    aria-label="Close Summary"
+                >
+                    ×
+                </button>
+
                 <h2 className="quote-title">Your Investment</h2>
 
                 {/* Package badge when a quick-pick is selected */}
@@ -109,6 +129,17 @@ export function QuoteSidebar() {
                     </>
                 )}
             </div>
+            
+            {/* Re-open Button when dismissed */}
+            {isDismissed && (
+                <button 
+                    type="button" 
+                    className="quote-reopen-btn" 
+                    onClick={() => setIsDismissed(false)}
+                >
+                    <span className="btn-icon">💰</span> Show Investment
+                </button>
+            )}
         </aside>
     );
 }

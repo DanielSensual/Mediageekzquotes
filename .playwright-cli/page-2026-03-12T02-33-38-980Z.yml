@@ -1,0 +1,4 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]: Loading Rate Cards...
+  - alert [ref=e5]
