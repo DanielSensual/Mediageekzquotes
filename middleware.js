@@ -9,7 +9,7 @@ const JWT_SECRET = new TextEncoder().encode(
 export async function middleware(request) {
     const { pathname } = request.nextUrl;
 
-    // Only protect /admin routes (but not /admin/login)
+    // Protect /admin routes (but not /admin/login)
     if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
         const token = request.cookies.get('admin_session')?.value;
 
@@ -19,12 +19,28 @@ export async function middleware(request) {
 
         try {
             await jwtVerify(token, JWT_SECRET);
-            // Token is valid, proceed
             return NextResponse.next();
         } catch (err) {
-            // Token invalid or expired
             const response = NextResponse.redirect(new URL('/admin/login', request.url));
             response.cookies.delete('admin_session');
+            return response;
+        }
+    }
+
+    // Protect /dashboard routes
+    if (pathname.startsWith('/dashboard')) {
+        const token = request.cookies.get('vq_session')?.value;
+
+        if (!token) {
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+
+        try {
+            await jwtVerify(token, JWT_SECRET);
+            return NextResponse.next();
+        } catch (err) {
+            const response = NextResponse.redirect(new URL('/login', request.url));
+            response.cookies.delete('vq_session');
             return response;
         }
     }
@@ -33,5 +49,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/admin/:path*'],
+    matcher: ['/admin/:path*', '/dashboard/:path*'],
 };
