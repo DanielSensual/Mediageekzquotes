@@ -1,19 +1,10 @@
+/**
+ * POST /api/auth/login
+ */
+
+import { prisma } from '@/lib/prisma';
+import { verifyPassword, createSession } from '@/lib/auth';
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import { SignJWT } from 'jose';
-
-const JWT_SECRET = new TextEncoder().encode(
-    process.env.JWT_SECRET || 'fallback_insecure_secret_for_development_only_12345'
-);
-
-let _prisma;
-function getPrisma() {
-    if (!_prisma) {
-        const { PrismaClient } = require('@prisma/client');
-        _prisma = new PrismaClient();
-    }
-    return _prisma;
-}
 
 export async function POST(request) {
     try {
@@ -23,10 +14,9 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
         }
 
-        const prisma = getPrisma();
-
+        // 1. Find user by email
         const user = await prisma.tenantUser.findUnique({
-            where: { email: email.toLowerCase() },
+            where: { email },
             include: { tenant: true },
         });
 
@@ -34,41 +24,39 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
 
-        const valid = await bcrypt.compare(password, user.passwordHash);
-        if (!valid) {
+        // 2. Verify password
+        const isValid = await verifyPassword(password, user.passwordHash);
+        if (!isValid) {
             return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
         }
 
-        const token = await new SignJWT({
-            userId: user.id,
-            tenantId: user.tenantId,
-            role: user.role,
+        // 3. Create JWT payload
+        const payload = {
+            id: user.id,
             email: user.email,
-        })
-            .setProtectedHeader({ alg: 'HS256' })
-            .setExpirationTime('30d')
-            .sign(JWT_SECRET);
+            role: user.role,
+            tenantId: user.tenantId,
+            tenantSlug: user.tenant.slug,
+        };
 
-        const response = NextResponse.json({
-            success: true,
-            tenant: {
-                id: user.tenant.id,
-                slug: user.tenant.slug,
-                name: user.tenant.name,
-            },
-        });
+        const token = await createSession(payload);
 
-        response.cookies.set('vq_session', token, {
+        // 4. Set cookie via NextResponse
+        const response = NextResponse.json({ success: true, redirect: '/admin' });
+
+        response.cookies.set({
+            name: 'admin_session',
+            value: token,
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 30 * 24 * 60 * 60,
             path: '/',
+            maxAge: 60 * 60 * 24, // 24 hours
         });
 
         return response;
     } catch (err) {
-        console.error('[Login] Error:', err);
-        return NextResponse.json({ error: 'Login failed. Please try again.' }, { status: 500 });
+        console.error('Login error:', err);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
 }

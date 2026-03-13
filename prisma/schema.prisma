@@ -23,13 +23,6 @@ model Tenant {
     name      String
     plan      String   @default("starter")
 
-    // Stripe Subscription
-    stripeCustomerId     String?  @unique @map("stripe_customer_id")
-    subscriptionId       String?  @map("subscription_id")
-    subscriptionStatus   String   @default("none") @map("subscription_status")
-    subscriptionPlan     String   @default("none") @map("subscription_plan")
-    trialEndsAt          DateTime? @map("trial_ends_at")
-
     // Branding
     logoUrl        String? @map("logo_url")
     colorPrimary   String  @default("#F97316") @map("color_primary")
