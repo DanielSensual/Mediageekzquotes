@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
    Custom Square Checkout — MediaGeekz
-   Supports: Credit/Debit Card, Apple Pay
+   Supports: Credit/Debit Card, Apple Pay, Google Pay
    ═══════════════════════════════════════════════════════════════ */
 
 const APP_ID = 'sq0idp-jfkRHmpqFrCxDYy1_Yv53A';
@@ -19,7 +19,8 @@ function CheckoutContent() {
     const type = searchParams.get('type') || 'deposit';
 
     const cardRef = useRef(null);
-    const applePayRef = useRef(null);
+    const applePayBtnRef = useRef(null);
+    const googlePayBtnRef = useRef(null);
     const paymentsRef = useRef(null);
     const cardInstanceRef = useRef(null);
 
@@ -27,8 +28,8 @@ function CheckoutContent() {
     const [processing, setProcessing] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
-    const [activeTab, setActiveTab] = useState('card');
-    const [applePayAvailable, setApplePayAvailable] = useState(false);
+    const [applePayReady, setApplePayReady] = useState(false);
+    const [googlePayReady, setGooglePayReady] = useState(false);
 
     const fmt = (n) => '$' + n.toLocaleString('en-US');
 
@@ -46,78 +47,81 @@ function CheckoutContent() {
         document.head.appendChild(script);
     }, []);
 
-    // Initialize payment methods once SDK loads
+    const processPayment = useCallback(async (sourceId) => {
+        setProcessing(true);
+        setError(null);
+        try {
+            const res = await fetch('/api/square-process-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sourceId, amount, description: desc }),
+            });
+            const data = await res.json();
+            if (!res.ok || !data.success) {
+                throw new Error(data.details?.[0]?.detail || data.error || 'Payment failed');
+            }
+            setSuccess({ id: data.paymentId, receipt: data.receiptUrl });
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setProcessing(false);
+        }
+    }, [amount, desc]);
+
+    // Initialize all payment methods once SDK loads
     useEffect(() => {
-        if (!sdkLoaded || !window.Square) return;
+        if (!sdkLoaded || !window.Square || amount <= 0) return;
 
         const init = async () => {
             try {
                 const payments = window.Square.payments(APP_ID, LOCATION_ID);
                 paymentsRef.current = payments;
 
-                // Card
-                const card = await payments.card();
-                await card.attach(cardRef.current);
-                cardInstanceRef.current = card;
+                // Card form
+                if (cardRef.current) {
+                    const card = await payments.card();
+                    await card.attach(cardRef.current);
+                    cardInstanceRef.current = card;
+                }
+
+                // Payment request for Apple Pay / Google Pay
+                const paymentRequest = payments.paymentRequest({
+                    countryCode: 'US',
+                    currencyCode: 'USD',
+                    total: {
+                        amount: amount.toFixed(2),
+                        label: desc,
+                    },
+                });
 
                 // Apple Pay
                 try {
-                    const paymentRequest = payments.paymentRequest({
-                        countryCode: 'US',
-                        currencyCode: 'USD',
-                        total: {
-                            amount: amount.toFixed(2),
-                            label: desc,
-                        },
-                    });
                     const applePay = await payments.applePay(paymentRequest);
-                    applePayRef.current = applePay;
-                    setApplePayAvailable(true);
-                } catch {
-                    // Apple Pay not available on this device/browser
-                    setApplePayAvailable(false);
+                    if (applePayBtnRef.current) {
+                        await applePay.attach(applePayBtnRef.current);
+                        setApplePayReady(true);
+                    }
+                } catch (e) {
+                    console.log('Apple Pay not available:', e.message);
                 }
 
-
+                // Google Pay
+                try {
+                    const googlePay = await payments.googlePay(paymentRequest);
+                    if (googlePayBtnRef.current) {
+                        await googlePay.attach(googlePayBtnRef.current);
+                        setGooglePayReady(true);
+                    }
+                } catch (e) {
+                    console.log('Google Pay not available:', e.message);
+                }
             } catch (e) {
                 setError('Failed to initialize payment form: ' + e.message);
             }
         };
 
         init();
-    }, [sdkLoaded, amount, desc]);
-
-    const processPayment = async (sourceId) => {
-        setProcessing(true);
-        setError(null);
-
-        try {
-            const res = await fetch('/api/square-process-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    sourceId,
-                    amount,
-                    description: desc,
-                }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok || !data.success) {
-                throw new Error(data.details?.[0]?.detail || data.error || 'Payment failed');
-            }
-
-            setSuccess({
-                id: data.paymentId,
-                receipt: data.receiptUrl,
-            });
-        } catch (e) {
-            setError(e.message);
-        } finally {
-            setProcessing(false);
-        }
-    };
+    }, [sdkLoaded, amount, desc, processPayment]);
 
     const handleCardPayment = async () => {
         if (!cardInstanceRef.current) return;
@@ -137,13 +141,11 @@ function CheckoutContent() {
         }
     };
 
-
-
     if (amount <= 0) {
         return (
             <div className="checkout-shell">
                 <div className="checkout-card">
-                    <div className="checkout-error-state">Invalid payment amount.</div>
+                    <div style={{ textAlign: 'center', color: '#f87171', padding: 40 }}>Invalid payment amount.</div>
                 </div>
             </div>
         );
@@ -182,6 +184,10 @@ function CheckoutContent() {
                     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
                 }
 
+                @media (max-width: 480px) {
+                    .checkout-card { padding: 28px 20px; }
+                }
+
                 .checkout-brand {
                     font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800;
                     letter-spacing: -0.02em; color: var(--white); text-align: center;
@@ -198,40 +204,14 @@ function CheckoutContent() {
                     text-align: center;
                 }
 
-                .checkout-desc {
-                    font-size: 12px; color: var(--muted); margin-bottom: 8px;
-                }
+                .checkout-desc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 
                 .checkout-amount {
                     font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800;
                     color: var(--white);
                 }
 
-                .checkout-tabs {
-                    display: flex; gap: 4px; margin-bottom: 24px;
-                    background: rgba(15, 23, 42, 0.5); border-radius: 12px; padding: 4px;
-                }
-
-                .checkout-tab {
-                    flex: 1; padding: 10px 12px; border: none; border-radius: 10px;
-                    background: transparent; color: var(--muted); cursor: pointer;
-                    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
-                    transition: all 0.2s; text-align: center;
-                }
-
-                .checkout-tab.active {
-                    background: rgba(232, 98, 44, 0.12); color: var(--orange);
-                }
-
-                .checkout-tab:hover:not(.active) {
-                    color: var(--white);
-                }
-
-                .tab-content { min-height: 180px; }
-
-                .sq-card-container {
-                    min-height: 120px; margin-bottom: 20px;
-                }
+                .sq-card-container { min-height: 90px; margin-bottom: 16px; }
 
                 .pay-action-btn {
                     display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -252,9 +232,26 @@ function CheckoutContent() {
                     box-shadow: 0 12px 36px rgba(232, 98, 44, 0.45);
                 }
 
-
-
                 .pay-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+                .divider {
+                    display: flex; align-items: center; gap: 16px;
+                    margin: 24px 0; font-size: 11px;
+                    color: rgba(148, 163, 184, 0.5); text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                }
+                .divider::before, .divider::after {
+                    content: ''; flex: 1; height: 1px;
+                    background: rgba(100, 116, 139, 0.15);
+                }
+
+                .wallet-section { display: flex; flex-direction: column; gap: 12px; }
+
+                .wallet-btn-container {
+                    min-height: 48px; border-radius: 12px; overflow: hidden;
+                }
+
+                .wallet-btn-container.hidden { display: none; }
 
                 .checkout-error {
                     margin-top: 16px; padding: 12px 16px; border-radius: 10px;
@@ -262,9 +259,7 @@ function CheckoutContent() {
                     color: #f87171; font-size: 13px; text-align: center;
                 }
 
-                .checkout-success {
-                    text-align: center; padding: 40px 20px;
-                }
+                .checkout-success { text-align: center; padding: 40px 20px; }
 
                 .success-icon {
                     display: inline-flex; align-items: center; justify-content: center;
@@ -279,7 +274,6 @@ function CheckoutContent() {
                 }
 
                 .success-desc { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-
                 .success-id { font-size: 11px; color: var(--muted); font-family: monospace; }
 
                 .success-link {
@@ -289,15 +283,19 @@ function CheckoutContent() {
                     color: var(--green); text-decoration: none; font-size: 13px; font-weight: 600;
                     transition: all 0.2s;
                 }
-
                 .success-link:hover { background: rgba(34, 197, 94, 0.15); }
 
                 .secure-note {
-                    margin-top: 20px; text-align: center;
+                    margin-top: 24px; text-align: center;
                     font-size: 11px; color: rgba(148, 163, 184, 0.6);
                 }
 
-
+                .back-link {
+                    display: block; text-align: center; margin-top: 16px;
+                    color: var(--muted); font-size: 12px; text-decoration: none;
+                    transition: color 0.2s;
+                }
+                .back-link:hover { color: var(--white); }
 
                 .loading-state {
                     display: flex; align-items: center; justify-content: center;
@@ -311,13 +309,6 @@ function CheckoutContent() {
                 }
 
                 @keyframes spin { to { transform: rotate(360deg); } }
-
-                .back-link {
-                    display: block; text-align: center; margin-top: 20px;
-                    color: var(--muted); font-size: 12px; text-decoration: none;
-                    transition: color 0.2s;
-                }
-                .back-link:hover { color: var(--white); }
             `}</style>
 
             <div className="checkout-shell">
@@ -347,61 +338,51 @@ function CheckoutContent() {
                         </div>
                     ) : (
                         <>
-                            <div className="checkout-tabs">
-                                <button
-                                    className={`checkout-tab ${activeTab === 'card' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('card')}
-                                >
-                                    💳 Card
-                                </button>
-                                {applePayAvailable && (
+                            {/* Digital Wallets — Apple Pay / Google Pay */}
+                            {(applePayReady || googlePayReady) && (
+                                <div className="wallet-section">
+                                    <div
+                                        ref={applePayBtnRef}
+                                        className={`wallet-btn-container ${applePayReady ? '' : 'hidden'}`}
+                                    />
+                                    <div
+                                        ref={googlePayBtnRef}
+                                        className={`wallet-btn-container ${googlePayReady ? '' : 'hidden'}`}
+                                    />
+                                </div>
+                            )}
+
+                            {/* Always render wallet containers (hidden until ready) */}
+                            {!applePayReady && !googlePayReady && (
+                                <>
+                                    <div ref={applePayBtnRef} className="wallet-btn-container hidden" />
+                                    <div ref={googlePayBtnRef} className="wallet-btn-container hidden" />
+                                </>
+                            )}
+
+                            <div className="divider">or pay with card</div>
+
+                            {/* Card Form */}
+                            {!sdkLoaded ? (
+                                <div className="loading-state">
+                                    <span className="spinner" />Loading payment form...
+                                </div>
+                            ) : (
+                                <>
+                                    <div ref={cardRef} className="sq-card-container" />
                                     <button
-                                        className={`checkout-tab ${activeTab === 'apple' ? 'active' : ''}`}
-                                        onClick={() => setActiveTab('apple')}
+                                        className="pay-action-btn primary"
+                                        onClick={handleCardPayment}
+                                        disabled={processing}
                                     >
-                                         Apple Pay
-                                    </button>
-                                )}
-
-                            </div>
-
-                            <div className="tab-content">
-                                {activeTab === 'card' && (
-                                    <>
-                                        {!sdkLoaded ? (
-                                            <div className="loading-state">
-                                                <span className="spinner" />Loading payment form...
-                                            </div>
+                                        {processing ? (
+                                            <><span className="spinner" /> Processing...</>
                                         ) : (
-                                            <>
-                                                <div ref={cardRef} className="sq-card-container" />
-                                                <button
-                                                    className="pay-action-btn primary"
-                                                    onClick={handleCardPayment}
-                                                    disabled={processing}
-                                                >
-                                                    {processing ? (
-                                                        <><span className="spinner" /> Processing...</>
-                                                    ) : (
-                                                        <>Pay {fmt(amount)}</>
-                                                    )}
-                                                </button>
-                                            </>
+                                            <>Pay {fmt(amount)}</>
                                         )}
-                                    </>
-                                )}
-
-                                {activeTab === 'apple' && applePayAvailable && (
-                                    <>
-                                        <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--muted)', fontSize: 13 }}>
-                                            Click below to pay with Apple Pay
-                                        </div>
-                                        <div id="apple-pay-button" />
-                                    </>
-                                )}
-
-
-                            </div>
+                                    </button>
+                                </>
+                            )}
 
                             {error && <div className="checkout-error">{error}</div>}
                             <div className="secure-note">🔒 Payments processed securely via Square</div>
