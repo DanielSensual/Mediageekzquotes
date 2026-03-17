@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
    Custom Square Checkout — MediaGeekz
-   Supports: Credit/Debit Card, Apple Pay, ACH Bank Transfer
+   Supports: Credit/Debit Card, Apple Pay
    ═══════════════════════════════════════════════════════════════ */
 
 const APP_ID = 'sq0idp-jfkRHmpqFrCxDYy1_Yv53A';
@@ -19,11 +19,9 @@ function CheckoutContent() {
     const type = searchParams.get('type') || 'deposit';
 
     const cardRef = useRef(null);
-    const achRef = useRef(null);
     const applePayRef = useRef(null);
     const paymentsRef = useRef(null);
     const cardInstanceRef = useRef(null);
-    const achInstanceRef = useRef(null);
 
     const [sdkLoaded, setSdkLoaded] = useState(false);
     const [processing, setProcessing] = useState(false);
@@ -80,13 +78,7 @@ function CheckoutContent() {
                     setApplePayAvailable(false);
                 }
 
-                // ACH
-                try {
-                    const ach = await payments.ach();
-                    achInstanceRef.current = ach;
-                } catch (e) {
-                    console.warn('ACH init failed:', e);
-                }
+
             } catch (e) {
                 setError('Failed to initialize payment form: ' + e.message);
             }
@@ -145,25 +137,7 @@ function CheckoutContent() {
         }
     };
 
-    const handleACHPayment = async () => {
-        if (!achInstanceRef.current) return;
-        setProcessing(true);
-        setError(null);
-        try {
-            const result = await achInstanceRef.current.tokenize({
-                accountHolderName: 'Customer',
-            });
-            if (result.status === 'OK') {
-                await processPayment(result.token);
-            } else {
-                setError(result.errors?.[0]?.message || 'Bank authorization failed.');
-                setProcessing(false);
-            }
-        } catch (e) {
-            setError(e.message);
-            setProcessing(false);
-        }
-    };
+
 
     if (amount <= 0) {
         return (
@@ -278,16 +252,7 @@ function CheckoutContent() {
                     box-shadow: 0 12px 36px rgba(232, 98, 44, 0.45);
                 }
 
-                .pay-action-btn.ach {
-                    background: linear-gradient(135deg, #1e3a5f, #2563eb);
-                    color: var(--white);
-                    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.3);
-                }
 
-                .pay-action-btn.ach:hover:not(:disabled) {
-                    transform: translateY(-2px);
-                    box-shadow: 0 12px 36px rgba(37, 99, 235, 0.4);
-                }
 
                 .pay-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -332,13 +297,7 @@ function CheckoutContent() {
                     font-size: 11px; color: rgba(148, 163, 184, 0.6);
                 }
 
-                .ach-info {
-                    padding: 16px; border-radius: 12px; margin-bottom: 20px;
-                    background: rgba(37, 99, 235, 0.04); border: 1px solid rgba(37, 99, 235, 0.12);
-                    font-size: 12px; color: var(--muted); line-height: 1.6;
-                }
 
-                .ach-info strong { color: var(--cream); }
 
                 .loading-state {
                     display: flex; align-items: center; justify-content: center;
@@ -403,12 +362,7 @@ function CheckoutContent() {
                                          Apple Pay
                                     </button>
                                 )}
-                                <button
-                                    className={`checkout-tab ${activeTab === 'ach' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('ach')}
-                                >
-                                    🏦 Bank (ACH)
-                                </button>
+
                             </div>
 
                             <div className="tab-content">
@@ -446,25 +400,7 @@ function CheckoutContent() {
                                     </>
                                 )}
 
-                                {activeTab === 'ach' && (
-                                    <>
-                                        <div className="ach-info">
-                                            <strong>Bank Transfer (ACH)</strong><br />
-                                            You will be redirected to securely connect your bank account via Plaid. ACH payments typically take 2–3 business days to process.
-                                        </div>
-                                        <button
-                                            className="pay-action-btn ach"
-                                            onClick={handleACHPayment}
-                                            disabled={processing}
-                                        >
-                                            {processing ? (
-                                                <><span className="spinner" /> Connecting Bank...</>
-                                            ) : (
-                                                <>🏦 Pay via Bank Transfer — {fmt(amount)}</>
-                                            )}
-                                        </button>
-                                    </>
-                                )}
+
                             </div>
 
                             {error && <div className="checkout-error">{error}</div>}
