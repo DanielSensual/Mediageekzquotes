@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://web.squarecdn.com/v1/square.js"></script>
+  <style>
+    body { background: #0b0f1a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    #apple-pay-button { height: 48px; width: 300px; }
+  </style>
+</head>
+<body>
+  <div id="apple-pay-button"></div>
+  <script>
+    async function init() {
+      const payments = window.Square.payments('sq0idp-jfkRHmpqFrCxDYy1_Yv53A', 'L819F9XH8VT84');
+      const req = payments.paymentRequest({ countryCode: 'US', currencyCode: 'USD', total: { amount: '1.00', label: 'Test' } });
+      try {
+        const applePay = await payments.applePay(req);
+        await applePay.attach('#apple-pay-button');
+        console.log("Attached!");
+      } catch (e) {
+        console.error(e);
+        document.body.innerHTML += `<p style="color:red">${e.message}</p>`;
+      }
+    }
+    init();
+  </script>
+</body>
+</html>

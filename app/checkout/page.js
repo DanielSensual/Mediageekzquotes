@@ -94,6 +94,10 @@ function CheckoutContent() {
                     },
                 });
 
+                // Apply specific height required by Square Apple/Google Pay
+                if (applePayBtnRef.current) applePayBtnRef.current.style.minHeight = '48px';
+                if (googlePayBtnRef.current) googlePayBtnRef.current.style.minHeight = '48px';
+
                 // Apple Pay
                 try {
                     const applePay = await payments.applePay(paymentRequest);
@@ -106,10 +110,8 @@ function CheckoutContent() {
                         }
                     });
 
-                    if (applePayBtnRef.current) {
-                        await applePay.attach(applePayBtnRef.current);
-                        setApplePayReady(true);
-                    }
+                    await applePay.attach(applePayBtnRef.current);
+                    setApplePayReady(true);
                 } catch (e) {
                     console.log('Apple Pay not available:', e.message);
                 }
@@ -126,10 +128,8 @@ function CheckoutContent() {
                         }
                     });
 
-                    if (googlePayBtnRef.current) {
-                        await googlePay.attach(googlePayBtnRef.current);
-                        setGooglePayReady(true);
-                    }
+                    await googlePay.attach(googlePayBtnRef.current);
+                    setGooglePayReady(true);
                 } catch (e) {
                     console.log('Google Pay not available:', e.message);
                 }
@@ -356,25 +356,30 @@ function CheckoutContent() {
                         </div>
                     ) : (
                         <>
-                            {/* Digital Wallets — Apple Pay / Google Pay */}
-                            <div className="wallet-section" style={{ display: applePayReady || googlePayReady ? 'flex' : 'none' }}>
+                            {/* Digital Wallets — Unconditional render to avoid DOM destruction */}
+                            <div className="wallet-section" style={{ display: (!sdkLoaded || (!applePayReady && !googlePayReady)) ? 'none' : 'flex' }}>
                                 <div
                                     ref={applePayBtnRef}
-                                    className={`wallet-btn-container ${applePayReady ? '' : 'hidden'}`}
+                                    style={{ display: applePayReady ? 'block' : 'none', width: '100%' }}
                                 />
                                 <div
                                     ref={googlePayBtnRef}
-                                    className={`wallet-btn-container ${googlePayReady ? '' : 'hidden'}`}
+                                    style={{ display: googlePayReady ? 'block' : 'none', width: '100%' }}
                                 />
                             </div>
 
-                            {/* Render hidden containers when SDK loads but wallets aren't ready yet so ref exists */}
-                            <div style={{ display: applePayReady || googlePayReady ? 'none' : 'block' }}>
-                                <div ref={applePayBtnRef} className="wallet-btn-container hidden" />
-                                <div ref={googlePayBtnRef} className="wallet-btn-container hidden" />
-                            </div>
+                            {/* Render a placeholder while SDK loads or if wallets aren't available yet but might become available */}
+                            {(!sdkLoaded || (!applePayReady && !googlePayReady)) && (
+                                <div style={{ height: 0, overflow: 'hidden' }}>
+                                    <div ref={applePayBtnRef} />
+                                    <div ref={googlePayBtnRef} />
+                                </div>
+                            )}
 
-                            <div className="divider">or pay with card</div>
+                            {/* Divider only shows if at least one wallet is active */}
+                            {(applePayReady || googlePayReady) && (
+                                <div className="divider">or pay with card</div>
+                            )}
 
                             {/* Card Form */}
                             {!sdkLoaded ? (
