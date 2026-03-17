@@ -11,13 +11,13 @@ const PACKAGES = [
         name: 'Professional',
         tagline: 'Full package',
         recommended: true,
-        base: 4350,
+        base: 7350,
         crew: [
             { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
             { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
         ],
         post: [
-            { label: '3× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 1500, per: '$500/ep' },
+            { label: '3× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 4500, per: '$1,500/ep' },
             { label: '6× Mobile-Ready Clips', detail: '60-sec vertical cuts from interviews', amount: 900, per: '$150/clip' },
         ],
         included: [
@@ -40,13 +40,13 @@ const PACKAGES = [
         id: 'premier',
         name: 'Premier',
         tagline: 'Full production',
-        base: 5850,
+        base: 7650,
         crew: [
             { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
             { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
         ],
         post: [
-            { label: '3× Multi-Cam Interview Edits', detail: 'Senior editor — 15–20 min, cinematic finish', amount: 2400, per: '$800/ep' },
+            { label: '3× Multi-Cam Interview Edits', detail: 'Senior editor — 15–20 min, cinematic finish', amount: 4500, per: '$1,500/ep' },
             { label: '6× Mobile-Ready Clips', detail: 'Senior editor — 60-sec vertical cuts', amount: 1500, per: '$250/clip' },
         ],
         included: [
@@ -928,10 +928,10 @@ export default function LeadershipInterviewsProposal() {
                         </div>
 
                         <div className="cta-row">
-                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MediaGeekz+%C3%97+Tommy+%E2%80%94+Leadership+Interview+Planning&details=Quick+planning+call+to+walk+through+package+options+and+lock+in+the+March+26+shoot.%0A%0AJoin+via+Google+Meet.&add=danielcastillo@mediageekz.com&dates=20260318T140000/20260318T141500" target="_blank" rel="noopener noreferrer" className="meeting-btn">
+                            <a href="mailto:mattworkman@mediageekz.com,danielcastillo@mediageekz.com?subject=Leadership%20Interview%20%E2%80%94%20Schedule%20a%20Planning%20Call&body=Hey%20Matt%20%26%20Daniel%2C%0A%0AI%27d%20like%20to%20schedule%20a%20quick%20call%20to%20plan%20the%20March%2026%20leadership%20interview%20shoot.%0A%0AAvailable%20times%3A%20%0A%0AThanks!" className="meeting-btn">
                                 📅 Schedule a Call →
                             </a>
-                            <a href="mailto:danielcastillo@mediageekz.com?subject=Leadership%20Interview%20Quote%20%E2%80%94%20Tommy&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20go%20with%20the%20__%20package%20for%20the%20March%2026%20leadership%20interviews.%0A%0AThanks!" className="cta-btn">
+                            <a href="mailto:mattworkman@mediageekz.com,danielcastillo@mediageekz.com?subject=Leadership%20Interview%20Quote%20%E2%80%94%20Confirmed&body=Hey%20Matt%20%26%20Daniel%2C%0A%0AI%27d%20like%20to%20go%20with%20the%20__%20package%20for%20the%20March%2026%20leadership%20interviews.%0A%0AThanks!" className="cta-btn">
                                 Reply to Confirm →
                             </a>
                         </div>
