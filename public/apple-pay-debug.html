@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Square Apple Pay Debug</title>
+  <script src="https://web.squarecdn.com/v1/square.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --panel: #0f172a;
+      --border: rgba(148, 163, 184, 0.2);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #e8622c;
+      --danger: #f87171;
+      --success: #4ade80;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top, rgba(232, 98, 44, 0.14), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .panel {
+      width: min(100%, 720px);
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .status {
+      margin: 20px 0 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      font-size: 14px;
+    }
+
+    .status.success {
+      color: var(--success);
+      border-color: rgba(74, 222, 128, 0.35);
+      background: rgba(74, 222, 128, 0.1);
+    }
+
+    .status.error {
+      color: var(--danger);
+      border-color: rgba(248, 113, 113, 0.35);
+      background: rgba(248, 113, 113, 0.1);
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    #apple-pay-button {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      -webkit-appearance: -apple-pay-button;
+      -apple-pay-button-type: buy;
+      -apple-pay-button-style: black;
+    }
+
+    #apple-pay-button[hidden] {
+      display: none;
+    }
+
+    .log {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      min-height: 180px;
+    }
+
+    code {
+      color: #fdba74;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>Square Apple Pay Debug</h1>
+    <p>Use this page on <strong>Safari</strong> over HTTPS on a Square-verified domain. It removes React from the loop and exercises Square's Apple Pay API directly.</p>
+
+    <div class="meta">
+      <div>App ID: <code>sq0idp-jfkRHmpqFrCxDYy1_Yv53A</code></div>
+      <div>Location ID: <code>L819F9XH8VT84</code></div>
+      <div>Query params: <code>?amount=1.00&label=Apple%20Pay%20Test</code></div>
+    </div>
+
+    <div id="status" class="status">Initializing Square Apple Pay…</div>
+    <button id="apple-pay-button" type="button" hidden aria-label="Pay with Apple Pay"></button>
+    <pre id="log" class="log"></pre>
+  </main>
+
+  <script>
+    const APP_ID = 'sq0idp-jfkRHmpqFrCxDYy1_Yv53A';
+    const LOCATION_ID = 'L819F9XH8VT84';
+
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get('amount') || '1.00';
+    const label = params.get('label') || 'Apple Pay Debug Test';
+
+    const statusEl = document.getElementById('status');
+    const logEl = document.getElementById('log');
+    const applePayButton = document.getElementById('apple-pay-button');
+
+    let applePayInstance = null;
+
+    function serialize(value) {
+      if (value instanceof Error) {
+        return {
+          name: value.name,
+          message: value.message,
+          stack: value.stack,
+        };
+      }
+
+      return value;
+    }
+
+    function log(message, payload) {
+      const timestamp = new Date().toISOString();
+      const line = payload === undefined
+        ? `[${timestamp}] ${message}`
+        : `[${timestamp}] ${message}\n${JSON.stringify(serialize(payload), null, 2)}`;
+
+      logEl.textContent += `${line}\n\n`;
+      console.log(message, payload);
+    }
+
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `status${type ? ` ${type}` : ''}`;
+    }
+
+    async function initApplePay() {
+      if (!window.Square) {
+        setStatus('Square SDK failed to load.', 'error');
+        return;
+      }
+
+      try {
+        const payments = window.Square.payments(APP_ID, LOCATION_ID);
+        log('Created Square payments instance.');
+
+        const paymentRequest = payments.paymentRequest({
+          countryCode: 'US',
+          currencyCode: 'USD',
+          total: {
+            amount,
+            label,
+          },
+        });
+        log('Built paymentRequest.', paymentRequest);
+
+        applePayInstance = await payments.applePay(paymentRequest);
+        log('Apple Pay instance initialized.');
+
+        applePayButton.hidden = false;
+        setStatus('Apple Pay initialized. Tap the button to tokenize.', 'success');
+      } catch (error) {
+        log('Apple Pay initialization failed.', error);
+        setStatus(`Apple Pay unavailable: ${error.message || 'Unknown error'}`, 'error');
+      }
+    }
+
+    applePayButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+
+      if (!applePayInstance) {
+        setStatus('Apple Pay is not initialized.', 'error');
+        return;
+      }
+
+      setStatus('Opening Apple Pay sheet…');
+
+      try {
+        const result = await applePayInstance.tokenize();
+        log('Apple Pay tokenization result.', result);
+
+        if (result.status === 'OK') {
+          const preview = `${result.token.slice(0, 24)}...`;
+          setStatus(`Tokenization succeeded: ${preview}`, 'success');
+          return;
+        }
+
+        const detail = (result.errors || [])
+          .map(error => error.message || error.detail)
+          .filter(Boolean)
+          .join(' ');
+
+        setStatus(detail || `Tokenization failed with status ${result.status}.`, 'error');
+      } catch (error) {
+        log('Apple Pay tokenize() threw.', error);
+        setStatus(`tokenize() error: ${error.message || 'Unknown error'}`, 'error');
+      }
+    });
+
+    initApplePay();
+  </script>
+</body>
+</html>

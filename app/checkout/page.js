@@ -79,6 +79,7 @@ function CheckoutContent() {
     const tokenizeWallet = useCallback(async (walletInstance, label) => {
         if (!walletInstance) return;
 
+        setProcessing(true);
         setError(null);
 
         try {
@@ -90,9 +91,11 @@ function CheckoutContent() {
             }
 
             setError(readTokenizationError(tokenResult, `${label} tokenization failed.`));
+            setProcessing(false);
         } catch (e) {
             console.error(`${label} tokenize error:`, e);
             setError(e.message || `${label} failed.`);
+            setProcessing(false);
         }
     }, [processPayment]);
 
