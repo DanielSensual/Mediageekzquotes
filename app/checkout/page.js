@@ -97,6 +97,15 @@ function CheckoutContent() {
                 // Apple Pay
                 try {
                     const applePay = await payments.applePay(paymentRequest);
+                    
+                    applePay.addEventListener('ontokenization', async (event) => {
+                        if (event.detail.tokenResult.status === 'OK') {
+                            await processPayment(event.detail.tokenResult.token);
+                        } else {
+                            setError(event.detail.tokenResult.errors?.[0]?.message || 'Apple Pay failed');
+                        }
+                    });
+
                     if (applePayBtnRef.current) {
                         await applePay.attach(applePayBtnRef.current);
                         setApplePayReady(true);
@@ -108,6 +117,15 @@ function CheckoutContent() {
                 // Google Pay
                 try {
                     const googlePay = await payments.googlePay(paymentRequest);
+
+                    googlePay.addEventListener('ontokenization', async (event) => {
+                        if (event.detail.tokenResult.status === 'OK') {
+                            await processPayment(event.detail.tokenResult.token);
+                        } else {
+                            setError(event.detail.tokenResult.errors?.[0]?.message || 'Google Pay failed');
+                        }
+                    });
+
                     if (googlePayBtnRef.current) {
                         await googlePay.attach(googlePayBtnRef.current);
                         setGooglePayReady(true);
@@ -339,26 +357,22 @@ function CheckoutContent() {
                     ) : (
                         <>
                             {/* Digital Wallets — Apple Pay / Google Pay */}
-                            {(applePayReady || googlePayReady) && (
-                                <div className="wallet-section">
-                                    <div
-                                        ref={applePayBtnRef}
-                                        className={`wallet-btn-container ${applePayReady ? '' : 'hidden'}`}
-                                    />
-                                    <div
-                                        ref={googlePayBtnRef}
-                                        className={`wallet-btn-container ${googlePayReady ? '' : 'hidden'}`}
-                                    />
-                                </div>
-                            )}
+                            <div className="wallet-section" style={{ display: applePayReady || googlePayReady ? 'flex' : 'none' }}>
+                                <div
+                                    ref={applePayBtnRef}
+                                    className={`wallet-btn-container ${applePayReady ? '' : 'hidden'}`}
+                                />
+                                <div
+                                    ref={googlePayBtnRef}
+                                    className={`wallet-btn-container ${googlePayReady ? '' : 'hidden'}`}
+                                />
+                            </div>
 
-                            {/* Always render wallet containers (hidden until ready) */}
-                            {!applePayReady && !googlePayReady && (
-                                <>
-                                    <div ref={applePayBtnRef} className="wallet-btn-container hidden" />
-                                    <div ref={googlePayBtnRef} className="wallet-btn-container hidden" />
-                                </>
-                            )}
+                            {/* Render hidden containers when SDK loads but wallets aren't ready yet so ref exists */}
+                            <div style={{ display: applePayReady || googlePayReady ? 'none' : 'block' }}>
+                                <div ref={applePayBtnRef} className="wallet-btn-container hidden" />
+                                <div ref={googlePayBtnRef} className="wallet-btn-container hidden" />
+                            </div>
 
                             <div className="divider">or pay with card</div>
 
