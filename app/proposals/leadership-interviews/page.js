@@ -30,6 +30,7 @@ const PACKAGES = [
             'Color grading + sound design',
             '2 revision rounds',
             'Priority delivery: Interview 1 within ~1 week',
+            'BTS photography — up to 100 photos',
         ],
         excluded: [],
     },
@@ -37,6 +38,7 @@ const PACKAGES = [
 
 const ADDONS = [
     { id: 'extra-interview', label: 'Extra Long-Form Interview Edit', detail: 'Additional 15–20 min multi-cam interview edit — recorded on shoot day', price: 1500 },
+    { id: 'licensed-music', label: 'Licensed Music', detail: 'Premium royalty-free track per episode — curated to match your brand', price: 100, per: '~$100/ep' },
 ];
 
 /* ═══════════════════════════════════════════════════════════════ */
@@ -742,7 +744,7 @@ export default function LeadershipInterviewsProposal() {
                         <div className="section-question">What are the options?</div>
                         <h2 className="section-title">Choose your coverage scope</h2>
                         <p className="section-desc">
-                            All tiers include professional cinema equipment, multi-cam recording, wireless lav audio, and organized raw footage delivery. Click any package to see the full cost breakdown.
+                            All tiers include professional cinema equipment, multi-cam recording, wireless lav audio, and BTS photography. Light and airy, organic visual style — click the package to see the full cost breakdown.
                         </p>
                     </div>
 
@@ -871,26 +873,26 @@ export default function LeadershipInterviewsProposal() {
                         <div className="next-steps-title">Next steps</div>
                         <div className="next-steps-grid">
                             <div className="next-step">
-                                <strong>01. Book a quick call</strong>
-                                <span>Jump on a 15-min Google Meet this week to walk through the options and lock in March 26.</span>
+                                <strong>01. Review the invoice</strong>
+                                <span>Check the line-item breakdown and contract terms. Everything is detailed and ready for your sign-off.</span>
                             </div>
                             <div className="next-step">
-                                <strong>02. Confirm your package</strong>
-                                <span>Pick your tier + any add-ons. We'll send over a final invoice and lock the date.</span>
+                                <strong>02. Sign & secure the date</strong>
+                                <span>Sign the agreement and submit the 50% reservation fee to lock in March 26.</span>
                             </div>
                             <div className="next-step">
                                 <strong>03. Talent prep</strong>
-                                <span>We'll send your interviewees a simple guide — what to wear, where to look, and what to expect on shoot day.</span>
+                                <span>We&apos;ll send your interviewees a simple guide — what to wear, where to look, and what to expect on shoot day.</span>
                             </div>
                             <div className="next-step">
                                 <strong>04. Shoot day</strong>
-                                <span>We arrive at 9:30 AM, handle everything, and wrap by 6 PM. Your talent just needs to show up and talk.</span>
+                                <span>We arrive at 9:30 AM, handle everything, and wrap by 5 PM. Your talent just needs to show up and talk.</span>
                             </div>
                         </div>
 
                         <div className="cta-row">
                             <a href="/proposals/leadership-interviews/invoice" className="cta-btn">
-                                Review Invoice & Sign →
+                                Review Invoice &amp; Sign →
                             </a>
                             <a href="mailto:mattworkman@mediageekz.com,danielcastillo@mediageekz.com?subject=Leadership%20Interview%20Quote%20%E2%80%94%20Confirmed&body=Hey%20Matt%20%26%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20March%2026%20leadership%20interview%20shoot.%0A%0AThanks!" className="meeting-btn">
                                 Reply to Confirm →

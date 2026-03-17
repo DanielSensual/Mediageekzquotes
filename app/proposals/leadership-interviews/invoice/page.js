@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
    Invoice + Contract — Leadership Interviews
@@ -33,9 +33,54 @@ const fmt = (n) => '$' + n.toLocaleString('en-US');
 
 export default function InvoicePage() {
     const printRef = useRef(null);
+    const [loading, setLoading] = useState(null);
+    const [error, setError] = useState(null);
+    const [sigName, setSigName] = useState('');
+    const [signed, setSigned] = useState(false);
+    const [signedAt, setSignedAt] = useState(null);
 
     const handlePrint = () => {
         window.print();
+    };
+
+    const handlePayment = async (type) => {
+        setLoading(type);
+        setError(null);
+        try {
+            const amount = type === 'deposit' ? DEPOSIT : SUBTOTAL;
+            const description = type === 'deposit'
+                ? `MediaGeekz — Leadership Interviews (50% Deposit)`
+                : `MediaGeekz — Leadership Interviews (Full Payment)`;
+
+            const res = await fetch('/api/square-checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    amount,
+                    description,
+                    redirectUrl: window.location.href,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (data.success && data.url) {
+                window.location.href = data.url;
+            } else {
+                setError('Could not create payment link. Please contact us directly.');
+            }
+        } catch (err) {
+            setError('Payment service unavailable. Please contact us directly.');
+        } finally {
+            setLoading(null);
+        }
+    };
+
+    const handleSign = () => {
+        if (!sigName.trim()) return;
+        const now = new Date();
+        setSignedAt(now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + ' at ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+        setSigned(true);
     };
 
     return (
@@ -255,6 +300,152 @@ export default function InvoicePage() {
                     text-decoration: none; transition: color 0.2s;
                 }
                 .back-link:hover { color: var(--orange); }
+
+                /* ── Payment Buttons ── */
+                .payment-actions {
+                    margin-top: 32px; padding: 28px 24px;
+                    border: 1px solid rgba(232, 98, 44, 0.2);
+                    border-radius: 16px;
+                    background: linear-gradient(180deg, rgba(232, 98, 44, 0.04), transparent);
+                }
+
+                .payment-title {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 18px; font-weight: 700; color: var(--white);
+                    margin-bottom: 16px; text-align: center;
+                }
+
+                .payment-grid {
+                    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+                }
+
+                @media (max-width: 560px) { .payment-grid { grid-template-columns: 1fr; } }
+
+                .pay-btn {
+                    display: flex; flex-direction: column; align-items: center;
+                    gap: 6px; padding: 20px 16px;
+                    border: none; border-radius: 14px; cursor: pointer;
+                    font-family: 'Outfit', sans-serif;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                    min-height: 76px; justify-content: center;
+                }
+
+                .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+                .pay-btn.deposit {
+                    background: linear-gradient(135deg, var(--orange), #f59e0b);
+                    box-shadow: 0 8px 28px rgba(232, 98, 44, 0.3);
+                }
+                .pay-btn.deposit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(232, 98, 44, 0.4); }
+
+                .pay-btn.full {
+                    background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(45, 212, 191, 0.08));
+                    border: 1px solid var(--teal);
+                }
+                .pay-btn.full:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45, 212, 191, 0.2); }
+
+                .pay-label {
+                    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+                    text-transform: uppercase; color: var(--white);
+                }
+
+                .pay-btn.full .pay-label { color: var(--teal); }
+
+                .pay-amount {
+                    font-size: 22px; font-weight: 700; color: var(--white);
+                }
+
+                .pay-btn.full .pay-amount { color: var(--cream); }
+
+                .pay-spinner {
+                    width: 22px; height: 22px; border: 2px solid rgba(255,255,255,0.3);
+                    border-top-color: var(--white); border-radius: 50%;
+                    animation: spin 0.7s linear infinite;
+                }
+
+                @keyframes spin { to { transform: rotate(360deg); } }
+
+                .pay-error {
+                    margin-top: 12px; padding: 10px 14px;
+                    border-radius: 8px; background: rgba(239, 68, 68, 0.1);
+                    border: 1px solid rgba(239, 68, 68, 0.3);
+                    color: #f87171; font-size: 12px; text-align: center;
+                }
+
+                .pay-secure-note {
+                    margin-top: 12px; text-align: center;
+                    font-size: 11px; color: var(--muted-3);
+                }
+
+                /* ── Digital Signature ── */
+                @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
+
+                .sig-input-group { margin-bottom: 20px; }
+
+                .sig-input-label {
+                    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+                    text-transform: uppercase; color: var(--muted-3); margin-bottom: 8px;
+                }
+
+                .sig-input {
+                    width: 100%; padding: 12px 16px;
+                    border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 10px;
+                    background: rgba(15, 23, 42, 0.6); color: var(--white);
+                    font-family: 'Inter', sans-serif; font-size: 14px;
+                    outline: none; transition: border-color 0.2s;
+                }
+
+                .sig-input:focus { border-color: var(--orange); }
+                .sig-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+                .sig-preview {
+                    min-height: 60px; padding: 12px 20px;
+                    border-bottom: 2px solid rgba(100, 116, 139, 0.3);
+                    margin-bottom: 8px; display: flex; align-items: flex-end;
+                }
+
+                .sig-cursive {
+                    font-family: 'Dancing Script', cursive;
+                    font-size: 32px; font-weight: 700; color: var(--white);
+                    line-height: 1.2;
+                }
+
+                .sig-date-auto {
+                    font-size: 12px; color: var(--muted); margin-top: 4px;
+                }
+
+                .sign-btn {
+                    display: flex; align-items: center; justify-content: center; gap: 10px;
+                    width: 100%; padding: 16px;
+                    border: none; border-radius: 12px; cursor: pointer;
+                    background: linear-gradient(135deg, var(--orange), #f59e0b);
+                    color: var(--white); font-family: 'Outfit', sans-serif;
+                    font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+                    text-transform: uppercase; margin-top: 20px;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 6px 24px rgba(232, 98, 44, 0.3);
+                }
+
+                .sign-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232, 98, 44, 0.4); }
+                .sign-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+                .signed-badge {
+                    display: flex; align-items: center; gap: 10px;
+                    padding: 14px 20px; border-radius: 12px;
+                    background: rgba(45, 212, 191, 0.08);
+                    border: 1px solid rgba(45, 212, 191, 0.25);
+                    margin-top: 16px;
+                }
+
+                .signed-badge-icon { font-size: 20px; }
+
+                .signed-badge-text {
+                    font-size: 12px; color: var(--teal); font-weight: 600;
+                }
+
+                .signed-badge-time {
+                    font-size: 11px; color: var(--muted-2); margin-top: 2px;
+                }
             `}</style>
 
             <div className="invoice-shell" ref={printRef}>
@@ -347,6 +538,43 @@ export default function InvoicePage() {
                         <strong>Rush Delivery:</strong> Interview 1 (CEO + CIO) will be delivered within approximately 1 week. Remaining edits delivered within 7–14 business days.
                     </div>
 
+                    {/* ── Payment Actions ── */}
+                    <div className="payment-actions no-print">
+                        <div className="payment-title">Secure Your Date</div>
+                        <div className="payment-grid">
+                            <button
+                                className="pay-btn deposit"
+                                onClick={() => handlePayment('deposit')}
+                                disabled={!!loading}
+                            >
+                                {loading === 'deposit' ? (
+                                    <span className="pay-spinner" />
+                                ) : (
+                                    <>
+                                        <span className="pay-label">Pay 50% Deposit</span>
+                                        <span className="pay-amount">{fmt(DEPOSIT)}</span>
+                                    </>
+                                )}
+                            </button>
+                            <button
+                                className="pay-btn full"
+                                onClick={() => handlePayment('full')}
+                                disabled={!!loading}
+                            >
+                                {loading === 'full' ? (
+                                    <span className="pay-spinner" />
+                                ) : (
+                                    <>
+                                        <span className="pay-label">Pay Full Balance</span>
+                                        <span className="pay-amount">{fmt(SUBTOTAL)}</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                        {error && <div className="pay-error">{error}</div>}
+                        <div className="pay-secure-note">🔒 Payments processed securely via Square</div>
+                    </div>
+
                     {/* ═══════════════════════════════════════════════
                         CONTRACT / AGREEMENT
                     ═══════════════════════════════════════════════ */}
@@ -413,21 +641,70 @@ export default function InvoicePage() {
                         <div className="sig-grid">
                             <div className="sig-block">
                                 <div className="sig-label">Producer — MediaGeekz</div>
-                                <div className="sig-line" />
+                                <div className="sig-preview">
+                                    <span className="sig-cursive">Daniel Castillo</span>
+                                </div>
                                 <div className="sig-field">Signature</div>
-                                <div className="sig-line" />
+                                <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                    <span style={{ fontSize: 13, color: 'var(--cream)' }}>Daniel Castillo</span>
+                                </div>
                                 <div className="sig-field">Printed Name</div>
-                                <div className="sig-line" />
+                                <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                    <span style={{ fontSize: 13, color: 'var(--cream)' }}>{INVOICE_DATE}</span>
+                                </div>
                                 <div className="sig-field">Date</div>
                             </div>
                             <div className="sig-block">
                                 <div className="sig-label">Client — {CLIENT.company}</div>
-                                <div className="sig-line" />
-                                <div className="sig-field">Signature</div>
-                                <div className="sig-line" />
-                                <div className="sig-field">Printed Name</div>
-                                <div className="sig-line" />
-                                <div className="sig-field">Date</div>
+                                {signed ? (
+                                    <>
+                                        <div className="sig-preview">
+                                            <span className="sig-cursive">{sigName}</span>
+                                        </div>
+                                        <div className="sig-field">Signature</div>
+                                        <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                            <span style={{ fontSize: 13, color: 'var(--cream)' }}>{sigName}</span>
+                                        </div>
+                                        <div className="sig-field">Printed Name</div>
+                                        <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                            <span style={{ fontSize: 13, color: 'var(--cream)' }}>{signedAt}</span>
+                                        </div>
+                                        <div className="sig-field">Date</div>
+                                        <div className="signed-badge">
+                                            <span className="signed-badge-icon">✓</span>
+                                            <div>
+                                                <div className="signed-badge-text">Agreement Signed</div>
+                                                <div className="signed-badge-time">{signedAt}</div>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="sig-input-group">
+                                            <div className="sig-input-label">Type your full name to sign</div>
+                                            <input
+                                                type="text"
+                                                className="sig-input"
+                                                placeholder={CLIENT.name}
+                                                value={sigName}
+                                                onChange={(e) => setSigName(e.target.value)}
+                                            />
+                                        </div>
+                                        {sigName.trim() && (
+                                            <div className="sig-preview">
+                                                <span className="sig-cursive">{sigName}</span>
+                                            </div>
+                                        )}
+                                        <div className="sig-date-auto">Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                        <button
+                                            className="sign-btn"
+                                            onClick={handleSign}
+                                            disabled={!sigName.trim()}
+                                        >
+                                            ✍️ Sign Agreement
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
