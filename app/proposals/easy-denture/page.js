@@ -3,87 +3,139 @@
 import { useState, useEffect } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
-   Pricing Data (from Podcast Production vertical)
+   Pricing Data — Easy Denture Mobile Dentistry Video Production
    ═══════════════════════════════════════════════════════════════ */
 const PACKAGES = [
     {
-        id: 'professional',
-        name: 'Professional',
-        tagline: 'Full package',
-        recommended: true,
-        base: 7350,
+        id: 'essentials',
+        name: 'Essentials',
+        tagline: 'Solo shooter',
+        base: 2800,
         crew: [
-            { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
-            { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
+            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
         ],
         post: [
-            { label: '3× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 4500, per: '$1,500/ep' },
-            { label: '6× Mobile-Ready Clips', detail: '60-sec vertical cuts from interviews', amount: 900, per: '$150/clip' },
+            { label: 'Organized Raw Footage Delivery', detail: 'Scene-separated, labeled by location', amount: 0, free: true },
+            { label: 'Basic Color Correction', detail: 'White-balance pass on all footage', amount: 400 },
+            { label: 'Audio Sync & Cleanup', detail: 'Lav synced to camera, noise reduction', amount: 300 },
+        ],
+        gear: [
+            { label: 'Sony FX3 (single camera)', detail: 'Full-frame cinema — 4K S-Log3', amount: 0, free: true },
+            { label: '1× Wireless Lav Mic', detail: 'Sennheiser EW-D', amount: 0, free: true },
+            { label: 'LED Interview Light Kit', detail: 'Portable panel + diffusion', amount: 0, free: true },
         ],
         included: [
-            'Full-day on-location recording',
-            '2-man crew + locked-off C-cam (Lead DP + Camera Op)',
-            '3 multi-cam synced interview edits (15–20 min)',
-            '6 mobile-ready 60-sec clips (9:16)',
-            'Professional audio (dual wireless lavs)',
-            'Color grading + sound design',
-            'Raw footage + room tone delivery',
-            '2 revision rounds',
+            'Full-day shoot (8 AM – 5:30 PM)',
+            'Solo cinematographer',
+            'Single camera coverage (Sony FX3)',
+            '1 wireless lav mic',
+            'Portable LED lighting',
+            'All locations covered (homes + office)',
+            'B-roll coverage (driving, walking in, exteriors)',
+            'Basic color correction + audio sync',
+            'Organized raw footage delivery',
+            '1 revision round on color/audio',
         ],
         excluded: [
-            'Animated intro/outro bumper',
-            'Dynamic captions',
-            'Creative director',
+            '2nd camera angle',
+            'Dedicated audio technician',
+            'Drone footage',
+        ],
+    },
+    {
+        id: 'professional',
+        name: 'Professional',
+        tagline: 'Full two-person crew',
+        recommended: true,
+        base: 3800,
+        crew: [
+            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
+            { label: 'Camera Operator B', detail: 'Full day — 2nd angle + B-roll', amount: 750 },
+        ],
+        post: [
+            { label: 'Organized Raw Footage Delivery', detail: 'Scene-separated, labeled, dual-cam synced', amount: 0, free: true },
+            { label: 'Color Correction (all footage)', detail: 'Full pass — matched A/B cams', amount: 550 },
+            { label: 'Audio Sync & Cleanup', detail: 'Dual lavs synced, room tone, noise reduction', amount: 400 },
+        ],
+        gear: [
+            { label: 'Sony FX3 + A7S III (dual camera)', detail: 'Matched color science — 4K S-Log3', amount: 0, free: true },
+            { label: '2× Wireless Lav Mics', detail: 'Sennheiser EW-D — one per speaker', amount: 0, free: true },
+            { label: 'LED Interview Light Kit', detail: 'Key + fill + hair light', amount: 0, free: true },
+        ],
+        included: [
+            'Full-day shoot (8 AM – 5:30 PM)',
+            '2-person crew (DP + Camera Operator)',
+            'Dual camera coverage (A-cam hero + B-cam wide/reactions)',
+            '2 wireless lav mics (one per speaker)',
+            'Professional 3-point lighting',
+            'All locations covered (homes + office)',
+            'Full B-roll package (driving, walking in, product close-ups)',
+            'Color correction + audio sync on all footage',
+            'Organized, dual-cam synced raw delivery',
+            '2 revision rounds on color/audio',
+        ],
+        excluded: [
+            'Drone footage',
+            'Dedicated audio technician',
         ],
     },
     {
         id: 'premier',
         name: 'Premier',
-        tagline: 'Full production',
-        base: 7650,
+        tagline: 'Full cinematic production',
+        base: 5200,
         crew: [
-            { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
-            { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
+            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
+            { label: 'Camera Operator B', detail: 'Full day — 2nd angle + B-roll', amount: 750 },
+            { label: 'Audio Technician', detail: 'Dedicated boom + lav management', amount: 500 },
         ],
         post: [
-            { label: '3× Multi-Cam Interview Edits', detail: 'Senior editor — 15–20 min, cinematic finish', amount: 4500, per: '$1,500/ep' },
-            { label: '6× Mobile-Ready Clips', detail: 'Senior editor — 60-sec vertical cuts', amount: 1500, per: '$250/clip' },
+            { label: 'Organized Raw Footage Delivery', detail: 'Scene-separated, labeled, synced + proxies', amount: 0, free: true },
+            { label: 'Color Grade (all footage)', detail: 'Cinematic grading — matched to client\'s existing look', amount: 700 },
+            { label: 'Audio Mix & Cleanup', detail: 'Broadcast-level lav + boom mix, noise reduction', amount: 500 },
+        ],
+        gear: [
+            { label: 'Sony FX3 + A7S III (dual camera)', detail: 'Matched color science — 4K S-Log3', amount: 0, free: true },
+            { label: '2× Wireless Lavs + Boom Mic', detail: 'Sennheiser EW-D + NTG5 boom', amount: 0, free: true },
+            { label: 'Full Lighting Kit', detail: 'Key + fill + hair light + portable panels', amount: 0, free: true },
+            { label: 'Drone (DJI Mini 4 Pro)', detail: 'Aerial establishing shots of locations', amount: 0, free: true },
         ],
         included: [
-            'Full-day on-location recording',
-            '2-man crew + locked-off C-cam + on-site Creative Director',
-            '3 multi-cam synced edits (senior editor, 15–20 min)',
-            '6 mobile-ready 60-sec clips (9:16)',
-            'Animated intro / outro bumper package',
-            'Dynamic captions on all 9 deliverables',
-            'Professional audio (dual wireless lavs)',
-            'Color grading + sound design (all edits)',
-            'Raw footage + room tone + audio stems',
+            'Full-day shoot (8 AM – 5:30 PM)',
+            '3-person crew (DP + Camera Op + Audio Tech)',
+            'Dual camera coverage + cinematic drone aerials',
+            '2 wireless lavs + dedicated boom mic',
+            'Full professional lighting (all locations)',
+            'All locations + pre-shoot location scout',
+            'Cinematic B-roll (driving, walking, aerials, product close-ups)',
+            'Cinematic color grade matched to existing brand look',
+            'Broadcast-level audio mix',
+            'Organized raw delivery + proxy files for editor',
             '3 revision rounds',
         ],
         excluded: [],
         bonuses: [
-            { label: 'Animated Intro/Outro Bumper', detail: 'Branded motion graphics — included' },
-            { label: 'Dynamic Captions', detail: 'On all 9 deliverables — included' },
-            { label: 'Creative Director', detail: 'On-site direction for 3/26 — included' },
+            { label: 'Drone Aerials', detail: 'Establishing shots of all locations — included' },
+            { label: 'Dedicated Audio Tech', detail: 'On-site boom + lav management — included' },
+            { label: 'Location Pre-Scout', detail: 'Advance visit to plan shots — included' },
         ],
     },
 ];
 
 const ADDONS = [
-    { id: 'boom-op', label: 'Boom Mic Operator', detail: 'Dedicated audio tech — full day boom coverage', price: 500 },
-    { id: 'captions', label: 'Dynamic Captions Package', detail: 'Animated captions on all 9 deliverables', price: 600 },
-    { id: 'extra-clips', label: 'Additional Clip Pack (3 clips)', detail: '3 extra 60-sec vertical clips from interviews', price: 450 },
-    { id: 'drone', label: 'Cinematic Drone Footage', detail: 'Aerial exterior establishing shots of location', price: 500 },
-    { id: 'bts', label: 'Behind-the-Scenes Photography', detail: 'Up to 100 stills — client selects favorites for editing', price: 400 },
-    { id: 'music', label: 'Licensed Background Music', detail: 'Copyright-free intro/outro and ambient music', price: 100 },
+    { id: 'rough-cut', label: 'Rough Assembly Edit', detail: 'Timeline-ordered rough cut for your editor to start from', price: 800 },
+    { id: 'highlight', label: 'Highlight Reel (2-min)', detail: 'Short promotional cut — ready for social or sales', price: 1200 },
+    { id: 'color-grade', label: 'Color Grading (Full)', detail: 'Cinematic color grade on all footage — matched to your brand', price: 600 },
+    { id: 'bts', label: 'Behind-the-Scenes Photography', detail: '15–20 edited stills from shoot day', price: 400 },
+    { id: 'same-day', label: 'Same-Day Social Teaser', detail: '30–60 sec teaser clip delivered same evening', price: 300 },
+    { id: 'drone', label: 'Drone Footage', detail: 'Aerial establishing shots of locations (if not in package)', price: 500 },
 ];
 
 /* ═══════════════════════════════════════════════════════════════ */
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
 
-export default function LeadershipInterviewsProposal() {
+export default function EasyDentureProposal() {
     const [addons, setAddons] = useState({});
     const [expandedPkg, setExpandedPkg] = useState('professional');
 
@@ -162,7 +214,7 @@ export default function LeadershipInterviewsProposal() {
                 .page-shell { position: relative; z-index: 1; }
 
                 /* ── Hero ── */
-                .li-hero {
+                .ed-hero {
                     min-height: 80vh;
                     display: flex; flex-direction: column;
                     justify-content: center; align-items: center;
@@ -173,7 +225,7 @@ export default function LeadershipInterviewsProposal() {
                         radial-gradient(ellipse at 50% 60%, rgba(45, 212, 191, 0.04) 0%, transparent 40%);
                 }
 
-                .li-hero::after {
+                .ed-hero::after {
                     content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
                     background: linear-gradient(transparent, var(--shadow));
                     pointer-events: none;
@@ -216,14 +268,14 @@ export default function LeadershipInterviewsProposal() {
                 }
 
                 .hero-subtitle {
-                    max-width: 600px; color: var(--muted);
+                    max-width: 620px; color: var(--muted);
                     font-size: 17px; line-height: 1.7;
                     position: relative; z-index: 1; margin-bottom: 48px;
                 }
 
                 .hero-meta {
                     display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-                    width: min(100%, 800px); position: relative; z-index: 1;
+                    width: min(100%, 860px); position: relative; z-index: 1;
                 }
 
                 .hero-stat {
@@ -261,7 +313,7 @@ export default function LeadershipInterviewsProposal() {
                 }
 
                 /* ── Sections ── */
-                .li-section {
+                .ed-section {
                     max-width: 1100px; margin: 0 auto;
                     padding: 80px 24px;
                 }
@@ -277,6 +329,29 @@ export default function LeadershipInterviewsProposal() {
                 }
 
                 .section-desc { color: var(--muted); font-size: 15px; line-height: 1.8; max-width: 640px; }
+
+                /* ── Scope / Understanding ── */
+                .scope-grid {
+                    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 20px; margin-top: 40px;
+                }
+
+                .scope-card {
+                    padding: 28px 24px; border: 1px solid rgba(45, 212, 191, 0.12);
+                    border-radius: 16px; background: var(--panel);
+                    transition: border-color 0.3s ease, transform 0.3s ease;
+                }
+
+                .scope-card:hover { border-color: rgba(45, 212, 191, 0.3); transform: translateY(-2px); }
+
+                .scope-icon { font-size: 28px; margin-bottom: 14px; }
+
+                .scope-card h3 {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 8px;
+                }
+
+                .scope-card p { font-size: 13px; color: var(--muted-2); line-height: 1.7; }
 
                 /* ── Timeline ── */
                 .timeline { position: relative; padding-left: 36px; }
@@ -303,6 +378,14 @@ export default function LeadershipInterviewsProposal() {
                     font-size: 16px; font-weight: 600; margin-bottom: 3px;
                 }
                 .timeline-desc { color: var(--muted-2); font-size: 12px; line-height: 1.6; }
+
+                .timeline-location {
+                    display: inline-flex; align-items: center; gap: 6px;
+                    margin-top: 6px; padding: 4px 10px;
+                    background: rgba(232, 98, 44, 0.08); border: 1px solid rgba(232, 98, 44, 0.15);
+                    border-radius: 999px; font-size: 10px; color: var(--orange);
+                    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+                }
 
                 /* ── Equipment Grid ── */
                 .equip-grid {
@@ -337,14 +420,14 @@ export default function LeadershipInterviewsProposal() {
 
                 /* ── Packages ── */
                 .packages-grid {
-                    display: grid; grid-template-columns: repeat(2, 1fr);
-                    gap: 24px; margin-top: 48px;
+                    display: grid; grid-template-columns: repeat(3, 1fr);
+                    gap: 20px; margin-top: 48px;
                 }
 
-                @media (max-width: 960px) { .packages-grid { grid-template-columns: 1fr; } }
+                @media (max-width: 1060px) { .packages-grid { grid-template-columns: 1fr; } }
 
                 .pkg-card {
-                    padding: 36px 28px; border: 1px solid rgba(100, 116, 139, 0.15);
+                    padding: 32px 24px; border: 1px solid rgba(100, 116, 139, 0.15);
                     border-radius: 20px;
                     background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--panel);
                     transition: border-color 0.3s ease, transform 0.3s ease;
@@ -363,7 +446,7 @@ export default function LeadershipInterviewsProposal() {
                 }
 
                 .pkg-badge {
-                    position: absolute; top: -12px; left: 28px;
+                    position: absolute; top: -12px; left: 24px;
                     background: linear-gradient(135deg, var(--orange), #f59e0b);
                     color: var(--shadow); font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
                     text-transform: uppercase; padding: 4px 14px; border-radius: 999px;
@@ -371,7 +454,7 @@ export default function LeadershipInterviewsProposal() {
 
                 .pkg-name {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 4px;
+                    font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 4px;
                 }
 
                 .pkg-tagline { color: var(--muted-2); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
@@ -384,7 +467,7 @@ export default function LeadershipInterviewsProposal() {
 
                 .pkg-amount {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 40px; font-weight: 700; color: var(--orange);
+                    font-size: 36px; font-weight: 700; color: var(--orange);
                     transition: all 0.3s ease;
                 }
 
@@ -392,7 +475,7 @@ export default function LeadershipInterviewsProposal() {
 
                 .pkg-features { list-style: none; }
                 .pkg-features li {
-                    font-size: 13px; color: var(--muted); padding: 7px 0 7px 22px;
+                    font-size: 12px; color: var(--muted); padding: 6px 0 6px 22px;
                     position: relative; line-height: 1.5;
                 }
 
@@ -431,7 +514,7 @@ export default function LeadershipInterviewsProposal() {
                     margin-top: 0;
                 }
 
-                .cost-breakdown.open { max-height: 600px; opacity: 1; margin-top: 16px; }
+                .cost-breakdown.open { max-height: 800px; opacity: 1; margin-top: 16px; }
 
                 .cost-section { margin-bottom: 18px; }
 
@@ -444,17 +527,17 @@ export default function LeadershipInterviewsProposal() {
 
                 .cost-row {
                     display: flex; justify-content: space-between; align-items: flex-start;
-                    padding: 6px 0; font-size: 13px;
+                    padding: 6px 0; font-size: 12px;
                 }
 
                 .cost-item { color: var(--cream); flex: 1; }
-                .cost-detail { display: block; font-size: 11px; color: var(--muted-3); margin-top: 2px; }
-                .cost-amount { color: var(--muted); font-weight: 500; white-space: nowrap; margin-left: 16px; }
+                .cost-detail { display: block; font-size: 10px; color: var(--muted-3); margin-top: 2px; }
+                .cost-amount { color: var(--muted); font-weight: 500; white-space: nowrap; margin-left: 16px; font-size: 12px; }
                 .cost-amount.free { color: var(--teal); font-weight: 600; }
 
                 .cost-row.total { border-top: 1px solid rgba(232, 98, 44, 0.25); padding-top: 12px; margin-top: 8px; }
                 .cost-row.total .cost-item { color: var(--white); font-weight: 600; }
-                .cost-row.total .cost-amount { color: var(--orange); font-weight: 700; font-size: 15px; }
+                .cost-row.total .cost-amount { color: var(--orange); font-weight: 700; font-size: 14px; }
 
                 /* ── Add-Ons ── */
                 .addons-section { margin-top: 48px; }
@@ -475,7 +558,7 @@ export default function LeadershipInterviewsProposal() {
                 .addon-switch {
                     width: 40px; height: 22px; border-radius: 999px;
                     background: rgba(100, 116, 139, 0.3); position: relative;
-                    transition: background 0.3s ease;
+                    transition: background 0.3s ease; flex-shrink: 0;
                 }
 
                 .addon-switch.on { background: var(--orange); }
@@ -514,40 +597,20 @@ export default function LeadershipInterviewsProposal() {
 
                 .next-step span { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-                /* ── Reference Section ── */
-                .reference-section {
-                    max-width: 900px; margin: 0 auto; padding: 60px 24px;
+                /* ── Delivery Note ── */
+                .delivery-note {
+                    margin-top: 40px; padding: 24px 28px;
+                    border: 1px solid rgba(45, 212, 191, 0.2); border-radius: 16px;
+                    background: rgba(45, 212, 191, 0.04);
                 }
 
-                .reference-card {
-                    position: relative; border-radius: 20px; overflow: hidden;
-                    border: 1px solid rgba(100, 116, 139, 0.15);
-                }
-
-                .reference-card img {
-                    width: 100%; display: block;
-                    aspect-ratio: 16/9; object-fit: cover;
-                }
-
-                .reference-overlay {
-                    position: absolute; bottom: 0; left: 0; right: 0;
-                    padding: 32px 28px 24px;
-                    background: linear-gradient(transparent, rgba(6, 10, 20, 0.92));
-                }
-
-                .reference-label {
-                    font-size: 9px; font-weight: 700; letter-spacing: 0.24em;
-                    text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
-                }
-
-                .reference-title {
+                .delivery-note-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 18px; font-weight: 600; color: var(--white);
+                    font-size: 16px; font-weight: 600; color: var(--teal); margin-bottom: 10px;
+                    display: flex; align-items: center; gap: 8px;
                 }
 
-                .reference-desc {
-                    margin-top: 6px; font-size: 13px; color: var(--muted);
-                }
+                .delivery-note p { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
                 /* ── CTA Row ── */
                 .cta-row {
@@ -588,7 +651,7 @@ export default function LeadershipInterviewsProposal() {
                 }
 
                 /* ── Footer ── */
-                .li-footer {
+                .ed-footer {
                     text-align: center; padding: 80px 24px 40px;
                     border-top: 1px solid rgba(100, 116, 139, 0.1);
                 }
@@ -614,114 +677,128 @@ export default function LeadershipInterviewsProposal() {
 
             <div className="page-shell">
                 {/* ── HERO ── */}
-                <div className="li-hero">
-                    <div className="hero-badge">MediaGeekz — Leadership Interviews</div>
+                <div className="ed-hero">
+                    <div className="hero-badge">MediaGeekz — Easy Denture</div>
                     <h1 className="hero-title">
-                        Record.<br /><em>Refine.</em><br />Amplify.
+                        Capture.<br /><em>Demonstrate.</em><br />Deliver.
                     </h1>
                     <p className="hero-subtitle">
-                        Three executive leadership interviews captured with cinematic multi-cam production — delivered as polished long-form episodes and mobile-ready social clips.
+                        A full day of cinematic video production capturing the Easy Denture mobile dentistry experience — patient fittings, product demonstrations, and expert interviews across multiple locations.
                     </p>
 
                     <div className="hero-meta">
                         <div className="hero-stat">
                             <div className="hero-stat-label">Client</div>
-                            <div className="hero-stat-value">Tommy</div>
+                            <div className="hero-stat-value">Elizabeth Leed</div>
+                            <div className="hero-stat-detail">Easy Denture</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Shoot Date</div>
-                            <div className="hero-stat-value">March 26</div>
-                            <div className="hero-stat-detail">Setup 9:30 AM · Record 11:30 AM</div>
+                            <div className="hero-stat-value">March 27</div>
+                            <div className="hero-stat-detail">8:00 AM – 5:30 PM</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Format</div>
-                            <div className="hero-stat-value">3-Cam</div>
-                            <div className="hero-stat-detail">2-person interviews</div>
+                            <div className="hero-stat-value">Multi-Location</div>
+                            <div className="hero-stat-detail">Homes + dentist office</div>
                         </div>
                         <div className="hero-stat">
-                            <div className="hero-stat-label">Location</div>
-                            <div className="hero-stat-value">Winter Garden</div>
-                            <div className="hero-stat-detail">Venue near theme parks</div>
+                            <div className="hero-stat-label">Deliverable</div>
+                            <div className="hero-stat-value">Raw Footage</div>
+                            <div className="hero-stat-detail">For your editor to finish</div>
                         </div>
                     </div>
                 </div>
 
                 <div className="divider" />
 
-                {/* ── REFERENCE IMAGE ── */}
-                <div className="reference-section reveal">
-                    <div className="section-header" style={{ marginBottom: 24, textAlign: 'center', maxWidth: '100%' }}>
-                        <div className="section-label">Current Production</div>
-                        <h2 className="section-title" style={{ fontSize: 'clamp(24px, 4vw, 36px)' }}>
-                            Where we&apos;re starting
-                        </h2>
-                        <p className="section-desc" style={{ margin: '0 auto' }}>
-                            This is the existing interview format. We&apos;re upgrading everything — camera work, lighting, audio, and post-production — to cinematic quality.
+                {/* ── PROJECT UNDERSTANDING ── */}
+                <section className="ed-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Project Understanding</div>
+                        <h2 className="section-title">What we&apos;re capturing</h2>
+                        <p className="section-desc">
+                            Your production company handles the final edit — we provide the raw material. Professional cinema footage, clean audio, and organized media ready for your team to splice together.
                         </p>
                     </div>
-                    <div className="reference-card">
-                        <img src="/proposals/leadership-interviews/current-production.jpg" alt="Current leadership interview production" />
-                        <div className="reference-overlay">
-                            <div className="reference-label">66 Degrees — CEO &amp; CTO Interview</div>
-                            <div className="reference-title">Current Format</div>
-                            <div className="reference-desc">3-cam interview setup — we&apos;re upgrading the cinematic quality with professional lighting, audio, and post-production</div>
+
+                    <div className="scope-grid">
+                        <div className="scope-card">
+                            <div className="scope-icon">🏠</div>
+                            <h3>Patient Home Visits</h3>
+                            <p>Capture the Easy Denture fitting process in real patient apartments — demonstrating the mobile dentistry experience in action. Close-ups on the product, the process, and patient reactions.</p>
+                        </div>
+                        <div className="scope-card">
+                            <div className="scope-icon">🎙️</div>
+                            <h3>Patient Testimonials</h3>
+                            <p>Quick, natural sound bites from patients about their experience with the product. Authentic, on-location reactions — not staged studio interviews.</p>
+                        </div>
+                        <div className="scope-card">
+                            <div className="scope-icon">🚗</div>
+                            <h3>Mobile B-Roll</h3>
+                            <p>Driving up to locations, walking through doors, loading equipment — visual storytelling that emphasizes the &quot;mobile&quot; in mobile dentistry.</p>
+                        </div>
+                        <div className="scope-card">
+                            <div className="scope-icon">🎬</div>
+                            <h3>Expert Interview</h3>
+                            <p>Interview-style segment at the dentist office with the inventor discussing the product, its benefits, and the vision behind Easy Denture. Sit-down, multi-cam format.</p>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <div className="divider" />
 
                 {/* ── PRODUCTION SCHEDULE ── */}
-                <section className="li-section reveal">
+                <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Production Schedule</div>
-                        <div className="section-question">March 26, 2026</div>
-                        <h2 className="section-title">One day. Three stories.</h2>
+                        <div className="section-question">March 27, 2026</div>
+                        <h2 className="section-title">Full day. Multiple locations.</h2>
                         <p className="section-desc">
-                            Every hour is structured to maximize quality and minimize downtime between interviews. We arrive early to dial in lighting and audio so your talent can focus on the conversation.
+                            Structured to maximize shooting time at each location while allowing for natural travel between patient homes and the dentist office. The inventor&apos;s demonstration drives the day.
                         </p>
                     </div>
 
                     <div className="timeline">
                         <div className="timeline-block">
-                            <div className="timeline-time">9:30 – 11:00 AM</div>
-                            <div className="timeline-label">Arrive + Setup</div>
-                            <div className="timeline-desc">Scout room lighting, position cameras for dual angles, set up lighting kit and black curtains as needed, test wireless lavs and audio levels. Dress the set while executives finish morning call.</div>
+                            <div className="timeline-time">8:00 – 8:30 AM</div>
+                            <div className="timeline-label">Load & Travel</div>
+                            <div className="timeline-desc">Load gear, confirm shot list, travel to first patient location. Capture driving/travel B-roll en route.</div>
+                            <div className="timeline-location">📍 En Route</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">11:00 – 11:30 AM</div>
-                            <div className="timeline-label">Talent Walkthrough</div>
-                            <div className="timeline-desc">Quick on-camera test with interviewees. Set framing, confirm eyeline, mic check, and make them comfortable.</div>
+                            <div className="timeline-time">8:30 – 10:30 AM</div>
+                            <div className="timeline-label">Patient Home #1 — Fitting + Testimonial</div>
+                            <div className="timeline-desc">Set up at first patient apartment. Capture the Easy Denture fitting process, product demo with inventor, and a brief patient testimonial. Exteriors and &quot;walking in&quot; B-roll.</div>
+                            <div className="timeline-location">📍 Patient Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">11:30 AM – 12:30 PM</div>
-                            <div className="timeline-label">Interview 1 — CEO + CIO</div>
-                            <div className="timeline-desc">First leadership sit-down. Multi-cam coverage with A-cam on hero angle and B-cam on reaction/wide. 15–20 min runtime. Priority edit — delivered within ~1 week.</div>
+                            <div className="timeline-time">10:30 – 11:00 AM</div>
+                            <div className="timeline-label">Travel + B-Roll</div>
+                            <div className="timeline-desc">Drive to second location. Capture additional mobile B-roll — driving shots, neighborhood establishing shots, loading/unloading gear.</div>
+                            <div className="timeline-location">📍 En Route</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">12:30 – 1:30 PM</div>
-                            <div className="timeline-label">Lunch + Reset</div>
-                            <div className="timeline-desc">Card swap, battery rotation, review hero shots on monitor. Reset lighting if interview 2 uses a different backdrop.</div>
+                            <div className="timeline-time">11:00 AM – 1:00 PM</div>
+                            <div className="timeline-label">Patient Home #2 — Fitting + Testimonial</div>
+                            <div className="timeline-desc">Second patient location. Same coverage — fitting process, inventor demo, patient sound bite, exterior B-roll. Adjust lighting for new environment.</div>
+                            <div className="timeline-location">📍 Patient Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">1:30 – 2:30 PM</div>
-                            <div className="timeline-label">Interview 2 — Recording</div>
-                            <div className="timeline-desc">Second leadership interview with fresh interviewees. Same multi-cam setup, adjusted framing as needed.</div>
+                            <div className="timeline-time">1:00 – 2:00 PM</div>
+                            <div className="timeline-label">Lunch + Travel to Office</div>
+                            <div className="timeline-desc">Break for lunch. Travel to dentist office location. Review morning footage on cards, confirm afternoon shot list.</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">2:30 – 3:00 PM</div>
-                            <div className="timeline-label">Break + B-Roll</div>
-                            <div className="timeline-desc">Capture branded detail shots — name tags, meeting space ambiance, handshake candids, architectural establishing shots.</div>
+                            <div className="timeline-time">2:00 – 4:30 PM</div>
+                            <div className="timeline-label">Dentist Office — Interview + Product Demo</div>
+                            <div className="timeline-desc">Set up interview lighting. Sit-down interview segment with the inventor on the product and vision. Additional product demonstration footage in the clinical setting. Office B-roll.</div>
+                            <div className="timeline-location">📍 Dentist Office</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">3:00 – 4:00 PM</div>
-                            <div className="timeline-label">Interview 3 — Recording</div>
-                            <div className="timeline-desc">Final leadership interview. Full multi-cam setup with any lessons learned from the earlier sessions applied.</div>
-                        </div>
-                        <div className="timeline-block">
-                            <div className="timeline-time">4:00 – 5:00 PM</div>
-                            <div className="timeline-label">Wrap + BTS Photography</div>
-                            <div className="timeline-desc">Behind-the-scenes photography, pickup shots, pack gear, offload media to backup drive. Confirm all files are verified.</div>
+                            <div className="timeline-time">4:30 – 5:30 PM</div>
+                            <div className="timeline-label">Pickup Shots + Wrap</div>
+                            <div className="timeline-desc">Any remaining B-roll, detail product close-ups, or additional sound bites. Pack gear, verify all media is backed up.</div>
                         </div>
                     </div>
                 </section>
@@ -729,12 +806,12 @@ export default function LeadershipInterviewsProposal() {
                 <div className="divider" />
 
                 {/* ── EQUIPMENT ── */}
-                <section className="li-section reveal">
+                <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Production Kit</div>
                         <h2 className="section-title">The gear behind the look</h2>
                         <p className="section-desc">
-                            Professional cinema equipment tuned for controlled interview environments — clean audio, flattering light, and multiple angles.
+                            Run-and-gun cinema equipment built for multi-location shoots — fast setup, professional results, and audio clean enough for your editor to drop straight into the timeline.
                         </p>
                     </div>
 
@@ -742,32 +819,26 @@ export default function LeadershipInterviewsProposal() {
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: 'var(--orange)' }}>✦ Camera A — Hero</div>
                             <h3>Sony FX3</h3>
-                            <p>Full-frame cinema body. Locked on hero interview angle — chest-up MCU.</p>
-                            <ul><li>85mm f/1.4 GM</li><li>S-Log3 / S-Gamut3.Cine</li><li>4K 24fps interview standard</li><li>XAVC-S 4:2:2 10-bit</li></ul>
+                            <p>Full-frame cinema body. Primary camera for interviews and product close-ups.</p>
+                            <ul><li>85mm f/1.4 GM (interviews)</li><li>24-70mm f/2.8 GM (run & gun)</li><li>S-Log3 / S-Gamut3.Cine</li><li>4K 24fps — XAVC-S 4:2:2 10-bit</li></ul>
                         </div>
                         <div className="equip-card">
-                            <div className="equip-icon" style={{ color: 'var(--teal)' }}>✦ Camera B — 2nd Angle</div>
+                            <div className="equip-icon" style={{ color: 'var(--teal)' }}>✦ Camera B — Wide / B-Roll</div>
                             <h3>Sony A7S III</h3>
-                            <p>B-cam on complementary angle — captures the second subject&apos;s reactions and close-ups.</p>
-                            <ul><li>24-70mm f/2.8 GM</li><li>Matched to A-cam color science</li><li>Low-light capable</li><li>S-Log3 synced</li></ul>
-                        </div>
-                        <div className="equip-card">
-                            <div className="equip-icon" style={{ color: '#A78BFA' }}>✦ Camera C — Locked Wide</div>
-                            <h3>Sony A7S III</h3>
-                            <p>Locked-off wide establishing shot — captures the full scene and both speakers for editor&apos;s cut-aways.</p>
-                            <ul><li>16-35mm f/2.8 GM</li><li>Static tripod mount</li><li>Full room coverage</li><li>S-Log3 synced</li></ul>
+                            <p>B-cam for wide angles, reactions, and run-and-gun B-roll between locations.</p>
+                            <ul><li>24-70mm f/2.8 GM</li><li>Matched color science to A-cam</li><li>Low-light monster for interiors</li><li>S-Log3 synced profiles</li></ul>
                         </div>
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: '#F472B6' }}>✦ Audio</div>
-                            <h3>Dual Wireless Lavs</h3>
-                            <p>One lav per participant. Clean, isolated audio tracks for each speaker.</p>
-                            <ul><li>Sennheiser EW-D ×2</li><li>Rode NTG5 boom backup</li><li>Zoom F6 32-bit float recorder</li><li>Synced timecode</li></ul>
+                            <h3>Wireless Lav System</h3>
+                            <p>Clean dialogue capture — critical for your editor to work with.</p>
+                            <ul><li>Sennheiser EW-D wireless lavs ×2</li><li>Rode NTG5 boom (Premier tier)</li><li>Zoom F6 32-bit float recorder</li><li>Backup on-camera audio</li></ul>
                         </div>
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: '#FBBF24' }}>✦ Lighting</div>
-                            <h3>Interview Kit</h3>
-                            <p>Soft, flattering key light with controlled fill and separation.</p>
-                            <ul><li>300W LED + 47&quot; Softbox (key)</li><li>Aputure MC RGB fill ×2</li><li>4×4 neg fill flag</li><li>LED hair light / edge</li></ul>
+                            <h3>Portable Interview Kit</h3>
+                            <p>Fast-deploy lighting for small spaces — patient apartments and office.</p>
+                            <ul><li>300W LED + collapsible softbox</li><li>Aputure MC RGB fills ×2</li><li>Portable bi-color panels</li><li>5-in-1 reflector / neg fill</li></ul>
                         </div>
                     </div>
                 </section>
@@ -775,13 +846,13 @@ export default function LeadershipInterviewsProposal() {
                 <div className="divider" />
 
                 {/* ── PACKAGES ── */}
-                <section className="li-section reveal">
+                <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Investment</div>
                         <div className="section-question">What are the options?</div>
-                        <h2 className="section-title">Choose your coverage scope</h2>
+                        <h2 className="section-title">Three tiers. Your edit.</h2>
                         <p className="section-desc">
-                            All tiers include professional cinema equipment, multi-cam recording, wireless lav audio, and organized raw footage delivery. Click any package to see the full cost breakdown.
+                            All packages deliver organized raw footage for your production company to edit. We handle the shoot — you handle the cut. Click any package to see the full cost breakdown.
                         </p>
                     </div>
 
@@ -791,6 +862,7 @@ export default function LeadershipInterviewsProposal() {
                             const isExpanded = expandedPkg === pkg.id;
                             const crewTotal = pkg.crew.reduce((s, c) => s + c.amount, 0);
                             const postTotal = pkg.post.reduce((s, p) => s + (p.free ? 0 : p.amount), 0);
+                            const gearTotal = pkg.gear.reduce((s, g) => s + (g.free ? 0 : g.amount), 0);
 
                             return (
                                 <div
@@ -844,7 +916,7 @@ export default function LeadershipInterviewsProposal() {
                                             <div className="cost-section-label">Post-Production</div>
                                             {pkg.post.map((p, i) => (
                                                 <div key={i} className="cost-row">
-                                                    <div className="cost-item">{p.label}<span className="cost-detail">{p.detail}{p.per ? ` — ${p.per}` : ''}</span></div>
+                                                    <div className="cost-item">{p.label}<span className="cost-detail">{p.detail}</span></div>
                                                     <div className={`cost-amount ${p.free ? 'free' : ''}`}>{p.free ? 'Included' : fmt(p.amount)}</div>
                                                 </div>
                                             ))}
@@ -852,6 +924,16 @@ export default function LeadershipInterviewsProposal() {
                                                 <div className="cost-item">Post Total</div>
                                                 <div className="cost-amount">{fmt(postTotal)}</div>
                                             </div>
+                                        </div>
+
+                                        <div className="cost-section">
+                                            <div className="cost-section-label">Equipment</div>
+                                            {pkg.gear.map((g, i) => (
+                                                <div key={i} className="cost-row">
+                                                    <div className="cost-item">{g.label}<span className="cost-detail">{g.detail}</span></div>
+                                                    <div className={`cost-amount ${g.free ? 'free' : ''}`}>{g.free ? 'Included' : fmt(g.amount)}</div>
+                                                </div>
+                                            ))}
                                         </div>
 
                                         {addonTotal > 0 && (
@@ -905,33 +987,43 @@ export default function LeadershipInterviewsProposal() {
                         ))}
                     </div>
 
+                    {/* ── Delivery Note ── */}
+                    <div className="delivery-note">
+                        <div className="delivery-note-title">
+                            📦 Footage Delivery for Your Production Team
+                        </div>
+                        <p>
+                            All footage will be delivered on a portable hard drive or via secure cloud transfer within 48 hours of the shoot. Files are organized by location and scene, with synced multi-cam timecode, labeled audio tracks, and room tone for your editor. We&apos;re happy to coordinate directly with your production company on any format or organizational preferences.
+                        </p>
+                    </div>
+
                     {/* ── Next Steps ── */}
                     <div className="next-steps">
                         <div className="next-steps-title">Next steps</div>
                         <div className="next-steps-grid">
                             <div className="next-step">
-                                <strong>01. Book a quick call</strong>
-                                <span>Jump on a 15-min Google Meet this week to walk through the options and lock in March 26.</span>
+                                <strong>01. Quick call</strong>
+                                <span>15-min Google Meet to walk through the options, answer questions about our process, and confirm March 27 availability.</span>
                             </div>
                             <div className="next-step">
                                 <strong>02. Confirm your package</strong>
-                                <span>Pick your tier + any add-ons. We'll send over a final invoice and lock the date.</span>
+                                <span>Pick your tier + any add-ons. We&apos;ll send a final invoice and lock the date.</span>
                             </div>
                             <div className="next-step">
-                                <strong>03. Talent prep</strong>
-                                <span>We'll send your interviewees a simple guide — what to wear, where to look, and what to expect on shoot day.</span>
+                                <strong>03. Location logistics</strong>
+                                <span>Share patient apartment addresses and dentist office location. We&apos;ll plan the route and shot list around travel time.</span>
                             </div>
                             <div className="next-step">
                                 <strong>04. Shoot day</strong>
-                                <span>We arrive at 9:30 AM, handle everything, and wrap by 6 PM. Your talent just needs to show up and talk.</span>
+                                <span>We arrive at 8 AM, handle everything on-site, and deliver organized raw footage within 48 hours for your editor.</span>
                             </div>
                         </div>
 
                         <div className="cta-row">
-                            <a href="/proposals/leadership-interviews/invoice" className="cta-btn">
-                                Review Invoice & Sign →
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MediaGeekz+%C3%97+Easy+Denture+%E2%80%94+Production+Planning&details=Quick+planning+call+to+walk+through+package+options+and+confirm+the+March+27+shoot.%0A%0AJoin+via+Google+Meet.&add=danielcastillo@mediageekz.com&dates=20260317T140000/20260317T141500" target="_blank" rel="noopener noreferrer" className="meeting-btn">
+                                📅 Schedule a Call →
                             </a>
-                            <a href="mailto:mattworkman@mediageekz.com,danielcastillo@mediageekz.com?subject=Leadership%20Interview%20Quote%20%E2%80%94%20Confirmed&body=Hey%20Matt%20%26%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20March%2026%20leadership%20interview%20shoot.%0A%0AThanks!" className="meeting-btn">
+                            <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Video%20Production%20Quote%20%E2%80%94%20Elizabeth%20Leed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20go%20with%20the%20__%20package%20for%20the%20March%2027%20Easy%20Denture%20shoot.%0A%0AThanks!%0AElizabeth" className="cta-btn">
                                 Reply to Confirm →
                             </a>
                         </div>
@@ -941,7 +1033,7 @@ export default function LeadershipInterviewsProposal() {
                 <div className="divider" />
 
                 {/* ── FOOTER ── */}
-                <footer className="li-footer">
+                <footer className="ed-footer">
                     <div className="footer-logo">MediaGeekz</div>
                     <div className="footer-tagline">Cinematic stories. Elevated brands.</div>
                 </footer>

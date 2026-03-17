@@ -28,3 +28,4 @@ prisma/*.db
 # test output
 test.pdf
 *.pdf
+.vercel
