@@ -14,9 +14,11 @@ const SERVICE_CATALOG = [
     { id: 'camera-op-c', category: 'Crew', label: 'Camera Operator C — Full Day', detail: '3rd angle / B-roll dedicated', defaultPrice: 1200 },
     { id: 'audio-tech', category: 'Crew', label: 'Audio Technician', detail: 'Dedicated sound engineer + wireless lavs', defaultPrice: 800 },
     { id: 'producer', category: 'Crew', label: 'On-Set Producer / Director', detail: 'Creative direction, talent coaching', defaultPrice: 1500 },
-    { id: 'interview-edit', category: 'Post-Production', label: 'Multi-Cam Interview Edit', detail: '15–20 min each · synced, color graded', defaultPrice: 2500, perUnit: '/episode' },
+    { id: 'interview-edit', category: 'Post-Production', label: 'Multi-Cam Interview Edit', detail: '15–20 min each · synced, color graded, lower thirds', defaultPrice: 4500, perUnit: '/episode' },
+    { id: 'corporate-brand-edit', category: 'Post-Production', label: 'Corporate Brand Profile Edit', detail: '2–3 min · talking-head + dynamic B-roll', defaultPrice: 3500, perUnit: '/video' },
+    { id: 'short-form-batch', category: 'Post-Production', label: 'Short-Form Social Batch (4x)', detail: 'Four 30–60s vertical cuts for Reels/TikTok', defaultPrice: 1200, perUnit: '/batch' },
     { id: 'short-form-edit', category: 'Post-Production', label: 'Short-Form Edit (Reel/TikTok)', detail: '60-sec vertical cuts (9:16)', defaultPrice: 250, perUnit: '/clip' },
-    { id: 'long-form-edit', category: 'Post-Production', label: 'Long-Form Video Edit', detail: '5–15 min · full edit, color, sound design', defaultPrice: 3500, perUnit: '/video' },
+    { id: 'long-form-edit', category: 'Post-Production', label: 'Long-Form Video Edit (Single Cam)', detail: '5–15 min · full edit, color, sound design', defaultPrice: 3500, perUnit: '/video' },
     { id: 'commercial-edit', category: 'Post-Production', label: 'Commercial / Promo Edit', detail: '30–90 sec · premium grade, motion graphics', defaultPrice: 3000, perUnit: '/spot' },
     { id: 'color-grade', category: 'Post-Production', label: 'Color Grading (Standalone)', detail: 'DaVinci Resolve cinematic grade', defaultPrice: 500, perUnit: '/video' },
     { id: 'sound-design', category: 'Post-Production', label: 'Sound Design & Mix', detail: 'Audio cleanup, music bed, SFX', defaultPrice: 500, perUnit: '/video' },
@@ -27,6 +29,7 @@ const SERVICE_CATALOG = [
     { id: 'motion-graphics', category: 'Add-On', label: 'Custom Motion Graphics', detail: 'Animated titles, logos, transitions', defaultPrice: 1000 },
     { id: 'teleprompter', category: 'Add-On', label: 'Teleprompter + Operator', detail: 'On-set teleprompter with operator', defaultPrice: 400 },
     { id: 'drone', category: 'Add-On', label: 'Drone Footage', detail: 'FAA-licensed aerial cinematography', defaultPrice: 800 },
+    { id: 'retainer-corporate', category: 'Retainers', label: 'Corporate Growth Retainer', detail: 'Monthly unlimited tier: up to 4 long-form & 12 short-form videos', defaultPrice: 3500, perUnit: '/mo' },
 ];
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
