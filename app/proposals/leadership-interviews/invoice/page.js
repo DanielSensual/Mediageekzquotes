@@ -446,6 +446,26 @@ export default function InvoicePage() {
                 .signed-badge-time {
                     font-size: 11px; color: var(--muted-2); margin-top: 2px;
                 }
+
+                .print-contract-btn {
+                    display: flex; align-items: center; justify-content: center; gap: 8px;
+                    width: 100%; padding: 14px; margin-top: 12px;
+                    border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px;
+                    background: transparent; color: var(--white);
+                    font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+                    cursor: pointer; transition: all 0.2s;
+                }
+                .print-contract-btn:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                    border-color: rgba(100, 116, 139, 0.5);
+                }
+
+                @media print {
+                    .no-print { display: none !important; }
+                    .invoice-shell { box-shadow: none; max-width: 100%; }
+                    body { background: white; color: black; }
+                    .sig-input-group, .sign-btn, .print-contract-btn { display: none !important; }
+                }
             `}</style>
 
             <div className="invoice-shell" ref={printRef}>
@@ -677,6 +697,9 @@ export default function InvoicePage() {
                                                 <div className="signed-badge-time">{signedAt}</div>
                                             </div>
                                         </div>
+                                        <button className="print-contract-btn no-print" onClick={handlePrint}>
+                                            📄 Download Signed PDF
+                                        </button>
                                     </>
                                 ) : (
                                     <>
