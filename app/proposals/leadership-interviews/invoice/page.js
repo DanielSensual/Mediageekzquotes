@@ -303,6 +303,32 @@ export default function InvoicePage() {
 
                 @media (max-width: 560px) { .payment-grid { grid-template-columns: 1fr; } }
 
+                @media (max-width: 640px) {
+                    .invoice-shell { padding: 24px 12px 60px; }
+                    .invoice-card { padding: 24px 16px; border-radius: 14px; }
+
+                    .invoice-header { flex-direction: column; gap: 20px; }
+                    .invoice-meta { text-align: left; }
+
+                    .parties { grid-template-columns: 1fr; gap: 20px; }
+
+                    .line-header { grid-template-columns: 1fr 60px 70px; gap: 4px; }
+                    .line-row { grid-template-columns: 1fr 60px 70px; gap: 4px; padding: 12px 0; }
+                    .line-desc { font-size: 13px; }
+                    .line-detail { font-size: 10px; }
+                    .line-per { font-size: 11px; }
+                    .line-amount { font-size: 13px; }
+
+                    .total-row.highlight { padding: 14px 16px; }
+                    .total-value.big { font-size: 20px; }
+
+                    .sig-grid { grid-template-columns: 1fr; gap: 32px; }
+                    .sig-cursive { font-size: 26px; }
+
+                    .contract-title { font-size: 17px; }
+                    .print-bar { margin-bottom: 20px; }
+                }
+
                 .pay-btn {
                     display: flex; flex-direction: column; align-items: center;
                     gap: 6px; padding: 20px 16px;
