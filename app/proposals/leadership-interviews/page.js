@@ -13,7 +13,7 @@ const PACKAGES = [
         recommended: true,
         base: 7350,
         crew: [
-            { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
+            { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–5:00 PM)', amount: 1200 },
             { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
         ],
         post: [
@@ -26,57 +26,17 @@ const PACKAGES = [
             '3 multi-cam synced interview edits (15–20 min)',
             '6 mobile-ready 60-sec clips (9:16)',
             'Professional audio (dual wireless lavs)',
+            'Simple lower-third graphics (name/title)',
             'Color grading + sound design',
-            'Raw footage + room tone delivery',
             '2 revision rounds',
-        ],
-        excluded: [
-            'Animated intro/outro bumper',
-            'Dynamic captions',
-            'Creative director',
-        ],
-    },
-    {
-        id: 'premier',
-        name: 'Premier',
-        tagline: 'Full production',
-        base: 7650,
-        crew: [
-            { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–6 PM)', amount: 1200 },
-            { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
-        ],
-        post: [
-            { label: '3× Multi-Cam Interview Edits', detail: 'Senior editor — 15–20 min, cinematic finish', amount: 4500, per: '$1,500/ep' },
-            { label: '6× Mobile-Ready Clips', detail: 'Senior editor — 60-sec vertical cuts', amount: 1500, per: '$250/clip' },
-        ],
-        included: [
-            'Full-day on-location recording',
-            '2-man crew + locked-off C-cam + on-site Creative Director',
-            '3 multi-cam synced edits (senior editor, 15–20 min)',
-            '6 mobile-ready 60-sec clips (9:16)',
-            'Animated intro / outro bumper package',
-            'Dynamic captions on all 9 deliverables',
-            'Professional audio (dual wireless lavs)',
-            'Color grading + sound design (all edits)',
-            'Raw footage + room tone + audio stems',
-            '3 revision rounds',
+            'Priority delivery: Interview 1 within ~1 week',
         ],
         excluded: [],
-        bonuses: [
-            { label: 'Animated Intro/Outro Bumper', detail: 'Branded motion graphics — included' },
-            { label: 'Dynamic Captions', detail: 'On all 9 deliverables — included' },
-            { label: 'Creative Director', detail: 'On-site direction for 3/26 — included' },
-        ],
     },
 ];
 
 const ADDONS = [
-    { id: 'boom-op', label: 'Boom Mic Operator', detail: 'Dedicated audio tech — full day boom coverage', price: 500 },
-    { id: 'captions', label: 'Dynamic Captions Package', detail: 'Animated captions on all 9 deliverables', price: 600 },
-    { id: 'extra-clips', label: 'Additional Clip Pack (3 clips)', detail: '3 extra 60-sec vertical clips from interviews', price: 450 },
-    { id: 'drone', label: 'Cinematic Drone Footage', detail: 'Aerial exterior establishing shots of location', price: 500 },
-    { id: 'bts', label: 'Behind-the-Scenes Photography', detail: 'Up to 100 stills — client selects favorites for editing', price: 400 },
-    { id: 'music', label: 'Licensed Background Music', detail: 'Copyright-free intro/outro and ambient music', price: 100 },
+    { id: 'extra-interview', label: 'Extra Long-Form Interview Edit', detail: 'Additional 15–20 min multi-cam interview edit — recorded on shoot day', price: 1500 },
 ];
 
 /* ═══════════════════════════════════════════════════════════════ */
@@ -337,7 +297,8 @@ export default function LeadershipInterviewsProposal() {
 
                 /* ── Packages ── */
                 .packages-grid {
-                    display: grid; grid-template-columns: repeat(2, 1fr);
+                    display: grid; grid-template-columns: 1fr;
+                    max-width: 600px;
                     gap: 24px; margin-top: 48px;
                 }
 
