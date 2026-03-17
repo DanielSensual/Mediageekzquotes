@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /* ═══════════════════════════════════════════════════════════════
    MediaGeekz Sales — Internal Proposal Builder
@@ -64,7 +65,7 @@ export default function SalesBuilder() {
 
     const updateItem = (id, field, value) => {
         setLineItems(prev => prev.map(i =>
-            i.id === id ? { ...i, [field]: field === 'price' || field === 'qty' ? Number(value) || 0 : value } : i
+            i.id === id ? { ...i, [field]: (field === 'price' || field === 'qty') ? Number(value) || 0 : value } : i
         ));
     };
 
@@ -95,12 +96,12 @@ export default function SalesBuilder() {
     return (
         <>
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
                 :root {
-                    --bg: #0b0f1a;
-                    --card: #111827;
-                    --card-border: rgba(100, 116, 139, 0.12);
+                    --bg: #060a14;
+                    --card: #0f1729;
+                    --card-border: rgba(100, 116, 139, 0.15);
                     --white: #f1f5f9;
                     --cream: #e2e8f0;
                     --muted: #94a3b8;
@@ -111,313 +112,330 @@ export default function SalesBuilder() {
                 }
 
                 * { margin: 0; padding: 0; box-sizing: border-box; }
-                body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
+                body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-                .sales-shell {
-                    max-width: 1100px; margin: 0 auto;
+                /* Luxury Layout */
+                .sales-layout {
+                    max-width: 1400px; margin: 0 auto;
                     padding: 40px 24px 80px;
+                    display: grid; grid-template-columns: 1fr 400px; gap: 40px;
+                    align-items: start;
                 }
 
-                .sales-header {
-                    text-align: center; margin-bottom: 48px;
+                @media (max-width: 1024px) {
+                    .sales-layout { grid-template-columns: 1fr; }
                 }
 
+                /* Header */
+                .sales-header { margin-bottom: 40px; }
                 .sales-title {
-                    font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800;
-                    color: var(--orange); letter-spacing: -0.02em;
+                    font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800;
+                    color: var(--white); letter-spacing: -0.02em;
+                    background: linear-gradient(135deg, #fff, #a5b4fc);
+                    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
                 }
-
                 .sales-subtitle {
-                    font-size: 13px; color: var(--muted); margin-top: 6px;
-                    letter-spacing: 0.1em; text-transform: uppercase;
+                    font-size: 13px; color: var(--orange); margin-top: 6px;
+                    letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
                 }
 
-                .sales-grid {
-                    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-                }
-
-                @media (max-width: 768px) { .sales-grid { grid-template-columns: 1fr; } }
-
+                /* Panels */
+                .editor-col { display: flex; flex-direction: column; gap: 24px; }
+                
                 .panel {
                     background: var(--card); border: 1px solid var(--card-border);
-                    border-radius: 16px; padding: 28px 24px;
+                    border-radius: 20px; padding: 32px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
                 }
 
                 .panel-title {
-                    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
-                    color: var(--white); margin-bottom: 20px;
-                    letter-spacing: 0.03em;
-                }
-
-                .field-group { margin-bottom: 16px; }
-                .field-label {
-                    display: block; font-size: 10px; font-weight: 700;
-                    letter-spacing: 0.2em; text-transform: uppercase;
-                    color: var(--muted); margin-bottom: 6px;
-                }
-
-                .field-input {
-                    width: 100%; padding: 10px 14px; border-radius: 10px;
-                    border: 1px solid rgba(100, 116, 139, 0.15);
-                    background: rgba(15, 23, 42, 0.6); color: var(--white);
-                    font-family: 'Inter', sans-serif; font-size: 14px;
-                    transition: border-color 0.2s;
-                }
-
-                .field-input:focus {
-                    outline: none; border-color: var(--orange);
-                }
-
-                .field-input::placeholder { color: rgba(148, 163, 184, 0.4); }
-
-                /* Service catalog */
-                .catalog-section { margin-top: 32px; }
-                .catalog-section .panel { margin-bottom: 16px; }
-
-                .cat-label {
-                    font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
-                    text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
-                }
-
-                .svc-row {
-                    display: flex; align-items: center; justify-content: space-between;
-                    padding: 10px 0; border-bottom: 1px solid rgba(100, 116, 139, 0.06);
-                    gap: 12px;
-                }
-
-                .svc-row:last-child { border-bottom: none; }
-
-                .svc-info { flex: 1; min-width: 0; }
-                .svc-name { font-size: 13px; font-weight: 600; color: var(--cream); }
-                .svc-detail { font-size: 11px; color: var(--muted); margin-top: 2px; }
-                .svc-price { font-size: 13px; color: var(--muted); white-space: nowrap; margin-right: 12px; }
-
-                .add-btn {
-                    padding: 6px 14px; border: 1px solid rgba(232, 98, 44, 0.3);
-                    border-radius: 8px; background: rgba(232, 98, 44, 0.08);
-                    color: var(--orange); font-size: 11px; font-weight: 700;
-                    cursor: pointer; white-space: nowrap; transition: all 0.2s;
-                    letter-spacing: 0.05em;
-                }
-                .add-btn:hover { background: rgba(232, 98, 44, 0.16); }
-                .add-btn.added {
-                    border-color: rgba(34, 197, 94, 0.3); background: rgba(34, 197, 94, 0.08);
-                    color: var(--green); cursor: default;
-                }
-
-                /* Line items editor */
-                .line-items-section { margin-top: 32px; }
-                .li-card {
-                    background: var(--card); border: 1px solid var(--card-border);
-                    border-radius: 14px; padding: 16px 20px; margin-bottom: 10px;
+                    font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700;
+                    color: var(--white); margin-bottom: 24px;
                     display: flex; align-items: center; gap: 12px;
                 }
 
-                .li-info { flex: 1; min-width: 0; }
-                .li-label { font-size: 13px; font-weight: 600; color: var(--cream); }
-                .li-detail { font-size: 10px; color: var(--muted); margin-top: 2px; }
-
-                .li-input {
-                    width: 80px; padding: 8px 10px; border-radius: 8px;
-                    border: 1px solid rgba(100, 116, 139, 0.15);
-                    background: rgba(15, 23, 42, 0.6); color: var(--white);
-                    font-family: 'Inter', sans-serif; font-size: 13px;
-                    text-align: right;
-                }
-                .li-input:focus { outline: none; border-color: var(--orange); }
-
-                .li-qty { width: 50px; }
-
-                .li-total {
-                    font-size: 14px; font-weight: 700; color: var(--white);
-                    min-width: 80px; text-align: right;
+                .panel-title::before {
+                    content: ''; display: block; width: 4px; height: 18px;
+                    background: var(--orange); border-radius: 4px;
                 }
 
-                .li-remove {
-                    width: 28px; height: 28px; border: none; border-radius: 6px;
-                    background: rgba(239, 68, 68, 0.08); color: var(--red);
-                    cursor: pointer; font-size: 16px; display: flex;
-                    align-items: center; justify-content: center; transition: all 0.2s;
-                }
-                .li-remove:hover { background: rgba(239, 68, 68, 0.2); }
+                /* Grid inputs */
+                .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+                @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+                .form-grid.single { grid-template-columns: 1fr; }
 
-                /* Totals */
-                .totals-bar {
-                    margin-top: 24px; padding: 24px; border-radius: 14px;
-                    background: linear-gradient(135deg, rgba(232, 98, 44, 0.08), rgba(45, 212, 191, 0.04));
-                    border: 1px solid rgba(232, 98, 44, 0.15);
+                .field-group { display: flex; flex-direction: column; gap: 8px; }
+                .field-label {
+                    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+                    text-transform: uppercase; color: var(--muted);
+                }
+
+                .field-input {
+                    width: 100%; padding: 12px 16px; border-radius: 12px;
+                    border: 1px solid rgba(100, 116, 139, 0.2);
+                    background: rgba(15, 23, 42, 0.8); color: var(--white);
+                    font-family: 'Inter', sans-serif; font-size: 14px;
+                    transition: all 0.2s ease;
+                }
+                .field-input:focus {
+                    outline: none; border-color: var(--orange);
+                    box-shadow: 0 0 0 3px rgba(232, 98, 44, 0.15);
+                }
+
+                /* Catalog */
+                .cat-label {
+                    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+                    text-transform: uppercase; color: var(--teal); margin: 32px 0 16px;
+                    border-bottom: 1px solid rgba(45, 212, 191, 0.2); padding-bottom: 8px;
+                }
+                .cat-label:first-child { margin-top: 0; }
+
+                .svc-row {
                     display: flex; align-items: center; justify-content: space-between;
-                    flex-wrap: wrap; gap: 16px;
+                    padding: 12px 0; border-bottom: 1px solid rgba(100, 116, 139, 0.1);
+                    gap: 16px; transition: background 0.2s; border-radius: 8px;
+                }
+                .svc-row:hover { background: rgba(255, 255, 255, 0.02); padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
+                .svc-row:last-child { border-bottom: none; }
+
+                .svc-info { flex: 1; min-width: 0; }
+                .svc-name { font-size: 14px; font-weight: 600; color: var(--white); }
+                .svc-detail { font-size: 12px; color: var(--muted); margin-top: 4px; }
+                .svc-price { font-size: 14px; font-weight: 500; color: var(--cream); white-space: nowrap; margin-right: 16px; font-family: 'Outfit', sans-serif; }
+
+                .add-btn {
+                    padding: 8px 16px; border: 1px solid rgba(232, 98, 44, 0.4);
+                    border-radius: 8px; background: rgba(232, 98, 44, 0.1);
+                    color: var(--orange); font-size: 12px; font-weight: 700;
+                    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+                }
+                .add-btn:hover { background: rgba(232, 98, 44, 0.2); transform: scale(1.02); }
+                .add-btn.added {
+                    border-color: rgba(34, 197, 94, 0.4); background: rgba(34, 197, 94, 0.1);
+                    color: var(--green); cursor: default; transform: none;
                 }
 
-                .totals-left { display: flex; gap: 32px; flex-wrap: wrap; }
+                /* Sidebar Preview */
+                .preview-col {
+                    position: sticky; top: 40px;
+                    display: flex; flex-direction: column; gap: 24px;
+                }
 
-                .total-block {}
-                .total-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-                .total-value { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: var(--white); margin-top: 4px; }
-                .total-value.orange { color: var(--orange); }
+                .invoice-preview-card {
+                    background: linear-gradient(180deg, #111827, #0f1729);
+                    border: 1px solid var(--card-border); border-radius: 20px;
+                    padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+                    position: relative; overflow: hidden;
+                }
+
+                .invoice-preview-card::before {
+                    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+                    background: linear-gradient(90deg, var(--orange), var(--teal));
+                }
+
+                .pv-header { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+                .pv-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+                .pv-client { font-size: 24px; font-weight: 700; color: var(--white); margin-top: 8px; }
+                .pv-project { font-size: 14px; color: var(--orange); margin-top: 4px; }
+
+                .pv-items { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; min-height: 100px; }
+                
+                .li-card {
+                    display: grid; grid-template-columns: auto 1fr auto; gap: 12px;
+                    align-items: center; padding: 12px; border-radius: 12px;
+                    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+                }
+                
+                .li-actions { display: flex; flex-direction: column; gap: 8px; }
+                .li-remove {
+                    width: 24px; height: 24px; border: none; border-radius: 6px;
+                    background: rgba(239, 68, 68, 0.1); color: var(--red);
+                    cursor: pointer; display: flex; align-items: center; justify-content: center;
+                    transition: all 0.2s;
+                }
+                .li-remove:hover { background: rgba(239, 68, 68, 0.3); }
+
+                .li-inputs { display: flex; gap: 8px; }
+                .li-input {
+                    background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+                    color: var(--white); border-radius: 6px; padding: 6px;
+                    font-size: 12px; text-align: center;
+                }
+                .li-input.qty { width: 40px; }
+                .li-input.price { width: 70px; }
+                .li-input:focus { outline: none; border-color: var(--teal); }
+
+                .li-info { min-width: 0; }
+                .li-name { font-size: 13px; font-weight: 600; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+                .li-total { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); text-align: right; }
+
+                .pv-totals {
+                    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05);
+                }
+
+                .pv-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+                .pv-total-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+                .pv-total-val { font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--white); }
+                
+                .pv-total-row.deposit { margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.1); }
+                .pv-total-row.deposit .pv-total-label { color: var(--orange); font-weight: 700; }
+                .pv-total-row.deposit .pv-total-val { font-size: 24px; font-weight: 800; color: var(--orange); }
 
                 .generate-btn {
-                    padding: 14px 32px; border: none; border-radius: 12px;
+                    width: 100%; padding: 18px; border: none; border-radius: 12px;
                     background: linear-gradient(135deg, var(--orange), #f59e0b);
                     color: var(--white); font-family: 'Outfit', sans-serif;
-                    font-size: 14px; font-weight: 700; cursor: pointer;
-                    letter-spacing: 0.06em; text-transform: uppercase;
-                    transition: all 0.2s;
-                    box-shadow: 0 8px 28px rgba(232, 98, 44, 0.3);
+                    font-size: 15px; font-weight: 800; cursor: pointer;
+                    letter-spacing: 0.1em; text-transform: uppercase;
+                    transition: all 0.2s; box-shadow: 0 10px 30px rgba(232, 98, 44, 0.3);
+                    margin-top: 24px;
                 }
-                .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(232, 98, 44, 0.4); }
+                .generate-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(232, 98, 44, 0.4); }
+                .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
                 .generate-btn.copied {
                     background: linear-gradient(135deg, var(--green), var(--teal));
-                    box-shadow: 0 8px 28px rgba(34, 197, 94, 0.3);
+                    box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
                 }
 
-                .empty-state {
-                    text-align: center; padding: 40px 20px; color: var(--muted);
-                    font-size: 13px;
-                }
+                .empty-items { text-align: center; padding: 40px 0; color: rgba(255,255,255,0.2); font-size: 13px; }
             `}</style>
 
-            <div className="sales-shell">
-                <div className="sales-header">
-                    <div className="sales-title">MediaGeekz Sales</div>
-                    <div className="sales-subtitle">Proposal Builder</div>
-                </div>
-
-                {/* Client & Project Info */}
-                <div className="sales-grid">
-                    <div className="panel">
-                        <div className="panel-title">Client Details</div>
-                        <div className="field-group">
-                            <label className="field-label">Client Name</label>
-                            <input className="field-input" placeholder="Tommy Bliven" value={client.name} onChange={e => setClient(p => ({ ...p, name: e.target.value }))} />
-                        </div>
-                        <div className="field-group">
-                            <label className="field-label">Company</label>
-                            <input className="field-input" placeholder="66 Degrees" value={client.company} onChange={e => setClient(p => ({ ...p, company: e.target.value }))} />
-                        </div>
-                        <div className="field-group">
-                            <label className="field-label">Email</label>
-                            <input className="field-input" type="email" placeholder="client@company.com" value={client.email} onChange={e => setClient(p => ({ ...p, email: e.target.value }))} />
-                        </div>
+            <div className="sales-layout">
+                {/* LEFT COL: Editor */}
+                <div className="editor-col">
+                    <div className="sales-header">
+                        <div className="sales-title">MediaGeekz Sales 💎</div>
+                        <div className="sales-subtitle">Premium Proposal Engine</div>
                     </div>
 
                     <div className="panel">
-                        <div className="panel-title">Project Details</div>
-                        <div className="field-group">
-                            <label className="field-label">Project Name</label>
-                            <input className="field-input" placeholder="Leadership Interviews" value={project.name} onChange={e => setProject(p => ({ ...p, name: e.target.value }))} />
+                        <div className="panel-title">1. Client Details</div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label className="field-label">Client Name</label>
+                                <input className="field-input" placeholder="e.g. Tommy Bliven" value={client.name} onChange={e => setClient(p => ({ ...p, name: e.target.value }))} />
+                            </div>
+                            <div className="field-group">
+                                <label className="field-label">Company</label>
+                                <input className="field-input" placeholder="e.g. 66 Degrees" value={client.company} onChange={e => setClient(p => ({ ...p, company: e.target.value }))} />
+                            </div>
+                            <div className="field-group" style={{ gridColumn: '1 / -1' }}>
+                                <label className="field-label">Email Address</label>
+                                <input className="field-input" type="email" placeholder="client@company.com" value={client.email} onChange={e => setClient(p => ({ ...p, email: e.target.value }))} />
+                            </div>
                         </div>
-                        <div className="field-group">
-                            <label className="field-label">Shoot Date</label>
-                            <input className="field-input" type="date" value={project.shootDate} onChange={e => setProject(p => ({ ...p, shootDate: e.target.value }))} />
+                    </div>
+
+                    <div className="panel">
+                        <div className="panel-title">2. Project Details</div>
+                        <div className="form-grid">
+                            <div className="field-group">
+                                <label className="field-label">Project Name</label>
+                                <input className="field-input" placeholder="e.g. Leadership Interviews" value={project.name} onChange={e => setProject(p => ({ ...p, name: e.target.value }))} />
+                            </div>
+                            <div className="field-group">
+                                <label className="field-label">Shoot Date</label>
+                                <input className="field-input" type="date" value={project.shootDate} onChange={e => setProject(p => ({ ...p, shootDate: e.target.value }))} />
+                            </div>
+                            <div className="field-group">
+                                <label className="field-label">Location</label>
+                                <input className="field-input" placeholder="Orlando, FL" value={project.location} onChange={e => setProject(p => ({ ...p, location: e.target.value }))} />
+                            </div>
+                            <div className="field-group" style={{ gridColumn: '1 / -1' }}>
+                                <label className="field-label">Internal/Contract Notes (optional)</label>
+                                <input className="field-input" placeholder="Special deliverables or instructions..." value={project.notes} onChange={e => setProject(p => ({ ...p, notes: e.target.value }))} />
+                            </div>
                         </div>
-                        <div className="field-group">
-                            <label className="field-label">Location</label>
-                            <input className="field-input" placeholder="Orlando, FL" value={project.location} onChange={e => setProject(p => ({ ...p, location: e.target.value }))} />
-                        </div>
-                        <div className="field-group">
-                            <label className="field-label">Notes (optional)</label>
-                            <input className="field-input" placeholder="Special instructions..." value={project.notes} onChange={e => setProject(p => ({ ...p, notes: e.target.value }))} />
-                        </div>
+                    </div>
+
+                    <div className="panel">
+                        <div className="panel-title">3. Service Catalog</div>
+                        {categories.map(cat => (
+                            <div key={cat} style={{ marginBottom: 24 }}>
+                                <div className="cat-label">{cat}</div>
+                                {SERVICE_CATALOG.filter(s => s.category === cat).map(svc => {
+                                    const added = lineItems.find(i => i.id === svc.id);
+                                    return (
+                                        <div className="svc-row" key={svc.id}>
+                                            <div className="svc-info">
+                                                <div className="svc-name">{svc.label}</div>
+                                                <div className="svc-detail">{svc.detail}</div>
+                                            </div>
+                                            <div className="svc-price">
+                                                {fmt(svc.defaultPrice)}{svc.perUnit || ''}
+                                            </div>
+                                            <button className={`add-btn ${added ? 'added' : ''}`} onClick={() => addService(svc)}>
+                                                {added ? '✓ Active' : '+ Add Item'}
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Service Catalog */}
-                <div className="catalog-section">
-                    <div className="panel-title" style={{ marginTop: 32, marginBottom: 16, fontSize: 18 }}>Service Catalog</div>
-                    {categories.map(cat => (
-                        <div className="panel" key={cat}>
-                            <div className="cat-label">{cat}</div>
-                            {SERVICE_CATALOG.filter(s => s.category === cat).map(svc => {
-                                const added = lineItems.find(i => i.id === svc.id);
-                                return (
-                                    <div className="svc-row" key={svc.id}>
-                                        <div className="svc-info">
-                                            <div className="svc-name">{svc.label}</div>
-                                            <div className="svc-detail">{svc.detail}</div>
+                {/* RIGHT COL: Sticky Preview */}
+                <div className="preview-col">
+                    <div className="invoice-preview-card">
+                        <div className="pv-header">
+                            <div className="pv-title">Live Preview</div>
+                            <div className="pv-client">{client.name || 'Client Name'}</div>
+                            <div className="pv-project">{project.name || 'Project Name'}</div>
+                        </div>
+
+                        <div className="pv-items">
+                            <AnimatePresence>
+                                {lineItems.length === 0 && (
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="empty-items">
+                                        No line items added yet.
+                                    </motion.div>
+                                )}
+                                {lineItems.map((item) => (
+                                    <motion.div
+                                        key={item.id}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95, height: 0, marginBottom: 0, overflow: 'hidden' }}
+                                        transition={{ duration: 0.2 }}
+                                        className="li-card"
+                                    >
+                                        <button className="li-remove" onClick={() => removeItem(item.id)} title="Remove">✕</button>
+                                        <div className="li-info">
+                                            <div className="li-name" title={item.label}>{item.label}</div>
+                                            <div className="li-inputs" style={{ marginTop: 8 }}>
+                                                <input className="li-input qty" type="number" min="1" value={item.qty} onChange={e => updateItem(item.id, 'qty', e.target.value)} title="Qty" />
+                                                <span style={{color: 'rgba(255,255,255,0.3)', fontSize: 10, alignSelf: 'center'}}>×</span>
+                                                <input className="li-input price" type="number" value={item.price} onChange={e => updateItem(item.id, 'price', e.target.value)} title="Price" />
+                                            </div>
                                         </div>
-                                        <div className="svc-price">
-                                            {fmt(svc.defaultPrice)}{svc.perUnit || ''}
-                                        </div>
-                                        <button
-                                            className={`add-btn ${added ? 'added' : ''}`}
-                                            onClick={() => addService(svc)}
-                                        >
-                                            {added ? '✓ Added' : '+ Add'}
-                                        </button>
-                                    </div>
-                                );
-                            })}
+                                        <div className="li-total">{fmt(item.price * item.qty)}</div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
                         </div>
-                    ))}
-                </div>
 
-                {/* Line Items Editor */}
-                <div className="line-items-section">
-                    <div className="panel-title" style={{ marginTop: 32, marginBottom: 16, fontSize: 18 }}>
-                        Line Items ({lineItems.length})
-                    </div>
-
-                    {lineItems.length === 0 ? (
-                        <div className="panel">
-                            <div className="empty-state">
-                                Add services from the catalog above to build the proposal.
+                        <div className="pv-totals">
+                            <div className="pv-total-row">
+                                <span className="pv-total-label">Subtotal</span>
+                                <span className="pv-total-val">{fmt(subtotal)}</span>
+                            </div>
+                            <div className="pv-total-row deposit">
+                                <span className="pv-total-label">50% Deposit</span>
+                                <span className="pv-total-val">{fmt(deposit)}</span>
                             </div>
                         </div>
-                    ) : (
-                        <>
-                            {lineItems.map(item => (
-                                <div className="li-card" key={item.id}>
-                                    <div className="li-info">
-                                        <div className="li-label">{item.label}</div>
-                                        <div className="li-detail">{item.detail}</div>
-                                    </div>
-                                    <input
-                                        className="li-input li-qty"
-                                        type="number"
-                                        min="1"
-                                        value={item.qty}
-                                        onChange={e => updateItem(item.id, 'qty', e.target.value)}
-                                        title="Quantity"
-                                    />
-                                    <span style={{ fontSize: 11, color: 'var(--muted)' }}>×</span>
-                                    <input
-                                        className="li-input"
-                                        type="number"
-                                        value={item.price}
-                                        onChange={e => updateItem(item.id, 'price', e.target.value)}
-                                        title="Unit price"
-                                    />
-                                    <div className="li-total">{fmt(item.price * item.qty)}</div>
-                                    <button className="li-remove" onClick={() => removeItem(item.id)} title="Remove">×</button>
-                                </div>
-                            ))}
-                        </>
-                    )}
-                </div>
 
-                {/* Totals & Generate */}
-                {lineItems.length > 0 && (
-                    <div className="totals-bar">
-                        <div className="totals-left">
-                            <div className="total-block">
-                                <div className="total-label">Subtotal</div>
-                                <div className="total-value">{fmt(subtotal)}</div>
-                            </div>
-                            <div className="total-block">
-                                <div className="total-label">50% Deposit</div>
-                                <div className="total-value orange">{fmt(deposit)}</div>
-                            </div>
-                        </div>
                         <button
                             className={`generate-btn ${copied ? 'copied' : ''}`}
                             onClick={generateLink}
+                            disabled={lineItems.length === 0}
                         >
-                            {copied ? '✓ Link Copied!' : 'Generate & Copy Link'}
+                            {copied ? '✓ Link Copied' : 'Generate Secure Link'}
                         </button>
                     </div>
-                )}
+                </div>
             </div>
         </>
     );
