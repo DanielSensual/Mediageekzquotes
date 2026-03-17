@@ -16,13 +16,12 @@ function CheckoutContent() {
     const searchParams = useSearchParams();
     const amount = parseFloat(searchParams.get('amount') || '0');
     const desc = searchParams.get('desc') || 'MediaGeekz — Video Production';
-    const type = searchParams.get('type') || 'deposit';
 
     const cardRef = useRef(null);
-    const applePayBtnRef = useRef(null);
     const googlePayBtnRef = useRef(null);
-    const paymentsRef = useRef(null);
     const cardInstanceRef = useRef(null);
+    const applePayInstanceRef = useRef(null);
+    const googlePayInstanceRef = useRef(null);
 
     const [sdkLoaded, setSdkLoaded] = useState(false);
     const [processing, setProcessing] = useState(false);
@@ -30,6 +29,7 @@ function CheckoutContent() {
     const [success, setSuccess] = useState(null);
     const [applePayReady, setApplePayReady] = useState(false);
     const [googlePayReady, setGooglePayReady] = useState(false);
+    const [walletSetupComplete, setWalletSetupComplete] = useState(false);
 
     const fmt = (n) => '$' + n.toLocaleString('en-US');
 
@@ -68,19 +68,58 @@ function CheckoutContent() {
         }
     }, [amount, desc]);
 
+    const readTokenizationError = (tokenResult, fallback) => {
+        if (!tokenResult?.errors?.length) return fallback;
+        return tokenResult.errors
+            .map(err => err.message || err.detail)
+            .filter(Boolean)
+            .join(' ') || fallback;
+    };
+
+    const tokenizeWallet = useCallback(async (walletInstance, label) => {
+        if (!walletInstance) return;
+
+        setError(null);
+
+        try {
+            const tokenResult = await walletInstance.tokenize();
+
+            if (tokenResult.status === 'OK') {
+                await processPayment(tokenResult.token);
+                return;
+            }
+
+            setError(readTokenizationError(tokenResult, `${label} tokenization failed.`));
+        } catch (e) {
+            console.error(`${label} tokenize error:`, e);
+            setError(e.message || `${label} failed.`);
+        }
+    }, [processPayment]);
+
     // Initialize all payment methods once SDK loads
     useEffect(() => {
         if (!sdkLoaded || !window.Square || amount <= 0) return;
 
+        let cancelled = false;
+
         const init = async () => {
             try {
+                setError(null);
+                setApplePayReady(false);
+                setGooglePayReady(false);
+                setWalletSetupComplete(false);
+
                 const payments = window.Square.payments(APP_ID, LOCATION_ID);
-                paymentsRef.current = payments;
 
                 // Card form
                 if (cardRef.current) {
+                    cardRef.current.innerHTML = '';
                     const card = await payments.card();
                     await card.attach(cardRef.current);
+                    if (cancelled) {
+                        await card.destroy();
+                        return;
+                    }
                     cardInstanceRef.current = card;
                 }
 
@@ -94,52 +133,76 @@ function CheckoutContent() {
                     },
                 });
 
-                // Apply specific height required by Square Apple/Google Pay
-                if (applePayBtnRef.current) applePayBtnRef.current.style.minHeight = '48px';
-                if (googlePayBtnRef.current) googlePayBtnRef.current.style.minHeight = '48px';
-
                 // Apple Pay
                 try {
                     const applePay = await payments.applePay(paymentRequest);
-                    
-                    applePay.addEventListener('ontokenization', async (event) => {
-                        if (event.detail.tokenResult.status === 'OK') {
-                            await processPayment(event.detail.tokenResult.token);
-                        } else {
-                            setError(event.detail.tokenResult.errors?.[0]?.message || 'Apple Pay failed');
-                        }
-                    });
-
-                    await applePay.attach(applePayBtnRef.current);
+                    if (cancelled) {
+                        await applePay.destroy();
+                        return;
+                    }
+                    applePayInstanceRef.current = applePay;
                     setApplePayReady(true);
                 } catch (e) {
-                    console.log('Apple Pay not available:', e.message);
+                    console.error('Apple Pay initialization failed:', e);
                 }
 
                 // Google Pay
+                if (googlePayBtnRef.current) {
+                    googlePayBtnRef.current.innerHTML = '';
+                    googlePayBtnRef.current.onclick = null;
+                }
+
                 try {
                     const googlePay = await payments.googlePay(paymentRequest);
-
-                    googlePay.addEventListener('ontokenization', async (event) => {
-                        if (event.detail.tokenResult.status === 'OK') {
-                            await processPayment(event.detail.tokenResult.token);
-                        } else {
-                            setError(event.detail.tokenResult.errors?.[0]?.message || 'Google Pay failed');
-                        }
-                    });
-
                     await googlePay.attach(googlePayBtnRef.current);
+                    if (cancelled) {
+                        await googlePay.destroy();
+                        return;
+                    }
+                    googlePayInstanceRef.current = googlePay;
+                    googlePayBtnRef.current.onclick = async (event) => {
+                        event.preventDefault();
+                        await tokenizeWallet(googlePay, 'Google Pay');
+                    };
                     setGooglePayReady(true);
                 } catch (e) {
-                    console.log('Google Pay not available:', e.message);
+                    console.error('Google Pay initialization failed:', e);
+                }
+
+                if (!cancelled) {
+                    setWalletSetupComplete(true);
                 }
             } catch (e) {
                 setError('Failed to initialize payment form: ' + e.message);
+                if (!cancelled) {
+                    setWalletSetupComplete(true);
+                }
             }
         };
 
         init();
-    }, [sdkLoaded, amount, desc, processPayment]);
+
+        return () => {
+            cancelled = true;
+
+            if (googlePayBtnRef.current) {
+                googlePayBtnRef.current.onclick = null;
+                googlePayBtnRef.current.innerHTML = '';
+            }
+
+            const destroyers = [
+                cardInstanceRef.current?.destroy?.(),
+                applePayInstanceRef.current?.destroy?.(),
+                googlePayInstanceRef.current?.destroy?.(),
+            ].filter(Boolean);
+
+            Promise.allSettled(destroyers).catch(() => {});
+
+            cardInstanceRef.current = null;
+            applePayInstanceRef.current = null;
+            googlePayInstanceRef.current = null;
+        };
+    }, [sdkLoaded, amount, desc, tokenizeWallet]);
 
     const handleCardPayment = async () => {
         if (!cardInstanceRef.current) return;
@@ -158,6 +221,12 @@ function CheckoutContent() {
             setProcessing(false);
         }
     };
+
+    const handleApplePayPayment = async () => {
+        await tokenizeWallet(applePayInstanceRef.current, 'Apple Pay');
+    };
+
+    const hasWallets = applePayReady || googlePayReady;
 
     if (amount <= 0) {
         return (
@@ -269,7 +338,18 @@ function CheckoutContent() {
                     min-height: 48px; border-radius: 12px; overflow: hidden;
                 }
 
-                .wallet-btn-container.hidden { display: none; }
+                .apple-pay-btn {
+                    width: 100%;
+                    min-height: 48px;
+                    border: none;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    -webkit-appearance: -apple-pay-button;
+                    -apple-pay-button-type: buy;
+                    -apple-pay-button-style: black;
+                }
+
+                .apple-pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
                 .checkout-error {
                     margin-top: 16px; padding: 12px 16px; border-radius: 10px;
@@ -356,29 +436,37 @@ function CheckoutContent() {
                         </div>
                     ) : (
                         <>
-                            {/* Digital Wallets — Unconditional render to avoid DOM destruction */}
-                            <div className="wallet-section" style={{ display: (!sdkLoaded || (!applePayReady && !googlePayReady)) ? 'none' : 'flex' }}>
-                                <div
-                                    ref={applePayBtnRef}
-                                    style={{ display: applePayReady ? 'block' : 'none', width: '100%' }}
-                                />
-                                <div
-                                    ref={googlePayBtnRef}
-                                    style={{ display: googlePayReady ? 'block' : 'none', width: '100%' }}
-                                />
-                            </div>
-
-                            {/* Render a placeholder while SDK loads or if wallets aren't available yet but might become available */}
-                            {(!sdkLoaded || (!applePayReady && !googlePayReady)) && (
-                                <div style={{ height: 0, overflow: 'hidden' }}>
-                                    <div ref={applePayBtnRef} />
-                                    <div ref={googlePayBtnRef} />
+                            {(!walletSetupComplete || hasWallets) && (
+                                <div className="wallet-section">
+                                    {applePayReady && (
+                                        <button
+                                            type="button"
+                                            className="apple-pay-btn"
+                                            onClick={handleApplePayPayment}
+                                            disabled={processing}
+                                            aria-label="Pay with Apple Pay"
+                                        />
+                                    )}
+                                    <div
+                                        ref={googlePayBtnRef}
+                                        className="wallet-btn-container"
+                                        style={{
+                                            display: walletSetupComplete && !googlePayReady ? 'none' : 'block',
+                                            opacity: googlePayReady ? 1 : 0.001,
+                                            pointerEvents: googlePayReady ? 'auto' : 'none',
+                                        }}
+                                    />
                                 </div>
                             )}
 
-                            {/* Divider only shows if at least one wallet is active */}
-                            {(applePayReady || googlePayReady) && (
+                            {hasWallets && (
                                 <div className="divider">or pay with card</div>
+                            )}
+
+                            {walletSetupComplete && !hasWallets && sdkLoaded && (
+                                <div className="secure-note" style={{ marginTop: 0, marginBottom: 20 }}>
+                                    Apple Pay and Google Pay are only shown when the current browser/device supports them.
+                                </div>
                             )}
 
                             {/* Card Form */}
