@@ -335,23 +335,37 @@ function CheckoutContent() {
                     background: rgba(100, 116, 139, 0.15);
                 }
 
-                .wallet-section { display: flex; flex-direction: column; gap: 12px; }
+                .wallet-section {
+                    display: flex; flex-direction: column; gap: 12px;
+                    padding: 20px; border-radius: 16px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(100, 116, 139, 0.1);
+                }
+
+                .wallet-label {
+                    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+                    text-transform: uppercase; color: var(--muted);
+                    text-align: center; margin-bottom: 4px;
+                }
 
                 .wallet-btn-container {
-                    min-height: 48px; border-radius: 12px; overflow: hidden;
+                    min-height: 48px; border-radius: 8px; overflow: hidden;
+                    width: 100%;
                 }
 
                 .apple-pay-btn {
                     width: 100%;
-                    min-height: 48px;
+                    height: 52px;
                     border: none;
-                    border-radius: 12px;
+                    border-radius: 8px;
                     cursor: pointer;
                     -webkit-appearance: -apple-pay-button;
                     -apple-pay-button-type: buy;
                     -apple-pay-button-style: black;
+                    transition: opacity 0.2s;
                 }
 
+                .apple-pay-btn:hover:not(:disabled) { opacity: 0.85; }
                 .apple-pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
                 .checkout-error {
@@ -441,6 +455,7 @@ function CheckoutContent() {
                         <>
                             {(!walletSetupComplete || hasWallets) && (
                                 <div className="wallet-section">
+                                    <div className="wallet-label">Express Checkout</div>
                                     {applePayReady && (
                                         <button
                                             type="button"
