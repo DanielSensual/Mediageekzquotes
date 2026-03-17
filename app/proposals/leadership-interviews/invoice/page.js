@@ -43,37 +43,19 @@ export default function InvoicePage() {
         window.print();
     };
 
-    const handlePayment = async (type) => {
-        setLoading(type);
-        setError(null);
-        try {
-            const amount = type === 'deposit' ? DEPOSIT : SUBTOTAL;
-            const description = type === 'deposit'
-                ? `MediaGeekz — Leadership Interviews (50% Deposit)`
-                : `MediaGeekz — Leadership Interviews (Full Payment)`;
+    const handlePayment = (type) => {
+        const amount = type === 'deposit' ? DEPOSIT : SUBTOTAL;
+        const description = type === 'deposit'
+            ? 'MediaGeekz — Leadership Interviews (50% Deposit)'
+            : 'MediaGeekz — Leadership Interviews (Full Payment)';
 
-            const res = await fetch('/api/square-checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    amount,
-                    description,
-                    redirectUrl: window.location.href,
-                }),
-            });
+        const params = new URLSearchParams({
+            amount: amount.toString(),
+            desc: description,
+            type,
+        });
 
-            const data = await res.json();
-
-            if (data.success && data.url) {
-                window.location.href = data.url;
-            } else {
-                setError('Could not create payment link. Please contact us directly.');
-            }
-        } catch (err) {
-            setError('Payment service unavailable. Please contact us directly.');
-        } finally {
-            setLoading(null);
-        }
+        window.location.href = `/checkout?${params.toString()}`;
     };
 
     const handleSign = () => {
@@ -661,18 +643,46 @@ export default function InvoicePage() {
                         <div className="sig-grid">
                             <div className="sig-block">
                                 <div className="sig-label">Producer — MediaGeekz</div>
-                                <div className="sig-preview">
-                                    <span className="sig-cursive">Daniel Castillo</span>
+
+                                {/* Matt Workman */}
+                                <div style={{ marginBottom: 24 }}>
+                                    <div className="sig-preview">
+                                        <span className="sig-cursive">Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Signature</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Printed Name</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>mattworkman@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>{INVOICE_DATE}</span>
+                                    </div>
+                                    <div className="sig-field">Date</div>
                                 </div>
-                                <div className="sig-field">Signature</div>
-                                <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
-                                    <span style={{ fontSize: 13, color: 'var(--cream)' }}>Daniel Castillo</span>
+
+                                {/* Daniel Castillo */}
+                                <div>
+                                    <div className="sig-preview">
+                                        <span className="sig-cursive">Daniel Castillo</span>
+                                    </div>
+                                    <div className="sig-field">Signature</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>Daniel Castillo</span>
+                                    </div>
+                                    <div className="sig-field">Printed Name</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>danielcastillo@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>{INVOICE_DATE}</span>
+                                    </div>
+                                    <div className="sig-field">Date</div>
                                 </div>
-                                <div className="sig-field">Printed Name</div>
-                                <div className="sig-line" style={{ borderBottomColor: 'rgba(100, 116, 139, 0.3)' }}>
-                                    <span style={{ fontSize: 13, color: 'var(--cream)' }}>{INVOICE_DATE}</span>
-                                </div>
-                                <div className="sig-field">Date</div>
                             </div>
                             <div className="sig-block">
                                 <div className="sig-label">Client — {CLIENT.company}</div>
