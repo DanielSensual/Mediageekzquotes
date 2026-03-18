@@ -30,13 +30,13 @@ const PACKAGES = [
             'Color grading + sound design',
             '2 revision rounds',
             'Priority delivery: Interview 1 within ~1 week',
-            'BTS photography — up to 100 photos',
         ],
         excluded: [],
     },
 ];
 
 const ADDONS = [
+    { id: 'bts-photos', label: 'BTS Photography', detail: 'Behind-the-scenes photos — up to 100 edited images from shoot day', price: 400 },
     { id: 'extra-interview', label: 'Extra Long-Form Interview Edit', detail: 'Additional 15–20 min multi-cam interview edit — recorded on shoot day', price: 1500 },
     { id: 'licensed-music', label: 'Licensed Music', detail: 'Premium royalty-free track per episode — curated to match your brand', price: 100, per: '~$100/ep' },
 ];
@@ -744,7 +744,7 @@ export default function LeadershipInterviewsProposal() {
                         <div className="section-question">What are the options?</div>
                         <h2 className="section-title">Choose your coverage scope</h2>
                         <p className="section-desc">
-                            All tiers include professional cinema equipment, multi-cam recording, wireless lav audio, and BTS photography. Light and airy, organic visual style — click the package to see the full cost breakdown.
+                            All tiers include professional cinema equipment, multi-cam recording, and wireless lav audio. Light and airy, organic visual style — click the package to see the full cost breakdown.
                         </p>
                     </div>
 
