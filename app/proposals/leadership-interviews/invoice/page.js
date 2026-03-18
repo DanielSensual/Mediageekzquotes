@@ -21,6 +21,7 @@ const CLIENT = {
 const LINE_ITEMS = [
     { description: 'Lead Cinematographer — Full Day', detail: 'Setup 9:30 AM · Record 11:30 AM – 5:00 PM', amount: 1200 },
     { description: 'Camera Operator B — Full Day', detail: '2nd angle coverage', amount: 750 },
+    { description: 'BTS Photography', detail: 'Up to 100 edited behind-the-scenes photos', amount: 400 },
     { description: '3× Multi-Cam Interview Edits', detail: '15–20 min each · synced, color graded, lower thirds', amount: 4500, per: '$1,500/ep' },
     { description: '6× Mobile-Ready Clips', detail: '60-sec vertical cuts from interviews (9:16)', amount: 900, per: '$150/clip' },
 ];
@@ -640,7 +641,7 @@ export default function InvoicePage() {
                         <div className="clause">
                             <div className="clause-num">5. Additional Services</div>
                             <div className="clause-text">
-                                Any additional videos recorded on shoot day will be billed at the agreed per-episode rate. Add-on services (boom operator, drone footage, BTS photography, dynamic captions, licensed music, additional clips) are available and priced separately as outlined on the proposal page.
+                                Any additional videos recorded on shoot day will be billed at the agreed per-episode rate. Add-on services (boom operator, drone footage, dynamic captions, licensed music, additional clips) are available and priced separately as outlined on the proposal page.
                             </div>
                         </div>
 
