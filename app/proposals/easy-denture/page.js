@@ -683,7 +683,7 @@ export default function EasyDentureProposal() {
                         Capture.<br /><em>Demonstrate.</em><br />Deliver.
                     </h1>
                     <p className="hero-subtitle">
-                        Cinematic video production capturing the Easy Denture mobile dentistry experience — from Sonya&apos;s car arrival to patient fittings and real testimonials, all in one morning.
+                        Cinematic video production capturing the Easy Denture mobile dentistry experience — from Sonya&apos;s car arrival to patient fittings and real testimonials.
                     </p>
 
                     <div className="hero-meta">
@@ -695,7 +695,7 @@ export default function EasyDentureProposal() {
                         <div className="hero-stat">
                             <div className="hero-stat-label">Shoot Date</div>
                             <div className="hero-stat-value">TBD</div>
-                            <div className="hero-stat-detail">Half-day — wrap by lunch</div>
+                            <div className="hero-stat-detail">Morning shoot — start ~8:30 AM</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Format</div>
@@ -753,9 +753,9 @@ export default function EasyDentureProposal() {
                     <div className="section-header">
                         <div className="section-label">Production Schedule</div>
                         <div className="section-question">Date TBD</div>
-                        <h2 className="section-title">Half day. One location.</h2>
+                        <h2 className="section-title">Morning shoot. One location.</h2>
                         <p className="section-desc">
-                            Compact morning shoot — Sonya&apos;s car segment first, then straight into the apartment for patient fittings and sound bites. Wrap by lunchtime.
+                            Sonya&apos;s car segment first, then straight into the apartment for patient fittings and sound bites.
                         </p>
                     </div>
 
