@@ -845,146 +845,14 @@ export default function EasyDentureProposal() {
 
                 <div className="divider" />
 
-                {/* ── PACKAGES ── */}
+                {/* ── PACKAGES — HIDDEN UNTIL MONDAY CALL ── */}
                 <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Investment</div>
-                        <div className="section-question">What are the options?</div>
-                        <h2 className="section-title">Three tiers. Your edit.</h2>
+                        <h2 className="section-title">Pricing coming soon.</h2>
                         <p className="section-desc">
-                            All packages deliver organized raw footage for your production company to edit. We handle the shoot — you handle the cut. Click any package to see the full cost breakdown.
+                            We&apos;re refining the scope and package options for the updated shoot format. Final pricing will be shared after our Monday planning call — everything else on this page reflects the current production approach.
                         </p>
-                    </div>
-
-                    <div className="packages-grid">
-                        {PACKAGES.map((pkg) => {
-                            const total = pkg.base + addonTotal;
-                            const isExpanded = expandedPkg === pkg.id;
-                            const crewTotal = pkg.crew.reduce((s, c) => s + c.amount, 0);
-                            const postTotal = pkg.post.reduce((s, p) => s + (p.free ? 0 : p.amount), 0);
-                            const gearTotal = pkg.gear.reduce((s, g) => s + (g.free ? 0 : g.amount), 0);
-
-                            return (
-                                <div
-                                    key={pkg.id}
-                                    className={`pkg-card ${pkg.recommended ? 'recommended' : ''}`}
-                                    onClick={() => setExpandedPkg(isExpanded ? null : pkg.id)}
-                                >
-                                    {pkg.recommended && <div className="pkg-badge">Recommended</div>}
-                                    <div className="pkg-name">{pkg.name}</div>
-                                    <div className="pkg-tagline">{pkg.tagline}</div>
-
-                                    <div className="pkg-price-row">
-                                        <span className="pkg-amount">{fmt(total)}</span>
-                                        {addonTotal > 0 && <span className="pkg-note">incl. add-ons</span>}
-                                    </div>
-
-                                    <ul className="pkg-features">
-                                        {pkg.included.map((f, i) => <li key={i}>{f}</li>)}
-                                        {(pkg.bonuses || []).map((b, i) => (
-                                            <li key={`b${i}`} className="bonus">{b.label} — {b.detail}</li>
-                                        ))}
-                                        {pkg.excluded.map((f, i) => <li key={`x${i}`} className="excluded">{f}</li>)}
-                                    </ul>
-
-                                    {/* Cost Breakdown Toggle */}
-                                    <button
-                                        type="button"
-                                        className="cost-toggle"
-                                        onClick={(e) => { e.stopPropagation(); setExpandedPkg(isExpanded ? null : pkg.id); }}
-                                    >
-                                        <span className={`cost-toggle-arrow ${isExpanded ? 'open' : ''}`}>▸</span>
-                                        {isExpanded ? 'Hide' : 'View'} Cost Breakdown
-                                    </button>
-
-                                    <div className={`cost-breakdown ${isExpanded ? 'open' : ''}`} onClick={(e) => e.stopPropagation()}>
-                                        <div className="cost-section">
-                                            <div className="cost-section-label">Crew — Shoot Day</div>
-                                            {pkg.crew.map((c, i) => (
-                                                <div key={i} className="cost-row">
-                                                    <div className="cost-item">{c.label}<span className="cost-detail">{c.detail}</span></div>
-                                                    <div className="cost-amount">{fmt(c.amount)}</div>
-                                                </div>
-                                            ))}
-                                            <div className="cost-row total">
-                                                <div className="cost-item">Crew Total</div>
-                                                <div className="cost-amount">{fmt(crewTotal)}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="cost-section">
-                                            <div className="cost-section-label">Post-Production</div>
-                                            {pkg.post.map((p, i) => (
-                                                <div key={i} className="cost-row">
-                                                    <div className="cost-item">{p.label}<span className="cost-detail">{p.detail}</span></div>
-                                                    <div className={`cost-amount ${p.free ? 'free' : ''}`}>{p.free ? 'Included' : fmt(p.amount)}</div>
-                                                </div>
-                                            ))}
-                                            <div className="cost-row total">
-                                                <div className="cost-item">Post Total</div>
-                                                <div className="cost-amount">{fmt(postTotal)}</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="cost-section">
-                                            <div className="cost-section-label">Equipment</div>
-                                            {pkg.gear.map((g, i) => (
-                                                <div key={i} className="cost-row">
-                                                    <div className="cost-item">{g.label}<span className="cost-detail">{g.detail}</span></div>
-                                                    <div className={`cost-amount ${g.free ? 'free' : ''}`}>{g.free ? 'Included' : fmt(g.amount)}</div>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {addonTotal > 0 && (
-                                            <div className="cost-section">
-                                                <div className="cost-section-label">Add-Ons</div>
-                                                {ADDONS.filter(a => addons[a.id]).map((a, i) => (
-                                                    <div key={i} className="cost-row">
-                                                        <div className="cost-item">{a.label}</div>
-                                                        <div className="cost-amount">+{fmt(a.price)}</div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-
-                                        <div className="cost-section" style={{ borderTop: `1px solid var(--border-strong)`, paddingTop: 14, marginTop: 6 }}>
-                                            <div className="cost-row total" style={{ borderTop: 'none', paddingTop: 0, marginTop: 0 }}>
-                                                <div className="cost-item">Package Total</div>
-                                                <div className="cost-amount">{fmt(total)}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* ── Add-Ons ── */}
-                    <div className="addons-section">
-                        <div className="section-header" style={{ marginBottom: 24 }}>
-                            <div className="section-label">Optional Add-Ons</div>
-                            <p className="section-desc">Toggle these to add to any package. Prices update in real-time across all tiers.</p>
-                        </div>
-
-                        {ADDONS.map((addon) => (
-                            <div
-                                key={addon.id}
-                                className={`addon-row ${addons[addon.id] ? 'active' : ''}`}
-                                onClick={() => toggleAddon(addon.id)}
-                            >
-                                <div className="addon-left">
-                                    <div className={`addon-switch ${addons[addon.id] ? 'on' : ''}`}>
-                                        <div className="addon-knob" />
-                                    </div>
-                                    <div>
-                                        <div className="addon-name">{addon.label}</div>
-                                        <div className="addon-detail">{addon.detail}</div>
-                                    </div>
-                                </div>
-                                <div className="addon-price">+{fmt(addon.price)}</div>
-                            </div>
-                        ))}
                     </div>
 
                     {/* ── Delivery Note ── */}
@@ -1002,8 +870,8 @@ export default function EasyDentureProposal() {
                         <div className="next-steps-title">Next steps</div>
                         <div className="next-steps-grid">
                             <div className="next-step">
-                                <strong>01. Quick call</strong>
-                                <span>15-min Google Meet to walk through the options, answer questions about our process, and confirm March 27 availability.</span>
+                                <strong>01. Monday planning call</strong>
+                                <span>Walk through the updated scope, finalize crew and package options, and confirm the shoot date.</span>
                             </div>
                             <div className="next-step">
                                 <strong>02. Confirm your package</strong>
