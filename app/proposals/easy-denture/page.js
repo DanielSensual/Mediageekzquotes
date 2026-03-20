@@ -683,7 +683,7 @@ export default function EasyDentureProposal() {
                         Capture.<br /><em>Demonstrate.</em><br />Deliver.
                     </h1>
                     <p className="hero-subtitle">
-                        A full day of cinematic video production capturing the Easy Denture mobile dentistry experience — patient fittings, product demonstrations, and expert interviews across multiple locations.
+                        Cinematic video production capturing the Easy Denture mobile dentistry experience — from Sonya&apos;s car arrival to patient fittings and real testimonials, all in one morning.
                     </p>
 
                     <div className="hero-meta">
@@ -694,13 +694,13 @@ export default function EasyDentureProposal() {
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Shoot Date</div>
-                            <div className="hero-stat-value">March 27</div>
-                            <div className="hero-stat-detail">8:00 AM – 5:30 PM</div>
+                            <div className="hero-stat-value">TBD</div>
+                            <div className="hero-stat-detail">Half-day — wrap by lunch</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Format</div>
-                            <div className="hero-stat-value">Multi-Location</div>
-                            <div className="hero-stat-detail">Homes + dentist office</div>
+                            <div className="hero-stat-value">Car + Apartment</div>
+                            <div className="hero-stat-detail">Sonya arrival → patient fittings</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Deliverable</div>
@@ -724,24 +724,24 @@ export default function EasyDentureProposal() {
 
                     <div className="scope-grid">
                         <div className="scope-card">
+                            <div className="scope-icon">🚗</div>
+                            <h3>Sonya — Car Segment</h3>
+                            <p>Film Sonya in her car talking about Easy Denture as she drives up. A few additional lines as she walks up to the apartment — natural, on-the-move energy.</p>
+                        </div>
+                        <div className="scope-card">
                             <div className="scope-icon">🏠</div>
-                            <h3>Patient Home Visits</h3>
-                            <p>Capture the Easy Denture fitting process in real patient apartments — demonstrating the mobile dentistry experience in action. Close-ups on the product, the process, and patient reactions.</p>
+                            <h3>Apartment Fittings</h3>
+                            <p>Capture the Easy Denture fitting process with two patients and two dentists inside the apartment — close-ups on the product, the process, and real patient reactions.</p>
                         </div>
                         <div className="scope-card">
                             <div className="scope-icon">🎙️</div>
-                            <h3>Patient Testimonials</h3>
-                            <p>Quick, natural sound bites from patients about their experience with the product. Authentic, on-location reactions — not staged studio interviews.</p>
-                        </div>
-                        <div className="scope-card">
-                            <div className="scope-icon">🚗</div>
-                            <h3>Mobile B-Roll</h3>
-                            <p>Driving up to locations, walking through doors, loading equipment — visual storytelling that emphasizes the &quot;mobile&quot; in mobile dentistry.</p>
+                            <h3>Sound Bites</h3>
+                            <p>Quick lines from each patient and each dentist after the fitting. Authentic reactions — &quot;I&apos;m excited to eat lunch with my new dentures today!&quot; style moments.</p>
                         </div>
                         <div className="scope-card">
                             <div className="scope-icon">🎬</div>
-                            <h3>Expert Interview</h3>
-                            <p>Interview-style segment at the dentist office with the inventor discussing the product, its benefits, and the vision behind Easy Denture. Sit-down, multi-cam format.</p>
+                            <h3>B-Roll + Drone</h3>
+                            <p>Driving up, walking in, patient smiling in the mirror, exterior establishing shots. Drone footage available as an optional add-on for aerial establishing shots.</p>
                         </div>
                     </div>
                 </section>
@@ -752,53 +752,42 @@ export default function EasyDentureProposal() {
                 <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Production Schedule</div>
-                        <div className="section-question">March 27, 2026</div>
-                        <h2 className="section-title">Full day. Multiple locations.</h2>
+                        <div className="section-question">Date TBD</div>
+                        <h2 className="section-title">Half day. One location.</h2>
                         <p className="section-desc">
-                            Structured to maximize shooting time at each location while allowing for natural travel between patient homes and the dentist office. The inventor&apos;s demonstration drives the day.
+                            Compact morning shoot — Sonya&apos;s car segment first, then straight into the apartment for patient fittings and sound bites. Wrap by lunchtime.
                         </p>
                     </div>
 
                     <div className="timeline">
                         <div className="timeline-block">
-                            <div className="timeline-time">8:00 – 8:30 AM</div>
-                            <div className="timeline-label">Load & Travel</div>
-                            <div className="timeline-desc">Load gear, confirm shot list, travel to first patient location. Capture driving/travel B-roll en route.</div>
-                            <div className="timeline-location">📍 En Route</div>
+                            <div className="timeline-time">~8:30 AM</div>
+                            <div className="timeline-label">Sonya — Car + Walk-Up</div>
+                            <div className="timeline-desc">Film Sonya in her car talking about Easy Denture as she drives to the apartment. Capture a couple of lines as she walks up to the building. Driving B-roll and exterior establishing shots.</div>
+                            <div className="timeline-location">📍 Sonya&apos;s Vehicle + Exterior</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">8:30 – 10:30 AM</div>
-                            <div className="timeline-label">Patient Home #1 — Fitting + Testimonial</div>
-                            <div className="timeline-desc">Set up at first patient apartment. Capture the Easy Denture fitting process, product demo with inventor, and a brief patient testimonial. Exteriors and &quot;walking in&quot; B-roll.</div>
-                            <div className="timeline-location">📍 Patient Apartment</div>
+                            <div className="timeline-time">~9:15 AM</div>
+                            <div className="timeline-label">Setup at Apartment</div>
+                            <div className="timeline-desc">Set up lighting and audio inside the apartment before patients arrive at 10 AM. Camera positions for fitting coverage + testimonial angles.</div>
+                            <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">10:30 – 11:00 AM</div>
-                            <div className="timeline-label">Travel + B-Roll</div>
-                            <div className="timeline-desc">Drive to second location. Capture additional mobile B-roll — driving shots, neighborhood establishing shots, loading/unloading gear.</div>
-                            <div className="timeline-location">📍 En Route</div>
+                            <div className="timeline-time">10:00 – 11:00 AM</div>
+                            <div className="timeline-label">Patient 1 + Dentist 1 — Fitting</div>
+                            <div className="timeline-desc">Capture the full Easy Denture fitting process. Close-ups on the product, the process, and patient reactions. After fitting — quick sound bites from patient and dentist.</div>
+                            <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">11:00 AM – 1:00 PM</div>
-                            <div className="timeline-label">Patient Home #2 — Fitting + Testimonial</div>
-                            <div className="timeline-desc">Second patient location. Same coverage — fitting process, inventor demo, patient sound bite, exterior B-roll. Adjust lighting for new environment.</div>
-                            <div className="timeline-location">📍 Patient Apartment</div>
+                            <div className="timeline-time">11:00 AM – 12:00 PM</div>
+                            <div className="timeline-label">Patient 2 + Dentist 2 — Fitting</div>
+                            <div className="timeline-desc">Second fitting — same coverage. After fitting, capture a couple of lines from patient and dentist. B-roll: patient smiling in mirror, product close-ups, candid moments.</div>
+                            <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">1:00 – 2:00 PM</div>
-                            <div className="timeline-label">Lunch + Travel to Office</div>
-                            <div className="timeline-desc">Break for lunch. Travel to dentist office location. Review morning footage on cards, confirm afternoon shot list.</div>
-                        </div>
-                        <div className="timeline-block">
-                            <div className="timeline-time">2:00 – 4:30 PM</div>
-                            <div className="timeline-label">Dentist Office — Interview + Product Demo</div>
-                            <div className="timeline-desc">Set up interview lighting. Sit-down interview segment with the inventor on the product and vision. Additional product demonstration footage in the clinical setting. Office B-roll.</div>
-                            <div className="timeline-location">📍 Dentist Office</div>
-                        </div>
-                        <div className="timeline-block">
-                            <div className="timeline-time">4:30 – 5:30 PM</div>
+                            <div className="timeline-time">~12:00 PM</div>
                             <div className="timeline-label">Pickup Shots + Wrap</div>
-                            <div className="timeline-desc">Any remaining B-roll, detail product close-ups, or additional sound bites. Pack gear, verify all media is backed up.</div>
+                            <div className="timeline-desc">Any remaining B-roll, detail product close-ups, or additional sound bites. Drone footage if included. Pack gear, verify all media is backed up.</div>
                         </div>
                     </div>
                 </section>
