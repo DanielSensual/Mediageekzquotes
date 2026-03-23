@@ -1130,9 +1130,69 @@ export default function EasyDentureProposal() {
                         </div>
                     </div>
 
-                    <div className="cta-row" style={{ maxWidth: 640, marginTop: 28 }}>
-                        <a href="tel:321-666-5228" className="cta-btn">📞 Call to Confirm</a>
-                        <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Shoot%20%E2%80%94%20Confirmed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20Easy%20Denture%20shoot%20at%20%244%2C070.%0A%0A%5B%20%5D%20Add%20Drone%20(%2B%24400)%0A%0AThanks!%0AElizabeth" className="meeting-btn">✉ Send Confirmation</a>
+                    <div style={{ maxWidth: 640, marginTop: 32 }}>
+                        {/* Square Payment */}
+                        <div style={{ padding: '28px 24px', border: '1px solid rgba(232, 98, 44, 0.25)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(232, 98, 44, 0.06), transparent 50%), var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 12 }}>Secure Payment via Square</div>
+                            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 20, lineHeight: 1.7 }}>
+                                Pay your 50% deposit to lock the shoot date. Card, Apple Pay, and Google Pay accepted.
+                            </div>
+
+                            <a
+                                href="/checkout?amount=2035&desc=Easy%20Denture%20%E2%80%94%2050%25%20Production%20Deposit"
+                                style={{
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                                    width: '100%', padding: '18px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
+                                    background: 'linear-gradient(135deg, var(--orange), #f59e0b)',
+                                    color: 'var(--white)', fontFamily: "'Outfit', sans-serif",
+                                    fontSize: 16, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                    textDecoration: 'none',
+                                    boxShadow: '0 8px 28px rgba(232, 98, 44, 0.35)',
+                                    transition: 'transform 0.2s, box-shadow 0.2s',
+                                }}
+                            >
+                                💳 Pay $2,035 Deposit Now
+                            </a>
+
+                            <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                                <a
+                                    href="/checkout?amount=4070&desc=Easy%20Denture%20%E2%80%94%20Full%20Production%20Payment"
+                                    style={{
+                                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                                        padding: '12px 16px', border: '1px solid rgba(45, 212, 191, 0.25)', borderRadius: 12,
+                                        background: 'rgba(45, 212, 191, 0.06)',
+                                        color: 'var(--teal)', fontFamily: "'Outfit', sans-serif",
+                                        fontSize: 12, fontWeight: 600, textDecoration: 'none',
+                                        transition: 'background 0.2s',
+                                    }}
+                                >
+                                    Pay Full $4,070
+                                </a>
+                                <a
+                                    href="/checkout?amount=4470&desc=Easy%20Denture%20%E2%80%94%20Full%20Production%20%2B%20Drone"
+                                    style={{
+                                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                                        padding: '12px 16px', border: '1px solid rgba(100, 116, 139, 0.15)', borderRadius: 12,
+                                        background: 'rgba(255, 255, 255, 0.02)',
+                                        color: 'var(--muted)', fontFamily: "'Outfit', sans-serif",
+                                        fontSize: 12, fontWeight: 600, textDecoration: 'none',
+                                        transition: 'background 0.2s',
+                                    }}
+                                >
+                                    Pay $4,470 (w/ Drone)
+                                </a>
+                            </div>
+
+                            <div style={{ marginTop: 16, fontSize: 11, color: 'rgba(148, 163, 184, 0.5)' }}>
+                                🔒 Payments processed securely via Square · Card, Apple Pay, Google Pay
+                            </div>
+                        </div>
+
+                        <div style={{ textAlign: 'center', marginTop: 16 }}>
+                            <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Shoot%20%E2%80%94%20Question&body=Hey%20Daniel%2C%0A%0A" style={{ color: 'var(--muted-2)', fontSize: 12, textDecoration: 'none' }}>
+                                Have questions? ✉ Email us
+                            </a>
+                        </div>
                     </div>
                 </section>
 
