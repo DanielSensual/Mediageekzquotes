@@ -651,14 +651,136 @@ export default function ThreadLink() {
                         </div>
                     </div>
                 </section>
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Creative Direction</div>
+                        <div className="section-question">From our meeting — the vision for both films</div>
+                        <h2 className="section-title">Organic. Cinematic. Real.</h2>
+                        <p className="section-desc">
+                            Not a generic corporate promo. These films need to feel human — like you&apos;re watching a story, not a sales pitch. The brand is there, but it&apos;s never shoved in your face. Think Publix commercials — you don&apos;t feel &quot;come buy groceries.&quot; You feel family. Quality. Connection.
+                        </p>
+                    </div>
+
+                    {/* Creative Pillars */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, marginBottom: 48 }}>
+                        {[
+                            { icon: '🎬', title: 'Screen to Street', desc: 'The magic transition — what\'s happening on the computer comes alive in the real world. Monster truck on screen → monster truck driving in real life. The brand in action, not just in pixels.' },
+                            { icon: '🏠', title: 'Publix Energy', desc: 'Subtle brand placement. Logo on the coffee cup, brand colors in the background, tagline on the wall — never the hero of the shot, always part of the environment. You feel it without being told.' },
+                            { icon: '🤝', title: 'Human Connection', desc: 'Real conversations. Real handshakes. Team sitting with clients, not performing for camera. The authenticity that makes people trust you before they ever call.' },
+                            { icon: '🚀', title: 'Built for Entrepreneurs', desc: 'Not every business. Entrepreneurs ready to scale — ready to break through the glass ceiling. The ones who want discovery, branding, web, SEO, ads, social — the full stack.' },
+                            { icon: '🎨', title: 'Creative, Not Corporate', desc: 'Apple Pencil on iPad. Wireframes on whiteboards. Logo iterations on screen. Show the craft — this is a creative agency, not a suit-and-tie consulting firm.' },
+                            { icon: '♻️', title: 'We Don\'t Drop You Off', desc: 'The full journey: 3-4 hour discovery → branding → website → SEO → ads → social media. Uniformed. Every touchpoint connected. The website actually converts, actually works for their business.' },
+                        ].map((p, i) => (
+                            <div key={i} style={{ padding: '24px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 28, marginBottom: 12 }}>{p.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 600, color: 'var(--white)', marginBottom: 8 }}>{p.title}</div>
+                                <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>{p.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Key Quote */}
+                    <div style={{ padding: '32px', border: '1px solid rgba(232, 98, 44, 0.15)', borderRadius: 20, background: 'rgba(232, 98, 44, 0.04)', borderLeft: '3px solid var(--orange)', marginBottom: 16 }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
+                            &quot;Whatever we&apos;re doing creatively, you see it in the real world. I want that connection. The brand in action — textile, tangible, actually happening. Not AI-generated stories. Real ones.&quot;
+                        </div>
+                        <div style={{ marginTop: 16, fontSize: 12, color: 'var(--muted-2)', fontWeight: 600 }}>— From the creative meeting</div>
+                    </div>
+                </section>
+
+                <div className="divider" />
+
+                {/* ═══ STORYBOARD / SCRIPT ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Storyboard &amp; Script</div>
+                        <div className="section-question">Beat-by-beat narrative for each film</div>
+                        <h2 className="section-title">The story we&apos;re telling</h2>
+                        <p className="section-desc">
+                            Each video follows a narrative arc — not a list of shots, but a story with emotional beats. Organic pacing, cinematic quality, human connection throughout.
+                        </p>
+                    </div>
+
+                    {/* Video 1 Script */}
+                    <div style={{ marginBottom: 64 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(232, 98, 44, 0.12)', border: '1px solid rgba(232, 98, 44, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                                📹 Video 1 — Local Market
+                            </div>
+                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Winter Garden Community Film</div>
+                        </div>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(232, 98, 44, 0.3)', background: 'rgba(232, 98, 44, 0.03)', borderRadius: '0 12px 12px 0' }}>
+                            <strong style={{ color: 'var(--orange)' }}>Tone:</strong> Warm, organic, family-friendly. Like a Publix commercial — you feel quality, community, and trust. The brand is in the background, never the pitch.
+                        </div>
+
+                        <div style={{ display: 'grid', gap: 12 }}>
+                            {[
+                                { beat: 'OPEN', title: 'Morning in Winter Garden', desc: 'Drone rises over downtown at golden hour. String lights still on from the night before. A family walks past the Garden Theatre. You hear ambient sound — birds, distant laughter, a door chime. This is home.', time: '0:00–0:08' },
+                                { beat: 'ACT 1', title: 'The People', desc: 'A barista hands over a coffee — logo on the cup is subtle, in the background. A shop owner flips her "OPEN" sign. Kids run past a mural. The team walks through Plant Street, waving at someone they know. It\'s all real. Nobody\'s performing.', time: '0:08–0:20' },
+                                { beat: 'TRANSITION', title: 'Screen to Street', desc: 'CUT TO: a hand scrolling through a website on an iPad in a coffee shop. The website shows a local business storefront. MATCH CUT: we\'re now standing in front of that actual storefront. The digital becomes real. The brand made this happen.', time: '0:20–0:28' },
+                                { beat: 'ACT 2', title: 'The Work in Action', desc: 'Team sitting with a local entrepreneur at their business — not in a boardroom, at their shop counter. Laughing, pointing at a laptop showing their new branding. The client\'s kid runs through. It\'s organic. You see the logo on a business card being handed over. Subtle. Real.', time: '0:28–0:42' },
+                                { beat: 'MONTAGE', title: 'The Community Texture', desc: 'Quick cuts: a hand-lettered chalkboard menu, a dog on a leash, fresh produce at the market, a couple holding hands walking past storefronts, the team photographing a local restaurant. Every frame has warmth. The brand colors appear — on signage, on a tote bag, on a mug — but never as the subject.', time: '0:42–0:55' },
+                                { beat: 'CLOSE', title: 'We\'re Here', desc: 'The team walks back toward the office at sunset. One of them turns back and waves. Drone pulls back to reveal the full downtown. Super: "Threadlinks Creative — Winter Garden, FL" — clean, minimal, on screen for 3 seconds. No CTA. No "call us." Just the name and the place. They\'ll remember.', time: '0:55–1:05' },
+                            ].map((b, i) => (
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(232, 98, 44, 0.1)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 60, textAlign: 'center' }}>
+                                        <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'var(--orange)', textTransform: 'uppercase', marginBottom: 4 }}>{b.beat}</div>
+                                        <div style={{ fontSize: 10, color: 'var(--muted-3)', fontFamily: "'Outfit', sans-serif" }}>{b.time}</div>
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)', marginBottom: 4 }}>{b.title}</div>
+                                        <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>{b.desc}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Video 2 Script */}
+                    <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.1)', border: '1px solid rgba(45, 212, 191, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                                📹 Video 2 — National Level
+                            </div>
+                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Creative Agency Film</div>
+                        </div>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(45, 212, 191, 0.3)', background: 'rgba(45, 212, 191, 0.03)', borderRadius: '0 12px 12px 0' }}>
+                            <strong style={{ color: 'var(--teal)' }}>Tone:</strong> Premium, cinematic, but still human. Show the creative process — the craft, the tools, the team. This is a creative agency that takes entrepreneurs from zero to scale. Not a brand factory — a partner.
+                        </div>
+
+                        <div style={{ display: 'grid', gap: 12 }}>
+                            {[
+                                { beat: 'OPEN', title: 'The Craft', desc: 'TIGHT: Apple Pencil touches iPad screen. A logo sketch comes alive. Pull back to reveal a designer in a warm studio, coffee within reach, natural light. It\'s quiet. Intentional. This is where ideas start.', time: '0:00–0:08' },
+                                { beat: 'ACT 1', title: 'Discovery', desc: 'The team sits across from a client at a table — not a pitch, a discovery. 3-4 hours of "what does your business actually need?" Whiteboard behind them covered in strategy. Laptop open showing wireframes. You feel the depth. This isn\'t a quick-fix agency.', time: '0:08–0:22' },
+                                { beat: 'TRANSITION', title: 'Screen to Street (2)', desc: 'OTS: a designer finishes a website mockup on screen. The client\'s product is right there in the design. MATCH CUT: we\'re at the client\'s actual location — an entrepreneur standing in front of their business, the new logo on the window. Digital to tangible. What was on screen is now in the world.', time: '0:22–0:30' },
+                                { beat: 'ACT 2', title: 'Full Stack', desc: 'QUICK CUTS synced to music: Apple Pencil sketching a logo → final logo on a business card. Wireframe on screen → live website on a phone. Camera filming a product → the ad playing on Instagram. SEO dashboard showing rankings climbing. Social media post getting liked. Each cut shows: they didn\'t just design it, they deployed it. It\'s working.', time: '0:30–0:48' },
+                                { beat: 'BRAND IN ACTION', title: 'The Real World Connection', desc: 'The client\'s business is now alive — customers walking in, the new sign on the building, branded packaging being handed to a customer. The team is there, photographing, filming, supporting. They didn\'t drop them off — they\'re still building. Logo on the cup. Brand on the apron. It\'s everywhere, but it\'s natural.', time: '0:48–1:00' },
+                                { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. The business grew. Not a vendor relationship — a partnership. Pull back to a wide of the team at their desks, golden hour light. Super: "Threadlinks Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:00–1:10' },
+                            ].map((b, i) => (
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 60, textAlign: 'center' }}>
+                                        <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'var(--teal)', textTransform: 'uppercase', marginBottom: 4 }}>{b.beat}</div>
+                                        <div style={{ fontSize: 10, color: 'var(--muted-3)', fontFamily: "'Outfit', sans-serif" }}>{b.time}</div>
+                                    </div>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)', marginBottom: 4 }}>{b.title}</div>
+                                        <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>{b.desc}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <div className="divider" />
 
                 {/* ═══ VISION — REFERENCE VIDEO ═══ */}
                 <section className="video-section reveal">
                     <div className="section-header">
-                        <div className="section-label">Vision & Direction</div>
-                        <h2 className="section-title">The look we&apos;re going for</h2>
+                        <div className="section-label">Reference</div>
+                        <h2 className="section-title">Cinematic quality benchmark</h2>
                         <p className="section-desc">
-                            This is the energy and cinematic quality we&apos;re aiming for. Watch it — this is the caliber of film we&apos;re building together.
+                            The production value we&apos;re matching — but with more heart, more connection, and more authenticity than a typical agency reel.
                         </p>
                     </div>
                     <div className="video-wrap">
@@ -670,7 +792,7 @@ export default function ThreadLink() {
                         />
                     </div>
                     <div className="video-caption">
-                        <span>Style Reference</span> — Creative Agency Film by SOCL
+                        <span>Quality Reference</span> — Our films will have this production value, but with real human connection, not just style
                     </div>
                 </section>
 
@@ -678,10 +800,10 @@ export default function ThreadLink() {
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Shot List</div>
-                        <div className="section-question">Inspired by the reference above</div>
-                        <h2 className="section-title">How we&apos;re building each video</h2>
+                        <div className="section-question">From the storyboard — every shot planned</div>
+                        <h2 className="section-title">The shots that make it real</h2>
                         <p className="section-desc">
-                            Every shot planned with intention. Here&apos;s the breakdown for both films — mapped from the SOCL reference and tailored to your agency and Winter Garden.
+                            Based on the &quot;Screen to Street&quot; concept — every shot bridges the creative process to the real-world impact. Organic, never staged.
                         </p>
                     </div>
 
@@ -696,21 +818,21 @@ export default function ThreadLink() {
 
                         <div style={{ display: 'grid', gap: 10 }}>
                             {[
-                                { shot: 'Hero Walk-In', type: 'Gimbal', desc: 'Team lead walks through downtown Winter Garden — Plant Street, local shops, familiar storefronts. Establishes "we\'re from here."' },
-                                { shot: 'Street-Level Establishing', type: 'Drone + Wide', desc: 'Aerial reveal of downtown Winter Garden at golden hour. Tree-lined streets, brick buildings, community energy from above.' },
-                                { shot: 'Local Landmark Montage', type: 'Slider + Gimbal', desc: 'Quick cuts of recognizable Winter Garden spots — Garden Theatre marquee, Plant Street Market, West Orange Trail, lakefront parks.' },
-                                { shot: 'Community Faces', type: 'Medium Close-Up', desc: 'Real locals in their element — shop owners waving, families at the farmer\'s market, people on the trail. Warm, authentic.' },
-                                { shot: 'Agency Storefront / Office', type: 'Dolly Push-In', desc: 'Cinematic reveal of the agency\'s home base. Slow push-in from exterior to interior — roots in the community.' },
-                                { shot: 'Team in the Neighborhood', type: 'Handheld + Gimbal', desc: 'Your team walking through town, grabbing coffee, interacting with locals. Natural, not staged. You\'re part of Winter Garden.' },
-                                { shot: 'Golden Hour B-Roll', type: 'Various', desc: 'Warm light hitting brick facades, shadows on sidewalks, string lights at dusk. The cinematic texture that makes Winter Garden glow.' },
-                                { shot: 'Client Handshake / Meeting', type: 'Medium Shot', desc: 'Team greeting a local client at their business. The human connection — personal, not corporate.' },
-                                { shot: 'Text-Safe Wide Shots', type: 'Static / Tripod', desc: 'Clean compositions with negative space for social media text overlays. Sky, walls, open streetscapes.' },
-                                { shot: 'Closing Moment', type: 'Drone Pull-Back', desc: 'Final aerial pulling back from the team on Plant Street, revealing the full Winter Garden skyline. "This is where we work."' },
+                                { shot: 'Golden Hour Drone Rise', type: 'Drone', desc: 'Downtown Winter Garden at sunrise/sunset. String lights, tree canopy, the Garden Theatre sign. Establishes warmth and place.' },
+                                { shot: 'Community Walk — Families', type: 'Gimbal', desc: 'Family walking past storefronts at Plant Street Market. Kids laughing, dog on a leash. Organic, not directed.' },
+                                { shot: 'Branded Coffee Cup', type: 'Insert / Macro', desc: 'Logo-on-cup moment — someone takes a sip at a local café. Brand is there but it\'s not the subject. Publix energy.' },
+                                { shot: 'Local Shop Owner Wave', type: 'Medium', desc: 'A real shopkeeper flipping their OPEN sign. Team member waves through the window. Community connection.' },
+                                { shot: 'Screen to Street — Website', type: 'Match Cut', desc: 'iPad showing a client\'s website → match cut to standing in front of that actual business. Digital becomes real.' },
+                                { shot: 'Client Meeting at Their Shop', type: 'Handheld', desc: 'Team and local entrepreneur at the shop counter — laughing, pointing at a laptop with their new branding. Kid runs through. Organic chaos.' },
+                                { shot: 'Business Card Handover', type: 'Close-Up', desc: 'New branded business card being handed to a customer. You see the logo, the design work — it\'s tangible. The brand in textile.' },
+                                { shot: 'Farmer\'s Market B-Roll', type: 'Gimbal + Slider', desc: 'Fresh produce, hand-lettered signs, families browsing. Intercut with team photographing a client\'s booth.' },
+                                { shot: 'Sunset Walk Back', type: 'Gimbal', desc: 'Team walking back toward the office at golden hour. One turns and waves. Natural, warm, unscripted.' },
+                                { shot: 'Drone Pull-Back Close', type: 'Drone', desc: 'Final wide — revealing the full downtown from above. Super: "Threadlinks Creative — Winter Garden, FL." 3 seconds. Cut to black.' },
                             ].map((s, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(232, 98, 44, 0.1)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(232, 98, 44, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--orange)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                                             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
                                             <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(45, 212, 191, 0.2)', background: 'rgba(45, 212, 191, 0.06)' }}>{s.type}</span>
                                         </div>
@@ -727,26 +849,26 @@ export default function ThreadLink() {
                             <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.1)', border: '1px solid rgba(45, 212, 191, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                                 📹 Video 2 — National Level
                             </div>
-                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Agency Brand Film</div>
+                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Creative Agency Film</div>
                         </div>
 
                         <div style={{ display: 'grid', gap: 10 }}>
                             {[
-                                { shot: 'The Walking Hero', type: 'Gimbal', desc: 'Team lead walks through the agency space — confident, purposeful. Shallow depth of field, rack focus reveals. Sets the premium tone instantly.' },
-                                { shot: 'Team Collaboration', type: 'Slider', desc: 'Smooth lateral moves across team brainstorming at a table — pointing at screens, sketching ideas, high-fives. The creative energy.' },
-                                { shot: 'Macro Equipment Close-Ups', type: 'Macro / Slider', desc: 'Extreme close-ups of camera sensors, lenses being mounted, LED pixels, keyboard keys typing. "Gear porn" that signals quality.' },
-                                { shot: 'Screen Work in Action', type: 'OTS / Close-Up', desc: 'Over-the-shoulder shots of design work, edit timelines, social media dashboards. Screens glowing in a dark environment.' },
-                                { shot: 'Quick-Cut Rhythm Montage', type: 'Various', desc: 'Fast-paced 1-2 second cuts synced to the music beat — coffee pour, mouse click, whiteboard sketch, handshake, monitor glow. Builds energy.' },
-                                { shot: 'Team Portraits', type: 'Static / Tripod', desc: 'Cinematic sit-down portraits of each team member. Dramatic lighting — soft key, hard edge. Each person gets their hero moment.' },
-                                { shot: 'Meeting Room Power Shot', type: 'Dolly Push-In', desc: 'Slow push into a glass conference room where the team is presenting. Backlit, shallow DOF. Corporate but not boring.' },
-                                { shot: 'The "Eureka" Moment', type: 'Handheld', desc: 'Organic, slightly shaky capture of a genuine team reaction — the win, the breakthrough. Authenticity in the chaos.' },
-                                { shot: 'Light Leak Transitions', type: 'In-Camera + Post', desc: 'Orange/teal light leaks or whip pans between sequences. Bridges the high-energy cuts with cinematic style.' },
-                                { shot: 'Logo Resolve', type: 'Static / Motion Graphics', desc: 'Clean ending — agency logo animates onto a dark background. Minimal. Powerful. The final frame that sticks.' },
+                                { shot: 'Apple Pencil on iPad', type: 'Macro', desc: 'Extreme tight: stylus meets screen, a logo comes to life. Pull back to reveal the designer in a cozy studio. Coffee steam. Natural light. This is where it starts.' },
+                                { shot: 'Discovery Meeting', type: 'Medium / OTS', desc: 'Team across from client at a table. Whiteboard covered in strategy behind them. 3-4 hour discovery — you see the depth. This isn\'t a 30-minute consult.' },
+                                { shot: 'Wireframe Close-Up', type: 'Macro / Slider', desc: 'Tight on screen: wireframe for a client\'s website. User flows, component layouts. The architecture before the beauty.' },
+                                { shot: 'Screen to Street — Logo', type: 'Match Cut', desc: 'Logo design on screen → match cut to that logo on a real building sign, on a coffee cup, on a business card. Digital becomes physical.' },
+                                { shot: 'Full-Stack Montage', type: 'Quick Cuts', desc: 'Apple Pencil → business card. Wireframe → live site on phone. Camera filming → ad on Instagram. SEO dashboard climbing. Each cut = they deployed it, and it\'s working.' },
+                                { shot: 'Client\'s Business Alive', type: 'Gimbal', desc: 'Walk through the client\'s transformed business — customers at the counter, branded packaging, new signage. The team is there too, filming, supporting. They didn\'t leave.' },
+                                { shot: 'Branded Elements in Environment', type: 'Insert', desc: 'Logo on the apron. Brand colors on the wall. Tagline on the website open on a laptop. Never the hero — always the texture. Starbucks-cup energy.' },
+                                { shot: 'Analytics Review — Both Smiling', type: 'Medium', desc: 'Team and client looking at a laptop together. Numbers going up. Both genuinely happy. Partnership, not a vendor call.' },
+                                { shot: 'Team at Work — Golden Hour', type: 'Wide / Slider', desc: 'Pull back to the full team at their desks. Warm light. Multiple screens showing active projects. The engine behind it all.' },
+                                { shot: 'Logo Resolve', type: 'Motion Graphics', desc: '"Threadlinks Creative — Full-Stack Creative Agency" — clean on black. 3 seconds. No CTA. Confidence. Cut to black.' },
                             ].map((s, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(45, 212, 191, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--teal)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
                                     <div style={{ flex: 1 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                                             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
                                             <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(232, 98, 44, 0.2)', background: 'rgba(232, 98, 44, 0.06)' }}>{s.type}</span>
                                         </div>
