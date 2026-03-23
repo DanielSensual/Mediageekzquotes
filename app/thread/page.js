@@ -82,8 +82,8 @@ export default function ThreadLink() {
 
                 .cin-hero-bg {
                     position: absolute; inset: 0;
-                    background: url('/thread/production-bts.png') center/cover no-repeat;
-                    filter: brightness(0.3) saturate(1.2);
+                    background: url('/thread/community.png') center/cover no-repeat;
+                    filter: brightness(0.25) saturate(1.3);
                     transform: scale(1.05);
                     transition: transform 0.1s linear;
                 }
@@ -271,6 +271,51 @@ export default function ThreadLink() {
                 }
 
                 .concept-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+                /* ── Treatment Gallery ── */
+                .treatment-grid {
+                    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+                    margin-top: 32px;
+                }
+
+                @media (max-width: 768px) { .treatment-grid { grid-template-columns: 1fr; } }
+
+                .treatment-card {
+                    border-radius: 16px; overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.06);
+                    background: var(--panel);
+                    transition: all 0.35s ease;
+                }
+
+                .treatment-card:hover {
+                    border-color: rgba(232, 98, 44, 0.25);
+                    transform: translateY(-3px);
+                    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+                }
+
+                .treatment-img {
+                    width: 100%; height: 200px;
+                    object-fit: cover; display: block;
+                    filter: brightness(0.9) saturate(1.1);
+                    transition: filter 0.3s, transform 0.5s;
+                }
+
+                .treatment-card:hover .treatment-img {
+                    filter: brightness(1) saturate(1.2);
+                    transform: scale(1.04);
+                }
+
+                .treatment-caption {
+                    padding: 16px;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 13px; font-weight: 600; color: var(--cream);
+                }
+
+                .treatment-type {
+                    font-size: 9px; color: var(--teal); font-weight: 700;
+                    letter-spacing: 0.15em; text-transform: uppercase;
+                    margin-bottom: 4px;
+                }
 
                 /* ── Video Embed ── */
                 .video-section {
@@ -473,12 +518,12 @@ export default function ThreadLink() {
                     <div className="cin-hero-bg" style={{ transform: `scale(1.05) translateY(${scrollY * 0.15}px)` }} />
                     <div className="cin-hero-overlay" />
                     <div className="cin-hero-content">
-                        <div className="hero-badge">MediaGeekz — Project Thread</div>
+                        <div className="hero-badge">MediaGeekz × Threadlinks</div>
                         <h1 className="hero-title">
-                            Let&apos;s<br /><em>Build.</em><br />Together.
+                            Create.<br /><em>Connect.</em><br />Grow.
                         </h1>
                         <p className="hero-subtitle">
-                            Your private production thread — a shared space where we plan, track, and deliver two cinematic films for your agency. First shoot together. Let&apos;s make it count.
+                            A creative collaboration between MediaGeekz and Threadlinks. Two cinematic films to showcase your creative agency and connect with the Winter Garden community.
                         </p>
 
                         <div className="hero-meta">
@@ -510,7 +555,7 @@ export default function ThreadLink() {
                 <div className="concept-grid reveal">
                     <div className="concept-card">
                         <div style={{ overflow: 'hidden' }}>
-                            <img className="concept-img" src="/thread/agency-hero.png" alt="Agency promo concept" />
+                            <img className="concept-img" src="/thread/community.png" alt="Winter Garden community" />
                         </div>
                         <div className="concept-body">
                             <div className="concept-tag" style={{ background: 'rgba(232, 98, 44, 0.12)', color: 'var(--orange)', border: '1px solid rgba(232, 98, 44, 0.25)' }}>
@@ -518,25 +563,94 @@ export default function ThreadLink() {
                             </div>
                             <div className="concept-name">Winter Garden Community Film</div>
                             <div className="concept-desc">
-                                Built to connect with the local community. Your agency rooted in Winter Garden — Plant Street energy, local landmarks, familiar faces, and the neighborhood vibe. Show locals you&apos;re one of them.
+                                Family-friendly, community-first. Your creative agency rooted in Winter Garden — local landmarks, familiar faces, neighborhood energy. Show the community you&apos;re one of them. Built to connect with locals.
                             </div>
                         </div>
                     </div>
                     <div className="concept-card">
                         <div style={{ overflow: 'hidden' }}>
-                            <img className="concept-img" src="/thread/winter-garden.png" alt="Winter Garden local area" />
+                            <img className="concept-img" src="/thread/screen-work.png" alt="Creative agency at work" />
                         </div>
                         <div className="concept-body">
                             <div className="concept-tag" style={{ background: 'rgba(45, 212, 191, 0.1)', color: 'var(--teal)', border: '1px solid rgba(45, 212, 191, 0.25)' }}>
                                 📹 Video 2 — National Level
                             </div>
-                            <div className="concept-name">Agency Brand Film</div>
+                            <div className="concept-name">Creative Agency Film</div>
                             <div className="concept-desc">
-                                National-market-ready brand film — premium, polished, and cinematic. The kind of video that positions your agency alongside the best. Fast cuts, gimbal walk-throughs, macro details, and team energy that competes on any stage.
+                                National-level creative showcase — the design process, the tools, the craft. Apple Pencil on iPad, designers at their screens, the creative energy that drives everything. Not a brand agency — a creative powerhouse.
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {/* ═══ CREATIVE TREATMENT — SHOT GALLERY ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Creative Treatment</div>
+                        <div className="section-question">The shots that tell the story</div>
+                        <h2 className="section-title">Visual direction for both films</h2>
+                        <p className="section-desc">
+                            These reference frames set the tone for each video — family-friendly local energy for Video 1, tight creative process shots for Video 2.
+                        </p>
+                    </div>
+
+                    <div className="treatment-grid">
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/community.png" alt="Community scene" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Video 1 · Local</div>
+                                Community Walk — Families, storefronts, farmer&apos;s market
+                            </div>
+                        </div>
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/apple-pencil.png" alt="Apple Pencil on iPad" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Video 2 · Tight Shot</div>
+                                Apple Pencil — The creative tool in motion
+                            </div>
+                        </div>
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/screen-work.png" alt="Designer at screen" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Video 2 · OTS</div>
+                                Screen Work — Designer reviewing creative layouts
+                            </div>
+                        </div>
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/winter-garden.png" alt="Winter Garden aerial" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Video 1 · Drone</div>
+                                Aerial Reveal — Downtown Winter Garden at golden hour
+                            </div>
+                        </div>
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/production-bts.png" alt="Production crew" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Both · BTS</div>
+                                Behind the Scenes — Cinema-grade production setup
+                            </div>
+                        </div>
+                        <div className="treatment-card">
+                            <div style={{ overflow: 'hidden' }}>
+                                <img className="treatment-img" src="/thread/agency-hero.png" alt="Agency workspace" />
+                            </div>
+                            <div className="treatment-caption">
+                                <div className="treatment-type">Video 2 · Wide</div>
+                                Team Collaboration — The creative workspace energy
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 {/* ═══ VISION — REFERENCE VIDEO ═══ */}
                 <section className="video-section reveal">
@@ -936,8 +1050,8 @@ export default function ThreadLink() {
 
                 {/* ═══ FOOTER ═══ */}
                 <div className="th-footer">
-                    <div className="footer-logo">MediaGeekz</div>
-                    <div className="footer-tagline">Your production. Our obsession.</div>
+                    <div className="footer-logo">MediaGeekz × Threadlinks</div>
+                    <div className="footer-tagline">Creative partnership. Community roots.</div>
                 </div>
             </div>
         </>
