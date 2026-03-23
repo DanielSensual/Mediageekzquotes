@@ -1028,23 +1028,23 @@ export default function ThreadLink() {
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Brand Palette</div>
-                        <div className="section-question">Indigo + Pink — Minimal, clean</div>
+                        <div className="section-question">Indigo — Minimal, clean, desaturated</div>
                         <h2 className="section-title">Color direction for the films</h2>
                         <p className="section-desc">
-                            The brand leans indigo-to-bubblegum pink with a minimal aesthetic. Color grading will be desaturated and balanced — not oversaturated. The palette informs set design, wardrobe coordination, and post-production color work.
+                            The brand is indigo. Not pink, not bubblegum — pure indigo with a minimal aesthetic. Color grading will be desaturated and balanced. The palette informs set design, wardrobe, LED accents, and post-production color work.
                         </p>
                     </div>
 
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
                         {[
+                            { color: '#0f172a', label: 'Background' },
                             { color: '#1e1b4b', label: 'Deep Indigo' },
+                            { color: '#312e81', label: 'Indigo Dark' },
                             { color: '#4338ca', label: 'Indigo Core' },
+                            { color: '#4f46e5', label: 'Indigo Brand' },
                             { color: '#6366f1', label: 'Indigo Vivid' },
                             { color: '#818cf8', label: 'Indigo Light' },
-                            { color: '#a78bfa', label: 'Violet' },
-                            { color: '#c084fc', label: 'Orchid' },
-                            { color: '#e879a8', label: 'Bubblegum Pink' },
-                            { color: '#0f172a', label: 'Background' },
+                            { color: '#e2e8f0', label: 'Clean White' },
                         ].map((c, i) => (
                             <div key={i} style={{ textAlign: 'center' }}>
                                 <div style={{ width: 56, height: 56, borderRadius: 14, background: c.color, border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: 6 }} />
@@ -1054,10 +1054,10 @@ export default function ThreadLink() {
                         ))}
                     </div>
 
-                    <div style={{ height: 8, borderRadius: 999, background: 'linear-gradient(90deg, #1e1b4b 0%, #4338ca 20%, #6366f1 35%, #818cf8 50%, #a78bfa 65%, #c084fc 80%, #e879a8 100%)', marginBottom: 20 }} />
+                    <div style={{ height: 8, borderRadius: 999, background: 'linear-gradient(90deg, #0f172a 0%, #1e1b4b 15%, #312e81 30%, #4338ca 45%, #4f46e5 55%, #6366f1 70%, #818cf8 85%, #e2e8f0 100%)', marginBottom: 20 }} />
 
                     <div style={{ padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
-                        <strong style={{ color: 'var(--cream)' }}>Color Grading Approach:</strong> Desaturated, clean, balanced. We won&apos;t oversaturate the indigo/pink — instead, we create a color palette in the grade that makes the brand colors feel natural in the footage. The raw footage starts gray; we shape it to feel minimal and intentional, not loud.
+                        <strong style={{ color: 'var(--cream)' }}>Color Grading Approach:</strong> Desaturated, clean, balanced. Raw footage starts gray — we shape it to feel minimal and intentional. Indigo accents via RGB LED lights in the background, not overlaid in post. The brand color lives in the environment, not a filter.
                     </div>
                 </section>
 
@@ -1071,7 +1071,7 @@ export default function ThreadLink() {
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
                         {[
-                            { icon: '🏢', title: 'The Office', desc: 'Working sessions, creativity happening live. Show the lively, fun atmosphere — even though it\'s "just an office," we make it look alive.' },
+                            { icon: '🏢', title: 'The Office', desc: 'Small but workable — tight shots, bokeh, ultra-wide slider between laptops. We\'ll rearrange furniture, center the table, keep it tight enough that it feels intentional. Indigo RGB LEDs in the background for brand color accents.' },
                             { icon: '🤝', title: 'Conference Room', desc: 'Discovery meetings, client presentations, whiteboard strategy sessions. The depth of the process visible.' },
                             { icon: '🌿', title: 'Artificial Grass Area', desc: 'Unique creative shots — unexpected texture, fun energy. Shows personality in the space.' },
                             { icon: '🎥', title: 'Studio Rental', desc: '1-2 hour studio rental for controlled creative shots — white backdrop, product work, cinematic lighting. Shows craft and professionalism.' },
@@ -1103,13 +1103,139 @@ export default function ThreadLink() {
                         {[
                             { icon: '🎧', title: 'Sound Design', desc: 'Custom sound design layered under the visuals. Ambient textures, subtle transitions, emotional scoring. Not stock music — a designed soundscape.' },
                             { icon: '📝', title: 'Selective Text Overlays', desc: 'Text at key moments when someone is speaking — not oversaturated captions everywhere. Specific words and phrases that need to land. Clean, minimal, on-brand typography.' },
-                            { icon: '🎨', title: 'Desaturated Color Grade', desc: 'Indigo/pink palette integrated through the grade — not shoved in, not loud. Balanced, clean, calm. The footage starts gray and gets shaped to feel minimal and intentional.' },
-                            { icon: '✂️', title: 'Pacing & Rhythm', desc: 'Organic pacing. Some moments breathe slowly (discovery, personal connection), others hit fast (full-stack montage, screen-to-street cuts). The edit matches the emotional arc.' },
+                            { icon: '🎨', title: 'Desaturated Color Grade', desc: 'Indigo palette integrated through the grade — not shoved in, not loud. Balanced, clean, calm. The footage starts gray and gets shaped to feel minimal and intentional.' },
+                            { icon: '✂️', title: 'Pacing &amp; Rhythm', desc: 'Organic pacing. Some moments breathe slowly (discovery, personal connection), others hit fast (full-stack montage, screen-to-street cuts). The edit matches the emotional arc.' },
                         ].map((p, i) => (
                             <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
                                 <div style={{ fontSize: 24, marginBottom: 10 }}>{p.icon}</div>
                                 <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{p.title}</div>
                                 <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{p.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ═══ WARDROBE DIRECTION ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Wardrobe</div>
+                        <div className="section-question">What to wear on shoot day</div>
+                        <h2 className="section-title">Wardrobe direction</h2>
+                        <p className="section-desc">
+                            Brand colors present but not forced. No company logo shirts — that&apos;s too corporate. The indigo should live subtly in the clothing and environment.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+                        {[
+                            { icon: '👔', title: 'Indigo Accents', desc: 'Indigo blazer, striped shirt, subtle tones. The brand color should be present but not screaming. Think: fashion-forward, not uniform.' },
+                            { icon: '🚫', title: 'No Logo Shirts', desc: 'No company name shirts. That reads corporate, not creative. Let the visuals and environment do the branding — the clothes should feel personal.' },
+                            { icon: '🎨', title: 'Collateral Materials', desc: 'ThreadLink can provide collateral for wardrobe coordination — branded materials at wholesale pricing. Subtle brand touches in accessories and props.' },
+                            { icon: '✨', title: 'Clean & Intentional', desc: 'Professional but approachable. Not suits. Not hoodies. The sweet spot between polished and real. The clothing matches the brand — minimal, premium, purposeful.' },
+                        ].map((w, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>{w.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{w.title}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{w.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ═══ MESSAGING & KEY WORDS ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Messaging</div>
+                        <div className="section-question">The words that carry the video</div>
+                        <h2 className="section-title">Key words &amp; phrases</h2>
+                        <p className="section-desc">
+                            The video needs a unifying word or phrase that threads through everything — the way you speak, the visuals, the energy. Viewers must walk away knowing exactly what this company does and what it stands for.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 24 }}>
+                        {['Connection', 'Empowerment', 'Purpose-Driven', 'Community', 'Building', 'Family', 'Growth', 'Authenticity'].map((word, i) => (
+                            <span key={i} style={{ padding: '8px 20px', borderRadius: 999, background: i < 2 ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255, 255, 255, 0.04)', border: '1px solid ' + (i < 2 ? 'rgba(99, 102, 241, 0.3)' : 'rgba(255, 255, 255, 0.08)'), color: i < 2 ? 'var(--orange)' : 'var(--cream)', fontSize: 13, fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>{word}</span>
+                        ))}
+                    </div>
+
+                    <div style={{ padding: '24px', border: '1px solid rgba(99, 102, 241, 0.12)', borderRadius: 16, background: 'rgba(99, 102, 241, 0.03)', borderLeft: '3px solid var(--orange)', marginBottom: 16 }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
+                            &quot;Certain words and the way you say things is going to be honestly more important than some of the visuals we may shoot. That&apos;s where the authenticity is going to come from, not the creative shots.&quot;
+                        </div>
+                        <div style={{ marginTop: 12, fontSize: 11, color: 'var(--muted-2)', fontWeight: 600 }}>— Daniel, from the meeting</div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>✅ Must Come Across</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2 }}>
+                                <li>We know exactly what ThreadLink does</li>
+                                <li>They build relationships, not transactions</li>
+                                <li>Your brand IS their brand — they invest personally</li>
+                                <li>Results matter more than aesthetics</li>
+                                <li>They don&apos;t drop you off after delivery</li>
+                            </ul>
+                        </div>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 8 }}>🚫 Avoid</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2 }}>
+                                <li>Looking like a corporate conglomerate</li>
+                                <li>Feeling muddy — unclear about services</li>
+                                <li>Over-listing services unnaturally</li>
+                                <li>Teleprompter energy — stiff, rehearsed</li>
+                                <li>Too many locations that dilute the story</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ═══ ON-CAMERA APPROACH ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">On-Camera</div>
+                        <div className="section-question">How we capture authenticity</div>
+                        <h2 className="section-title">Production approach</h2>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+                        {[
+                            { icon: '🚫', title: 'No Teleprompter', desc: 'Natural conversation, not scripts. Cable-talk energy — get them going and they flow. The authenticity comes from real conversation, not rehearsed lines.' },
+                            { icon: '🎙️', title: 'Practice Runs', desc: 'Practice speaking on camera before shoot day. Podcast-style warm-ups to get comfortable. The more natural, the more viewers trust you.' },
+                            { icon: '😄', title: 'Light Comedy', desc: 'One light-hearted moment — juggling drinks (we juggle everything), a quick reaction shot. Not forced. Just a beat that makes someone chuckle.' },
+                            { icon: '🎯', title: 'Results > Aesthetics', desc: 'The video that gets clients results beats the "prettiest" video every time. Beautiful AND effective — that is the standard.' },
+                        ].map((a, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>{a.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{a.title}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{a.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ═══ EQUIPMENT INVESTMENT ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Equipment</div>
+                        <div className="section-question">What we invested for this project</div>
+                        <h2 className="section-title">New gear for ThreadLink</h2>
+                        <p className="section-desc">
+                            We purchased additional equipment specifically for this project. This isn&apos;t rented — it&apos;s owned. Long-term investment in the quality of the work.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
+                        {[
+                            { icon: '📷', title: '2nd Sony FX3', desc: 'Another $5K cinema body — matched color science, dual-cam coverage without compromise. Same sensor, same logs, seamless editing.' },
+                            { icon: '💡', title: 'Thin LED Panels', desc: 'Ultra-thin, lightweight LED panels. No heavy softboxes — flat surfaces that deliver beautiful, controllable light without cluttering the set.' },
+                            { icon: '🟣', title: 'RGB LED Accents', desc: 'Indigo-colored LED accent lights for background brand color. The brand color lives in the environment through light, not post-production overlays.' },
+                            { icon: '🔧', title: 'Accessories & Rigging', desc: 'Sliders, lenses, rigging for ultra-wide angles between desks. The tools to make a small office feel cinematic.' },
+                        ].map((e, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>{e.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{e.title}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{e.desc}</div>
                             </div>
                         ))}
                     </div>
