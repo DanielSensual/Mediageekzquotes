@@ -667,9 +667,11 @@ export default function ThreadLink() {
                             { icon: '🎬', title: 'Screen to Street', desc: 'The magic transition — what\'s happening on the computer comes alive in the real world. Monster truck on screen → monster truck driving in real life. The brand in action, not just in pixels.' },
                             { icon: '🏠', title: 'Publix Energy', desc: 'Subtle brand placement. Logo on the coffee cup, brand colors in the background, tagline on the wall — never the hero of the shot, always part of the environment. You feel it without being told.' },
                             { icon: '🤝', title: 'Human Connection', desc: 'Real conversations. Real handshakes. Team sitting with clients, not performing for camera. The authenticity that makes people trust you before they ever call.' },
+                            { icon: '❤️', title: 'This Is Personal', desc: 'When a client is struggling, you scale their spend down. You tell them to save money. You want them to make it — and you do everything to set the stage. Not a conglomerate. A family.' },
                             { icon: '🚀', title: 'Built for Entrepreneurs', desc: 'Not every business. Entrepreneurs ready to scale — ready to break through the glass ceiling. The ones who want discovery, branding, web, SEO, ads, social — the full stack.' },
                             { icon: '🎨', title: 'Creative, Not Corporate', desc: 'Apple Pencil on iPad. Wireframes on whiteboards. Logo iterations on screen. Show the craft — this is a creative agency, not a suit-and-tie consulting firm.' },
                             { icon: '♻️', title: 'We Don\'t Drop You Off', desc: 'The full journey: 3-4 hour discovery → branding → website → SEO → ads → social media. Uniformed. Every touchpoint connected. The website actually converts, actually works for their business.' },
+                            { icon: '📺', title: 'Brady Bunch Remote Team', desc: 'The remote creative team appears in a split-screen grid — cinema-lit, like a Zoom meeting shot with real equipment. 2-3 seconds. Connects the viewer to the full team, not just the local office.' },
                         ].map((p, i) => (
                             <div key={i} style={{ padding: '24px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
                                 <div style={{ fontSize: 28, marginBottom: 12 }}>{p.icon}</div>
@@ -685,6 +687,22 @@ export default function ThreadLink() {
                             &quot;Whatever we&apos;re doing creatively, you see it in the real world. I want that connection. The brand in action — textile, tangible, actually happening. Not AI-generated stories. Real ones.&quot;
                         </div>
                         <div style={{ marginTop: 16, fontSize: 12, color: 'var(--muted-2)', fontWeight: 600 }}>— From the creative meeting</div>
+                    </div>
+
+                    {/* Second Quote */}
+                    <div style={{ padding: '32px', border: '1px solid rgba(45, 212, 191, 0.15)', borderRadius: 20, background: 'rgba(45, 212, 191, 0.03)', borderLeft: '3px solid var(--teal)', marginBottom: 16 }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
+                            &quot;This is personal for us. We want you to make it. And we&apos;re going to do everything we can to set the stage for you. You&apos;re still going to have to sell. This is your business. But we will set the stage.&quot;
+                        </div>
+                        <div style={{ marginTop: 16, fontSize: 12, color: 'var(--muted-2)', fontWeight: 600 }}>— From the creative meeting</div>
+                    </div>
+
+                    {/* North Dakota Story */}
+                    <div style={{ padding: '20px 24px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', marginBottom: 16 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>📍 Proof It Works — Without Video</div>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7 }}>
+                            A client in <strong style={{ color: 'var(--cream)' }}>North Dakota</strong> found you by searching &quot;creative agency near me&quot; — and called because of your reviews and the <em>feeling</em> she got from the website alone. She said she&apos;d been pushed around by agencies for years and couldn&apos;t get anyone on the phone. You haven&apos;t had a single video until now. Imagine what happens when you do.
+                        </div>
                     </div>
                 </section>
 
@@ -752,10 +770,12 @@ export default function ThreadLink() {
                             {[
                                 { beat: 'OPEN', title: 'The Craft', desc: 'TIGHT: Apple Pencil touches iPad screen. A logo sketch comes alive. Pull back to reveal a designer in a warm studio, coffee within reach, natural light. It\'s quiet. Intentional. This is where ideas start.', time: '0:00–0:08' },
                                 { beat: 'ACT 1', title: 'Discovery', desc: 'The team sits across from a client at a table — not a pitch, a discovery. 3-4 hours of "what does your business actually need?" Whiteboard behind them covered in strategy. Laptop open showing wireframes. You feel the depth. This isn\'t a quick-fix agency.', time: '0:08–0:22' },
-                                { beat: 'TRANSITION', title: 'Screen to Street (2)', desc: 'OTS: a designer finishes a website mockup on screen. The client\'s product is right there in the design. MATCH CUT: we\'re at the client\'s actual location — an entrepreneur standing in front of their business, the new logo on the window. Digital to tangible. What was on screen is now in the world.', time: '0:22–0:30' },
-                                { beat: 'ACT 2', title: 'Full Stack', desc: 'QUICK CUTS synced to music: Apple Pencil sketching a logo → final logo on a business card. Wireframe on screen → live website on a phone. Camera filming a product → the ad playing on Instagram. SEO dashboard showing rankings climbing. Social media post getting liked. Each cut shows: they didn\'t just design it, they deployed it. It\'s working.', time: '0:30–0:48' },
-                                { beat: 'BRAND IN ACTION', title: 'The Real World Connection', desc: 'The client\'s business is now alive — customers walking in, the new sign on the building, branded packaging being handed to a customer. The team is there, photographing, filming, supporting. They didn\'t drop them off — they\'re still building. Logo on the cup. Brand on the apron. It\'s everywhere, but it\'s natural.', time: '0:48–1:00' },
-                                { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. The business grew. Not a vendor relationship — a partnership. Pull back to a wide of the team at their desks, golden hour light. Super: "Threadlinks Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:00–1:10' },
+                                { beat: 'TEAM', title: 'The Brady Bunch', desc: 'SPLIT SCREEN: 6 faces appear in a grid — the full creative leadership team. Three in the office, three remote, each cinema-lit in their own space. They\'re in a meeting, laughing, pointing at their screens. 2-3 seconds. Shows that the connection doesn\'t stop at city limits. The team is everywhere.', time: '0:22–0:26' },
+                                { beat: 'TRANSITION', title: 'Screen to Street', desc: 'OTS: a designer finishes a website mockup on screen. The client\'s product is right there in the design. MATCH CUT: we\'re at the client\'s actual location — an entrepreneur standing in front of their business, the new logo on the window. Digital to tangible.', time: '0:26–0:34' },
+                                { beat: 'ACT 2', title: 'Full Stack', desc: 'QUICK CUTS synced to music: Apple Pencil sketching a logo → final logo on a business card. Wireframe on screen → live website on a phone. Camera filming a product → the ad playing on Instagram. SEO dashboard showing rankings climbing. Each cut shows: they deployed it, and it\'s working.', time: '0:34–0:50' },
+                                { beat: 'PERSONAL', title: 'This Is Personal', desc: 'QUIET MOMENT: the team leader on a call with a client, genuinely invested. Not upselling — listening. Maybe they\'re scaling the budget down because the client needs it. The care is visible. This isn\'t transactional. They want you to make it.', time: '0:50–0:58' },
+                                { beat: 'BRAND IN ACTION', title: 'The Real World', desc: 'The client\'s business is alive — customers walking in, new signage, branded packaging. The team is there too, filming, supporting. Logo on the cup. Brand on the apron. It\'s everywhere, but it\'s natural. They didn\'t drop them off.', time: '0:58–1:08' },
+                                { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. Not a vendor relationship — a partnership. Pull back. The full leadership team at their desks, golden hour light. Super: "Threadlinks Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:08–1:18' },
                             ].map((b, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 60, textAlign: 'center' }}>
@@ -877,6 +897,42 @@ export default function ThreadLink() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                </section>
+
+                {/* ═══ ON-CAMERA TALENT ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">On-Camera Talent</div>
+                        <div className="section-question">Creative leadership team — 6 people</div>
+                        <h2 className="section-title">The faces of the brand</h2>
+                        <p className="section-desc">
+                            The leadership team that will be on camera. Three in the office, three remote (Brady Bunch split-screen). Blood, sweat, and tears in every project — you&apos;ll see that on screen.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 14 }}>
+                        {[
+                            { name: 'Lead 1', role: 'Creative Director', location: '📍 In Office', color: 'var(--orange)' },
+                            { name: 'Ashley', role: 'Co-Founder / Strategy', location: '📍 In Office', color: 'var(--orange)' },
+                            { name: 'Saraw', role: 'Creative Team', location: '📍 In Office', color: 'var(--orange)' },
+                            { name: 'Sebastian', role: 'Creative Team', location: '🌐 Remote', color: 'var(--teal)' },
+                            { name: 'Andre', role: 'Creative Team', location: '🌐 Remote — Spain', color: 'var(--teal)' },
+                            { name: 'Andrea', role: 'Creative Team', location: '🌐 Remote', color: 'var(--teal)' },
+                        ].map((t, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', textAlign: 'center', transition: 'all 0.3s' }}>
+                                <div style={{ width: 48, height: 48, borderRadius: 14, background: `${t.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', fontSize: 22 }}>
+                                    {i < 3 ? '🎯' : '📺'}
+                                </div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)', marginBottom: 4 }}>{t.name}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', marginBottom: 8 }}>{t.role}</div>
+                                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: t.color, padding: '3px 10px', borderRadius: 999, border: `1px solid ${t.color}30`, background: `${t.color}08`, display: 'inline-block' }}>{t.location}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ marginTop: 24, padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                        <strong style={{ color: 'var(--cream)' }}>📺 Brady Bunch Shot:</strong> The 3 remote team members appear in a cinema-lit split-screen grid — like a Zoom meeting, but shot with real cameras and proper lighting. 2-3 seconds in the video. Shows that the full team is connected regardless of location. The remote members will record their footage independently with lighting direction from us.
                     </div>
                 </section>
 
