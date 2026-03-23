@@ -136,7 +136,7 @@ const ADDONS = [
 const fmt = (n) => '$' + n.toLocaleString('en-US');
 
 export default function EasyDentureProposal() {
-    const proposalHidden = true;
+    const proposalHidden = false;
 
     if (proposalHidden) {
         return (
@@ -790,19 +790,19 @@ export default function EasyDentureProposal() {
                             <div className="hero-stat-detail">Easy Denture</div>
                         </div>
                         <div className="hero-stat">
-                            <div className="hero-stat-label">Shoot Date</div>
-                            <div className="hero-stat-value">TBD</div>
-                            <div className="hero-stat-detail">Morning shoot — start ~8:30 AM</div>
+                            <div className="hero-stat-label">Schedule</div>
+                            <div className="hero-stat-value">7:00 AM – 12:30 PM</div>
+                            <div className="hero-stat-detail">Half-day rate</div>
                         </div>
                         <div className="hero-stat">
-                            <div className="hero-stat-label">Format</div>
-                            <div className="hero-stat-value">Car + Apartment</div>
-                            <div className="hero-stat-detail">Sonya arrival → patient fittings</div>
+                            <div className="hero-stat-label">Crew</div>
+                            <div className="hero-stat-value">3-Man Team</div>
+                            <div className="hero-stat-detail">Director · Camera · Assistant</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Deliverable</div>
                             <div className="hero-stat-value">Raw Footage</div>
-                            <div className="hero-stat-detail">For your editor to finish</div>
+                            <div className="hero-stat-detail">No editing — for your editor</div>
                         </div>
                     </div>
                 </div>
@@ -858,31 +858,37 @@ export default function EasyDentureProposal() {
 
                     <div className="timeline">
                         <div className="timeline-block">
-                            <div className="timeline-time">~8:30 AM</div>
+                            <div className="timeline-time">7:00 AM</div>
+                            <div className="timeline-label">Crew Arrival + Setup</div>
+                            <div className="timeline-desc">3-man crew arrives. Set up cameras, lighting, and audio. If drone is added, fly establishing shots of location exterior while light is soft.</div>
+                            <div className="timeline-location">📍 Location Exterior</div>
+                        </div>
+                        <div className="timeline-block">
+                            <div className="timeline-time">~7:30 AM</div>
                             <div className="timeline-label">Sonya — Car + Walk-Up</div>
                             <div className="timeline-desc">Film Sonya in her car talking about Easy Denture as she drives to the apartment. Capture a couple of lines as she walks up to the building. Driving B-roll and exterior establishing shots.</div>
                             <div className="timeline-location">📍 Sonya&apos;s Vehicle + Exterior</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">~9:15 AM</div>
-                            <div className="timeline-label">Setup at Apartment</div>
-                            <div className="timeline-desc">Set up lighting and audio inside the apartment before patients arrive at 10 AM. Camera positions for fitting coverage + testimonial angles.</div>
+                            <div className="timeline-time">~8:15 AM</div>
+                            <div className="timeline-label">Interior Setup at Apartment</div>
+                            <div className="timeline-desc">Set up lighting and audio inside the apartment before patients arrive. Camera positions for fitting coverage + testimonial angles.</div>
                             <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">10:00 – 11:00 AM</div>
+                            <div className="timeline-time">9:00 – 10:30 AM</div>
                             <div className="timeline-label">Patient 1 + Dentist 1 — Fitting</div>
                             <div className="timeline-desc">Capture the full Easy Denture fitting process. Close-ups on the product, the process, and patient reactions. After fitting — quick sound bites from patient and dentist.</div>
                             <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">11:00 AM – 12:00 PM</div>
+                            <div className="timeline-time">10:30 AM – 12:00 PM</div>
                             <div className="timeline-label">Patient 2 + Dentist 2 — Fitting</div>
                             <div className="timeline-desc">Second fitting — same coverage. After fitting, capture a couple of lines from patient and dentist. B-roll: patient smiling in mirror, product close-ups, candid moments.</div>
                             <div className="timeline-location">📍 Apartment</div>
                         </div>
                         <div className="timeline-block">
-                            <div className="timeline-time">~12:00 PM</div>
+                            <div className="timeline-time">12:00 – 12:30 PM</div>
                             <div className="timeline-label">Pickup Shots + Wrap</div>
                             <div className="timeline-desc">Any remaining B-roll, detail product close-ups, or additional sound bites. Drone footage if included. Pack gear, verify all media is backed up.</div>
                         </div>
@@ -931,56 +937,167 @@ export default function EasyDentureProposal() {
 
                 <div className="divider" />
 
-                {/* ── PACKAGES — HIDDEN UNTIL MONDAY CALL ── */}
+                {/* ── INVESTMENT / PRICING ── */}
                 <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Investment</div>
-                        <h2 className="section-title">Pricing coming soon.</h2>
+                        <h2 className="section-title">Day Rate — Raw Footage</h2>
                         <p className="section-desc">
-                            We&apos;re refining the scope and package options for the updated shoot format. Final pricing will be shared after our Monday planning call — everything else on this page reflects the current production approach.
+                            Flat day rate for a 3-man crew. No editing, no post — clean, organized raw footage delivered to your production team within 48 hours.
                         </p>
                     </div>
 
+                    {/* ── Day Rate Card ── */}
+                    <div style={{ maxWidth: 640, border: '1px solid rgba(232, 98, 44, 0.25)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(232, 98, 44, 0.08), transparent 50%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel)', padding: '36px 28px', boxShadow: '0 0 40px rgba(232, 98, 44, 0.06)' }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6 }}>
+                            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 42, fontWeight: 700, color: 'var(--orange)' }}>$2,400</span>
+                            <span style={{ fontSize: 13, color: 'var(--muted-2)', fontWeight: 500 }}>day rate</span>
+                        </div>
+                        <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid rgba(100, 116, 139, 0.15)' }}>
+                            7:00 AM – 12:30 PM · Half-day shoot · Raw footage only — no editing
+                        </div>
+
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 14 }}>Crew</div>
+                        <div style={{ display: 'grid', gap: 10, marginBottom: 24 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Director</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Creative direction, shot calling, talent coaching</div>
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Camera Operator</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Primary camera — interviews, close-ups, hero angles</div>
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Assistant</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>B-cam, lighting assist, audio management, gear wrangling</div>
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                            </div>
+                        </div>
+
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 14 }}>Included</div>
+                        <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--muted)', lineHeight: 2.2 }}>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Dual-camera coverage (Sony FX3 + A7S III)</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Professional wireless lavs ×2</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Portable LED lighting kit</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>All B-roll (driving, walking, product, exteriors)</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Organized raw footage delivery (48 hrs)</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Scene-separated, labeled, synced multi-cam</li>
+                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>On-set media backup</li>
+                        </ul>
+                    </div>
+
+                    {/* ── Drone Add-On ── */}
+                    <div style={{ maxWidth: 640, marginTop: 16, padding: '18px 24px', border: '1px solid rgba(232, 98, 44, 0.2)', borderRadius: 16, background: 'rgba(232, 98, 44, 0.04)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>🚁 Drone Footage — Add-On</div>
+                            <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 4 }}>Aerial establishing shots of location exteriors · FAA Part 107 certified</div>
+                        </div>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--orange)', whiteSpace: 'nowrap' }}>+$400</div>
+                    </div>
+
+                    {/* ── Payment Terms ── */}
+                    <div style={{ maxWidth: 640, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginTop: 24 }}>
+                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Deposit</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--orange)' }}>50%</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>to lock shoot date</div>
+                        </div>
+                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Balance</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>50%</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>on wrap day</div>
+                        </div>
+                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Delivery</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>48 hrs</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>raw footage</div>
+                        </div>
+                    </div>
+
                     {/* ── Delivery Note ── */}
-                    <div className="delivery-note">
+                    <div className="delivery-note" style={{ maxWidth: 640 }}>
                         <div className="delivery-note-title">
                             📦 Footage Delivery for Your Production Team
                         </div>
                         <p>
-                            All footage will be delivered on a portable hard drive or via secure cloud transfer within 48 hours of the shoot. Files are organized by location and scene, with synced multi-cam timecode, labeled audio tracks, and room tone for your editor. We&apos;re happy to coordinate directly with your production company on any format or organizational preferences.
+                            All footage will be delivered on a portable hard drive or via secure cloud transfer within 48 hours of the shoot. Files are organized by location and scene, with synced multi-cam timecode, labeled audio tracks, and room tone for your editor.
+                        </p>
+                    </div>
+                </section>
+
+                <div className="divider" />
+
+                {/* ── SIGNATURE / AGREEMENT ── */}
+                <section className="ed-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Agreement</div>
+                        <h2 className="section-title">Sign to confirm</h2>
+                        <p className="section-desc">
+                            By signing below, both parties agree to the scope of work, deliverables, and payment terms outlined in this proposal.
                         </p>
                     </div>
 
-                    {/* ── Next Steps ── */}
-                    <div className="next-steps">
-                        <div className="next-steps-title">Next steps</div>
-                        <div className="next-steps-grid">
-                            <div className="next-step">
-                                <strong>01. Monday planning call</strong>
-                                <span>Walk through the updated scope, finalize crew and package options, and confirm the shoot date.</span>
+                    <div style={{ maxWidth: 640, border: '1px solid rgba(100, 116, 139, 0.15)', borderRadius: 20, background: 'var(--panel)', padding: '32px 28px' }}>
+                        {/* Summary */}
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 14 }}>Engagement Summary</div>
+                        <div style={{ display: 'grid', gap: 8, marginBottom: 28 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--cream)' }}>Day Rate — 3-Man Crew (7 AM – 12:30 PM)</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$2,400</span>
                             </div>
-                            <div className="next-step">
-                                <strong>02. Confirm your package</strong>
-                                <span>Pick your tier + any add-ons. We&apos;ll send a final invoice and lock the date.</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--cream)' }}>Raw Footage Delivery (organized, synced)</span>
+                                <span style={{ color: 'var(--teal)', fontWeight: 600, fontSize: 11 }}>INCLUDED</span>
                             </div>
-                            <div className="next-step">
-                                <strong>03. Location logistics</strong>
-                                <span>Share patient apartment addresses and dentist office location. We&apos;ll plan the route and shot list around travel time.</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, opacity: 0.5 }}>
+                                <span style={{ color: 'var(--cream)' }}>Drone Footage (optional add-on)</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>+$400</span>
                             </div>
-                            <div className="next-step">
-                                <strong>04. Shoot day</strong>
-                                <span>We arrive at 8 AM, handle everything on-site, and deliver organized raw footage within 48 hours for your editor.</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, borderTop: '1px solid rgba(232, 98, 44, 0.2)', paddingTop: 12, marginTop: 8 }}>
+                                <span style={{ color: 'var(--white)', fontWeight: 600 }}>Total</span>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", color: 'var(--orange)', fontWeight: 700, fontSize: 18 }}>$2,400 – $2,800</span>
                             </div>
                         </div>
 
-                        <div className="cta-row">
-                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MediaGeekz+%C3%97+Easy+Denture+%E2%80%94+Production+Planning&details=Quick+planning+call+to+walk+through+package+options+and+confirm+the+March+27+shoot.%0A%0AJoin+via+Google+Meet.&add=danielcastillo@mediageekz.com&dates=20260317T140000/20260317T141500" target="_blank" rel="noopener noreferrer" className="meeting-btn">
-                                📅 Schedule a Call →
-                            </a>
-                            <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Video%20Production%20Quote%20%E2%80%94%20Elizabeth%20Leed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20go%20with%20the%20__%20package%20for%20the%20March%2027%20Easy%20Denture%20shoot.%0A%0AThanks!%0AElizabeth" className="cta-btn">
-                                Reply to Confirm →
-                            </a>
+                        {/* Terms */}
+                        <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, marginBottom: 28, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
+                            <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock the shoot date. Remaining 50% due on wrap. Cancellation within 48 hours forfeits the deposit. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered footage. MediaGeekz retains portfolio usage rights unless otherwise agreed.
                         </div>
+
+                        {/* Signature Lines */}
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+                            <div>
+                                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 16 }}>Client</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Signature</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Print Name</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Date</div>
+                            </div>
+                            <div>
+                                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 16 }}>Producer</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Signature</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Print Name</div>
+                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Date</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="cta-row" style={{ maxWidth: 640, marginTop: 28 }}>
+                        <a href="tel:321-666-5228" className="cta-btn">📞 Call to Confirm</a>
+                        <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Shoot%20%E2%80%94%20Confirmed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20Easy%20Denture%20shoot%20at%20the%20%242%2C400%20day%20rate.%0A%0A%5B%20%5D%20Add%20Drone%20(%2B%24400)%0A%0AThanks!%0AElizabeth" className="meeting-btn">✉ Send Confirmation</a>
                     </div>
                 </section>
 
