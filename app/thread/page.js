@@ -1300,14 +1300,14 @@ export default function ThreadLink() {
                         <div className="team-card">
                             <div className="team-avatar">🎬</div>
                             <div>
-                                <div className="team-name">Daniel Castillo</div>
+                                <div className="team-name">Matt Workman</div>
                                 <div className="team-role">Director / Lead DP</div>
                             </div>
                         </div>
                         <div className="team-card">
                             <div className="team-avatar">🎯</div>
                             <div>
-                                <div className="team-name">Matt Workman</div>
+                                <div className="team-name">Daniel Castillo</div>
                                 <div className="team-role">Producer</div>
                             </div>
                         </div>
