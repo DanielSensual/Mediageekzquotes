@@ -1694,6 +1694,120 @@ export default function ThreadLink() {
                     </div>
                 </div>
 
+                {/* ═══ INVESTMENT / PRICING ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Investment</div>
+                        <div className="section-question">What does this project cost?</div>
+                        <h2 className="section-title">Choose your package</h2>
+                        <p className="section-desc">
+                            All tiers include professional dual-camera coverage with matched Sony FX3 cinema bodies, professional audio, and organized footage delivery. 50% deposit to lock the date.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+
+                        {/* ── ESSENTIALS ── */}
+                        <div style={{ padding: '32px 24px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 8 }}>Essentials</div>
+                            <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 36, fontWeight: 700, color: 'var(--orange)' }}>$4,800</span>
+                                <br />
+                                <span style={{ fontSize: 11, color: 'var(--muted-2)' }}>single video — brand authority</span>
+                            </div>
+                            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--muted-2)', lineHeight: 2.4 }}>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Full-day shoot (up to 8 hours)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Dual-cam coverage (2× Sony FX3)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>1 brand video (60–90 sec, cinematic edit)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Color grading + sound design</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>4 social clips (9:16 vertical)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Professional audio (dual wireless lavs)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>1 revision round</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Local community film</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Extended cuts (2–3 min)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>BTS photography delivery</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Motion graphics package</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Raw footage archive</li>
+                            </ul>
+                        </div>
+
+                        {/* ── PROFESSIONAL (Recommended) ── */}
+                        <div style={{ padding: '32px 24px', border: '1px solid rgba(99, 102, 241, 0.35)', borderRadius: 16, background: 'linear-gradient(135deg, var(--panel), rgba(99, 102, 241, 0.06))', position: 'relative', transition: 'all 0.3s' }}>
+                            <div style={{ position: 'absolute', top: -12, left: 24, background: 'linear-gradient(135deg, #6366f1, #818cf8)', color: '#fff', fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', padding: '4px 16px', borderRadius: 20 }}>Recommended</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 8 }}>Professional</div>
+                            <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid rgba(99, 102, 241, 0.15)' }}>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 36, fontWeight: 700, color: '#818cf8' }}>$7,500</span>
+                                <br />
+                                <span style={{ fontSize: 11, color: 'var(--muted-2)' }}>two videos — full package</span>
+                            </div>
+                            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--cream)', lineHeight: 2.4 }}>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Full-day shoot (up to 10 hours)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Dual-cam coverage (2× Sony FX3)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>2 cinematic videos (brand + local community)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Desaturated indigo color grade</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Custom sound design (not stock)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Selective text overlays</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>8 social clips (9:16 vertical)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Extended cuts (2–3 min each for web)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>BTS photography (iPhone + pro cameras)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>Outdoor lighting crew assist</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: '#818cf8' }}>✓</span>2 revision rounds</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3, color: 'var(--muted-2)' }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Premium motion graphics</li>
+                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3, color: 'var(--muted-2)' }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Raw footage archive</li>
+                            </ul>
+                        </div>
+
+                        {/* ── PREMIER ── */}
+                        <div style={{ padding: '32px 24px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 8 }}>Premier</div>
+                            <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 36, fontWeight: 700, color: 'var(--orange)' }}>$11,500</span>
+                                <br />
+                                <span style={{ fontSize: 11, color: 'var(--muted-2)' }}>full creative production</span>
+                            </div>
+                            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--muted-2)', lineHeight: 2.4 }}>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Full-day shoot (up to 12 hours)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Dual-cam + creative director on set</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>2 cinematic videos (brand + local)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Desaturated indigo color grade</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Custom sound design + licensed music</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Premium motion graphics + text overlays</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>12+ social clips (9:16 vertical)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Extended cuts (2–3 min each for web)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Pro BTS photography + BTS video reel</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Outdoor lighting crew + extra PA</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Raw footage archive drive</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Priority delivery (~5 business days)</li>
+                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>3 revision rounds</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    {/* Payment Terms */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginTop: 24 }}>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Deposit</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--orange)' }}>50%</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>to lock shoot date</div>
+                        </div>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Balance</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>50%</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>on first deliverable</div>
+                        </div>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Delivery</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>7–10</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>business days</div>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 16, padding: '14px 18px', border: '1px solid rgba(255, 255, 255, 0.04)', borderRadius: 12, background: 'rgba(99, 102, 241, 0.03)', fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8 }}>
+                        <strong style={{ color: 'var(--cream)' }}>What&apos;s included in every tier:</strong> Dual Sony FX3 cinema cameras with matched color science, professional wireless audio (dual lavs), full lighting kit (LED panels + RGB accents), slider/gimbal stabilization, CPL polarizer for screen shots, and all media backed up on-set.
+                    </div>
+                </section>
+
                 {/* ═══ YOUR TEAM ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
