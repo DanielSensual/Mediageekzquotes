@@ -9,6 +9,66 @@ import { useState, useEffect } from 'react';
    ═══════════════════════════════════════════════════════════════ */
 
 export default function ThreadLink() {
+    const proposalHidden = true;
+
+    if (proposalHidden) {
+        return (
+            <>
+                <style jsx global>{`
+                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+                    :root {
+                        --shadow: #060a14;
+                        --navy: #0f1729;
+                        --panel: rgba(15, 23, 42, 0.88);
+                        --border: rgba(99, 102, 241, 0.24);
+                        --indigo: #6366f1;
+                        --cream: #e2e8f0;
+                        --white: #f8fafc;
+                        --muted: #94a3b8;
+                    }
+                    * { box-sizing: border-box; }
+                    body {
+                        margin: 0;
+                        font-family: 'Inter', sans-serif !important;
+                        color: var(--cream) !important;
+                        background:
+                            radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08), transparent 35%),
+                            radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.04), transparent 35%),
+                            linear-gradient(180deg, #0d1220 0%, #080c16 100%) !important;
+                    }
+                    .hold-shell { min-height: 100vh; display: grid; place-items: center; padding: 32px; }
+                    .hold-card {
+                        width: min(100%, 760px); padding: 40px 32px;
+                        border: 1px solid var(--border); border-radius: 24px;
+                        background: var(--panel); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+                        text-align: center;
+                    }
+                    .hold-badge {
+                        display: inline-block; margin-bottom: 20px; padding: 8px 14px;
+                        border-radius: 999px; border: 1px solid rgba(99, 102, 241, 0.3);
+                        color: var(--indigo); font-size: 11px; font-weight: 700;
+                        letter-spacing: 0.18em; text-transform: uppercase;
+                    }
+                    .hold-title {
+                        margin: 0 0 16px; font-family: 'Outfit', sans-serif;
+                        font-size: clamp(38px, 7vw, 64px); line-height: 0.98; color: var(--white);
+                    }
+                    .hold-title em { font-style: normal; color: var(--indigo); }
+                    .hold-copy { margin: 0 auto; max-width: 560px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+                `}</style>
+                <main className="hold-shell">
+                    <section className="hold-card">
+                        <div className="hold-badge">Proposal Temporarily Hidden</div>
+                        <h1 className="hold-title">ThreadLink <em>proposal</em> is being finalized.</h1>
+                        <p className="hold-copy">
+                            We&apos;re putting the finishing touches on the production plan and pricing. This page will be shared once everything is confirmed.
+                        </p>
+                    </section>
+                </main>
+            </>
+        );
+    }
+
     const [activePhase, setActivePhase] = useState('pre-production');
     const [scrollY, setScrollY] = useState(0);
 
