@@ -485,7 +485,7 @@ export default function ThreadLink() {
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Project</div>
                                 <div className="hero-stat-value">2 Videos</div>
-                                <div className="hero-stat-detail">Agency Promo + Local Area</div>
+                                <div className="hero-stat-detail">Local Market + National</div>
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Shoot Date</div>
@@ -495,7 +495,7 @@ export default function ThreadLink() {
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Format</div>
                                 <div className="hero-stat-value">Multi-Cam</div>
-                                <div className="hero-stat-detail">Cinematic brand + location</div>
+                                <div className="hero-stat-detail">Local connect + brand film</div>
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Location</div>
@@ -514,11 +514,11 @@ export default function ThreadLink() {
                         </div>
                         <div className="concept-body">
                             <div className="concept-tag" style={{ background: 'rgba(232, 98, 44, 0.12)', color: 'var(--orange)', border: '1px solid rgba(232, 98, 44, 0.25)' }}>
-                                📹 Video 1
+                                📹 Video 1 — Local Market
                             </div>
-                            <div className="concept-name">Agency Brand Film</div>
+                            <div className="concept-name">Winter Garden Community Film</div>
                             <div className="concept-desc">
-                                The cinematic story of your agency — who you are, what you build, and the energy you bring. Hero team portraits, workspace action shots, and short interview segments that sell your vision without saying a word.
+                                Built to connect with the local community. Your agency rooted in Winter Garden — Plant Street energy, local landmarks, familiar faces, and the neighborhood vibe. Show locals you&apos;re one of them.
                             </div>
                         </div>
                     </div>
@@ -528,11 +528,11 @@ export default function ThreadLink() {
                         </div>
                         <div className="concept-body">
                             <div className="concept-tag" style={{ background: 'rgba(45, 212, 191, 0.1)', color: 'var(--teal)', border: '1px solid rgba(45, 212, 191, 0.25)' }}>
-                                📹 Video 2
+                                📹 Video 2 — National Level
                             </div>
-                            <div className="concept-name">Local Area Film</div>
+                            <div className="concept-name">Agency Brand Film</div>
                             <div className="concept-desc">
-                                A cinematic love letter to Winter Garden — downtown charm, Plant Street energy, parks, and community vibe. Show potential clients the neighborhood your agency calls home. Drone aerials, golden hour magic.
+                                National-market-ready brand film — premium, polished, and cinematic. The kind of video that positions your agency alongside the best. Fast cuts, gimbal walk-throughs, macro details, and team energy that competes on any stage.
                             </div>
                         </div>
                     </div>
@@ -557,6 +557,90 @@ export default function ThreadLink() {
                     </div>
                     <div className="video-caption">
                         <span>Style Reference</span> — Creative Agency Film by SOCL
+                    </div>
+                </section>
+
+                {/* ═══ SHOT LIST ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Shot List</div>
+                        <div className="section-question">Inspired by the reference above</div>
+                        <h2 className="section-title">How we&apos;re building each video</h2>
+                        <p className="section-desc">
+                            Every shot planned with intention. Here&apos;s the breakdown for both films — mapped from the SOCL reference and tailored to your agency and Winter Garden.
+                        </p>
+                    </div>
+
+                    {/* Video 1 Shot List */}
+                    <div style={{ marginBottom: 56 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(232, 98, 44, 0.12)', border: '1px solid rgba(232, 98, 44, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                                📹 Video 1 — Local Market
+                            </div>
+                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Winter Garden Community Film</div>
+                        </div>
+
+                        <div style={{ display: 'grid', gap: 10 }}>
+                            {[
+                                { shot: 'Hero Walk-In', type: 'Gimbal', desc: 'Team lead walks through downtown Winter Garden — Plant Street, local shops, familiar storefronts. Establishes "we\'re from here."' },
+                                { shot: 'Street-Level Establishing', type: 'Drone + Wide', desc: 'Aerial reveal of downtown Winter Garden at golden hour. Tree-lined streets, brick buildings, community energy from above.' },
+                                { shot: 'Local Landmark Montage', type: 'Slider + Gimbal', desc: 'Quick cuts of recognizable Winter Garden spots — Garden Theatre marquee, Plant Street Market, West Orange Trail, lakefront parks.' },
+                                { shot: 'Community Faces', type: 'Medium Close-Up', desc: 'Real locals in their element — shop owners waving, families at the farmer\'s market, people on the trail. Warm, authentic.' },
+                                { shot: 'Agency Storefront / Office', type: 'Dolly Push-In', desc: 'Cinematic reveal of the agency\'s home base. Slow push-in from exterior to interior — roots in the community.' },
+                                { shot: 'Team in the Neighborhood', type: 'Handheld + Gimbal', desc: 'Your team walking through town, grabbing coffee, interacting with locals. Natural, not staged. You\'re part of Winter Garden.' },
+                                { shot: 'Golden Hour B-Roll', type: 'Various', desc: 'Warm light hitting brick facades, shadows on sidewalks, string lights at dusk. The cinematic texture that makes Winter Garden glow.' },
+                                { shot: 'Client Handshake / Meeting', type: 'Medium Shot', desc: 'Team greeting a local client at their business. The human connection — personal, not corporate.' },
+                                { shot: 'Text-Safe Wide Shots', type: 'Static / Tripod', desc: 'Clean compositions with negative space for social media text overlays. Sky, walls, open streetscapes.' },
+                                { shot: 'Closing Moment', type: 'Drone Pull-Back', desc: 'Final aerial pulling back from the team on Plant Street, revealing the full Winter Garden skyline. "This is where we work."' },
+                            ].map((s, i) => (
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(232, 98, 44, 0.1)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(232, 98, 44, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--orange)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                                            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
+                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(45, 212, 191, 0.2)', background: 'rgba(45, 212, 191, 0.06)' }}>{s.type}</span>
+                                        </div>
+                                        <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6 }}>{s.desc}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Video 2 Shot List */}
+                    <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.1)', border: '1px solid rgba(45, 212, 191, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                                📹 Video 2 — National Level
+                            </div>
+                            <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Agency Brand Film</div>
+                        </div>
+
+                        <div style={{ display: 'grid', gap: 10 }}>
+                            {[
+                                { shot: 'The Walking Hero', type: 'Gimbal', desc: 'Team lead walks through the agency space — confident, purposeful. Shallow depth of field, rack focus reveals. Sets the premium tone instantly.' },
+                                { shot: 'Team Collaboration', type: 'Slider', desc: 'Smooth lateral moves across team brainstorming at a table — pointing at screens, sketching ideas, high-fives. The creative energy.' },
+                                { shot: 'Macro Equipment Close-Ups', type: 'Macro / Slider', desc: 'Extreme close-ups of camera sensors, lenses being mounted, LED pixels, keyboard keys typing. "Gear porn" that signals quality.' },
+                                { shot: 'Screen Work in Action', type: 'OTS / Close-Up', desc: 'Over-the-shoulder shots of design work, edit timelines, social media dashboards. Screens glowing in a dark environment.' },
+                                { shot: 'Quick-Cut Rhythm Montage', type: 'Various', desc: 'Fast-paced 1-2 second cuts synced to the music beat — coffee pour, mouse click, whiteboard sketch, handshake, monitor glow. Builds energy.' },
+                                { shot: 'Team Portraits', type: 'Static / Tripod', desc: 'Cinematic sit-down portraits of each team member. Dramatic lighting — soft key, hard edge. Each person gets their hero moment.' },
+                                { shot: 'Meeting Room Power Shot', type: 'Dolly Push-In', desc: 'Slow push into a glass conference room where the team is presenting. Backlit, shallow DOF. Corporate but not boring.' },
+                                { shot: 'The "Eureka" Moment', type: 'Handheld', desc: 'Organic, slightly shaky capture of a genuine team reaction — the win, the breakthrough. Authenticity in the chaos.' },
+                                { shot: 'Light Leak Transitions', type: 'In-Camera + Post', desc: 'Orange/teal light leaks or whip pans between sequences. Bridges the high-energy cuts with cinematic style.' },
+                                { shot: 'Logo Resolve', type: 'Static / Motion Graphics', desc: 'Clean ending — agency logo animates onto a dark background. Minimal. Powerful. The final frame that sticks.' },
+                            ].map((s, i) => (
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(45, 212, 191, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--teal)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                                            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
+                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(232, 98, 44, 0.2)', background: 'rgba(232, 98, 44, 0.06)' }}>{s.type}</span>
+                                        </div>
+                                        <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6 }}>{s.desc}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
