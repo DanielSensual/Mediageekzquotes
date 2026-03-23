@@ -137,6 +137,7 @@ const fmt = (n) => '$' + n.toLocaleString('en-US');
 
 export default function EasyDentureProposal() {
     const proposalHidden = false;
+    const [addDrone, setAddDrone] = useState(false);
 
     if (proposalHidden) {
         return (
@@ -1013,13 +1014,39 @@ export default function EasyDentureProposal() {
                         </div>
                     </div>
 
-                    {/* ── Drone Add-On ── */}
-                    <div style={{ maxWidth: 640, marginTop: 16, padding: '18px 24px', border: '1px solid rgba(232, 98, 44, 0.2)', borderRadius: 16, background: 'rgba(232, 98, 44, 0.04)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div>
-                            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>🚁 Drone Footage — Add-On</div>
-                            <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 4 }}>Aerial establishing shots of location exteriors · FAA Part 107 certified</div>
+                    {/* ── Drone Add-On Toggle ── */}
+                    <div
+                        onClick={() => setAddDrone(!addDrone)}
+                        style={{
+                            maxWidth: 640, marginTop: 16, padding: '18px 24px',
+                            border: addDrone ? '1px solid rgba(45, 212, 191, 0.4)' : '1px solid rgba(232, 98, 44, 0.2)',
+                            borderRadius: 16,
+                            background: addDrone ? 'rgba(45, 212, 191, 0.06)' : 'rgba(232, 98, 44, 0.04)',
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            cursor: 'pointer', transition: 'all 0.3s ease', userSelect: 'none',
+                        }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                            <div style={{
+                                width: 40, height: 22, borderRadius: 12,
+                                background: addDrone ? 'var(--teal)' : 'rgba(100, 116, 139, 0.3)',
+                                position: 'relative', transition: 'background 0.3s ease',
+                            }}>
+                                <div style={{
+                                    position: 'absolute', top: 2, left: addDrone ? 20 : 2,
+                                    width: 18, height: 18, borderRadius: '50%',
+                                    background: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
+                                    transition: 'left 0.3s ease',
+                                }} />
+                            </div>
+                            <div>
+                                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>🚁 Drone Footage</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Aerial establishing shots · FAA Part 107 certified</div>
+                            </div>
                         </div>
-                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--orange)', whiteSpace: 'nowrap' }}>+$400</div>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: addDrone ? 'var(--teal)' : 'var(--orange)', whiteSpace: 'nowrap', transition: 'color 0.3s' }}>
+                            {addDrone ? '✓ Added' : '+$400'}
+                        </div>
                     </div>
 
                     {/* ── Payment Terms ── */}
@@ -1088,17 +1115,17 @@ export default function EasyDentureProposal() {
                                 <span style={{ color: 'var(--cream)' }}>Raw Footage Delivery</span>
                                 <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$500</span>
                             </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, opacity: addDrone ? 1 : 0.4 }}>
+                                <span style={{ color: 'var(--cream)' }}>Drone Footage {addDrone ? '' : '(not selected)'}</span>
+                                <span style={{ color: addDrone ? 'var(--cream)' : 'var(--muted)', fontWeight: 500 }}>{addDrone ? '$400' : '—'}</span>
+                            </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
                                 <span style={{ color: 'var(--muted-2)' }}>Production Fee (10%)</span>
-                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$370</span>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, opacity: 0.5 }}>
-                                <span style={{ color: 'var(--cream)' }}>Drone Footage (optional add-on)</span>
-                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>+$400</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>{addDrone ? '$410' : '$370'}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, borderTop: '1px solid rgba(232, 98, 44, 0.2)', paddingTop: 12, marginTop: 8 }}>
                                 <span style={{ color: 'var(--white)', fontWeight: 600 }}>Total</span>
-                                <span style={{ fontFamily: "'Outfit', sans-serif", color: 'var(--orange)', fontWeight: 700, fontSize: 18 }}>$4,070 – $4,470</span>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", color: 'var(--orange)', fontWeight: 700, fontSize: 18 }}>{addDrone ? '$4,510' : '$4,070'}</span>
                             </div>
                         </div>
 
@@ -1139,7 +1166,7 @@ export default function EasyDentureProposal() {
                             </div>
 
                             <a
-                                href="/checkout?amount=2035&desc=Easy%20Denture%20%E2%80%94%2050%25%20Production%20Deposit"
+                                href={`/checkout?amount=${addDrone ? 2255 : 2035}&desc=${encodeURIComponent(`Easy Denture — 50% Deposit${addDrone ? ' (w/ Drone)' : ''}`)}`}
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
                                     width: '100%', padding: '18px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
@@ -1151,37 +1178,23 @@ export default function EasyDentureProposal() {
                                     transition: 'transform 0.2s, box-shadow 0.2s',
                                 }}
                             >
-                                💳 Pay $2,035 Deposit Now
+                                💳 Pay {addDrone ? '$2,255' : '$2,035'} Deposit Now
                             </a>
 
-                            <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                                <a
-                                    href="/checkout?amount=4070&desc=Easy%20Denture%20%E2%80%94%20Full%20Production%20Payment"
-                                    style={{
-                                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                                        padding: '12px 16px', border: '1px solid rgba(45, 212, 191, 0.25)', borderRadius: 12,
-                                        background: 'rgba(45, 212, 191, 0.06)',
-                                        color: 'var(--teal)', fontFamily: "'Outfit', sans-serif",
-                                        fontSize: 12, fontWeight: 600, textDecoration: 'none',
-                                        transition: 'background 0.2s',
-                                    }}
-                                >
-                                    Pay Full $4,070
-                                </a>
-                                <a
-                                    href="/checkout?amount=4470&desc=Easy%20Denture%20%E2%80%94%20Full%20Production%20%2B%20Drone"
-                                    style={{
-                                        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                                        padding: '12px 16px', border: '1px solid rgba(100, 116, 139, 0.15)', borderRadius: 12,
-                                        background: 'rgba(255, 255, 255, 0.02)',
-                                        color: 'var(--muted)', fontFamily: "'Outfit', sans-serif",
-                                        fontSize: 12, fontWeight: 600, textDecoration: 'none',
-                                        transition: 'background 0.2s',
-                                    }}
-                                >
-                                    Pay $4,470 (w/ Drone)
-                                </a>
-                            </div>
+                            <a
+                                href={`/checkout?amount=${addDrone ? 4510 : 4070}&desc=${encodeURIComponent(`Easy Denture — Full Payment${addDrone ? ' (w/ Drone)' : ''}`)}`}
+                                style={{
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                                    width: '100%', marginTop: 12, padding: '14px 16px',
+                                    border: '1px solid rgba(45, 212, 191, 0.25)', borderRadius: 12,
+                                    background: 'rgba(45, 212, 191, 0.06)',
+                                    color: 'var(--teal)', fontFamily: "'Outfit', sans-serif",
+                                    fontSize: 13, fontWeight: 600, textDecoration: 'none',
+                                    transition: 'background 0.2s',
+                                }}
+                            >
+                                Or Pay Full {addDrone ? '$4,510' : '$4,070'}
+                            </a>
 
                             <div style={{ marginTop: 16, fontSize: 11, color: 'rgba(148, 163, 184, 0.5)' }}>
                                 🔒 Payments processed securely via Square · Card, Apple Pay, Google Pay
