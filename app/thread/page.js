@@ -544,14 +544,100 @@ export default function ThreadLink() {
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Location</div>
-                                <div className="hero-stat-value">Winter Garden</div>
+                                <div className="hero-stat-value">Clermont</div>
                                 <div className="hero-stat-detail">FL · On-Location</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* ═══ TWO-VIDEO CONCEPT CARDS ═══ */}
+                {/* ═══ CLIENT PROFILE — THREADLINK ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Client Profile</div>
+                        <div className="section-question">Who we&apos;re creating for</div>
+                        <h2 className="section-title">ThreadLink</h2>
+                        <p className="section-desc">
+                            A strategic web design &amp; branding studio rooted in Clermont, Florida — serving businesses from the Orlando area to clients across the U.S.
+                        </p>
+                    </div>
+
+                    {/* Logo + Brand Identity */}
+                    <div style={{ display: 'flex', gap: 24, alignItems: 'center', marginBottom: 32, flexWrap: 'wrap' }}>
+                        <div style={{ background: '#111', borderRadius: 16, padding: '20px 32px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                            <img src="https://cdn.prod.website-files.com/6556499e67d676543a981f3c/68b18b947aae8a1c4f263916_WHITE-ThreadLink-Container-Logo.png" alt="ThreadLink Logo" style={{ height: 36 }} />
+                        </div>
+                        <div style={{ flex: 1, minWidth: 200 }}>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 12, fontWeight: 600, color: 'var(--white)', marginBottom: 4 }}>mythreadlink.com</div>
+                            <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>
+                                📍 17011 SR-50 Suite 201, Clermont FL 34711 · 📞 (407) 664-1287
+                            </div>
+                        </div>
+                        <a href="https://mythreadlink.com" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 20px', borderRadius: 999, background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>Visit Site →</a>
+                    </div>
+
+                    {/* Key Details Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 28 }}>
+                        {[
+                            { label: 'Founded', value: 'Clermont, FL', icon: '📍' },
+                            { label: 'Specialization', value: 'Web Design + Branding', icon: '🎨' },
+                            { label: 'Awards', value: 'Best of South Lake 2023-2025', icon: '🏆' },
+                            { label: 'Portfolio', value: '20+ Clients', icon: '📂' },
+                            { label: 'Tools', value: 'Figma → Webflow', icon: '⚙️' },
+                            { label: 'Reach', value: 'Local + Nationwide', icon: '🌐' },
+                        ].map((d, i) => (
+                            <div key={i} style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                                <div style={{ fontSize: 18, marginBottom: 6 }}>{d.icon}</div>
+                                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 4 }}>{d.label}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 13, fontWeight: 600, color: 'var(--white)' }}>{d.value}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Services */}
+                    <div style={{ marginBottom: 28 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 14 }}>Services Offered</div>
+                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                            {['UI Design', 'UX Design', 'SEO', '3D', 'Consulting', 'Stylescapes', 'Logo Design', 'Brand Guidelines', 'Marketing Strategy', 'Custom Websites'].map((s, i) => (
+                                <span key={i} style={{ padding: '5px 14px', borderRadius: 999, background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.15)', color: 'var(--cream)', fontSize: 11, fontWeight: 500 }}>{s}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Process Flow */}
+                    <div style={{ marginBottom: 28 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 14 }}>Their Process (What the Videos Should Showcase)</div>
+                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                            {['Discovery', 'Strategy', 'Stylescapes', 'Wireframing', 'Prototyping', 'Development', 'Testing', 'Launch & Beyond'].map((step, i) => (
+                                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                    <span style={{ padding: '6px 14px', borderRadius: 10, background: i === 0 ? 'rgba(99, 102, 241, 0.15)' : 'var(--panel)', border: '1px solid rgba(255, 255, 255, 0.06)', fontSize: 11, fontWeight: 600, color: i === 0 ? 'var(--orange)' : 'var(--cream)' }}>{step}</span>
+                                    {i < 7 && <span style={{ color: 'var(--muted-3)', fontSize: 10 }}>→</span>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Portfolio Highlights */}
+                    <div style={{ padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', marginBottom: 16 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 10 }}>Notable Clients</div>
+                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                            {['Paladin HealthCare', 'South Lake Chamber', 'SunCoast Eco-Tours', 'Pain Free Orlando', 'Powell Studio Architecture', 'Renovation Outdoors', '4Sight Labs', 'OnlyinClermont', 'Ovosk Medspa', 'Rapid Environmental'].map((c, i) => (
+                                <span key={i} style={{ padding: '4px 12px', borderRadius: 8, background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.06)', fontSize: 10, color: 'var(--muted)', fontWeight: 500 }}>{c}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Brand Positioning Quote */}
+                    <div style={{ padding: '24px', border: '1px solid rgba(99, 102, 241, 0.12)', borderRadius: 16, background: 'rgba(99, 102, 241, 0.03)', borderLeft: '3px solid var(--orange)' }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
+                            &quot;We partner with industries that build our communities, delivering purpose-driven web design and cohesive branding solutions engineered to fuel growth and empower your business.&quot;
+                        </div>
+                        <div style={{ marginTop: 12, fontSize: 11, color: 'var(--muted-2)', fontWeight: 600 }}>— mythreadlink.com</div>
+                    </div>
+                </section>
+
+                <div className="divider" />
+
                 <div className="concept-grid reveal">
                     <div className="concept-card">
                         <div style={{ overflow: 'hidden' }}>
