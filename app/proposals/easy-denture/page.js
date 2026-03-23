@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
    Pricing Data — Easy Denture Mobile Dentistry Video Production
@@ -138,6 +138,21 @@ const fmt = (n) => '$' + n.toLocaleString('en-US');
 export default function EasyDentureProposal() {
     const proposalHidden = false;
     const [addDrone, setAddDrone] = useState(false);
+    const [sigName, setSigName] = useState('');
+    const [signed, setSigned] = useState(false);
+    const [signedAt, setSignedAt] = useState(null);
+    const printRef = useRef(null);
+
+    const handleSign = () => {
+        if (!sigName.trim()) return;
+        const now = new Date();
+        setSignedAt(now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + ' at ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+        setSigned(true);
+    };
+
+    const handlePrint = () => {
+        window.print();
+    };
 
     if (proposalHidden) {
         return (
@@ -1131,28 +1146,139 @@ export default function EasyDentureProposal() {
 
                         {/* Terms */}
                         <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, marginBottom: 28, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
+                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> This engagement covers <strong style={{ color: 'var(--cream)' }}>production day only — raw footage delivery</strong>. No post-production editing, color grading, or sound design is included. All footage will be delivered organized, scene-separated, and synced within 48 hours of the shoot.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock the shoot date. Remaining 50% due on wrap. Cancellation within 48 hours forfeits the deposit. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered footage. MediaGeekz retains portfolio usage rights unless otherwise agreed.
                         </div>
 
-                        {/* Signature Lines */}
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+                        {/* ── Signature Block ── */}
+                        <style jsx>{`
+                            @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
+                            .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(100, 116, 139, 0.12); }
+                            .sig-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-3); margin-bottom: 32px; }
+                            .sig-preview { min-height: 52px; padding: 10px 16px; border-bottom: 2px solid rgba(100, 116, 139, 0.3); margin-bottom: 6px; display: flex; align-items: flex-end; }
+                            .sig-cursive { font-family: 'Dancing Script', cursive; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1.2; }
+                            .sig-field { font-size: 11px; color: var(--muted-2); margin-bottom: 18px; }
+                            .sig-line { border-bottom: 1px solid rgba(100, 116, 139, 0.3); padding-bottom: 6px; margin-bottom: 6px; min-height: 28px; }
+                            .sig-input { width: 100%; padding: 12px 16px; border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 10px; background: rgba(15, 23, 42, 0.6); color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+                            .sig-input:focus { border-color: var(--orange); }
+                            .sign-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border: none; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, var(--orange), #f59e0b); color: var(--white); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 24px rgba(232, 98, 44, 0.3); }
+                            .sign-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232, 98, 44, 0.4); }
+                            .sign-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+                            .signed-badge { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: 12px; background: rgba(45, 212, 191, 0.08); border: 1px solid rgba(45, 212, 191, 0.25); margin-top: 16px; }
+                            .signed-badge-icon { font-size: 20px; }
+                            .signed-badge-text { font-size: 12px; color: var(--teal); font-weight: 600; }
+                            .signed-badge-time { font-size: 11px; color: var(--muted-2); margin-top: 2px; }
+                            .print-contract-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; margin-top: 12px; border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; background: transparent; color: var(--white); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+                            .print-contract-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(100, 116, 139, 0.5); }
+                            @media (max-width: 640px) { .sig-grid { grid-template-columns: 1fr; gap: 28px; } .sig-cursive { font-size: 24px; } }
+                            @media print {
+                                .no-print { display: none !important; }
+                                .sign-btn, .print-contract-btn, .sig-input { display: none !important; }
+                                body { background: white !important; color: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                            }
+                        `}</style>
+
+                        <div className="sig-grid">
+                            {/* Producer — Matt + Daniel pre-signed */}
                             <div>
-                                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 16 }}>Client</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Signature</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Print Name</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Date</div>
+                                <div className="sig-label">Producer — MediaGeekz</div>
+
+                                {/* Matt Workman */}
+                                <div style={{ marginBottom: 24 }}>
+                                    <div className="sig-preview">
+                                        <span className="sig-cursive">Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Signature</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Printed Name</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>mattworkman@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 23, 2026</span>
+                                    </div>
+                                    <div className="sig-field">Date</div>
+                                </div>
+
+                                {/* Daniel Castillo */}
+                                <div>
+                                    <div className="sig-preview">
+                                        <span className="sig-cursive">Daniel Castillo</span>
+                                    </div>
+                                    <div className="sig-field">Signature</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>Daniel Castillo</span>
+                                    </div>
+                                    <div className="sig-field">Printed Name</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>danielcastillo@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 23, 2026</span>
+                                    </div>
+                                    <div className="sig-field">Date</div>
+                                </div>
                             </div>
+
+                            {/* Client — Easy Denture */}
                             <div>
-                                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 16 }}>Producer</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Signature</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Print Name</div>
-                                <div style={{ borderBottom: '1px solid rgba(100, 116, 139, 0.3)', paddingBottom: 8, marginBottom: 8, marginTop: 20, minHeight: 36 }} />
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>Date</div>
+                                <div className="sig-label">Client — Easy Denture</div>
+                                {signed ? (
+                                    <>
+                                        <div className="sig-preview">
+                                            <span className="sig-cursive">{sigName}</span>
+                                        </div>
+                                        <div className="sig-field">Signature</div>
+                                        <div className="sig-line">
+                                            <span style={{ fontSize: 13, color: 'var(--cream)' }}>{sigName}</span>
+                                        </div>
+                                        <div className="sig-field">Printed Name</div>
+                                        <div className="sig-line">
+                                            <span style={{ fontSize: 13, color: 'var(--cream)' }}>{signedAt}</span>
+                                        </div>
+                                        <div className="sig-field">Date</div>
+                                        <div className="signed-badge">
+                                            <span className="signed-badge-icon">✓</span>
+                                            <div>
+                                                <div className="signed-badge-text">Agreement Signed</div>
+                                                <div className="signed-badge-time">{signedAt}</div>
+                                            </div>
+                                        </div>
+                                        <button className="print-contract-btn no-print" onClick={handlePrint}>
+                                            📄 Download Signed PDF
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div style={{ marginBottom: 16 }}>
+                                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 8 }}>Type your full name to sign</div>
+                                            <input
+                                                type="text"
+                                                className="sig-input"
+                                                placeholder="Elizabeth Torres"
+                                                value={sigName}
+                                                onChange={(e) => setSigName(e.target.value)}
+                                            />
+                                        </div>
+                                        {sigName.trim() && (
+                                            <div className="sig-preview">
+                                                <span className="sig-cursive">{sigName}</span>
+                                            </div>
+                                        )}
+                                        <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                        <button
+                                            className="sign-btn"
+                                            onClick={handleSign}
+                                            disabled={!sigName.trim()}
+                                        >
+                                            ✍️ Sign Agreement
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
