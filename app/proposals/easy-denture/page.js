@@ -947,51 +947,70 @@ export default function EasyDentureProposal() {
                         </p>
                     </div>
 
-                    {/* ── Day Rate Card ── */}
+                    {/* ── Itemized Pricing Card ── */}
                     <div style={{ maxWidth: 640, border: '1px solid rgba(232, 98, 44, 0.25)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(232, 98, 44, 0.08), transparent 50%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel)', padding: '36px 28px', boxShadow: '0 0 40px rgba(232, 98, 44, 0.06)' }}>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6 }}>
-                            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 42, fontWeight: 700, color: 'var(--orange)' }}>$2,400</span>
-                            <span style={{ fontSize: 13, color: 'var(--muted-2)', fontWeight: 500 }}>day rate</span>
+                            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 42, fontWeight: 700, color: 'var(--orange)' }}>$4,070</span>
+                            <span style={{ fontSize: 13, color: 'var(--muted-2)', fontWeight: 500 }}>production day rate</span>
                         </div>
                         <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid rgba(100, 116, 139, 0.15)' }}>
-                            7:00 AM – 12:30 PM · Half-day shoot · Raw footage only — no editing
+                            7:00 AM – 12:30 PM · 3-man crew · Raw footage only — no editing
                         </div>
 
-                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 14 }}>Crew</div>
-                        <div style={{ display: 'grid', gap: 10, marginBottom: 24 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 14 }}>Cost Breakdown</div>
+                        <div style={{ display: 'grid', gap: 8, marginBottom: 20 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
                                 <div>
                                     <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Director</div>
                                     <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Creative direction, shot calling, talent coaching</div>
                                 </div>
-                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                                <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$1,500</div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
                                 <div>
-                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Camera Operator</div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>2nd Camera Operator</div>
                                     <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Primary camera — interviews, close-ups, hero angles</div>
                                 </div>
-                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                                <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$1,000</div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
                                 <div>
-                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Assistant</div>
-                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>B-cam, lighting assist, audio management, gear wrangling</div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>PA / Assistant</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Lighting assist, audio management, gear wrangling</div>
                                 </div>
-                                <div style={{ fontSize: 11, color: 'var(--teal)', fontWeight: 600 }}>Included</div>
+                                <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$350</div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Lighting Package</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>LED panels, softbox, RGB fills, reflectors</div>
+                                </div>
+                                <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$350</div>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid rgba(45, 212, 191, 0.1)', borderRadius: 12, background: 'rgba(45, 212, 191, 0.03)' }}>
+                                <div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Raw Footage Delivery</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Organized, scene-separated, synced multi-cam, 48hr delivery</div>
+                                </div>
+                                <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$500</div>
                             </div>
                         </div>
 
-                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 14 }}>Included</div>
-                        <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--muted)', lineHeight: 2.2 }}>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Dual-camera coverage (Sony FX3 + A7S III)</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Professional wireless lavs ×2</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Portable LED lighting kit</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>All B-roll (driving, walking, product, exteriors)</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Organized raw footage delivery (48 hrs)</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>Scene-separated, labeled, synced multi-cam</li>
-                            <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--teal)' }}>✓</span>On-set media backup</li>
-                        </ul>
+                        {/* Subtotal + Production Fee */}
+                        <div style={{ borderTop: '1px solid rgba(100, 116, 139, 0.15)', paddingTop: 14, display: 'grid', gap: 6 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--muted)' }}>Subtotal</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$3,700</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--muted)' }}>Production Fee (10%)</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$370</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 16, borderTop: '1px solid rgba(232, 98, 44, 0.25)', paddingTop: 12, marginTop: 6 }}>
+                                <span style={{ color: 'var(--white)', fontWeight: 700, fontFamily: "'Outfit', sans-serif" }}>Total</span>
+                                <span style={{ color: 'var(--orange)', fontWeight: 700, fontFamily: "'Outfit', sans-serif", fontSize: 20 }}>$4,070</span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* ── Drone Add-On ── */}
@@ -1050,12 +1069,28 @@ export default function EasyDentureProposal() {
                         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 14 }}>Engagement Summary</div>
                         <div style={{ display: 'grid', gap: 8, marginBottom: 28 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                                <span style={{ color: 'var(--cream)' }}>Day Rate — 3-Man Crew (7 AM – 12:30 PM)</span>
-                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$2,400</span>
+                                <span style={{ color: 'var(--cream)' }}>Director</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$1,500</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                                <span style={{ color: 'var(--cream)' }}>Raw Footage Delivery (organized, synced)</span>
-                                <span style={{ color: 'var(--teal)', fontWeight: 600, fontSize: 11 }}>INCLUDED</span>
+                                <span style={{ color: 'var(--cream)' }}>2nd Camera Operator</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$1,000</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--cream)' }}>PA / Assistant</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$350</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--cream)' }}>Lighting Package</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$350</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--cream)' }}>Raw Footage Delivery</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$500</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                                <span style={{ color: 'var(--muted-2)' }}>Production Fee (10%)</span>
+                                <span style={{ color: 'var(--muted)', fontWeight: 500 }}>$370</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, opacity: 0.5 }}>
                                 <span style={{ color: 'var(--cream)' }}>Drone Footage (optional add-on)</span>
@@ -1063,7 +1098,7 @@ export default function EasyDentureProposal() {
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, borderTop: '1px solid rgba(232, 98, 44, 0.2)', paddingTop: 12, marginTop: 8 }}>
                                 <span style={{ color: 'var(--white)', fontWeight: 600 }}>Total</span>
-                                <span style={{ fontFamily: "'Outfit', sans-serif", color: 'var(--orange)', fontWeight: 700, fontSize: 18 }}>$2,400 – $2,800</span>
+                                <span style={{ fontFamily: "'Outfit', sans-serif", color: 'var(--orange)', fontWeight: 700, fontSize: 18 }}>$4,070 – $4,470</span>
                             </div>
                         </div>
 
@@ -1097,7 +1132,7 @@ export default function EasyDentureProposal() {
 
                     <div className="cta-row" style={{ maxWidth: 640, marginTop: 28 }}>
                         <a href="tel:321-666-5228" className="cta-btn">📞 Call to Confirm</a>
-                        <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Shoot%20%E2%80%94%20Confirmed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20Easy%20Denture%20shoot%20at%20the%20%242%2C400%20day%20rate.%0A%0A%5B%20%5D%20Add%20Drone%20(%2B%24400)%0A%0AThanks!%0AElizabeth" className="meeting-btn">✉ Send Confirmation</a>
+                        <a href="mailto:danielcastillo@mediageekz.com?subject=Easy%20Denture%20Shoot%20%E2%80%94%20Confirmed&body=Hey%20Daniel%2C%0A%0AI%27d%20like%20to%20confirm%20the%20Easy%20Denture%20shoot%20at%20%244%2C070.%0A%0A%5B%20%5D%20Add%20Drone%20(%2B%24400)%0A%0AThanks!%0AElizabeth" className="meeting-btn">✉ Send Confirmation</a>
                     </div>
                 </section>
 
