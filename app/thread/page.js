@@ -422,8 +422,8 @@ export default function ThreadLink() {
                     <div className="hero-meta">
                         <div className="hero-stat">
                             <div className="hero-stat-label">Project</div>
-                            <div className="hero-stat-value">Agency Promo</div>
-                            <div className="hero-stat-detail">Brand video for your agency</div>
+                            <div className="hero-stat-value">2 Videos</div>
+                            <div className="hero-stat-detail">Agency Promo + Local Area</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Shoot Date</div>
@@ -433,7 +433,7 @@ export default function ThreadLink() {
                         <div className="hero-stat">
                             <div className="hero-stat-label">Format</div>
                             <div className="hero-stat-value">Multi-Cam</div>
-                            <div className="hero-stat-detail">Cinematic agency brand film</div>
+                            <div className="hero-stat-detail">Cinematic brand + location film</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Location</div>
@@ -502,24 +502,34 @@ export default function ThreadLink() {
                     {activePhase === 'shoot-day' && (
                         <div className="timeline">
                             <div className="timeline-block">
-                                <div className="timeline-time">Morning</div>
+                                <div className="timeline-time">Early Morning</div>
                                 <div className="timeline-label">Arrive + Setup</div>
                                 <div className="timeline-desc">Position cameras, set lighting, dress the set. Test audio and dial in the look before talent arrives.</div>
                             </div>
                             <div className="timeline-block">
+                                <div className="timeline-time" style={{ color: 'var(--orange)' }}>📹 Video 1 — Agency Promo</div>
+                                <div className="timeline-label">Agency Team + Brand Story</div>
+                                <div className="timeline-desc">Cinematic portraits, action shots of the team at work, and short punchy interview segments. Who are you? What do you do? Why should people care? The faces and energy of your agency.</div>
+                            </div>
+                            <div className="timeline-block">
                                 <div className="timeline-time">Late Morning</div>
-                                <div className="timeline-label">Hero Shots — Agency Team</div>
-                                <div className="timeline-desc">Cinematic portraits and action shots of the team at work. The faces of your agency, captured with intention.</div>
+                                <div className="timeline-label">Agency B-Roll + Workspace</div>
+                                <div className="timeline-desc">Interior detail shots — workspace energy, team collaboration, client-facing moments. Office textures and branded elements.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Midday</div>
-                                <div className="timeline-label">Brand Story — Talking Heads</div>
-                                <div className="timeline-desc">Short, punchy interview segments. Who are you? What do you do? Why should people care? Natural and conversational.</div>
+                                <div className="timeline-label">Lunch + Reset</div>
+                                <div className="timeline-desc">Card swap, battery rotation. Review hero shots on monitor. Prep for exterior shoots.</div>
+                            </div>
+                            <div className="timeline-block">
+                                <div className="timeline-time" style={{ color: 'var(--teal)' }}>📹 Video 2 — Local Area</div>
+                                <div className="timeline-label">Winter Garden Neighborhood Film</div>
+                                <div className="timeline-desc">Cinematic showcase of the local area — downtown Winter Garden, Plant Street, historic district, parks, community vibe. Show potential clients the area your agency calls home.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Afternoon</div>
-                                <div className="timeline-label">B-Roll + Environment</div>
-                                <div className="timeline-desc">Cinematic detail shots — workspace energy, team collaboration, client-facing moments. The texture that makes the edit sing.</div>
+                                <div className="timeline-label">Exterior B-Roll + Drone</div>
+                                <div className="timeline-desc">Golden hour establishing shots, storefronts, street scenes, aerial views. The cinematic texture that ties the local area story together.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Late Afternoon</div>
@@ -532,19 +542,24 @@ export default function ThreadLink() {
                     {activePhase === 'post-production' && (
                         <div className="timeline">
                             <div className="timeline-block">
-                                <div className="timeline-time">Week 1</div>
-                                <div className="timeline-label">Hero Edit — Agency Brand Film</div>
+                                <div className="timeline-time" style={{ color: 'var(--orange)' }}>Video 1</div>
+                                <div className="timeline-label">Agency Brand Film — Hero Edit</div>
                                 <div className="timeline-desc">Primary 60–90 sec cinematic brand video. Color graded, sound designed, motion graphics. Priority delivery within ~7 days.</div>
                             </div>
                             <div className="timeline-block">
+                                <div className="timeline-time" style={{ color: 'var(--teal)' }}>Video 2</div>
+                                <div className="timeline-label">Local Area Film — Winter Garden</div>
+                                <div className="timeline-desc">60–90 sec cinematic location showcase. Highlight the neighborhood, community, and lifestyle. Designed to attract clients who value the area.</div>
+                            </div>
+                            <div className="timeline-block">
                                 <div className="timeline-time">Week 1–2</div>
-                                <div className="timeline-label">Social Clips — First Batch</div>
-                                <div className="timeline-desc">Vertical cuts optimized for Reels and TikTok. Quick-hit agency highlights for immediate posting.</div>
+                                <div className="timeline-label">Social Clips — Both Videos</div>
+                                <div className="timeline-desc">Vertical cuts from both the agency promo and local area footage. Optimized for Reels, TikTok, and LinkedIn.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Week 2</div>
-                                <div className="timeline-label">Extended Cut + BTS Photos</div>
-                                <div className="timeline-desc">Longer-form version for website/YouTube + full BTS photography set delivered via secure link.</div>
+                                <div className="timeline-label">Extended Cuts + BTS Photos</div>
+                                <div className="timeline-desc">Longer-form versions (2–3 min each) for website/YouTube + full BTS photography set.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Ongoing</div>
@@ -557,19 +572,24 @@ export default function ThreadLink() {
                     {activePhase === 'delivery' && (
                         <div className="timeline">
                             <div className="timeline-block">
-                                <div className="timeline-time">Week 1 Post-Shoot</div>
+                                <div className="timeline-time">Week 1</div>
                                 <div className="timeline-label">Agency Brand Film — Hero Edit</div>
                                 <div className="timeline-desc">Priority delivery via secure download link. You&apos;ll get a notification when it&apos;s ready for review.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Week 1</div>
+                                <div className="timeline-label">Local Area Film — Hero Edit</div>
+                                <div className="timeline-desc">Winter Garden neighborhood showcase delivered alongside the agency film.</div>
+                            </div>
+                            <div className="timeline-block">
+                                <div className="timeline-time">Week 1</div>
                                 <div className="timeline-label">BTS Photography</div>
-                                <div className="timeline-desc">Behind-the-scenes photos, professionally edited, delivered via gallery link.</div>
+                                <div className="timeline-desc">Behind-the-scenes photos from both shoot segments, professionally edited.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Week 2</div>
-                                <div className="timeline-label">Social Clips + Extended Cut</div>
-                                <div className="timeline-desc">All vertical social cuts and the extended website/YouTube version, ready for launch.</div>
+                                <div className="timeline-label">Social Clips + Extended Cuts</div>
+                                <div className="timeline-desc">All vertical social cuts and extended versions for both videos, ready for launch.</div>
                             </div>
                         </div>
                     )}
@@ -590,10 +610,11 @@ export default function ThreadLink() {
 
                     <div className="del-grid">
                         {[
-                            { name: 'Agency Brand Film (60–90 sec)', desc: 'Cinematic hero video — color graded, sound designed, motion graphics', eta: '~1 week post-shoot', status: 'upcoming' },
-                            { name: 'Extended Cut (2–3 min)', desc: 'Longer version for website & YouTube — full brand story', eta: '~2 weeks', status: 'upcoming' },
-                            { name: 'Social Clips (4–6 cuts)', desc: 'Vertical 30–60s cuts for Reels, TikTok, LinkedIn', eta: '~10 days', status: 'upcoming' },
-                            { name: 'BTS Photography', desc: 'Behind-the-scenes photos, professionally edited', eta: '~3 days', status: 'upcoming' },
+                            { name: '📹 Agency Brand Film (60–90 sec)', desc: 'Cinematic hero video — your team, your story, your energy. Color graded + sound designed.', eta: '~1 week', status: 'upcoming' },
+                            { name: '📹 Local Area Film (60–90 sec)', desc: 'Winter Garden neighborhood showcase — community, lifestyle, and why clients choose this area.', eta: '~1 week', status: 'upcoming' },
+                            { name: 'Extended Cuts (2–3 min each)', desc: 'Longer versions of both videos for website & YouTube', eta: '~2 weeks', status: 'upcoming' },
+                            { name: 'Social Clips (6–8 cuts)', desc: 'Vertical 30–60s cuts from both videos for Reels, TikTok, LinkedIn', eta: '~10 days', status: 'upcoming' },
+                            { name: 'BTS Photography', desc: 'Behind-the-scenes photos from both shoot segments', eta: '~3 days', status: 'upcoming' },
                             { name: '2 Revision Rounds per Deliverable', desc: 'Feedback tracked in-thread — just reply with notes', eta: 'Ongoing', status: 'included' },
                         ].map((d, i) => (
                             <div className="del-card" key={i}>
