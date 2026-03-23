@@ -1705,31 +1705,7 @@ export default function ThreadLink() {
                         </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-
-                        {/* ── ESSENTIALS ── */}
-                        <div style={{ padding: '32px 24px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 8 }}>Essentials</div>
-                            <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                                <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 36, fontWeight: 700, color: 'var(--orange)' }}>$4,800</span>
-                                <br />
-                                <span style={{ fontSize: 11, color: 'var(--muted-2)' }}>single video — brand authority</span>
-                            </div>
-                            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 12, color: 'var(--muted-2)', lineHeight: 2.4 }}>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Full-day shoot (up to 8 hours)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Dual-cam coverage (2× Sony FX3)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>1 brand video (60–90 sec, cinematic edit)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Color grading + sound design</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>4 social clips (9:16 vertical)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>Professional audio (dual wireless lavs)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative' }}><span style={{ position: 'absolute', left: 0, color: 'var(--orange)' }}>✓</span>1 revision round</li>
-                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Local community film</li>
-                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Extended cuts (2–3 min)</li>
-                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>BTS photography delivery</li>
-                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Motion graphics package</li>
-                                <li style={{ paddingLeft: 20, position: 'relative', opacity: 0.3 }}><span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>—</span>Raw footage archive</li>
-                            </ul>
-                        </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
 
                         {/* ── PROFESSIONAL (Recommended) ── */}
                         <div style={{ padding: '32px 24px', border: '1px solid rgba(99, 102, 241, 0.35)', borderRadius: 16, background: 'linear-gradient(135deg, var(--panel), rgba(99, 102, 241, 0.06))', position: 'relative', transition: 'all 0.3s' }}>
