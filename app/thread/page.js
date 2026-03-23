@@ -41,11 +41,11 @@ export default function ThreadLink() {
                     --shadow: #060a14;
                     --navy: #0f1729;
                     --panel: rgba(15, 23, 42, 0.88);
-                    --border: rgba(232, 98, 44, 0.16);
-                    --orange: #e8622c;
-                    --orange-soft: rgba(232, 98, 44, 0.12);
-                    --teal: #2dd4bf;
-                    --teal-soft: rgba(45, 212, 191, 0.12);
+                    --border: rgba(99, 102, 241, 0.16);
+                    --orange: #818cf8;
+                    --orange-soft: rgba(129, 140, 248, 0.12);
+                    --teal: #a78bfa;
+                    --teal-soft: rgba(167, 139, 250, 0.12);
                     --cream: #e2e8f0;
                     --white: #f1f5f9;
                     --muted: #94a3b8;
@@ -66,10 +66,10 @@ export default function ThreadLink() {
                     -webkit-font-smoothing: antialiased;
                 }
 
-                ::selection { background: rgba(232, 98, 44, 0.3); color: var(--white); }
+                ::selection { background: rgba(99, 102, 241, 0.35); color: var(--white); }
                 ::-webkit-scrollbar { width: 5px; }
                 ::-webkit-scrollbar-track { background: transparent; }
-                ::-webkit-scrollbar-thumb { background: rgba(232, 98, 44, 0.4); border-radius: 999px; }
+                ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #6366f1 0%, #818cf8 100%); border-radius: 999px; }
 
                 .page-shell { position: relative; }
 
@@ -92,7 +92,7 @@ export default function ThreadLink() {
                     position: absolute; inset: 0;
                     background:
                         linear-gradient(180deg, rgba(6, 10, 20, 0.5) 0%, rgba(6, 10, 20, 0.3) 40%, rgba(6, 10, 20, 0.85) 80%, #060a14 100%),
-                        radial-gradient(ellipse at 30% 30%, rgba(232, 98, 44, 0.12) 0%, transparent 50%);
+                        radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
                 }
 
                 .cin-hero-content {
@@ -103,7 +103,7 @@ export default function ThreadLink() {
 
                 .hero-badge {
                     display: inline-flex; align-items: center; gap: 10px;
-                    padding: 10px 20px; border: 1px solid rgba(232, 98, 44, 0.3);
+                    padding: 10px 20px; border: 1px solid rgba(99, 102, 241, 0.35);
                     border-radius: 999px; background: rgba(15, 23, 42, 0.6);
                     color: var(--orange); font-size: 11px; font-weight: 600;
                     letter-spacing: 0.3em; text-transform: uppercase;
@@ -112,13 +112,13 @@ export default function ThreadLink() {
 
                 .hero-badge::before {
                     content: ""; width: 7px; height: 7px; border-radius: 50%;
-                    background: var(--orange); box-shadow: 0 0 0 7px rgba(232, 98, 44, 0.15);
+                    background: var(--orange); box-shadow: 0 0 0 7px rgba(99, 102, 241, 0.15);
                     animation: pulse-dot 2s ease-in-out infinite;
                 }
 
                 @keyframes pulse-dot {
-                    0%, 100% { box-shadow: 0 0 0 7px rgba(232, 98, 44, 0.15); }
-                    50% { box-shadow: 0 0 0 14px rgba(232, 98, 44, 0.04); }
+                    0%, 100% { box-shadow: 0 0 0 7px rgba(99, 102, 241, 0.15); }
+                    50% { box-shadow: 0 0 0 14px rgba(99, 102, 241, 0.04); }
                 }
 
                 .hero-title {
@@ -162,9 +162,9 @@ export default function ThreadLink() {
                 }
 
                 .hero-stat:hover {
-                    border-color: rgba(232, 98, 44, 0.35);
+                    border-color: rgba(99, 102, 241, 0.35);
                     transform: translateY(-3px);
-                    box-shadow: 0 12px 32px rgba(232, 98, 44, 0.08);
+                    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.08);
                 }
 
                 .hero-stat-label {
@@ -238,7 +238,7 @@ export default function ThreadLink() {
                 }
 
                 .concept-card:hover {
-                    border-color: rgba(232, 98, 44, 0.3);
+                    border-color: rgba(99, 102, 241, 0.3);
                     transform: translateY(-4px);
                     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
                 }
@@ -288,7 +288,7 @@ export default function ThreadLink() {
                 }
 
                 .treatment-card:hover {
-                    border-color: rgba(232, 98, 44, 0.25);
+                    border-color: rgba(99, 102, 241, 0.25);
                     transform: translateY(-3px);
                     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
                 }
@@ -327,8 +327,8 @@ export default function ThreadLink() {
                     position: relative; width: 100%;
                     padding-bottom: 56.25%; /* 16:9 */
                     border-radius: 20px; overflow: hidden;
-                    border: 1px solid rgba(232, 98, 44, 0.15);
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(232, 98, 44, 0.06);
+                    border: 1px solid rgba(99, 102, 241, 0.15);
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(99, 102, 241, 0.06);
                 }
 
                 .video-wrap iframe {
@@ -347,7 +347,7 @@ export default function ThreadLink() {
                 /* ── Divider ── */
                 .divider {
                     width: min(100%, 900px); height: 1px; margin: 0 auto;
-                    background: linear-gradient(90deg, transparent, rgba(232, 98, 44, 0.3), rgba(45, 212, 191, 0.2), transparent);
+                    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2), transparent);
                 }
 
                 /* ── Sections ── */
@@ -376,10 +376,10 @@ export default function ThreadLink() {
                     display: flex; align-items: center; gap: 8px;
                 }
 
-                .phase-pill:hover { border-color: rgba(232, 98, 44, 0.3); color: var(--cream); }
+                .phase-pill:hover { border-color: rgba(99, 102, 241, 0.3); color: var(--cream); }
 
                 .phase-pill.active {
-                    border-color: var(--orange); background: rgba(232, 98, 44, 0.1); color: var(--orange);
+                    border-color: var(--orange); background: rgba(99, 102, 241, 0.1); color: var(--orange);
                 }
 
                 .phase-dot-sm { width: 6px; height: 6px; border-radius: 50%; }
@@ -396,7 +396,7 @@ export default function ThreadLink() {
                     content: ''; position: absolute; left: -32px; top: 6px;
                     width: 10px; height: 10px; border-radius: 50%;
                     background: var(--orange); border: 2px solid var(--shadow);
-                    box-shadow: 0 0 0 4px rgba(232, 98, 44, 0.15);
+                    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
                 }
 
                 .timeline-time {
@@ -417,12 +417,12 @@ export default function ThreadLink() {
                 }
 
                 .equip-card {
-                    padding: 24px 20px; border: 1px solid rgba(45, 212, 191, 0.1);
+                    padding: 24px 20px; border: 1px solid rgba(139, 92, 246, 0.1);
                     border-radius: 16px; background: var(--panel);
                     transition: border-color 0.3s, transform 0.3s;
                 }
 
-                .equip-card:hover { border-color: rgba(45, 212, 191, 0.3); transform: translateY(-2px); }
+                .equip-card:hover { border-color: rgba(139, 92, 246, 0.3); transform: translateY(-2px); }
                 .equip-icon { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
 
                 .equip-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
@@ -440,7 +440,7 @@ export default function ThreadLink() {
                     border-radius: 16px; background: var(--panel); transition: all 0.3s;
                 }
 
-                .del-card:hover { border-color: rgba(232, 98, 44, 0.25); transform: translateX(6px); background: rgba(232, 98, 44, 0.03); }
+                .del-card:hover { border-color: rgba(99, 102, 241, 0.25); transform: translateX(6px); background: rgba(99, 102, 241, 0.03); }
 
                 .del-info { flex: 1; }
                 .del-name { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); }
@@ -458,11 +458,11 @@ export default function ThreadLink() {
                     border-radius: 16px; background: var(--panel); transition: border-color 0.3s, transform 0.3s;
                 }
 
-                .team-card:hover { border-color: rgba(232, 98, 44, 0.25); transform: translateY(-2px); }
+                .team-card:hover { border-color: rgba(99, 102, 241, 0.25); transform: translateY(-2px); }
 
                 .team-avatar {
                     width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
-                    background: var(--orange-soft); border: 1px solid rgba(232, 98, 44, 0.2);
+                    background: var(--orange-soft); border: 1px solid rgba(99, 102, 241, 0.2);
                     border-radius: 14px; font-size: 24px;
                 }
 
@@ -479,21 +479,21 @@ export default function ThreadLink() {
                     color: var(--white); font-family: 'Outfit', sans-serif;
                     font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
                     transition: transform 0.2s, box-shadow 0.2s;
-                    box-shadow: 0 8px 30px rgba(232, 98, 44, 0.3); text-decoration: none;
+                    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3); text-decoration: none;
                 }
 
-                .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232, 98, 44, 0.4); }
+                .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4); }
 
                 .meeting-btn {
                     display: inline-flex; align-items: center; gap: 10px;
                     padding: 16px 32px; border: 1px solid var(--teal); border-radius: 999px; cursor: pointer;
-                    background: rgba(45, 212, 191, 0.08); color: var(--teal);
+                    background: rgba(139, 92, 246, 0.08); color: var(--teal);
                     font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700;
                     letter-spacing: 0.1em; text-transform: uppercase;
                     transition: transform 0.2s, box-shadow 0.2s, background 0.2s; text-decoration: none;
                 }
 
-                .meeting-btn:hover { transform: translateY(-2px); background: rgba(45, 212, 191, 0.14); box-shadow: 0 8px 30px rgba(45, 212, 191, 0.2); }
+                .meeting-btn:hover { transform: translateY(-2px); background: rgba(139, 92, 246, 0.14); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2); }
 
                 /* ── Footer ── */
                 .th-footer { text-align: center; padding: 80px 24px 48px; border-top: 1px solid rgba(100, 116, 139, 0.08); }
@@ -558,7 +558,7 @@ export default function ThreadLink() {
                             <img className="concept-img" src="/thread/community.png" alt="Winter Garden community" />
                         </div>
                         <div className="concept-body">
-                            <div className="concept-tag" style={{ background: 'rgba(232, 98, 44, 0.12)', color: 'var(--orange)', border: '1px solid rgba(232, 98, 44, 0.25)' }}>
+                            <div className="concept-tag" style={{ background: 'rgba(99, 102, 241, 0.12)', color: 'var(--orange)', border: '1px solid rgba(99, 102, 241, 0.25)' }}>
                                 📹 Video 1 — Local Market
                             </div>
                             <div className="concept-name">Winter Garden Community Film</div>
@@ -572,7 +572,7 @@ export default function ThreadLink() {
                             <img className="concept-img" src="/thread/screen-work.png" alt="Creative agency at work" />
                         </div>
                         <div className="concept-body">
-                            <div className="concept-tag" style={{ background: 'rgba(45, 212, 191, 0.1)', color: 'var(--teal)', border: '1px solid rgba(45, 212, 191, 0.25)' }}>
+                            <div className="concept-tag" style={{ background: 'rgba(139, 92, 246, 0.1)', color: 'var(--teal)', border: '1px solid rgba(139, 92, 246, 0.25)' }}>
                                 📹 Video 2 — National Level
                             </div>
                             <div className="concept-name">Creative Agency Film</div>
@@ -682,7 +682,7 @@ export default function ThreadLink() {
                     </div>
 
                     {/* Key Quote */}
-                    <div style={{ padding: '32px', border: '1px solid rgba(232, 98, 44, 0.15)', borderRadius: 20, background: 'rgba(232, 98, 44, 0.04)', borderLeft: '3px solid var(--orange)', marginBottom: 16 }}>
+                    <div style={{ padding: '32px', border: '1px solid rgba(99, 102, 241, 0.15)', borderRadius: 20, background: 'rgba(99, 102, 241, 0.04)', borderLeft: '3px solid var(--orange)', marginBottom: 16 }}>
                         <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
                             &quot;Whatever we&apos;re doing creatively, you see it in the real world. I want that connection. The brand in action — textile, tangible, actually happening. Not AI-generated stories. Real ones.&quot;
                         </div>
@@ -690,7 +690,7 @@ export default function ThreadLink() {
                     </div>
 
                     {/* Second Quote */}
-                    <div style={{ padding: '32px', border: '1px solid rgba(45, 212, 191, 0.15)', borderRadius: 20, background: 'rgba(45, 212, 191, 0.03)', borderLeft: '3px solid var(--teal)', marginBottom: 16 }}>
+                    <div style={{ padding: '32px', border: '1px solid rgba(139, 92, 246, 0.15)', borderRadius: 20, background: 'rgba(139, 92, 246, 0.03)', borderLeft: '3px solid var(--teal)', marginBottom: 16 }}>
                         <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.6, fontStyle: 'italic' }}>
                             &quot;This is personal for us. We want you to make it. And we&apos;re going to do everything we can to set the stage for you. You&apos;re still going to have to sell. This is your business. But we will set the stage.&quot;
                         </div>
@@ -722,12 +722,12 @@ export default function ThreadLink() {
                     {/* Video 1 Script */}
                     <div style={{ marginBottom: 64 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
-                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(232, 98, 44, 0.12)', border: '1px solid rgba(232, 98, 44, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                                 📹 Video 1 — Local Market
                             </div>
                             <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Winter Garden Community Film</div>
                         </div>
-                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(232, 98, 44, 0.3)', background: 'rgba(232, 98, 44, 0.03)', borderRadius: '0 12px 12px 0' }}>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(99, 102, 241, 0.3)', background: 'rgba(99, 102, 241, 0.03)', borderRadius: '0 12px 12px 0' }}>
                             <strong style={{ color: 'var(--orange)' }}>Tone:</strong> Warm, organic, family-friendly. Like a Publix commercial — you feel quality, community, and trust. The brand is in the background, never the pitch.
                         </div>
 
@@ -740,7 +740,7 @@ export default function ThreadLink() {
                                 { beat: 'MONTAGE', title: 'The Community Texture', desc: 'Quick cuts: a hand-lettered chalkboard menu, a dog on a leash, fresh produce at the market, a couple holding hands walking past storefronts, the team photographing a local restaurant. Every frame has warmth. The brand colors appear — on signage, on a tote bag, on a mug — but never as the subject.', time: '0:42–0:55' },
                                 { beat: 'CLOSE', title: 'We\'re Here', desc: 'The team walks back toward the office at sunset. One of them turns back and waves. Drone pulls back to reveal the full downtown. Super: "Threadlinks Creative — Winter Garden, FL" — clean, minimal, on screen for 3 seconds. No CTA. No "call us." Just the name and the place. They\'ll remember.', time: '0:55–1:05' },
                             ].map((b, i) => (
-                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(232, 98, 44, 0.1)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(99, 102, 241, 0.1)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 60, textAlign: 'center' }}>
                                         <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'var(--orange)', textTransform: 'uppercase', marginBottom: 4 }}>{b.beat}</div>
                                         <div style={{ fontSize: 10, color: 'var(--muted-3)', fontFamily: "'Outfit', sans-serif" }}>{b.time}</div>
@@ -757,12 +757,12 @@ export default function ThreadLink() {
                     {/* Video 2 Script */}
                     <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
-                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.1)', border: '1px solid rgba(45, 212, 191, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                                 📹 Video 2 — National Level
                             </div>
                             <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Creative Agency Film</div>
                         </div>
-                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(45, 212, 191, 0.3)', background: 'rgba(45, 212, 191, 0.03)', borderRadius: '0 12px 12px 0' }}>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 640, padding: '12px 16px', borderLeft: '2px solid rgba(139, 92, 246, 0.3)', background: 'rgba(139, 92, 246, 0.03)', borderRadius: '0 12px 12px 0' }}>
                             <strong style={{ color: 'var(--teal)' }}>Tone:</strong> Premium, cinematic, but still human. Show the creative process — the craft, the tools, the team. This is a creative agency that takes entrepreneurs from zero to scale. Not a brand factory — a partner.
                         </div>
 
@@ -777,7 +777,7 @@ export default function ThreadLink() {
                                 { beat: 'BRAND IN ACTION', title: 'The Real World', desc: 'The client\'s business is alive — customers walking in, new signage, branded packaging. The team is there too, filming, supporting. Logo on the cup. Brand on the apron. It\'s everywhere, but it\'s natural. They didn\'t drop them off.', time: '0:58–1:08' },
                                 { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. Not a vendor relationship — a partnership. Pull back. The full leadership team at their desks, golden hour light. Super: "Threadlinks Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:08–1:18' },
                             ].map((b, i) => (
-                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(139, 92, 246, 0.08)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 60, textAlign: 'center' }}>
                                         <div style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: 'var(--teal)', textTransform: 'uppercase', marginBottom: 4 }}>{b.beat}</div>
                                         <div style={{ fontSize: 10, color: 'var(--muted-3)', fontFamily: "'Outfit', sans-serif" }}>{b.time}</div>
@@ -830,7 +830,7 @@ export default function ThreadLink() {
                     {/* Video 1 Shot List */}
                     <div style={{ marginBottom: 56 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(232, 98, 44, 0.12)', border: '1px solid rgba(232, 98, 44, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.25)', color: 'var(--orange)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                                 📹 Video 1 — Local Market
                             </div>
                             <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Winter Garden Community Film</div>
@@ -849,12 +849,12 @@ export default function ThreadLink() {
                                 { shot: 'Sunset Walk Back', type: 'Gimbal', desc: 'Team walking back toward the office at golden hour. One turns and waves. Natural, warm, unscripted.' },
                                 { shot: 'Drone Pull-Back Close', type: 'Drone', desc: 'Final wide — revealing the full downtown from above. Super: "Threadlinks Creative — Winter Garden, FL." 3 seconds. Cut to black.' },
                             ].map((s, i) => (
-                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(232, 98, 44, 0.1)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
-                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(232, 98, 44, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--orange)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(99, 102, 241, 0.1)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(99, 102, 241, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--orange)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
                                     <div style={{ flex: 1 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                                             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
-                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(45, 212, 191, 0.2)', background: 'rgba(45, 212, 191, 0.06)' }}>{s.type}</span>
+                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(139, 92, 246, 0.2)', background: 'rgba(139, 92, 246, 0.06)' }}>{s.type}</span>
                                         </div>
                                         <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6 }}>{s.desc}</div>
                                     </div>
@@ -866,7 +866,7 @@ export default function ThreadLink() {
                     {/* Video 2 Shot List */}
                     <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.1)', border: '1px solid rgba(45, 212, 191, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                            <div style={{ padding: '6px 16px', borderRadius: 999, background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.25)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
                                 📹 Video 2 — National Level
                             </div>
                             <div style={{ fontSize: 16, fontFamily: "'Outfit', sans-serif", fontWeight: 600, color: 'var(--white)' }}>Creative Agency Film</div>
@@ -885,12 +885,12 @@ export default function ThreadLink() {
                                 { shot: 'Team at Work — Golden Hour', type: 'Wide / Slider', desc: 'Pull back to the full team at their desks. Warm light. Multiple screens showing active projects. The engine behind it all.' },
                                 { shot: 'Logo Resolve', type: 'Motion Graphics', desc: '"Threadlinks Creative — Full-Stack Creative Agency" — clean on black. 3 seconds. No CTA. Confidence. Cut to black.' },
                             ].map((s, i) => (
-                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(45, 212, 191, 0.08)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
-                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(45, 212, 191, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--teal)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
+                                <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(139, 92, 246, 0.08)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
+                                    <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--teal)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
                                     <div style={{ flex: 1 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4, flexWrap: 'wrap' }}>
                                             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 600, color: 'var(--white)' }}>{s.shot}</span>
-                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(232, 98, 44, 0.2)', background: 'rgba(232, 98, 44, 0.06)' }}>{s.type}</span>
+                                            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', padding: '2px 8px', borderRadius: 999, border: '1px solid rgba(99, 102, 241, 0.2)', background: 'rgba(99, 102, 241, 0.06)' }}>{s.type}</span>
                                         </div>
                                         <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6 }}>{s.desc}</div>
                                     </div>
@@ -1127,8 +1127,8 @@ export default function ThreadLink() {
                                     <div className="del-eta">ETA {d.eta}</div>
                                     <div className="del-status" style={{
                                         color: d.status === 'included' ? 'var(--teal)' : 'var(--orange)',
-                                        borderColor: d.status === 'included' ? 'rgba(45, 212, 191, 0.3)' : 'rgba(232, 98, 44, 0.3)',
-                                        background: d.status === 'included' ? 'rgba(45, 212, 191, 0.08)' : 'rgba(232, 98, 44, 0.08)',
+                                        borderColor: d.status === 'included' ? 'rgba(139, 92, 246, 0.3)' : 'rgba(99, 102, 241, 0.3)',
+                                        background: d.status === 'included' ? 'rgba(139, 92, 246, 0.08)' : 'rgba(99, 102, 241, 0.08)',
                                     }}>
                                         {d.status === 'included' ? 'Included' : 'Upcoming'}
                                     </div>
