@@ -668,6 +668,8 @@ export default function ThreadLink() {
                             { icon: '🏠', title: 'Publix Energy', desc: 'Subtle brand placement. Logo on the coffee cup, brand colors in the background, tagline on the wall — never the hero of the shot, always part of the environment. You feel it without being told.' },
                             { icon: '🤝', title: 'Human Connection', desc: 'Real conversations. Real handshakes. Team sitting with clients, not performing for camera. The authenticity that makes people trust you before they ever call.' },
                             { icon: '❤️', title: 'This Is Personal', desc: 'When a client is struggling, you scale their spend down. You tell them to save money. You want them to make it — and you do everything to set the stage. Not a conglomerate. A family.' },
+                            { icon: '📞', title: 'Always Pick Up', desc: 'Someone calls the office, someone answers. Email at 1am because the thought just hit? Send it. Don\'t wait. The commitment is visible — clients feel it before they ever sign.' },
+                            { icon: '📣', title: 'Social Media By Demand', desc: 'Two clients literally handed over budgets and said "you\'re doing our social media." It wasn\'t the plan — but when clients demand you carry the vision forward, you step up. That\'s how the service was born.' },
                             { icon: '🚀', title: 'Built for Entrepreneurs', desc: 'Not every business. Entrepreneurs ready to scale — ready to break through the glass ceiling. The ones who want discovery, branding, web, SEO, ads, social — the full stack.' },
                             { icon: '🎨', title: 'Creative, Not Corporate', desc: 'Apple Pencil on iPad. Wireframes on whiteboards. Logo iterations on screen. Show the craft — this is a creative agency, not a suit-and-tie consulting firm.' },
                             { icon: '♻️', title: 'We Don\'t Drop You Off', desc: 'The full journey: 3-4 hour discovery → branding → website → SEO → ads → social media. Uniformed. Every touchpoint connected. The website actually converts, actually works for their business.' },
@@ -936,6 +938,97 @@ export default function ThreadLink() {
                     </div>
                 </section>
 
+                {/* ═══ BRAND PALETTE ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Brand Palette</div>
+                        <div className="section-question">Indigo + Pink — Minimal, clean</div>
+                        <h2 className="section-title">Color direction for the films</h2>
+                        <p className="section-desc">
+                            The brand leans indigo-to-bubblegum pink with a minimal aesthetic. Color grading will be desaturated and balanced — not oversaturated. The palette informs set design, wardrobe coordination, and post-production color work.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
+                        {[
+                            { color: '#1e1b4b', label: 'Deep Indigo' },
+                            { color: '#4338ca', label: 'Indigo Core' },
+                            { color: '#6366f1', label: 'Indigo Vivid' },
+                            { color: '#818cf8', label: 'Indigo Light' },
+                            { color: '#a78bfa', label: 'Violet' },
+                            { color: '#c084fc', label: 'Orchid' },
+                            { color: '#e879a8', label: 'Bubblegum Pink' },
+                            { color: '#0f172a', label: 'Background' },
+                        ].map((c, i) => (
+                            <div key={i} style={{ textAlign: 'center' }}>
+                                <div style={{ width: 56, height: 56, borderRadius: 14, background: c.color, border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: 6 }} />
+                                <div style={{ fontSize: 9, fontWeight: 600, color: 'var(--muted-2)', letterSpacing: '0.05em' }}>{c.label}</div>
+                                <div style={{ fontSize: 8, color: 'var(--muted-3)', fontFamily: "'Outfit', sans-serif" }}>{c.color}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ height: 8, borderRadius: 999, background: 'linear-gradient(90deg, #1e1b4b 0%, #4338ca 20%, #6366f1 35%, #818cf8 50%, #a78bfa 65%, #c084fc 80%, #e879a8 100%)', marginBottom: 20 }} />
+
+                    <div style={{ padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                        <strong style={{ color: 'var(--cream)' }}>Color Grading Approach:</strong> Desaturated, clean, balanced. We won&apos;t oversaturate the indigo/pink — instead, we create a color palette in the grade that makes the brand colors feel natural in the footage. The raw footage starts gray; we shape it to feel minimal and intentional, not loud.
+                    </div>
+                </section>
+
+                {/* ═══ CREATIVE LOCATIONS ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Creative Locations</div>
+                        <div className="section-question">Where we&apos;re shooting</div>
+                        <h2 className="section-title">Locations &amp; set design</h2>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
+                        {[
+                            { icon: '🏢', title: 'The Office', desc: 'Working sessions, creativity happening live. Show the lively, fun atmosphere — even though it\'s "just an office," we make it look alive.' },
+                            { icon: '🤝', title: 'Conference Room', desc: 'Discovery meetings, client presentations, whiteboard strategy sessions. The depth of the process visible.' },
+                            { icon: '🌿', title: 'Artificial Grass Area', desc: 'Unique creative shots — unexpected texture, fun energy. Shows personality in the space.' },
+                            { icon: '🎥', title: 'Studio Rental', desc: '1-2 hour studio rental for controlled creative shots — white backdrop, product work, cinematic lighting. Shows craft and professionalism.' },
+                            { icon: '🏪', title: 'Client Locations', desc: 'On-site at client businesses. Show them in their element. The team is there with them — cameras in hand, building together.' },
+                            { icon: '🌄', title: 'Winter Garden Downtown', desc: 'Plant Street, Garden Theatre, farmer\'s market. Golden hour B-roll. The community texture that grounds the local video.' },
+                        ].map((loc, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>{loc.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{loc.title}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{loc.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ marginTop: 20, padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                        <strong style={{ color: 'var(--cream)' }}>🎥 BTS Content:</strong> Behind-the-scenes footage will be captured throughout. The same cameras, same lenses — showing the creative process as it happens. This BTS content becomes its own social media asset.
+                    </div>
+                </section>
+
+                {/* ═══ POST-PRODUCTION NOTES ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Post-Production</div>
+                        <div className="section-question">Sound, text, and color</div>
+                        <h2 className="section-title">Finishing the story</h2>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
+                        {[
+                            { icon: '🎧', title: 'Sound Design', desc: 'Custom sound design layered under the visuals. Ambient textures, subtle transitions, emotional scoring. Not stock music — a designed soundscape.' },
+                            { icon: '📝', title: 'Selective Text Overlays', desc: 'Text at key moments when someone is speaking — not oversaturated captions everywhere. Specific words and phrases that need to land. Clean, minimal, on-brand typography.' },
+                            { icon: '🎨', title: 'Desaturated Color Grade', desc: 'Indigo/pink palette integrated through the grade — not shoved in, not loud. Balanced, clean, calm. The footage starts gray and gets shaped to feel minimal and intentional.' },
+                            { icon: '✂️', title: 'Pacing & Rhythm', desc: 'Organic pacing. Some moments breathe slowly (discovery, personal connection), others hit fast (full-stack montage, screen-to-street cuts). The edit matches the emotional arc.' },
+                        ].map((p, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>{p.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 600, color: 'var(--white)', marginBottom: 6 }}>{p.title}</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{p.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
                 <div style={{ height: 40 }} />
                 <div className="divider" />
 
@@ -952,7 +1045,7 @@ export default function ThreadLink() {
 
                     <div className="phase-bar">
                         {[
-                            { id: 'pre-production', label: 'Pre-Production', color: '#e8622c' },
+                            { id: 'pre-production', label: 'Pre-Production', color: '#6366f1' },
                             { id: 'shoot-day', label: 'Shoot Day', color: '#94a3b8' },
                             { id: 'post-production', label: 'Post-Production', color: '#94a3b8' },
                             { id: 'delivery', label: 'Delivery', color: '#94a3b8' },
