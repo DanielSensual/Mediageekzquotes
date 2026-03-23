@@ -251,6 +251,7 @@ export default function EasyDentureProposal() {
 
     const [addons, setAddons] = useState({});
     const [expandedPkg, setExpandedPkg] = useState('professional');
+    const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -263,7 +264,10 @@ export default function EasyDentureProposal() {
         }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        return () => observer.disconnect();
+
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => { observer.disconnect(); window.removeEventListener('scroll', handleScroll); };
     }, []);
 
     const toggleAddon = (id) => {
@@ -328,20 +332,32 @@ export default function EasyDentureProposal() {
 
                 /* ── Hero ── */
                 .ed-hero {
-                    min-height: 80vh;
+                    min-height: 90vh;
                     display: flex; flex-direction: column;
                     justify-content: center; align-items: center;
                     text-align: center; padding: 80px 24px 60px;
-                    position: relative;
+                    position: relative; overflow: hidden;
+                }
+
+                .ed-hero-bg {
+                    position: absolute; inset: 0; z-index: 0;
+                    background: url('/easy-denture/hero.png') center/cover no-repeat;
+                    filter: brightness(0.35) saturate(0.85);
+                    transform: scale(1.1);
+                    transition: transform 0.05s linear;
+                }
+
+                .ed-hero-overlay {
+                    position: absolute; inset: 0; z-index: 1;
                     background:
-                        radial-gradient(ellipse at 50% 20%, rgba(232, 98, 44, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 60%, rgba(45, 212, 191, 0.04) 0%, transparent 40%);
+                        linear-gradient(180deg, rgba(6, 10, 20, 0.6) 0%, rgba(6, 10, 20, 0.3) 40%, rgba(6, 10, 20, 0.85) 100%),
+                        radial-gradient(ellipse at 50% 20%, rgba(232, 98, 44, 0.12) 0%, transparent 50%);
                 }
 
                 .ed-hero::after {
                     content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
                     background: linear-gradient(transparent, var(--shadow));
-                    pointer-events: none;
+                    pointer-events: none; z-index: 2;
                 }
 
                 .hero-badge {
@@ -781,6 +797,57 @@ export default function EasyDentureProposal() {
                     color: rgba(100, 116, 139, 0.4);
                 }
 
+                /* ── Image Panels (Parallax Breaks) ── */
+                .img-panel {
+                    position: relative; height: 50vh; overflow: hidden;
+                    display: flex; align-items: center; justify-content: center;
+                }
+
+                .img-panel-bg {
+                    position: absolute; inset: -20% 0; z-index: 0;
+                    background-size: cover; background-position: center;
+                    filter: brightness(0.4) saturate(0.9);
+                }
+
+                .img-panel-overlay {
+                    position: absolute; inset: 0; z-index: 1;
+                    background: linear-gradient(180deg, var(--shadow) 0%, transparent 30%, transparent 70%, var(--shadow) 100%);
+                }
+
+                .img-panel-content {
+                    position: relative; z-index: 2; text-align: center;
+                    padding: 24px;
+                }
+
+                .img-label {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(20px, 4vw, 36px);
+                    font-weight: 300; color: rgba(241, 245, 249, 0.9);
+                    letter-spacing: 0.08em;
+                }
+
+                .img-label span { color: var(--orange); font-weight: 600; }
+
+                .img-sub {
+                    font-size: 12px; color: rgba(148, 163, 184, 0.6);
+                    letter-spacing: 0.2em; text-transform: uppercase;
+                    margin-top: 8px;
+                }
+
+                /* ── Scope cards with images ── */
+                .scope-card-img {
+                    width: 100%; height: 160px; object-fit: cover;
+                    border-radius: 12px 12px 0 0; margin: -24px -24px 16px -24px;
+                    width: calc(100% + 48px);
+                    filter: brightness(0.7) saturate(0.9);
+                    transition: filter 0.4s ease, transform 0.5s ease;
+                }
+
+                .scope-card:hover .scope-card-img {
+                    filter: brightness(0.85) saturate(1.1);
+                    transform: scale(1.02);
+                }
+
                 /* ── Reveal ── */
                 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
                 .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -791,6 +858,8 @@ export default function EasyDentureProposal() {
             <div className="page-shell">
                 {/* ── HERO ── */}
                 <div className="ed-hero">
+                    <div className="ed-hero-bg" style={{ transform: `scale(1.1) translateY(${scrollY * 0.15}px)` }} />
+                    <div className="ed-hero-overlay" />
                     <div className="hero-badge">MediaGeekz — Easy Denture</div>
                     <h1 className="hero-title">
                         Capture.<br /><em>Demonstrate.</em><br />Deliver.
@@ -836,28 +905,38 @@ export default function EasyDentureProposal() {
                     </div>
 
                     <div className="scope-grid">
-                        <div className="scope-card">
-                            <div className="scope-icon">🚗</div>
-                            <h3>Sonya — Car Segment</h3>
+                        <div className="scope-card" style={{ overflow: 'hidden' }}>
+                            <img className="scope-card-img" src="/easy-denture/hero.png" alt="Mobile dentistry arrival" />
+                            <h3>🚗 Sonya — Car Segment</h3>
                             <p>Film Sonya in her car talking about Easy Denture as she drives up. A few additional lines as she walks up to the apartment — natural, on-the-move energy.</p>
                         </div>
-                        <div className="scope-card">
-                            <div className="scope-icon">🏠</div>
-                            <h3>Apartment Fittings</h3>
+                        <div className="scope-card" style={{ overflow: 'hidden' }}>
+                            <img className="scope-card-img" src="/easy-denture/fitting.png" alt="Denture fitting procedure" />
+                            <h3>🏠 Apartment Fittings</h3>
                             <p>Capture the Easy Denture fitting process with two patients and two dentists inside the apartment — close-ups on the product, the process, and real patient reactions.</p>
                         </div>
-                        <div className="scope-card">
-                            <div className="scope-icon">🎙️</div>
-                            <h3>Sound Bites</h3>
+                        <div className="scope-card" style={{ overflow: 'hidden' }}>
+                            <img className="scope-card-img" src="/easy-denture/crew-bts.png" alt="Production crew" />
+                            <h3>🎙️ Sound Bites</h3>
                             <p>Quick lines from each patient and each dentist after the fitting. Authentic reactions — &quot;I&apos;m excited to eat lunch with my new dentures today!&quot; style moments.</p>
                         </div>
-                        <div className="scope-card">
-                            <div className="scope-icon">🎬</div>
-                            <h3>B-Roll + Drone</h3>
+                        <div className="scope-card" style={{ overflow: 'hidden' }}>
+                            <img className="scope-card-img" src="/easy-denture/drone-aerial.png" alt="Aerial drone shot" />
+                            <h3>🎬 B-Roll + Drone</h3>
                             <p>Driving up, walking in, patient smiling in the mirror, exterior establishing shots. Drone footage available as an optional add-on for aerial establishing shots.</p>
                         </div>
                     </div>
                 </section>
+
+                {/* ═══ CINEMATIC IMAGE BREAK — DENTAL FITTING ═══ */}
+                <div className="img-panel">
+                    <div className="img-panel-bg" style={{ backgroundImage: "url('/easy-denture/fitting.png')", transform: `translateY(${(scrollY - 1200) * 0.08}px)` }} />
+                    <div className="img-panel-overlay" />
+                    <div className="img-panel-content">
+                        <div className="img-label">Bringing <span>Smiles</span> to Their Doorstep</div>
+                        <div className="img-sub">Mobile Dentistry · Captured Cinematically</div>
+                    </div>
+                </div>
 
                 <div className="divider" />
 
@@ -911,6 +990,16 @@ export default function EasyDentureProposal() {
                     </div>
                 </section>
 
+                {/* ═══ DRONE AERIAL IMAGE BREAK ═══ */}
+                <div className="img-panel">
+                    <div className="img-panel-bg" style={{ backgroundImage: "url('/easy-denture/drone-aerial.png')", transform: `translateY(${(scrollY - 2200) * 0.07}px)` }} />
+                    <div className="img-panel-overlay" />
+                    <div className="img-panel-content">
+                        <div className="img-label">On Location — <span>Orlando, FL</span></div>
+                        <div className="img-sub">Aerial Establishing Shots · FAA Part 107 Certified</div>
+                    </div>
+                </div>
+
                 <div className="divider" />
 
                 {/* ── EQUIPMENT ── */}
@@ -950,6 +1039,16 @@ export default function EasyDentureProposal() {
                         </div>
                     </div>
                 </section>
+
+                {/* ═══ PRODUCTION CREW IMAGE BREAK ═══ */}
+                <div className="img-panel">
+                    <div className="img-panel-bg" style={{ backgroundImage: "url('/easy-denture/crew-bts.png')", transform: `translateY(${(scrollY - 3000) * 0.06}px)` }} />
+                    <div className="img-panel-overlay" />
+                    <div className="img-panel-content">
+                        <div className="img-label">Professional <span>Cinema-Grade</span> Production</div>
+                        <div className="img-sub">Sony FX3 · Sennheiser EW-D · LED Lighting</div>
+                    </div>
+                </div>
 
                 <div className="divider" />
 
