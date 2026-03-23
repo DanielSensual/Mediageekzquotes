@@ -3,13 +3,20 @@
 import { useState, useEffect } from 'react';
 
 /* ═══════════════════════════════════════════════════════════════
-   MediaGeekz — Thread Link
+   MediaGeekz — Thread Link  ·  Enhanced Edition
    Collaborative Project Space · Winter Garden, FL
-   Agency Promo Video — First Shoot Together
+   Two-Video Shoot: Agency Promo + Local Area
    ═══════════════════════════════════════════════════════════════ */
 
 export default function ThreadLink() {
     const [activePhase, setActivePhase] = useState('pre-production');
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -19,7 +26,7 @@ export default function ThreadLink() {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         return () => observer.disconnect();
@@ -28,20 +35,15 @@ export default function ThreadLink() {
     return (
         <>
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
                 :root {
                     --shadow: #060a14;
-                    --shadow-2: #0a0f1a;
                     --navy: #0f1729;
-                    --navy-light: #162033;
                     --panel: rgba(15, 23, 42, 0.88);
-                    --panel-strong: rgba(18, 28, 50, 0.94);
                     --border: rgba(232, 98, 44, 0.16);
-                    --border-strong: rgba(232, 98, 44, 0.35);
                     --orange: #e8622c;
                     --orange-soft: rgba(232, 98, 44, 0.12);
-                    --orange-glow: rgba(232, 98, 44, 0.22);
                     --teal: #2dd4bf;
                     --teal-soft: rgba(45, 212, 191, 0.12);
                     --cream: #e2e8f0;
@@ -58,54 +60,54 @@ export default function ThreadLink() {
                 body {
                     font-family: 'Inter', sans-serif !important;
                     color: var(--cream) !important;
-                    background:
-                        radial-gradient(circle at 30% 10%, rgba(232, 98, 44, 0.06), transparent 40%),
-                        radial-gradient(circle at 70% 80%, rgba(45, 212, 191, 0.04), transparent 40%),
-                        linear-gradient(180deg, #0d1220 0%, #080c16 50%, #060a14 100%) !important;
+                    background: #060a14 !important;
                     line-height: 1.6;
                     overflow-x: hidden;
-                }
-
-                body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-                    background: linear-gradient(90deg, rgba(232,98,44,0.015) 1px, transparent 1px),
-                                linear-gradient(0deg, rgba(45,212,191,0.01) 1px, transparent 1px);
-                    background-size: 100px 100px; opacity: 0.5;
-                    mask-image: radial-gradient(circle at center, black 20%, transparent 75%);
+                    -webkit-font-smoothing: antialiased;
                 }
 
                 ::selection { background: rgba(232, 98, 44, 0.3); color: var(--white); }
-                ::-webkit-scrollbar { width: 6px; }
-                ::-webkit-scrollbar-track { background: var(--shadow); }
+                ::-webkit-scrollbar { width: 5px; }
+                ::-webkit-scrollbar-track { background: transparent; }
                 ::-webkit-scrollbar-thumb { background: rgba(232, 98, 44, 0.4); border-radius: 999px; }
 
-                .page-shell { position: relative; z-index: 1; }
+                .page-shell { position: relative; }
 
-                /* ── Hero ── */
-                .th-hero {
-                    min-height: 80vh;
-                    display: flex; flex-direction: column;
-                    justify-content: center; align-items: center;
-                    text-align: center; padding: 80px 24px 60px;
-                    position: relative;
-                    background:
-                        radial-gradient(ellipse at 50% 20%, rgba(232, 98, 44, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 60%, rgba(45, 212, 191, 0.04) 0%, transparent 40%);
+                /* ── CINEMATIC HERO ── */
+                .cin-hero {
+                    position: relative; min-height: 100vh;
+                    display: flex; align-items: center; justify-content: center;
+                    overflow: hidden;
                 }
 
-                .th-hero::after {
-                    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-                    background: linear-gradient(transparent, var(--shadow));
-                    pointer-events: none;
+                .cin-hero-bg {
+                    position: absolute; inset: 0;
+                    background: url('/thread/production-bts.png') center/cover no-repeat;
+                    filter: brightness(0.3) saturate(1.2);
+                    transform: scale(1.05);
+                    transition: transform 0.1s linear;
+                }
+
+                .cin-hero-overlay {
+                    position: absolute; inset: 0;
+                    background:
+                        linear-gradient(180deg, rgba(6, 10, 20, 0.5) 0%, rgba(6, 10, 20, 0.3) 40%, rgba(6, 10, 20, 0.85) 80%, #060a14 100%),
+                        radial-gradient(ellipse at 30% 30%, rgba(232, 98, 44, 0.12) 0%, transparent 50%);
+                }
+
+                .cin-hero-content {
+                    position: relative; z-index: 2;
+                    text-align: center; padding: 80px 24px 100px;
+                    max-width: 900px;
                 }
 
                 .hero-badge {
                     display: inline-flex; align-items: center; gap: 10px;
-                    padding: 10px 16px; border: 1px solid rgba(232, 98, 44, 0.25);
-                    border-radius: 999px; background: rgba(15, 23, 42, 0.7);
+                    padding: 10px 20px; border: 1px solid rgba(232, 98, 44, 0.3);
+                    border-radius: 999px; background: rgba(15, 23, 42, 0.6);
                     color: var(--orange); font-size: 11px; font-weight: 600;
                     letter-spacing: 0.3em; text-transform: uppercase;
-                    backdrop-filter: blur(12px); margin-bottom: 32px;
-                    position: relative; z-index: 1;
+                    backdrop-filter: blur(16px); margin-bottom: 36px;
                 }
 
                 .hero-badge::before {
@@ -116,44 +118,54 @@ export default function ThreadLink() {
 
                 @keyframes pulse-dot {
                     0%, 100% { box-shadow: 0 0 0 7px rgba(232, 98, 44, 0.15); }
-                    50% { box-shadow: 0 0 0 12px rgba(232, 98, 44, 0.06); }
+                    50% { box-shadow: 0 0 0 14px rgba(232, 98, 44, 0.04); }
                 }
 
                 .hero-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(48px, 8vw, 96px);
-                    font-weight: 700; line-height: 0.96; letter-spacing: -0.03em;
-                    color: var(--white); margin-bottom: 24px;
-                    position: relative; z-index: 1;
+                    font-size: clamp(52px, 9vw, 110px);
+                    font-weight: 800; line-height: 0.92; letter-spacing: -0.035em;
+                    color: var(--white); margin-bottom: 28px;
                 }
 
                 .hero-title em {
-                    color: var(--orange); font-style: normal; font-weight: 800;
-                    background: linear-gradient(135deg, #e8622c, #f59e0b);
+                    font-style: normal;
+                    background: linear-gradient(135deg, #e8622c, #f59e0b, #e8622c);
+                    background-size: 200% auto;
                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
                     background-clip: text;
+                    animation: shimmer 4s ease-in-out infinite;
+                }
+
+                @keyframes shimmer {
+                    0%, 100% { background-position: 0% center; }
+                    50% { background-position: 100% center; }
                 }
 
                 .hero-subtitle {
-                    max-width: 600px; color: var(--muted);
-                    font-size: 17px; line-height: 1.7;
-                    position: relative; z-index: 1; margin-bottom: 48px;
+                    max-width: 560px; margin: 0 auto 52px;
+                    color: rgba(148, 163, 184, 0.9);
+                    font-size: 18px; line-height: 1.7; font-weight: 300;
                 }
 
                 .hero-meta {
-                    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-                    width: min(100%, 800px); position: relative; z-index: 1;
+                    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+                    width: min(100%, 800px); margin: 0 auto;
                 }
 
                 .hero-stat {
-                    padding: 20px 16px; border: 1px solid rgba(232, 98, 44, 0.12);
-                    border-radius: 16px;
-                    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), rgba(15, 23, 42, 0.7);
-                    backdrop-filter: blur(12px);
-                    transition: border-color 0.3s ease;
+                    padding: 22px 16px; border: 1px solid rgba(255, 255, 255, 0.06);
+                    border-radius: 18px;
+                    background: rgba(15, 23, 42, 0.5);
+                    backdrop-filter: blur(16px);
+                    transition: all 0.35s ease;
                 }
 
-                .hero-stat:hover { border-color: rgba(232, 98, 44, 0.3); }
+                .hero-stat:hover {
+                    border-color: rgba(232, 98, 44, 0.35);
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 32px rgba(232, 98, 44, 0.08);
+                }
 
                 .hero-stat-label {
                     color: var(--teal); font-size: 9px; font-weight: 700;
@@ -163,28 +175,111 @@ export default function ThreadLink() {
                 .hero-stat-value {
                     margin-top: 10px; color: var(--white);
                     font-family: 'Outfit', sans-serif;
-                    font-size: 18px; font-weight: 600; line-height: 1.2;
+                    font-size: 20px; font-weight: 700; line-height: 1.2;
                 }
 
-                .hero-stat-detail { margin-top: 6px; color: var(--muted); font-size: 12px; }
+                .hero-stat-detail { margin-top: 5px; color: var(--muted-2); font-size: 12px; }
 
                 @media (max-width: 640px) {
                     .hero-meta { grid-template-columns: repeat(2, 1fr); }
+                    .cin-hero-content { padding: 60px 20px 80px; }
                 }
+
+                /* ── IMAGE PANELS ── */
+                .img-panel {
+                    position: relative;
+                    width: 100%; height: 50vh; min-height: 320px;
+                    overflow: hidden;
+                }
+
+                .img-panel-bg {
+                    position: absolute; inset: -40px;
+                    background-size: cover; background-position: center;
+                    transition: transform 0.1s linear;
+                }
+
+                .img-panel-overlay {
+                    position: absolute; inset: 0;
+                    background: linear-gradient(180deg, #060a14, rgba(6, 10, 20, 0.15) 30%, rgba(6, 10, 20, 0.15) 70%, #060a14);
+                }
+
+                .img-panel-content {
+                    position: relative; z-index: 2;
+                    height: 100%; display: flex; align-items: center; justify-content: center;
+                    text-align: center; padding: 32px 24px;
+                }
+
+                .img-label {
+                    display: inline-block; padding: 10px 20px;
+                    border: 1px solid rgba(255, 255, 255, 0.15);
+                    border-radius: 999px; backdrop-filter: blur(12px);
+                    background: rgba(0, 0, 0, 0.3);
+                    color: var(--white); font-family: 'Outfit', sans-serif;
+                    font-size: 16px; font-weight: 700; letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                }
+
+                .img-label span { color: var(--orange); }
+
+                /* ── CONCEPT CARDS ── */
+                .concept-grid {
+                    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+                    max-width: 1100px; margin: 0 auto; padding: 0 24px;
+                    margin-top: -60px; position: relative; z-index: 3;
+                }
+
+                @media (max-width: 768px) { .concept-grid { grid-template-columns: 1fr; } }
+
+                .concept-card {
+                    border: 1px solid rgba(255, 255, 255, 0.06);
+                    border-radius: 20px; overflow: hidden;
+                    background: var(--panel); backdrop-filter: blur(16px);
+                    transition: all 0.35s ease;
+                }
+
+                .concept-card:hover {
+                    border-color: rgba(232, 98, 44, 0.3);
+                    transform: translateY(-4px);
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+                }
+
+                .concept-img {
+                    width: 100%; height: 220px;
+                    object-fit: cover; display: block;
+                    filter: brightness(0.85) saturate(1.1);
+                    transition: filter 0.3s, transform 0.5s;
+                }
+
+                .concept-card:hover .concept-img {
+                    filter: brightness(1) saturate(1.2);
+                    transform: scale(1.03);
+                }
+
+                .concept-body { padding: 28px 24px 32px; }
+
+                .concept-tag {
+                    display: inline-block; padding: 4px 12px;
+                    border-radius: 999px; font-size: 10px; font-weight: 700;
+                    letter-spacing: 0.15em; text-transform: uppercase;
+                    margin-bottom: 14px;
+                }
+
+                .concept-name {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 22px; font-weight: 700; color: var(--white);
+                    margin-bottom: 10px; line-height: 1.2;
+                }
+
+                .concept-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
                 /* ── Divider ── */
                 .divider {
                     width: min(100%, 900px); height: 1px; margin: 0 auto;
                     background: linear-gradient(90deg, transparent, rgba(232, 98, 44, 0.3), rgba(45, 212, 191, 0.2), transparent);
-                    opacity: 0.72;
                 }
 
                 /* ── Sections ── */
-                .th-section {
-                    max-width: 1100px; margin: 0 auto;
-                    padding: 80px 24px;
-                }
-
+                .th-section { max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
                 .section-header { display: grid; gap: 14px; margin-bottom: 40px; max-width: 740px; }
                 .section-label { color: var(--orange); font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; }
                 .section-question { color: var(--muted-2); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -192,22 +287,18 @@ export default function ThreadLink() {
                 .section-title {
                     font-family: 'Outfit', sans-serif;
                     font-size: clamp(36px, 5vw, 54px);
-                    font-weight: 600; line-height: 1.05; color: var(--white);
+                    font-weight: 700; line-height: 1.05; color: var(--white);
                 }
 
                 .section-desc { color: var(--muted); font-size: 15px; line-height: 1.8; max-width: 640px; }
 
-                /* ── Phase Status Bar ── */
-                .phase-bar {
-                    display: flex; gap: 8px; margin-bottom: 48px;
-                    flex-wrap: wrap;
-                }
+                /* ── Phase Bar ── */
+                .phase-bar { display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap; }
 
                 .phase-pill {
                     padding: 10px 20px; border-radius: 999px;
                     border: 1px solid rgba(100, 116, 139, 0.15);
-                    background: var(--panel);
-                    font-size: 12px; font-weight: 600;
+                    background: var(--panel); font-size: 12px; font-weight: 600;
                     color: var(--muted); cursor: pointer;
                     transition: all 0.25s ease;
                     display: flex; align-items: center; gap: 8px;
@@ -216,14 +307,10 @@ export default function ThreadLink() {
                 .phase-pill:hover { border-color: rgba(232, 98, 44, 0.3); color: var(--cream); }
 
                 .phase-pill.active {
-                    border-color: var(--orange);
-                    background: rgba(232, 98, 44, 0.1);
-                    color: var(--orange);
+                    border-color: var(--orange); background: rgba(232, 98, 44, 0.1); color: var(--orange);
                 }
 
-                .phase-dot-sm {
-                    width: 6px; height: 6px; border-radius: 50%;
-                }
+                .phase-dot-sm { width: 6px; height: 6px; border-radius: 50%; }
 
                 /* ── Timeline ── */
                 .timeline { position: relative; padding-left: 36px; }
@@ -253,87 +340,56 @@ export default function ThreadLink() {
 
                 /* ── Equipment Grid ── */
                 .equip-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                    gap: 20px; margin-top: 40px;
+                    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                    gap: 16px; margin-top: 32px;
                 }
 
                 .equip-card {
-                    padding: 24px 20px; border: 1px solid rgba(45, 212, 191, 0.12);
+                    padding: 24px 20px; border: 1px solid rgba(45, 212, 191, 0.1);
                     border-radius: 16px; background: var(--panel);
-                    transition: border-color 0.3s ease, transform 0.3s ease;
+                    transition: border-color 0.3s, transform 0.3s;
                 }
 
                 .equip-card:hover { border-color: rgba(45, 212, 191, 0.3); transform: translateY(-2px); }
                 .equip-icon { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
 
-                .equip-card h3 {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 8px;
-                }
-
+                .equip-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
                 .equip-card p { font-size: 12px; color: var(--muted-2); line-height: 1.7; }
                 .equip-card ul { list-style: none; margin-top: 10px; }
-                .equip-card ul li {
-                    font-size: 11px; color: var(--muted-2); padding: 3px 0 3px 18px;
-                    position: relative; line-height: 1.5;
-                }
-                .equip-card ul li::before {
-                    content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 10px;
-                }
+                .equip-card ul li { font-size: 11px; color: var(--muted-2); padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
+                .equip-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 10px; }
 
                 /* ── Deliverables Grid ── */
-                .del-grid {
-                    display: grid; grid-template-columns: 1fr;
-                    gap: 14px; margin-top: 32px;
-                }
+                .del-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
 
                 .del-card {
                     display: flex; align-items: center; justify-content: space-between;
-                    padding: 22px 24px;
-                    border: 1px solid rgba(100, 116, 139, 0.12);
-                    border-radius: 16px; background: var(--panel);
-                    transition: all 0.3s ease;
+                    padding: 22px 24px; border: 1px solid rgba(100, 116, 139, 0.1);
+                    border-radius: 16px; background: var(--panel); transition: all 0.3s;
                 }
 
-                .del-card:hover {
-                    border-color: rgba(232, 98, 44, 0.25);
-                    transform: translateX(6px);
-                    background: rgba(232, 98, 44, 0.03);
-                }
+                .del-card:hover { border-color: rgba(232, 98, 44, 0.25); transform: translateX(6px); background: rgba(232, 98, 44, 0.03); }
 
                 .del-info { flex: 1; }
                 .del-name { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--white); }
                 .del-desc { font-size: 12px; color: var(--muted-2); margin-top: 4px; }
-
                 .del-right { display: flex; align-items: center; gap: 16px; }
                 .del-eta { font-size: 12px; color: var(--muted-2); font-family: 'Outfit', sans-serif; }
-                .del-status {
-                    padding: 5px 14px; border-radius: 999px;
-                    font-size: 10px; font-weight: 800;
-                    letter-spacing: 0.1em; text-transform: uppercase;
-                    border: 1px solid;
-                }
+                .del-status { padding: 5px 14px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid; }
 
-                /* ── Team Section ── */
-                .team-grid {
-                    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 20px; margin-top: 32px;
-                }
+                /* ── Team ── */
+                .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
 
                 .team-card {
                     display: flex; align-items: center; gap: 18px;
-                    padding: 24px 20px;
-                    border: 1px solid rgba(100, 116, 139, 0.12);
-                    border-radius: 16px; background: var(--panel);
-                    transition: border-color 0.3s, transform 0.3s;
+                    padding: 24px 20px; border: 1px solid rgba(100, 116, 139, 0.1);
+                    border-radius: 16px; background: var(--panel); transition: border-color 0.3s, transform 0.3s;
                 }
 
                 .team-card:hover { border-color: rgba(232, 98, 44, 0.25); transform: translateY(-2px); }
 
                 .team-avatar {
-                    width: 52px; height: 52px;
-                    display: flex; align-items: center; justify-content: center;
+                    width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
                     background: var(--orange-soft); border: 1px solid rgba(232, 98, 44, 0.2);
                     border-radius: 14px; font-size: 24px;
                 }
@@ -341,61 +397,36 @@ export default function ThreadLink() {
                 .team-name { font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 600; color: var(--white); }
                 .team-role { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
-                /* ── CTA Row ── */
-                .cta-row {
-                    display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap;
-                }
+                /* ── CTA ── */
+                .cta-row { display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
 
                 .cta-btn {
                     display: inline-flex; align-items: center; gap: 10px;
-                    padding: 16px 32px;
-                    border: none; border-radius: 999px; cursor: pointer;
+                    padding: 16px 32px; border: none; border-radius: 999px; cursor: pointer;
                     background: linear-gradient(135deg, var(--orange), #f59e0b);
                     color: var(--white); font-family: 'Outfit', sans-serif;
-                    font-size: 14px; font-weight: 700;
-                    letter-spacing: 0.1em; text-transform: uppercase;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                    box-shadow: 0 8px 30px rgba(232, 98, 44, 0.3);
-                    text-decoration: none;
+                    font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 8px 30px rgba(232, 98, 44, 0.3); text-decoration: none;
                 }
 
                 .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232, 98, 44, 0.4); }
 
                 .meeting-btn {
                     display: inline-flex; align-items: center; gap: 10px;
-                    padding: 16px 32px;
-                    border: 1px solid var(--teal); border-radius: 999px; cursor: pointer;
-                    background: rgba(45, 212, 191, 0.08);
-                    color: var(--teal); font-family: 'Outfit', sans-serif;
-                    font-size: 14px; font-weight: 700;
+                    padding: 16px 32px; border: 1px solid var(--teal); border-radius: 999px; cursor: pointer;
+                    background: rgba(45, 212, 191, 0.08); color: var(--teal);
+                    font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700;
                     letter-spacing: 0.1em; text-transform: uppercase;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-                    text-decoration: none;
+                    transition: transform 0.2s, box-shadow 0.2s, background 0.2s; text-decoration: none;
                 }
 
-                .meeting-btn:hover {
-                    transform: translateY(-2px);
-                    background: rgba(45, 212, 191, 0.14);
-                    box-shadow: 0 8px 30px rgba(45, 212, 191, 0.2);
-                }
+                .meeting-btn:hover { transform: translateY(-2px); background: rgba(45, 212, 191, 0.14); box-shadow: 0 8px 30px rgba(45, 212, 191, 0.2); }
 
                 /* ── Footer ── */
-                .th-footer {
-                    text-align: center; padding: 80px 24px 40px;
-                    border-top: 1px solid rgba(100, 116, 139, 0.1);
-                }
-
-                .footer-logo {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 14px; font-weight: 700; letter-spacing: 0.4em;
-                    text-transform: uppercase; color: var(--muted-3); margin-bottom: 10px;
-                }
-
-                .footer-tagline {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 16px; font-weight: 300; font-style: italic;
-                    color: rgba(100, 116, 139, 0.4);
-                }
+                .th-footer { text-align: center; padding: 80px 24px 48px; border-top: 1px solid rgba(100, 116, 139, 0.08); }
+                .footer-logo { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted-3); }
+                .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 300; font-style: italic; color: rgba(100, 116, 139, 0.35); margin-top: 8px; }
 
                 /* ── Reveal ── */
                 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -405,54 +436,92 @@ export default function ThreadLink() {
                     .del-right { flex-direction: column; align-items: flex-end; gap: 6px; }
                     .phase-bar { gap: 6px; }
                     .phase-pill { padding: 8px 14px; font-size: 11px; }
+                    .concept-img { height: 180px; }
                 }
             `}</style>
 
             <div className="page-shell">
-                {/* ── HERO ── */}
-                <div className="th-hero">
-                    <div className="hero-badge">MediaGeekz — Project Thread</div>
-                    <h1 className="hero-title">
-                        Let&apos;s<br /><em>Build.</em><br />Together.
-                    </h1>
-                    <p className="hero-subtitle">
-                        Your private production thread — a shared space where we plan, track, and deliver your agency&apos;s promo video. First shoot together. Let&apos;s make it count.
-                    </p>
+                {/* ═══ CINEMATIC HERO ═══ */}
+                <div className="cin-hero">
+                    <div className="cin-hero-bg" style={{ transform: `scale(1.05) translateY(${scrollY * 0.15}px)` }} />
+                    <div className="cin-hero-overlay" />
+                    <div className="cin-hero-content">
+                        <div className="hero-badge">MediaGeekz — Project Thread</div>
+                        <h1 className="hero-title">
+                            Let&apos;s<br /><em>Build.</em><br />Together.
+                        </h1>
+                        <p className="hero-subtitle">
+                            Your private production thread — a shared space where we plan, track, and deliver two cinematic films for your agency. First shoot together. Let&apos;s make it count.
+                        </p>
 
-                    <div className="hero-meta">
-                        <div className="hero-stat">
-                            <div className="hero-stat-label">Project</div>
-                            <div className="hero-stat-value">2 Videos</div>
-                            <div className="hero-stat-detail">Agency Promo + Local Area</div>
-                        </div>
-                        <div className="hero-stat">
-                            <div className="hero-stat-label">Shoot Date</div>
-                            <div className="hero-stat-value">April TBD</div>
-                            <div className="hero-stat-detail">Picking the date today</div>
-                        </div>
-                        <div className="hero-stat">
-                            <div className="hero-stat-label">Format</div>
-                            <div className="hero-stat-value">Multi-Cam</div>
-                            <div className="hero-stat-detail">Cinematic brand + location film</div>
-                        </div>
-                        <div className="hero-stat">
-                            <div className="hero-stat-label">Location</div>
-                            <div className="hero-stat-value">Winter Garden</div>
-                            <div className="hero-stat-detail">FL · On-Location</div>
+                        <div className="hero-meta">
+                            <div className="hero-stat">
+                                <div className="hero-stat-label">Project</div>
+                                <div className="hero-stat-value">2 Videos</div>
+                                <div className="hero-stat-detail">Agency Promo + Local Area</div>
+                            </div>
+                            <div className="hero-stat">
+                                <div className="hero-stat-label">Shoot Date</div>
+                                <div className="hero-stat-value">April TBD</div>
+                                <div className="hero-stat-detail">Picking the date today</div>
+                            </div>
+                            <div className="hero-stat">
+                                <div className="hero-stat-label">Format</div>
+                                <div className="hero-stat-value">Multi-Cam</div>
+                                <div className="hero-stat-detail">Cinematic brand + location</div>
+                            </div>
+                            <div className="hero-stat">
+                                <div className="hero-stat-label">Location</div>
+                                <div className="hero-stat-value">Winter Garden</div>
+                                <div className="hero-stat-detail">FL · On-Location</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                {/* ═══ TWO-VIDEO CONCEPT CARDS ═══ */}
+                <div className="concept-grid reveal">
+                    <div className="concept-card">
+                        <div style={{ overflow: 'hidden' }}>
+                            <img className="concept-img" src="/thread/agency-hero.png" alt="Agency promo concept" />
+                        </div>
+                        <div className="concept-body">
+                            <div className="concept-tag" style={{ background: 'rgba(232, 98, 44, 0.12)', color: 'var(--orange)', border: '1px solid rgba(232, 98, 44, 0.25)' }}>
+                                📹 Video 1
+                            </div>
+                            <div className="concept-name">Agency Brand Film</div>
+                            <div className="concept-desc">
+                                The cinematic story of your agency — who you are, what you build, and the energy you bring. Hero team portraits, workspace action shots, and short interview segments that sell your vision without saying a word.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="concept-card">
+                        <div style={{ overflow: 'hidden' }}>
+                            <img className="concept-img" src="/thread/winter-garden.png" alt="Winter Garden local area" />
+                        </div>
+                        <div className="concept-body">
+                            <div className="concept-tag" style={{ background: 'rgba(45, 212, 191, 0.1)', color: 'var(--teal)', border: '1px solid rgba(45, 212, 191, 0.25)' }}>
+                                📹 Video 2
+                            </div>
+                            <div className="concept-name">Local Area Film</div>
+                            <div className="concept-desc">
+                                A cinematic love letter to Winter Garden — downtown charm, Plant Street energy, parks, and community vibe. Show potential clients the neighborhood your agency calls home. Drone aerials, golden hour magic.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{ height: 80 }} />
                 <div className="divider" />
 
-                {/* ── PROJECT STATUS ── */}
+                {/* ═══ PROJECT STATUS / TIMELINE ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Project Status</div>
                         <div className="section-question">Where are we right now?</div>
                         <h2 className="section-title">Planning Phase</h2>
                         <p className="section-desc">
-                            We&apos;re picking the shoot date today and mapping out the vision for your agency promo. Here&apos;s where things stand across every phase of production.
+                            We&apos;re picking the shoot date today and mapping out the vision for both videos. Here&apos;s where things stand across every phase.
                         </p>
                     </div>
 
@@ -484,12 +553,12 @@ export default function ThreadLink() {
                             <div className="timeline-block">
                                 <div className="timeline-time">○ Upcoming</div>
                                 <div className="timeline-label">Creative Direction & Shot List</div>
-                                <div className="timeline-desc">Define the visual story — what does your agency look like on camera? Hero angles, team moments, workspace energy, client-facing scenes. We&apos;ll build a shot list together.</div>
+                                <div className="timeline-desc">Define the visual story for both videos — agency energy + local area charm. We&apos;ll build the shot list together.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">○ Upcoming</div>
                                 <div className="timeline-label">Location Scout — Winter Garden</div>
-                                <div className="timeline-desc">Walk the space, test natural light, find hero backdrops, plan camera placements. Identify any grip/lighting needs.</div>
+                                <div className="timeline-desc">Walk the space, test natural light, find hero backdrops. Scout exterior locations for the local area film.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">○ Upcoming</div>
@@ -509,7 +578,7 @@ export default function ThreadLink() {
                             <div className="timeline-block">
                                 <div className="timeline-time" style={{ color: 'var(--orange)' }}>📹 Video 1 — Agency Promo</div>
                                 <div className="timeline-label">Agency Team + Brand Story</div>
-                                <div className="timeline-desc">Cinematic portraits, action shots of the team at work, and short punchy interview segments. Who are you? What do you do? Why should people care? The faces and energy of your agency.</div>
+                                <div className="timeline-desc">Cinematic portraits, action shots of the team at work, and short punchy interview segments. The faces and energy of your agency.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Late Morning</div>
@@ -524,7 +593,7 @@ export default function ThreadLink() {
                             <div className="timeline-block">
                                 <div className="timeline-time" style={{ color: 'var(--teal)' }}>📹 Video 2 — Local Area</div>
                                 <div className="timeline-label">Winter Garden Neighborhood Film</div>
-                                <div className="timeline-desc">Cinematic showcase of the local area — downtown Winter Garden, Plant Street, historic district, parks, community vibe. Show potential clients the area your agency calls home.</div>
+                                <div className="timeline-desc">Cinematic showcase of the local area — downtown Winter Garden, Plant Street, historic district, parks, community vibe.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Afternoon</div>
@@ -549,7 +618,7 @@ export default function ThreadLink() {
                             <div className="timeline-block">
                                 <div className="timeline-time" style={{ color: 'var(--teal)' }}>Video 2</div>
                                 <div className="timeline-label">Local Area Film — Winter Garden</div>
-                                <div className="timeline-desc">60–90 sec cinematic location showcase. Highlight the neighborhood, community, and lifestyle. Designed to attract clients who value the area.</div>
+                                <div className="timeline-desc">60–90 sec cinematic location showcase. Highlight the neighborhood, community, and lifestyle.</div>
                             </div>
                             <div className="timeline-block">
                                 <div className="timeline-time">Week 1–2</div>
@@ -595,9 +664,16 @@ export default function ThreadLink() {
                     )}
                 </section>
 
-                <div className="divider" />
+                {/* ═══ BTS IMAGE BREAK ═══ */}
+                <div className="img-panel">
+                    <div className="img-panel-bg" style={{ backgroundImage: "url('/thread/production-bts.png')", transform: `translateY(${(scrollY - 2000) * 0.08}px)` }} />
+                    <div className="img-panel-overlay" />
+                    <div className="img-panel-content">
+                        <div className="img-label">Professional <span>Cinema-Grade</span> Production</div>
+                    </div>
+                </div>
 
-                {/* ── DELIVERABLES ── */}
+                {/* ═══ DELIVERABLES ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Deliverables</div>
@@ -624,14 +700,11 @@ export default function ThreadLink() {
                                 </div>
                                 <div className="del-right">
                                     <div className="del-eta">ETA {d.eta}</div>
-                                    <div
-                                        className="del-status"
-                                        style={{
-                                            color: d.status === 'included' ? 'var(--teal)' : 'var(--orange)',
-                                            borderColor: d.status === 'included' ? 'rgba(45, 212, 191, 0.3)' : 'rgba(232, 98, 44, 0.3)',
-                                            background: d.status === 'included' ? 'rgba(45, 212, 191, 0.08)' : 'rgba(232, 98, 44, 0.08)',
-                                        }}
-                                    >
+                                    <div className="del-status" style={{
+                                        color: d.status === 'included' ? 'var(--teal)' : 'var(--orange)',
+                                        borderColor: d.status === 'included' ? 'rgba(45, 212, 191, 0.3)' : 'rgba(232, 98, 44, 0.3)',
+                                        background: d.status === 'included' ? 'rgba(45, 212, 191, 0.08)' : 'rgba(232, 98, 44, 0.08)',
+                                    }}>
                                         {d.status === 'included' ? 'Included' : 'Upcoming'}
                                     </div>
                                 </div>
@@ -642,13 +715,13 @@ export default function ThreadLink() {
 
                 <div className="divider" />
 
-                {/* ── EQUIPMENT ── */}
+                {/* ═══ EQUIPMENT ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Production Kit</div>
                         <h2 className="section-title">The gear behind the look</h2>
                         <p className="section-desc">
-                            Professional cinema equipment tuned for controlled interview environments — clean audio, flattering light, and multiple angles.
+                            Professional cinema equipment for both interior agency shoots and exterior location coverage.
                         </p>
                     </div>
 
@@ -656,45 +729,52 @@ export default function ThreadLink() {
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: 'var(--orange)' }}>✦ Camera A — Hero</div>
                             <h3>Sony FX3</h3>
-                            <p>Full-frame cinema body. Locked on hero interview angle — chest-up MCU.</p>
+                            <p>Full-frame cinema body. Primary hero angle for interviews and team portraits.</p>
                             <ul><li>85mm f/1.4 GM</li><li>S-Log3 / S-Gamut3.Cine</li><li>4K 24fps</li><li>XAVC-S 4:2:2 10-bit</li></ul>
                         </div>
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: 'var(--teal)' }}>✦ Camera B — 2nd Angle</div>
                             <h3>Sony A7S III</h3>
-                            <p>B-cam on complementary angle — captures reactions and close-ups.</p>
+                            <p>B-cam on complementary angle — detail shots and reactions.</p>
                             <ul><li>24-70mm f/2.8 GM</li><li>Matched color science</li><li>Low-light capable</li><li>S-Log3 synced</li></ul>
                         </div>
                         <div className="equip-card">
-                            <div className="equip-icon" style={{ color: '#A78BFA' }}>✦ Camera C — Wide</div>
+                            <div className="equip-icon" style={{ color: '#A78BFA' }}>✦ Camera C — Wide / Gimbal</div>
                             <h3>Sony A7S III</h3>
-                            <p>Locked-off wide establishing shot — full scene coverage for editor&apos;s cutaways.</p>
-                            <ul><li>16-35mm f/2.8 GM</li><li>Static tripod</li><li>Full room coverage</li><li>S-Log3 synced</li></ul>
+                            <p>Establishing shots + gimbal movement for exterior location coverage.</p>
+                            <ul><li>16-35mm f/2.8 GM</li><li>DJI RS 3 Pro gimbal</li><li>Full scene coverage</li><li>S-Log3 synced</li></ul>
                         </div>
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: '#F472B6' }}>✦ Audio</div>
                             <h3>Dual Wireless Lavs</h3>
-                            <p>One lav per participant. Clean, isolated audio tracks for each speaker.</p>
-                            <ul><li>Sennheiser EW-D ×2</li><li>Rode NTG5 boom backup</li><li>Zoom F6 32-bit float</li><li>Synced timecode</li></ul>
+                            <p>Clean, isolated audio tracks for each speaker.</p>
+                            <ul><li>Sennheiser EW-D ×2</li><li>Rode NTG5 boom</li><li>Zoom F6 32-bit float</li><li>Synced timecode</li></ul>
                         </div>
                         <div className="equip-card">
                             <div className="equip-icon" style={{ color: '#FBBF24' }}>✦ Lighting</div>
-                            <h3>Interview Kit</h3>
-                            <p>Soft, flattering key light with controlled fill and separation.</p>
-                            <ul><li>300W LED + 47&quot; Softbox</li><li>Aputure MC RGB fill ×2</li><li>4×4 neg fill flag</li><li>LED hair light / edge</li></ul>
+                            <h3>Interview + Location Kit</h3>
+                            <p>Soft, flattering key light for interiors. Portable fills for exteriors.</p>
+                            <ul><li>300W LED + 47&quot; Softbox</li><li>Aputure MC RGB fill ×2</li><li>4×4 neg fill flag</li><li>Portable reflectors</li></ul>
                         </div>
                     </div>
                 </section>
 
-                <div className="divider" />
+                {/* ═══ WINTER GARDEN IMAGE BREAK ═══ */}
+                <div className="img-panel">
+                    <div className="img-panel-bg" style={{ backgroundImage: "url('/thread/winter-garden.png')", transform: `translateY(${(scrollY - 4000) * 0.06}px)` }} />
+                    <div className="img-panel-overlay" />
+                    <div className="img-panel-content">
+                        <div className="img-label">On Location — <span>Winter Garden, FL</span></div>
+                    </div>
+                </div>
 
-                {/* ── YOUR TEAM ── */}
+                {/* ═══ YOUR TEAM ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Your Team</div>
                         <h2 className="section-title">Who&apos;s on your project</h2>
                         <p className="section-desc">
-                            Your dedicated production crew. Any questions or ideas — reach out to us directly through this thread.
+                            Your dedicated production crew. Any questions or ideas — reach out directly.
                         </p>
                     </div>
 
@@ -721,7 +801,7 @@ export default function ThreadLink() {
                     </div>
                 </section>
 
-                {/* ── FOOTER ── */}
+                {/* ═══ FOOTER ═══ */}
                 <div className="th-footer">
                     <div className="footer-logo">MediaGeekz</div>
                     <div className="footer-tagline">Your production. Our obsession.</div>
