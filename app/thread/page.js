@@ -534,8 +534,8 @@ export default function ThreadLink() {
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Shoot Date</div>
-                                <div className="hero-stat-value">April TBD</div>
-                                <div className="hero-stat-detail">Picking the date today</div>
+                                <div className="hero-stat-value">Mid-April</div>
+                                <div className="hero-stat-detail">Weekend shoot</div>
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Format</div>
@@ -1072,11 +1072,11 @@ export default function ThreadLink() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
                         {[
                             { icon: '🏢', title: 'The Office', desc: 'Small but workable — tight shots, bokeh, ultra-wide slider between laptops. We\'ll rearrange furniture, center the table, keep it tight enough that it feels intentional. Indigo RGB LEDs in the background for brand color accents.' },
-                            { icon: '🤝', title: 'Conference Room', desc: 'Discovery meetings, client presentations, whiteboard strategy sessions. The depth of the process visible.' },
-                            { icon: '🌿', title: 'Artificial Grass Area', desc: 'Unique creative shots — unexpected texture, fun energy. Shows personality in the space.' },
-                            { icon: '🎥', title: 'Studio Rental', desc: '1-2 hour studio rental for controlled creative shots — white backdrop, product work, cinematic lighting. Shows craft and professionalism.' },
-                            { icon: '🏪', title: 'Client Locations', desc: 'On-site at client businesses. Show them in their element. The team is there with them — cameras in hand, building together.' },
-                            { icon: '🌄', title: 'Winter Garden Downtown', desc: 'Plant Street, Garden Theatre, farmer\'s market. Golden hour B-roll. The community texture that grounds the local video.' },
+                            { icon: '🤝', title: 'Conference Room', desc: 'Discovery meetings, client presentations, strategy sessions. The depth of the process visible. Tables can be moved, glass whiteboard down. Good depth for interviews.' },
+                            { icon: '🚧', title: 'Construction Site', desc: 'Client location — wear the helmets, show you\'re out there working hard. It shows range: you\'re not just behind a screen, you\'re embedded in the client\'s world.' },
+                            { icon: '🏡', title: 'Client Businesses', desc: 'On-site at client locations. Show them in their element. The team is there with them — cameras in hand, building together. Need confirmed time slots, not run-and-gun.' },
+                            { icon: '🌅', title: 'Downtown Winter Garden', desc: 'Plant Street, clock tower, train in the background. Recognizable but not center-stage — a couple seconds of local texture. Background should be identifiable but we\'re not under the clock tower posing.' },
+                            { icon: '🌿', title: 'Artificial Grass Area', desc: 'Unique creative shots — unexpected texture, fun energy. Shows personality in the space. Quick moments, not a main location.' },
                         ].map((loc, i) => (
                             <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
                                 <div style={{ fontSize: 24, marginBottom: 10 }}>{loc.icon}</div>
@@ -1086,8 +1086,17 @@ export default function ThreadLink() {
                         ))}
                     </div>
 
-                    <div style={{ marginTop: 20, padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
-                        <strong style={{ color: 'var(--cream)' }}>🎥 BTS Content:</strong> Behind-the-scenes footage will be captured throughout. The same cameras, same lenses — showing the creative process as it happens. This BTS content becomes its own social media asset.
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 20 }}>
+                        <div style={{ padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                            <strong style={{ color: 'var(--cream)' }}>☀️ Outdoor Lighting:</strong> Extra crew member needed for outdoor shots. Butterfly softbox setup (large diffusion frame) to control harsh sunlight. Best when slightly cloudy. Time-sensitive — tight schedule for outdoor scenes.
+                        </div>
+                        <div style={{ padding: '16px 20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)', fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                            <strong style={{ color: 'var(--cream)' }}>📱 BTS Content:</strong> Entire shoot process documented with iPhones + pro cameras. BTS becomes its own social media asset. Creative behind-the-scenes showing the journey, not just final product.
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 12, padding: '12px 16px', border: '1px solid rgba(234, 179, 8, 0.15)', borderRadius: 10, background: 'rgba(234, 179, 8, 0.03)', fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                        ⚠️ <strong style={{ color: '#eab308' }}>Permits:</strong> May be needed for outdoor shooting with professional equipment. Public spaces are generally fine for handheld, but butterfly softboxes and full rigs could draw attention. Locations need to be confirmed and locked before shoot day.
                     </div>
                 </section>
 
@@ -1122,16 +1131,55 @@ export default function ThreadLink() {
                         <div className="section-question">What to wear on shoot day</div>
                         <h2 className="section-title">Wardrobe direction</h2>
                         <p className="section-desc">
-                            Brand colors present but not forced. No company logo shirts — that&apos;s too corporate. The indigo should live subtly in the clothing and environment.
+                            Brand colors present but not forced. No company logo shirts — that&apos;s too corporate. The indigo should live subtly in the clothing. Final wardrobe choices need to be decided before the shoot.
                         </p>
+                    </div>
+
+                    {/* Colors to avoid vs prefer */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 20 }}>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 10 }}>✅ Preferred Colors</div>
+                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                                {[
+                                    { color: '#111', label: 'Black' },
+                                    { color: '#fff', label: 'White' },
+                                    { color: '#4f46e5', label: 'Indigo' },
+                                    { color: '#eab308', label: 'Yellow accent' },
+                                ].map((c, i) => (
+                                    <div key={i} style={{ textAlign: 'center' }}>
+                                        <div style={{ width: 36, height: 36, borderRadius: 10, background: c.color, border: '1px solid rgba(255,255,255,0.15)', marginBottom: 4 }} />
+                                        <div style={{ fontSize: 8, color: 'var(--muted-2)' }}>{c.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 10 }}>🚫 Avoid</div>
+                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                                {[
+                                    { color: '#f5f0e1', label: 'Cream' },
+                                    { color: '#14b8a6', label: 'Turquoise' },
+                                    { color: '#3b82f6', label: 'Blues' },
+                                    { color: 'repeating-linear-gradient(45deg, #666, #666 5px, #888 5px, #888 10px)', label: 'Patterns' },
+                                ].map((c, i) => (
+                                    <div key={i} style={{ textAlign: 'center' }}>
+                                        <div style={{ width: 36, height: 36, borderRadius: 10, background: c.color, border: '1px solid rgba(255,255,255,0.15)', marginBottom: 4, position: 'relative', overflow: 'hidden' }}>
+                                            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', fontSize: 18, fontWeight: 700 }}>×</div>
+                                        </div>
+                                        <div style={{ fontSize: 8, color: 'var(--muted-2)' }}>{c.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
                         {[
-                            { icon: '👔', title: 'Indigo Accents', desc: 'Indigo blazer, striped shirt, subtle tones. The brand color should be present but not screaming. Think: fashion-forward, not uniform.' },
+                            { icon: '👔', title: 'Indigo Accents', desc: 'Indigo blazer, striped shirt, subtle tones. Yellow as a subtle pop — like peeking from under a coat. The brand color should be present but not screaming.' },
                             { icon: '🚫', title: 'No Logo Shirts', desc: 'No company name shirts. That reads corporate, not creative. Let the visuals and environment do the branding — the clothes should feel personal.' },
-                            { icon: '🎨', title: 'Collateral Materials', desc: 'ThreadLink can provide collateral for wardrobe coordination — branded materials at wholesale pricing. Subtle brand touches in accessories and props.' },
+                            { icon: '🎨', title: 'Collateral Materials', desc: 'ThreadLink can provide collateral — branded materials at wholesale pricing. Maybe custom pins with the indigo icon. Subtle brand touches in accessories and props.' },
                             { icon: '✨', title: 'Clean & Intentional', desc: 'Professional but approachable. Not suits. Not hoodies. The sweet spot between polished and real. The clothing matches the brand — minimal, premium, purposeful.' },
+                            { icon: '💄', title: 'No Makeup Artist Needed', desc: 'Keeping it natural and authentic. No glam. The team should look like themselves — real, not produced. Just make sure hair and grooming are sharp.' },
                         ].map((w, i) => (
                             <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
                                 <div style={{ fontSize: 24, marginBottom: 10 }}>{w.icon}</div>
@@ -1196,14 +1244,19 @@ export default function ThreadLink() {
                         <div className="section-label">On-Camera</div>
                         <div className="section-question">How we capture authenticity</div>
                         <h2 className="section-title">Production approach</h2>
+                        <p className="section-desc">
+                            Final delivery: under 1:30. Script drafted collaboratively — the team knows their brand best, we&apos;ll help shape it. Not talking 24/7 — there need to be breaks and moments.
+                        </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
                         {[
                             { icon: '🚫', title: 'No Teleprompter', desc: 'Natural conversation, not scripts. Cable-talk energy — get them going and they flow. The authenticity comes from real conversation, not rehearsed lines.' },
-                            { icon: '🎙️', title: 'Practice Runs', desc: 'Practice speaking on camera before shoot day. Podcast-style warm-ups to get comfortable. The more natural, the more viewers trust you.' },
+                            { icon: '🎬', title: 'Script Under 1:30', desc: 'Rough draft from the team, then we refine together. Overlays and visuals fill the gaps — you don\'t have to be talking every second. Natural breaks, moments of breathing room.' },
+                            { icon: '🎤', title: 'Practice Runs', desc: 'Practice speaking on camera before shoot day. Podcast-style warm-ups. The more natural, the more viewers trust you. Practice leads to confidence, not perfection.' },
                             { icon: '😄', title: 'Light Comedy', desc: 'One light-hearted moment — juggling drinks (we juggle everything), a quick reaction shot. Not forced. Just a beat that makes someone chuckle.' },
                             { icon: '🎯', title: 'Results > Aesthetics', desc: 'The video that gets clients results beats the "prettiest" video every time. Beautiful AND effective — that is the standard.' },
+                            { icon: '📣', title: 'No Hard CTA', desc: 'If the storytelling is done well enough, they know the call to action. No "call us" or "get your free estimate." Let the work speak. The story IS the pitch.' },
                         ].map((a, i) => (
                             <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)', transition: 'all 0.3s' }}>
                                 <div style={{ fontSize: 24, marginBottom: 10 }}>{a.icon}</div>
@@ -1211,6 +1264,10 @@ export default function ThreadLink() {
                                 <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{a.desc}</div>
                             </div>
                         ))}
+                    </div>
+
+                    <div style={{ marginTop: 16, padding: '12px 16px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 10, background: 'var(--panel)', fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>
+                        📷 <strong style={{ color: 'var(--cream)' }}>Tech Note:</strong> Need a CPL polarizer for any screen shots (laptops, monitors). The lens we have can handle it, but want a fresh one for this shoot to ensure clean reflections.
                     </div>
                 </section>
 
@@ -1238,6 +1295,145 @@ export default function ThreadLink() {
                                 <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>{e.desc}</div>
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                {/* ═══ MEETING NOTES ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Meeting Notes</div>
+                        <div className="section-question">Everything discussed across all sessions</div>
+                        <h2 className="section-title">Raw meeting notes</h2>
+                        <p className="section-desc">
+                            Compiled from all pre-production meetings. These are the unfiltered takeaways that inform every creative decision.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+                        {/* Creative Direction */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>🎬 Creative Direction</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Two videos: local community film (Winter Garden) + national brand authority film (full-stack capabilities)</li>
+                                <li>Screen to Street concept — transition from computer work to real-world brand in action. The truck driving on screen transitions to real life.</li>
+                                <li>We want to see the brand IN ACTION, not just talking about it. Show the creative process happening live.</li>
+                                <li>Balance between demonstrating authority and building human connection. Don&apos;t choose one — do both.</li>
+                                <li>Publix Energy — like Publix commercials, subtle branding that makes you feel something without being aggressive</li>
+                                <li>Organic content but cinematic quality. Not run-and-gun. Not overly produced. The sweet spot.</li>
+                                <li>AI is getting good enough to fake things with people. We want to make sure whatever we create has genuine human moments that can&apos;t be replicated.</li>
+                                <li>The storytelling should show the real working relationship, not a curated highlight reel</li>
+                                <li>Brady Bunch split-screen for the remote team — 3 remote members in a cinema-lit grid, 2-3 seconds in the video</li>
+                                <li>Alternative remote shot: record a Zoom call, one team member full frame, then zoom out to show the desk in real life</li>
+                            </ul>
+                        </div>
+
+                        {/* Brand Philosophy */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>💡 Brand Philosophy &amp; Client Approach</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>This is personal for us. We want them to make it. We will do everything we can to give them the tools and set the stage.</li>
+                                <li>We toned down a client&apos;s spend budget when she was in a hard spot. Told her to bring it down, we can run with this for now, then scale back up.</li>
+                                <li>We&apos;re not a massive conglomerate. We&apos;re a team that picks up the phone. We respond quickly. We&apos;re available.</li>
+                                <li>Social media was added because clients literally demanded it. We didn&apos;t plan on offering it — the market told us to.</li>
+                                <li>Hiring process values initiative and cultural fit. We don&apos;t just hire for skills.</li>
+                                <li>Their brand is your brand. We need to provide real authentic services because their success IS our success.</li>
+                                <li>Got made fun of by another videographer for quality — sent that videographer the client results. Views, leads, ad performance. Results win.</li>
+                                <li>We went back out for free when we messed up. We own mistakes and make them right.</li>
+                                <li>Clients come to us looking outdated — their content or collateral doesn&apos;t match the services they provide. We fix that gap.</li>
+                                <li>Tired of seeing businesses fail because they chased the wrong team. We want to build family within the space.</li>
+                            </ul>
+                        </div>
+
+                        {/* Wardrobe Notes */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>👔 Wardrobe &amp; Styling</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Indigo and purple should be present but not overpowering. Just there.</li>
+                                <li>An indigo striped blazer — not what you&apos;d wear casually, but styled for camera</li>
+                                <li>Or you wear shirts with your company name, but that can be corporate. We don&apos;t think you need that.</li>
+                                <li>No patterns. No cream. No turquoise or certain blues.</li>
+                                <li>Preferred: black, white, indigo, yellow accents</li>
+                                <li>Yellow works as a subtle pop — like peeking from under a coat. Not the whole outfit.</li>
+                                <li>Maybe custom pins with the brand icon in purple</li>
+                                <li>ThreadLink can help with collateral materials at wholesale pricing</li>
+                                <li>No makeup artist needed. Keeping it natural.</li>
+                                <li>Everyone in the shot matters — team needs to have wardrobe decisions made before shoot day</li>
+                            </ul>
+                        </div>
+
+                        {/* Messaging */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>💬 Messaging &amp; Script</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Certain words and the way you say things is going to be more important than some of the visuals. That&apos;s where the authenticity comes from.</li>
+                                <li>We need a word or phrase that threads through the entire video — connection, empowerment, purpose-driven</li>
+                                <li>When you finish watching, you need to know what this company does. Period.</li>
+                                <li>The website says &quot;elevating brands and empowering clients.&quot; Empowering is good. Elevating is overused.</li>
+                                <li>Video should be under 1:30 final delivery. Natural breaks. Not talking 24/7.</li>
+                                <li>Script is collaborative — team writes a rough draft of what they want to say, then we refine together</li>
+                                <li>No teleprompter. Cable-talk energy — just get them going and they flow.</li>
+                                <li>No hard CTA needed. If the storytelling is done well enough, they know the call to action. No &quot;call us now.&quot;</li>
+                                <li>Text overlays should be selective — specific words at key moments, not captions everywhere</li>
+                                <li>Practice on camera before shoot day. Podcast warm-ups help. Comfort builds confidence.</li>
+                                <li>One light comedy moment is fine — juggling drinks, a quick reaction shot. Nothing forced.</li>
+                            </ul>
+                        </div>
+
+                        {/* Locations */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>📍 Locations &amp; Set</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Keep locations minimal. Too many locations dilutes the video. Only add a location if it truly serves the message.</li>
+                                <li>Office is small but workable — tight shots, bokeh, ultra-wide slider between laptops. Rearrange furniture to make it feel intentional.</li>
+                                <li>Conference room has depth. Tables can be moved. Glass whiteboard was taken down.</li>
+                                <li>Can fake the office — center the table, desaturate the colors, focus lighting in one area. Nobody needs to know there&apos;s other stuff.</li>
+                                <li>Indigo RGB LED lights in the background for brand color accents. Like the reference video uses blue.</li>
+                                <li>Downtown Winter Garden — recognizable background but not center stage. See the train, know where you are, but not posing under the clock tower.</li>
+                                <li>Construction site with hard hats shows range — not just behind a screen</li>
+                                <li>No studio rental. Not the vibe.</li>
+                                <li>If doing outdoor shots, need an extra crew member dedicated to lighting. Butterfly softbox setup for harsh sun control.</li>
+                                <li>Cloudy days are best for outdoor filming. If sunny, we need diffusion.</li>
+                                <li>Outdoor scenes should be tight — a couple seconds max. Quick local texture.</li>
+                                <li>Permits may be needed for professional equipment in public spaces. Butterfly rigs draw attention.</li>
+                                <li>Every location needs confirmed time slots. No run-and-gun for this project.</li>
+                            </ul>
+                        </div>
+
+                        {/* Technical */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 12 }}>⚙️ Technical &amp; Equipment</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Bought a 2nd FX3 specifically for this project. Another $5K. Matched color science for dual-cam coverage.</li>
+                                <li>New ultra-thin LED panels — lightweight, no heavy softboxes cluttering the set</li>
+                                <li>Was about to buy a $20K camera but was talked out of it. Better to invest in better lenses and lighting with the FX3.</li>
+                                <li>Lighting is so important. Backlighting separates you from the background — creates a 3D effect.</li>
+                                <li>Need a CPL polarizer for screen shots (laptops, monitors). Want a fresh one for this shoot.</li>
+                                <li>Color grading will be desaturated, minimal. Raw footage starts gray — shaped to feel intentional, not loud.</li>
+                                <li>Brand color lives in the environment through RGB LEDs, not through post-production filters.</li>
+                                <li>Sound design is custom — not stock music. Ambient textures, subtle transitions, emotional scoring.</li>
+                                <li>BTS will be captured with iPhones + pro cameras. The BTS footage becomes its own social media content.</li>
+                                <li>Bringing extra crew for BTS documentation — capturing the entire journey</li>
+                                <li>ThreadLink will provide actual hex codes from their style escape for accurate color matching</li>
+                            </ul>
+                        </div>
+
+                        {/* Open Questions */}
+                        <div style={{ padding: '20px', border: '1px solid rgba(234, 179, 8, 0.1)', borderRadius: 16, background: 'rgba(234, 179, 8, 0.02)' }}>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#eab308', marginBottom: 12 }}>❓ Open Questions / To Decide</div>
+                            <ul style={{ margin: 0, paddingLeft: 16, fontSize: 11, color: 'var(--muted-2)', lineHeight: 2.2 }}>
+                                <li>Exact shoot date — mid-April weekend, TBD</li>
+                                <li>Which client locations to feature? Construction site? Apex Health?</li>
+                                <li>Do we need scenes outside the office to show community involvement?</li>
+                                <li>Best way to balance humor and professionalism in the content?</li>
+                                <li>How heavily should services (SEO, marketing, branding) be featured vs. implied?</li>
+                                <li>Final wardrobe selections for all team members</li>
+                                <li>Are permits required for all chosen outdoor filming locations?</li>
+                                <li>Exact script — team needs to draft their talking points</li>
+                                <li>What is the final unifying word/phrase? Connection? Empowerment? Both?</li>
+                            </ul>
+                        </div>
+
                     </div>
                 </section>
 
