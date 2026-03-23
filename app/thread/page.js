@@ -272,6 +272,33 @@ export default function ThreadLink() {
 
                 .concept-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
+                /* ── Video Embed ── */
+                .video-section {
+                    max-width: 1100px; margin: 0 auto;
+                    padding: 80px 24px 0;
+                }
+
+                .video-wrap {
+                    position: relative; width: 100%;
+                    padding-bottom: 56.25%; /* 16:9 */
+                    border-radius: 20px; overflow: hidden;
+                    border: 1px solid rgba(232, 98, 44, 0.15);
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(232, 98, 44, 0.06);
+                }
+
+                .video-wrap iframe {
+                    position: absolute; top: 0; left: 0;
+                    width: 100%; height: 100%; border: none;
+                }
+
+                .video-caption {
+                    margin-top: 20px; text-align: center;
+                    font-size: 13px; color: var(--muted-2);
+                    font-style: italic;
+                }
+
+                .video-caption span { color: var(--orange); font-style: normal; font-weight: 600; }
+
                 /* ── Divider ── */
                 .divider {
                     width: min(100%, 900px); height: 1px; margin: 0 auto;
@@ -511,7 +538,29 @@ export default function ThreadLink() {
                     </div>
                 </div>
 
-                <div style={{ height: 80 }} />
+                {/* ═══ VISION — REFERENCE VIDEO ═══ */}
+                <section className="video-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Vision & Direction</div>
+                        <h2 className="section-title">The look we&apos;re going for</h2>
+                        <p className="section-desc">
+                            This is the energy and cinematic quality we&apos;re aiming for. Watch it — this is the caliber of film we&apos;re building together.
+                        </p>
+                    </div>
+                    <div className="video-wrap">
+                        <iframe
+                            src="https://www.youtube.com/embed/wpo7lzDhiAw?rel=0&modestbranding=1&color=white"
+                            title="Creative Agency Film — Style Reference"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+                    </div>
+                    <div className="video-caption">
+                        <span>Style Reference</span> — Creative Agency Film by SOCL
+                    </div>
+                </section>
+
+                <div style={{ height: 40 }} />
                 <div className="divider" />
 
                 {/* ═══ PROJECT STATUS / TIMELINE ═══ */}
