@@ -518,12 +518,12 @@ export default function ThreadLink() {
                     <div className="cin-hero-bg" style={{ transform: `scale(1.05) translateY(${scrollY * 0.15}px)` }} />
                     <div className="cin-hero-overlay" />
                     <div className="cin-hero-content">
-                        <div className="hero-badge">MediaGeekz × Threadlinks</div>
+                        <div className="hero-badge">MediaGeekz × ThreadLink</div>
                         <h1 className="hero-title">
                             Create.<br /><em>Connect.</em><br />Grow.
                         </h1>
                         <p className="hero-subtitle">
-                            A creative collaboration between MediaGeekz and Threadlinks. Two cinematic films to showcase your creative agency and connect with the Winter Garden community.
+                            A creative collaboration between MediaGeekz and ThreadLink — a strategic web design &amp; branding studio rooted in Clermont, FL. Two cinematic films to showcase the creative agency and connect with the community.
                         </p>
 
                         <div className="hero-meta">
@@ -740,7 +740,7 @@ export default function ThreadLink() {
                                 { beat: 'TRANSITION', title: 'Screen to Street', desc: 'CUT TO: a hand scrolling through a website on an iPad in a coffee shop. The website shows a local business storefront. MATCH CUT: we\'re now standing in front of that actual storefront. The digital becomes real. The brand made this happen.', time: '0:20–0:28' },
                                 { beat: 'ACT 2', title: 'The Work in Action', desc: 'Team sitting with a local entrepreneur at their business — not in a boardroom, at their shop counter. Laughing, pointing at a laptop showing their new branding. The client\'s kid runs through. It\'s organic. You see the logo on a business card being handed over. Subtle. Real.', time: '0:28–0:42' },
                                 { beat: 'MONTAGE', title: 'The Community Texture', desc: 'Quick cuts: a hand-lettered chalkboard menu, a dog on a leash, fresh produce at the market, a couple holding hands walking past storefronts, the team photographing a local restaurant. Every frame has warmth. The brand colors appear — on signage, on a tote bag, on a mug — but never as the subject.', time: '0:42–0:55' },
-                                { beat: 'CLOSE', title: 'We\'re Here', desc: 'The team walks back toward the office at sunset. One of them turns back and waves. Drone pulls back to reveal the full downtown. Super: "Threadlinks Creative — Winter Garden, FL" — clean, minimal, on screen for 3 seconds. No CTA. No "call us." Just the name and the place. They\'ll remember.', time: '0:55–1:05' },
+                                { beat: 'CLOSE', title: 'We\'re Here', desc: 'The team walks back toward the office at sunset. One of them turns back and waves. Drone pulls back to reveal the full downtown. Super: "ThreadLink Creative — Winter Garden, FL" — clean, minimal, on screen for 3 seconds. No CTA. No "call us." Just the name and the place. They\'ll remember.', time: '0:55–1:05' },
                             ].map((b, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(99, 102, 241, 0.1)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 60, textAlign: 'center' }}>
@@ -777,7 +777,7 @@ export default function ThreadLink() {
                                 { beat: 'ACT 2', title: 'Full Stack', desc: 'QUICK CUTS synced to music: Apple Pencil sketching a logo → final logo on a business card. Wireframe on screen → live website on a phone. Camera filming a product → the ad playing on Instagram. SEO dashboard showing rankings climbing. Each cut shows: they deployed it, and it\'s working.', time: '0:34–0:50' },
                                 { beat: 'PERSONAL', title: 'This Is Personal', desc: 'QUIET MOMENT: the team leader on a call with a client, genuinely invested. Not upselling — listening. Maybe they\'re scaling the budget down because the client needs it. The care is visible. This isn\'t transactional. They want you to make it.', time: '0:50–0:58' },
                                 { beat: 'BRAND IN ACTION', title: 'The Real World', desc: 'The client\'s business is alive — customers walking in, new signage, branded packaging. The team is there too, filming, supporting. Logo on the cup. Brand on the apron. It\'s everywhere, but it\'s natural. They didn\'t drop them off.', time: '0:58–1:08' },
-                                { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. Not a vendor relationship — a partnership. Pull back. The full leadership team at their desks, golden hour light. Super: "Threadlinks Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:08–1:18' },
+                                { beat: 'CLOSE', title: 'The Partner', desc: 'Team and client together, reviewing analytics on a laptop. Both smiling — it\'s working. Not a vendor relationship — a partnership. Pull back. The full leadership team at their desks, golden hour light. Super: "ThreadLink Creative — Full-Stack Creative Agency" — 3 seconds, clean, confident. Cut to black.', time: '1:08–1:18' },
                             ].map((b, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '20px', border: '1px solid rgba(139, 92, 246, 0.08)', borderRadius: 14, background: 'var(--panel)', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 60, textAlign: 'center' }}>
@@ -849,7 +849,7 @@ export default function ThreadLink() {
                                 { shot: 'Business Card Handover', type: 'Close-Up', desc: 'New branded business card being handed to a customer. You see the logo, the design work — it\'s tangible. The brand in textile.' },
                                 { shot: 'Farmer\'s Market B-Roll', type: 'Gimbal + Slider', desc: 'Fresh produce, hand-lettered signs, families browsing. Intercut with team photographing a client\'s booth.' },
                                 { shot: 'Sunset Walk Back', type: 'Gimbal', desc: 'Team walking back toward the office at golden hour. One turns and waves. Natural, warm, unscripted.' },
-                                { shot: 'Drone Pull-Back Close', type: 'Drone', desc: 'Final wide — revealing the full downtown from above. Super: "Threadlinks Creative — Winter Garden, FL." 3 seconds. Cut to black.' },
+                                { shot: 'Drone Pull-Back Close', type: 'Drone', desc: 'Final wide — revealing the full downtown from above. Super: "ThreadLink Creative — Winter Garden, FL." 3 seconds. Cut to black.' },
                             ].map((s, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(99, 102, 241, 0.1)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(99, 102, 241, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--orange)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
@@ -885,7 +885,7 @@ export default function ThreadLink() {
                                 { shot: 'Branded Elements in Environment', type: 'Insert', desc: 'Logo on the apron. Brand colors on the wall. Tagline on the website open on a laptop. Never the hero — always the texture. Starbucks-cup energy.' },
                                 { shot: 'Analytics Review — Both Smiling', type: 'Medium', desc: 'Team and client looking at a laptop together. Numbers going up. Both genuinely happy. Partnership, not a vendor call.' },
                                 { shot: 'Team at Work — Golden Hour', type: 'Wide / Slider', desc: 'Pull back to the full team at their desks. Warm light. Multiple screens showing active projects. The engine behind it all.' },
-                                { shot: 'Logo Resolve', type: 'Motion Graphics', desc: '"Threadlinks Creative — Full-Stack Creative Agency" — clean on black. 3 seconds. No CTA. Confidence. Cut to black.' },
+                                { shot: 'Logo Resolve', type: 'Motion Graphics', desc: '"ThreadLink Creative — Full-Stack Creative Agency" — clean on black. 3 seconds. No CTA. Confidence. Cut to black.' },
                             ].map((s, i) => (
                                 <div key={i} style={{ display: 'flex', gap: 16, padding: '16px 20px', border: '1px solid rgba(139, 92, 246, 0.08)', borderRadius: 14, background: 'var(--panel)', transition: 'all 0.3s', alignItems: 'flex-start' }}>
                                     <div style={{ minWidth: 28, height: 28, borderRadius: 8, background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--teal)', fontFamily: "'Outfit', sans-serif" }}>{i + 1}</div>
@@ -1321,7 +1321,7 @@ export default function ThreadLink() {
 
                 {/* ═══ FOOTER ═══ */}
                 <div className="th-footer">
-                    <div className="footer-logo">MediaGeekz × Threadlinks</div>
+                    <div className="footer-logo">MediaGeekz × ThreadLink</div>
                     <div className="footer-tagline">Creative partnership. Community roots.</div>
                 </div>
             </div>
