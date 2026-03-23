@@ -279,7 +279,7 @@ export default function EasyDentureProposal() {
     return (
         <>
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
                 :root {
                     --shadow: #060a14;
@@ -848,6 +848,31 @@ export default function EasyDentureProposal() {
                     transform: scale(1.02);
                 }
 
+                /* ── Signature Block ── */
+                .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(100, 116, 139, 0.12); }
+                .sig-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-3); margin-bottom: 32px; }
+                .sig-preview { min-height: 52px; padding: 10px 16px; border-bottom: 2px solid rgba(100, 116, 139, 0.3); margin-bottom: 6px; display: flex; align-items: flex-end; }
+                .sig-cursive { font-family: 'Dancing Script', cursive; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1.2; }
+                .sig-field { font-size: 11px; color: var(--muted-2); margin-bottom: 18px; }
+                .sig-line { border-bottom: 1px solid rgba(100, 116, 139, 0.3); padding-bottom: 6px; margin-bottom: 6px; min-height: 28px; }
+                .sig-input { width: 100%; padding: 12px 16px; border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 10px; background: rgba(15, 23, 42, 0.6); color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+                .sig-input:focus { border-color: var(--orange); }
+                .sign-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border: none; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, var(--orange), #f59e0b); color: var(--white); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 24px rgba(232, 98, 44, 0.3); }
+                .sign-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232, 98, 44, 0.4); }
+                .sign-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+                .signed-badge { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: 12px; background: rgba(45, 212, 191, 0.08); border: 1px solid rgba(45, 212, 191, 0.25); margin-top: 16px; }
+                .signed-badge-icon { font-size: 20px; }
+                .signed-badge-text { font-size: 12px; color: var(--teal); font-weight: 600; }
+                .signed-badge-time { font-size: 11px; color: var(--muted-2); margin-top: 2px; }
+                .print-contract-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; margin-top: 12px; border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; background: transparent; color: var(--white); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+                .print-contract-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(100, 116, 139, 0.5); }
+                @media (max-width: 640px) { .sig-grid { grid-template-columns: 1fr; gap: 28px; } .sig-cursive { font-size: 24px; } }
+                @media print {
+                    .no-print { display: none !important; }
+                    .sign-btn, .print-contract-btn, .sig-input { display: none !important; }
+                    body { background: white !important; color: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                }
+
                 /* ── Reveal ── */
                 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
                 .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -1249,33 +1274,7 @@ export default function EasyDentureProposal() {
                             <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock the shoot date. Remaining 50% due on wrap. Cancellation within 48 hours forfeits the deposit. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered footage. MediaGeekz retains portfolio usage rights unless otherwise agreed.
                         </div>
 
-                        {/* ── Signature Block ── */}
-                        <style jsx>{`
-                            @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
-                            .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(100, 116, 139, 0.12); }
-                            .sig-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-3); margin-bottom: 32px; }
-                            .sig-preview { min-height: 52px; padding: 10px 16px; border-bottom: 2px solid rgba(100, 116, 139, 0.3); margin-bottom: 6px; display: flex; align-items: flex-end; }
-                            .sig-cursive { font-family: 'Dancing Script', cursive; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1.2; }
-                            .sig-field { font-size: 11px; color: var(--muted-2); margin-bottom: 18px; }
-                            .sig-line { border-bottom: 1px solid rgba(100, 116, 139, 0.3); padding-bottom: 6px; margin-bottom: 6px; min-height: 28px; }
-                            .sig-input { width: 100%; padding: 12px 16px; border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 10px; background: rgba(15, 23, 42, 0.6); color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
-                            .sig-input:focus { border-color: var(--orange); }
-                            .sign-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border: none; border-radius: 12px; cursor: pointer; background: linear-gradient(135deg, var(--orange), #f59e0b); color: var(--white); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 16px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 24px rgba(232, 98, 44, 0.3); }
-                            .sign-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232, 98, 44, 0.4); }
-                            .sign-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-                            .signed-badge { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: 12px; background: rgba(45, 212, 191, 0.08); border: 1px solid rgba(45, 212, 191, 0.25); margin-top: 16px; }
-                            .signed-badge-icon { font-size: 20px; }
-                            .signed-badge-text { font-size: 12px; color: var(--teal); font-weight: 600; }
-                            .signed-badge-time { font-size: 11px; color: var(--muted-2); margin-top: 2px; }
-                            .print-contract-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; margin-top: 12px; border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; background: transparent; color: var(--white); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-                            .print-contract-btn:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(100, 116, 139, 0.5); }
-                            @media (max-width: 640px) { .sig-grid { grid-template-columns: 1fr; gap: 28px; } .sig-cursive { font-size: 24px; } }
-                            @media print {
-                                .no-print { display: none !important; }
-                                .sign-btn, .print-contract-btn, .sig-input { display: none !important; }
-                                body { background: white !important; color: #1a1a1a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-                            }
-                        `}</style>
+
 
                         <div className="sig-grid">
                             {/* Producer — Matt + Daniel pre-signed */}
