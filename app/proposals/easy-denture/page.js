@@ -137,7 +137,7 @@ const fmt = (n) => '$' + n.toLocaleString('en-US');
 
 export default function EasyDentureProposal() {
     const proposalHidden = false;
-    const [addDrone, setAddDrone] = useState(false);
+    const [addDrone, setAddDrone] = useState(true);
     const [sigName, setSigName] = useState('');
     const [signed, setSigned] = useState(false);
     const [signedAt, setSignedAt] = useState(null);
@@ -1152,38 +1152,37 @@ export default function EasyDentureProposal() {
                         </div>
                     </div>
 
-                    {/* ── Drone Add-On Toggle ── */}
+                    {/* Drone Included by Default */}
                     <div
-                        onClick={() => setAddDrone(!addDrone)}
                         style={{
                             maxWidth: 640, marginTop: 16, padding: '18px 24px',
-                            border: addDrone ? '1px solid rgba(45, 212, 191, 0.4)' : '1px solid rgba(232, 98, 44, 0.2)',
+                            border: '1px solid rgba(45, 212, 191, 0.4)',
                             borderRadius: 16,
-                            background: addDrone ? 'rgba(45, 212, 191, 0.06)' : 'rgba(232, 98, 44, 0.04)',
+                            background: 'rgba(45, 212, 191, 0.12)',
                             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                            cursor: 'pointer', transition: 'all 0.3s ease', userSelect: 'none',
+                            cursor: 'default', transition: 'all 0.3s ease', userSelect: 'none',
                         }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                             <div style={{
                                 width: 40, height: 22, borderRadius: 12,
-                                background: addDrone ? 'var(--teal)' : 'rgba(100, 116, 139, 0.3)',
+                                background: 'var(--teal)',
                                 position: 'relative', transition: 'background 0.3s ease',
                             }}>
                                 <div style={{
-                                    position: 'absolute', top: 2, left: addDrone ? 20 : 2,
+                                    position: 'absolute', top: 2, left: 20,
                                     width: 18, height: 18, borderRadius: '50%',
                                     background: 'white', boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
                                     transition: 'left 0.3s ease',
                                 }} />
                             </div>
                             <div>
-                                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>🚁 Drone Footage</div>
-                                <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Aerial establishing shots · FAA Part 107 certified</div>
+                                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>🚁 Drone Footage — Included</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Aerial establishing shots added to final deliverables</div>
                             </div>
                         </div>
-                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: addDrone ? 'var(--teal)' : 'var(--orange)', whiteSpace: 'nowrap', transition: 'color 0.3s' }}>
-                            {addDrone ? '✓ Added' : '+$400'}
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--teal)', whiteSpace: 'nowrap' }}>
+                            ✓ Added
                         </div>
                     </div>
 
@@ -1382,42 +1381,42 @@ export default function EasyDentureProposal() {
 
                     <div style={{ maxWidth: 640, marginTop: 32 }}>
                         {/* Square Payment */}
-                        <div style={{ padding: '28px 24px', border: '1px solid rgba(232, 98, 44, 0.25)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(232, 98, 44, 0.06), transparent 50%), var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 12 }}>Secure Payment via Square</div>
-                            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 20, lineHeight: 1.7 }}>
-                                Pay your 50% deposit to lock the shoot date. Card, Apple Pay, and Google Pay accepted.
+                        <div style={{ padding: '28px 24px', border: '1px solid rgba(45, 212, 191, 0.4)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(45, 212, 191, 0.1), transparent 50%), var(--panel)', textAlign: 'center' }}>
+                            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 14px', borderRadius: 999, background: 'rgba(45, 212, 191, 0.15)', border: '1px solid rgba(45, 212, 191, 0.3)', color: 'var(--teal)', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 20 }}>
+                                <span style={{ fontSize: 14 }}>✓</span> Deposit Paid — March 24
+                            </div>
+                            
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 12 }}>Final Balance Due on Wrap</div>
+                            <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 24, lineHeight: 1.7 }}>
+                                50% Remaining balance + Drone production charge ($400 + 10% fee). Final footage delivered within 48 hours of payment.
                             </div>
 
                             <a
-                                href={`/checkout?amount=${addDrone ? 2255 : 2035}&desc=${encodeURIComponent(`Easy Denture — 50% Deposit${addDrone ? ' (w/ Drone)' : ''}`)}`}
+                                href={`/checkout?amount=2475&desc=${encodeURIComponent(`Easy Denture — Final Balance (inc. Drone)`)}`}
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                                    width: '100%', padding: '18px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
+                                    width: '100%', padding: '20px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
                                     background: 'linear-gradient(135deg, var(--orange), #f59e0b)',
                                     color: 'var(--white)', fontFamily: "'Outfit', sans-serif",
-                                    fontSize: 16, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                    fontSize: 18, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
                                     textDecoration: 'none',
                                     boxShadow: '0 8px 28px rgba(232, 98, 44, 0.35)',
                                     transition: 'transform 0.2s, box-shadow 0.2s',
                                 }}
                             >
-                                💳 Pay {addDrone ? '$2,255' : '$2,035'} Deposit Now
+                                💳 Pay Final Balance $2,475
                             </a>
 
-                            <a
-                                href={`/checkout?amount=${addDrone ? 4510 : 4070}&desc=${encodeURIComponent(`Easy Denture — Full Payment${addDrone ? ' (w/ Drone)' : ''}`)}`}
-                                style={{
-                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                                    width: '100%', marginTop: 12, padding: '14px 16px',
-                                    border: '1px solid rgba(45, 212, 191, 0.25)', borderRadius: 12,
-                                    background: 'rgba(45, 212, 191, 0.06)',
-                                    color: 'var(--teal)', fontFamily: "'Outfit', sans-serif",
-                                    fontSize: 13, fontWeight: 600, textDecoration: 'none',
-                                    transition: 'background 0.2s',
-                                }}
-                            >
-                                Or Pay Full {addDrone ? '$4,510' : '$4,070'}
-                            </a>
+                            <div style={{ marginTop: 24, padding: '12px 16px', borderRadius: 12, border: '1px solid rgba(255, 255, 255, 0.04)', background: 'rgba(255, 255, 255, 0.02)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                                <div style={{ textAlign: 'left' }}>
+                                    <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--muted-3)', textTransform: 'uppercase', marginBottom: 4 }}>Deposit Paid</div>
+                                    <div style={{ color: 'var(--muted)', fontSize: 14, fontWeight: 600 }}>$2,035</div>
+                                </div>
+                                <div style={{ textAlign: 'right' }}>
+                                    <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--orange)', textTransform: 'uppercase', marginBottom: 4 }}>Balance Due</div>
+                                    <div style={{ color: 'var(--white)', fontSize: 14, fontWeight: 700 }}>$2,475</div>
+                                </div>
+                            </div>
 
                             <div style={{ marginTop: 16, fontSize: 11, color: 'rgba(148, 163, 184, 0.5)' }}>
                                 🔒 Payments processed securely via Square · Card, Apple Pay, Google Pay
