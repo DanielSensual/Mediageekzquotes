@@ -896,12 +896,12 @@ export default function EasyDentureProposal() {
                     <div className="hero-meta">
                         <div className="hero-stat">
                             <div className="hero-stat-label">Client</div>
-                            <div className="hero-stat-value">Elizabeth Leed</div>
-                            <div className="hero-stat-detail">Easy Denture</div>
+                            <div className="hero-stat-value">Scott Bodemann</div>
+                            <div className="hero-stat-detail">sbodemann@easydenture.com</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Schedule</div>
-                            <div className="hero-stat-value">7:00 AM – 12:30 PM</div>
+                            <div className="hero-stat-value">March 27 · 7:00 AM – 12:30 PM</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Crew</div>
@@ -968,7 +968,7 @@ export default function EasyDentureProposal() {
                 <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Production Schedule</div>
-                        <div className="section-question">Date TBD</div>
+                        <div className="section-question">March 27, 2026</div>
                         <h2 className="section-title">Morning shoot. One location.</h2>
                         <p className="section-desc">
                             Sonya&apos;s car segment first, then straight into the apartment for patient fittings and sound bites.
@@ -1295,7 +1295,7 @@ export default function EasyDentureProposal() {
                                     </div>
                                     <div className="sig-field">Email</div>
                                     <div className="sig-line">
-                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 23, 2026</span>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 24, 2026</span>
                                     </div>
                                     <div className="sig-field">Date</div>
                                 </div>
@@ -1315,7 +1315,7 @@ export default function EasyDentureProposal() {
                                     </div>
                                     <div className="sig-field">Email</div>
                                     <div className="sig-line">
-                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 23, 2026</span>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>March 24, 2026</span>
                                     </div>
                                     <div className="sig-field">Date</div>
                                 </div>
@@ -1356,7 +1356,7 @@ export default function EasyDentureProposal() {
                                             <input
                                                 type="text"
                                                 className="sig-input"
-                                                placeholder="Elizabeth Torres"
+                                                placeholder="Scott Bodemann"
                                                 value={sigName}
                                                 onChange={(e) => setSigName(e.target.value)}
                                             />
