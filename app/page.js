@@ -108,6 +108,34 @@ export default function HomePage() {
                 )}
             </main>
 
+            {/* ═══ CLIENT PROPOSALS ═══ */}
+                <section className={`tenant-list ${mounted ? 'tenant-visible' : ''}`} style={{ marginTop: 24 }}>
+                    <h3>Client Proposals</h3>
+                    <div className="vertical-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+                        {[
+                            { href: '/thread', icon: '🧵', name: 'ThreadLink', desc: 'Brand story + community video production', status: 'Active' },
+                            { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active' },
+                            { href: '/proposals/leadership-interviews', icon: '🎙️', name: 'Leadership Interviews', desc: 'Interview series — multi-cam production', status: 'Active' },
+                            { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active' },
+                            { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active' },
+                            { href: '/proposals/wedding-basic', icon: '💒', name: 'Wedding Basic', desc: 'Wedding day cinematic package', status: 'Active' },
+                        ].map((p, i) => (
+                            <a
+                                key={p.href}
+                                href={p.href}
+                                className={`vertical-card-preview ${mounted ? 'card-visible' : ''}`}
+                                style={{ animationDelay: `${150 + i * 100}ms`, textDecoration: 'none' }}
+                            >
+                                <span className="vc-icon">{p.icon}</span>
+                                <span className="vc-name">{p.name}</span>
+                                <span className="vc-desc">{p.desc}</span>
+                                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#34d399', background: 'rgba(52, 211, 153, 0.1)', padding: '3px 10px', borderRadius: 20, marginTop: 6 }}>{p.status}</span>
+                                <span className="vc-arrow">→</span>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+
             <footer className="landing-footer">
                 <p>© 2026 VideoQuoter — A Ghost AI Systems Product</p>
             </footer>
