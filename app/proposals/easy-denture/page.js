@@ -12,7 +12,7 @@ const PACKAGES = [
         tagline: 'Solo shooter',
         base: 2800,
         crew: [
-            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
+            { label: 'Lead Cinematographer / DP', detail: '7:00 AM – 12:30 PM', amount: 1400 },
         ],
         post: [
             { label: 'Organized Raw Footage Delivery', detail: 'Scene-separated, labeled by location', amount: 0, free: true },
@@ -25,7 +25,7 @@ const PACKAGES = [
             { label: 'LED Interview Light Kit', detail: 'Portable panel + diffusion', amount: 0, free: true },
         ],
         included: [
-            'Full-day shoot (8 AM – 5:30 PM)',
+            '7:00 AM – 12:30 PM',
             'Solo cinematographer',
             'Single camera coverage (Sony FX3)',
             '1 wireless lav mic',
@@ -49,8 +49,8 @@ const PACKAGES = [
         recommended: true,
         base: 3800,
         crew: [
-            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
-            { label: 'Camera Operator B', detail: 'Full day — 2nd angle + B-roll', amount: 750 },
+            { label: 'Lead Cinematographer / DP', detail: '7:00 AM – 12:30 PM', amount: 1400 },
+            { label: 'Camera Operator B', detail: '7:00 AM – 12:30 PM — 2nd angle + B-roll', amount: 750 },
         ],
         post: [
             { label: 'Organized Raw Footage Delivery', detail: 'Scene-separated, labeled, dual-cam synced', amount: 0, free: true },
@@ -63,7 +63,7 @@ const PACKAGES = [
             { label: 'LED Interview Light Kit', detail: 'Key + fill + hair light', amount: 0, free: true },
         ],
         included: [
-            'Full-day shoot (8 AM – 5:30 PM)',
+            '7:00 AM – 12:30 PM',
             '2-person crew (DP + Camera Operator)',
             'Dual camera coverage (A-cam hero + B-cam wide/reactions)',
             '2 wireless lav mics (one per speaker)',
@@ -85,8 +85,8 @@ const PACKAGES = [
         tagline: 'Full cinematic production',
         base: 5200,
         crew: [
-            { label: 'Lead Cinematographer / DP', detail: 'Full day (8 AM–5:30 PM)', amount: 1400 },
-            { label: 'Camera Operator B', detail: 'Full day — 2nd angle + B-roll', amount: 750 },
+            { label: 'Lead Cinematographer / DP', detail: '7:00 AM – 12:30 PM', amount: 1400 },
+            { label: 'Camera Operator B', detail: '7:00 AM – 12:30 PM — 2nd angle + B-roll', amount: 750 },
             { label: 'Audio Technician', detail: 'Dedicated boom + lav management', amount: 500 },
         ],
         post: [
@@ -101,7 +101,7 @@ const PACKAGES = [
             { label: 'Drone (DJI Mini 4 Pro)', detail: 'Aerial establishing shots of locations', amount: 0, free: true },
         ],
         included: [
-            'Full-day shoot (8 AM – 5:30 PM)',
+            '7:00 AM – 12:30 PM',
             '3-person crew (DP + Camera Op + Audio Tech)',
             'Dual camera coverage + cinematic drone aerials',
             '2 wireless lavs + dedicated boom mic',
@@ -902,7 +902,6 @@ export default function EasyDentureProposal() {
                         <div className="hero-stat">
                             <div className="hero-stat-label">Schedule</div>
                             <div className="hero-stat-value">7:00 AM – 12:30 PM</div>
-                            <div className="hero-stat-detail">Half-day rate</div>
                         </div>
                         <div className="hero-stat">
                             <div className="hero-stat-label">Crew</div>
@@ -1081,9 +1080,9 @@ export default function EasyDentureProposal() {
                 <section className="ed-section reveal">
                     <div className="section-header">
                         <div className="section-label">Investment</div>
-                        <h2 className="section-title">Day Rate — Raw Footage</h2>
+                        <h2 className="section-title">Raw Footage Package</h2>
                         <p className="section-desc">
-                            Flat day rate for a 3-man crew. No editing, no post — clean, organized raw footage delivered to your production team within 48 hours.
+                            Flat rate for a 3-man crew. No editing, no post — clean, organized raw footage delivered to your production team within 48 hours.
                         </p>
                     </div>
 
@@ -1091,7 +1090,7 @@ export default function EasyDentureProposal() {
                     <div style={{ maxWidth: 640, border: '1px solid rgba(232, 98, 44, 0.25)', borderRadius: 20, background: 'radial-gradient(circle at top right, rgba(232, 98, 44, 0.08), transparent 50%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel)', padding: '36px 28px', boxShadow: '0 0 40px rgba(232, 98, 44, 0.06)' }}>
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6 }}>
                             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: 42, fontWeight: 700, color: 'var(--orange)' }}>$4,070</span>
-                            <span style={{ fontSize: 13, color: 'var(--muted-2)', fontWeight: 500 }}>production day rate</span>
+                            <span style={{ fontSize: 13, color: 'var(--muted-2)', fontWeight: 500 }}>production rate</span>
                         </div>
                         <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 24, paddingBottom: 24, borderBottom: '1px solid rgba(100, 116, 139, 0.15)' }}>
                             7:00 AM – 12:30 PM · 3-man crew · Raw footage only — no editing
