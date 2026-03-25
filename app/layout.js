@@ -1,8 +1,8 @@
 import '@/app/globals.css';
 
 export const metadata = {
-    title: 'VideoQuoter — Professional Video Production Quotes',
-    description: 'Multi-tenant video production quoting platform for conventions, weddings, social media, and restaurants.',
+    title: 'ProducerOS — AI-Powered Proposals for Video Production',
+    description: 'Multi-tenant video production proposal platform for conventions, weddings, social media, and more.',
 };
 
 export default function RootLayout({ children }) {
