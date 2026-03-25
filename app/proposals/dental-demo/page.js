@@ -199,11 +199,15 @@ export default function DentalDemoProposal() {
                     overflow-x: hidden;
                 }
 
-                body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-                    background: linear-gradient(90deg, rgba(232,98,44,0.015) 1px, transparent 1px),
-                                linear-gradient(0deg, rgba(45,212,191,0.01) 1px, transparent 1px);
-                    background-size: 100px 100px; opacity: 0.5;
-                    mask-image: radial-gradient(circle at center, black 20%, transparent 75%);
+                body::before {
+                    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+                    background:
+                        url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'),
+                        linear-gradient(90deg, rgba(232,98,44,0.015) 1px, transparent 1px),
+                        linear-gradient(0deg, rgba(45,212,191,0.01) 1px, transparent 1px);
+                    background-size: 100px 100px, 100px 100px, 100px 100px;
+                    opacity: 0.12; mix-blend-mode: overlay;
+                    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
                 }
 
                 ::selection { background: rgba(232, 98, 44, 0.3); color: var(--white); }
@@ -274,7 +278,7 @@ export default function DentalDemoProposal() {
                 .hero-title {
                     font-family: 'Outfit', sans-serif;
                     font-size: clamp(48px, 8vw, 96px);
-                    font-weight: 700; line-height: 0.96; letter-spacing: -0.03em;
+                    font-weight: 700; line-height: 0.96; letter-spacing: -0.04em;
                     color: var(--white); margin-bottom: 24px;
                     position: relative; z-index: 1;
                 }
@@ -284,6 +288,7 @@ export default function DentalDemoProposal() {
                     background: linear-gradient(135deg, #e8622c, #f59e0b);
                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
                     background-clip: text;
+                    filter: drop-shadow(0 0 16px rgba(232,98,44,0.4));
                 }
 
                 .hero-subtitle {
@@ -300,12 +305,14 @@ export default function DentalDemoProposal() {
                 .hero-stat {
                     padding: 20px 16px; border: 1px solid rgba(232, 98, 44, 0.12);
                     border-radius: 16px;
-                    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), rgba(15, 23, 42, 0.7);
-                    backdrop-filter: blur(12px);
-                    transition: border-color 0.3s ease;
+                    background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent), rgba(15, 23, 42, 0.5);
+                    backdrop-filter: blur(24px) saturate(180%);
+                    -webkit-backdrop-filter: blur(24px) saturate(180%);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 8px 32px rgba(6, 10, 20, 0.4);
+                    transition: border-color 0.3s ease, transform 0.3s ease;
                 }
 
-                .hero-stat:hover { border-color: rgba(232, 98, 44, 0.3); }
+                .hero-stat:hover { border-color: rgba(232, 98, 44, 0.4); transform: translateY(-2px); }
 
                 .hero-stat-label {
                     color: var(--teal); font-size: 9px; font-weight: 700;
@@ -357,11 +364,20 @@ export default function DentalDemoProposal() {
 
                 .scope-card {
                     padding: 28px 24px; border: 1px solid rgba(45, 212, 191, 0.12);
-                    border-radius: 16px; background: var(--panel);
-                    transition: border-color 0.3s ease, transform 0.3s ease;
+                    border-radius: 16px; background: rgba(15, 23, 42, 0.4);
+                    backdrop-filter: blur(24px) saturate(180%);
+                    -webkit-backdrop-filter: blur(24px) saturate(180%);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 32px rgba(6, 10, 20, 0.4);
+                    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
                 }
 
-                .scope-card:hover { border-color: rgba(45, 212, 191, 0.3); transform: translateY(-2px); }
+                .scope-card:hover { 
+                    border-color: rgba(45, 212, 191, 0.4); 
+                    transform: translateY(-2px); 
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 12px 40px rgba(45, 212, 191, 0.12);
+                }
+                .scope-card:hover .scope-icon { transform: scale(1.1); }
+                .scope-icon { font-size: 28px; margin-bottom: 14px; transition: transform 0.3s ease; }
 
                 .scope-icon { font-size: 28px; margin-bottom: 14px; }
 
@@ -415,11 +431,18 @@ export default function DentalDemoProposal() {
 
                 .equip-card {
                     padding: 24px 20px; border: 1px solid rgba(45, 212, 191, 0.12);
-                    border-radius: 16px; background: var(--panel);
-                    transition: border-color 0.3s ease, transform 0.3s ease;
+                    border-radius: 16px; background: rgba(15, 23, 42, 0.4);
+                    backdrop-filter: blur(24px) saturate(180%);
+                    -webkit-backdrop-filter: blur(24px) saturate(180%);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 32px rgba(6, 10, 20, 0.4);
+                    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
                 }
 
-                .equip-card:hover { border-color: rgba(45, 212, 191, 0.3); transform: translateY(-2px); }
+                .equip-card:hover { 
+                    border-color: rgba(45, 212, 191, 0.4); 
+                    transform: translateY(-2px); 
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 12px 40px rgba(45, 212, 191, 0.12);
+                }
                 .equip-icon { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
 
                 .equip-card h3 {
@@ -448,20 +471,36 @@ export default function DentalDemoProposal() {
                 .pkg-card {
                     padding: 32px 24px; border: 1px solid rgba(100, 116, 139, 0.15);
                     border-radius: 20px;
-                    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--panel);
-                    transition: border-color 0.3s ease, transform 0.3s ease;
-                    position: relative; cursor: pointer;
+                    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), rgba(15, 23, 42, 0.4);
+                    backdrop-filter: blur(24px) saturate(180%);
+                    -webkit-backdrop-filter: blur(24px) saturate(180%);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 12px 40px rgba(6, 10, 20, 0.5);
+                    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                    position: relative; cursor: pointer; overflow: hidden;
                 }
 
-                .pkg-card:hover { border-color: rgba(232, 98, 44, 0.3); transform: translateY(-4px); }
+                .pkg-card::before {
+                    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+                    transform: skewX(-20deg); transition: left 0.6s ease;
+                    pointer-events: none;
+                }
+
+                .pkg-card:hover::before { left: 150%; }
+
+                .pkg-card:hover { 
+                    border-color: rgba(232, 98, 44, 0.4); 
+                    transform: translateY(-4px); 
+                    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), 0 20px 50px rgba(232, 98, 44, 0.12);
+                }
 
                 .pkg-card.recommended {
-                    border-color: var(--orange);
+                    border-color: rgba(232, 98, 44, 0.6);
                     background:
-                        radial-gradient(circle at top right, rgba(232, 98, 44, 0.1), transparent 50%),
-                        linear-gradient(180deg, rgba(255,255,255,0.03), transparent),
-                        rgba(15, 23, 42, 0.94);
-                    box-shadow: 0 0 40px rgba(232, 98, 44, 0.08);
+                        radial-gradient(circle at top right, rgba(232, 98, 44, 0.15), transparent 50%),
+                        linear-gradient(180deg, rgba(255,255,255,0.05), transparent),
+                        rgba(15, 23, 42, 0.5);
+                    box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 0 60px rgba(232, 98, 44, 0.15);
                 }
 
                 .pkg-badge {
@@ -545,7 +584,7 @@ export default function DentalDemoProposal() {
                 }
 
                 .cost-item { color: var(--cream); flex: 1; }
-                .cost-detail { display: block; font-size: 10px; color: var(--muted-3); margin-top: 2px; }
+                .cost-detail { display: block; font-size: 10px; color: var(--muted-2); margin-top: 2px; }
                 .cost-amount { color: var(--muted); font-weight: 500; white-space: nowrap; margin-left: 16px; font-size: 12px; }
                 .cost-amount.free { color: var(--teal); font-weight: 600; }
 
@@ -560,31 +599,51 @@ export default function DentalDemoProposal() {
                     display: flex; align-items: center; justify-content: space-between;
                     padding: 18px 20px; margin-bottom: 12px;
                     border: 1px solid rgba(100, 116, 139, 0.15); border-radius: 14px;
-                    background: var(--panel); cursor: pointer;
-                    transition: border-color 0.25s ease, background 0.25s ease;
+                    background: rgba(15, 23, 42, 0.4);
+                    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+                    cursor: pointer;
+                    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
                 }
 
-                .addon-row:hover { border-color: rgba(232, 98, 44, 0.3); }
-                .addon-row.active { border-color: var(--orange); background: rgba(232, 98, 44, 0.06); }
+                .addon-row:hover { 
+                    border-color: rgba(232, 98, 44, 0.4); 
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(232, 98, 44, 0.05); 
+                }
+                .addon-row.active { 
+                    border-color: var(--orange); 
+                    background: rgba(232, 98, 44, 0.08); 
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 0 30px rgba(232, 98, 44, 0.1);
+                }
 
                 .addon-left { display: flex; align-items: center; gap: 14px; }
 
                 .addon-switch {
-                    width: 40px; height: 22px; border-radius: 999px;
-                    background: rgba(100, 116, 139, 0.3); position: relative;
-                    transition: background 0.3s ease; flex-shrink: 0;
+                    width: 44px; height: 24px; border-radius: 999px;
+                    background: rgba(8, 12, 22, 0.8); position: relative;
+                    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 1px 1px rgba(255,255,255,0.05);
+                    border: 1px solid rgba(100, 116, 139, 0.2);
+                    transition: background 0.3s ease, border-color 0.3s ease; flex-shrink: 0;
                 }
 
-                .addon-switch.on { background: var(--orange); }
+                .addon-switch.on { 
+                    background: var(--orange); 
+                    border-color: rgba(255, 255, 255, 0.2);
+                    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 0 12px rgba(232, 98, 44, 0.4);
+                }
 
                 .addon-knob {
                     position: absolute; top: 2px; left: 2px;
                     width: 18px; height: 18px; border-radius: 50%;
-                    background: var(--white); transition: left 0.3s ease;
-                    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+                    background: linear-gradient(180deg, #ffffff, #e2e8f0); 
+                    transition: left 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.3s ease;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 -2px 2px rgba(0,0,0,0.1);
                 }
 
-                .addon-switch.on .addon-knob { left: 20px; }
+                .addon-switch.on .addon-knob { 
+                    left: 18px; 
+                    box-shadow: 0 2px 8px rgba(232, 98, 44, 0.6), inset 0 -2px 2px rgba(232, 98, 44, 0.4);
+                }
 
                 .addon-name { color: var(--cream); font-size: 14px; font-weight: 500; }
                 .addon-detail { color: var(--muted-2); font-size: 11px; margin-top: 2px; }
@@ -592,8 +651,12 @@ export default function DentalDemoProposal() {
 
                 /* ── Next Steps ── */
                 .next-steps {
-                    margin-top: 60px; padding: 32px 28px; border: 1px solid rgba(100, 116, 139, 0.15);
-                    border-radius: 20px; background: var(--panel);
+                    margin-top: 60px; padding: 32px 28px; border: 1px solid rgba(100, 116, 139, 0.2);
+                    border-radius: 20px; 
+                    background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(8, 12, 22, 0.7));
+                    backdrop-filter: blur(24px) saturate(180%);
+                    -webkit-backdrop-filter: blur(24px) saturate(180%);
+                    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 20px 40px rgba(6, 10, 20, 0.5);
                 }
 
                 .next-steps-title {
