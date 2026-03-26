@@ -19,13 +19,13 @@ const PACKAGES = [
         ],
         post: [
             { label: '3× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 4500, per: '$1,500/ep' },
-            { label: '6× Mobile-Ready Clips', detail: '60-sec vertical cuts from interviews', amount: 900, per: '$150/clip' },
+            { label: 'Lighting & Microphone Package', detail: 'Professional interview lighting kit + dual wireless lav system', amount: 900 },
         ],
         included: [
             'Full-day on-location recording',
             '2-man crew + locked-off C-cam (Lead DP + Camera Op)',
             '3 multi-cam synced interview edits (15–20 min)',
-            '6 mobile-ready 60-sec clips (9:16)',
+            'Professional lighting kit + dual wireless lav mics',
             'Professional audio (dual wireless lavs)',
             'Simple lower-third graphics (name/title)',
             'Color grading + sound design',
@@ -584,7 +584,7 @@ export default function LeadershipInterviewsProposal() {
                         Record.<br /><em>Refine.</em><br />Amplify.
                     </h1>
                     <p className="hero-subtitle">
-                        Three executive leadership interviews captured with cinematic multi-cam production — delivered as polished long-form episodes and mobile-ready social clips.
+                        Three executive leadership interviews captured with cinematic multi-cam production — delivered as polished long-form episodes with professional lighting and audio.
                     </p>
 
                     <div className="hero-meta">

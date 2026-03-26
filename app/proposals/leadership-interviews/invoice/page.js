@@ -23,7 +23,7 @@ const LINE_ITEMS = [
     { description: 'Camera Operator B — Full Day', detail: '2nd angle coverage', amount: 750 },
     { description: 'BTS Photography', detail: 'Up to 100 edited behind-the-scenes photos', amount: 400 },
     { description: '3× Multi-Cam Interview Edits', detail: '15–20 min each · synced, color graded, lower thirds', amount: 4500, per: '$1,500/ep' },
-    { description: '6× Mobile-Ready Clips', detail: '60-sec vertical cuts from interviews (9:16)', amount: 900, per: '$150/clip' },
+    { description: 'Lighting & Microphone Package', detail: 'Professional interview lighting kit + dual wireless lav system', amount: 900 },
 ];
 
 const SUBTOTAL = LINE_ITEMS.reduce((s, i) => s + i.amount, 0);
@@ -613,7 +613,7 @@ export default function InvoicePage() {
                         <div className="clause">
                             <div className="clause-num">1. Scope of Work</div>
                             <div className="clause-text">
-                                MediaGeekz LLC (&ldquo;Producer&rdquo;) agrees to provide video production services for {CLIENT.company} (&ldquo;Client&rdquo;) as outlined in this invoice. Services include: on-site multi-camera recording of three (3) executive leadership interviews, professional post-production editing, color grading, sound design, and delivery of nine (9) total video assets (3 long-form episodes + 6 mobile-ready clips).
+                                MediaGeekz LLC (&ldquo;Producer&rdquo;) agrees to provide video production services for {CLIENT.company} (&ldquo;Client&rdquo;) as outlined in this invoice. Services include: on-site multi-camera recording of three (3) executive leadership interviews with professional lighting and microphone equipment, professional post-production editing, color grading, sound design, and delivery of three (3) long-form video episodes.
                             </div>
                         </div>
 
@@ -634,14 +634,14 @@ export default function InvoicePage() {
                         <div className="clause">
                             <div className="clause-num">4. Deliverables & Timeline</div>
                             <div className="clause-text">
-                                Producer will deliver three (3) multi-cam interview edits (15–20 min each) and six (6) mobile-ready 60-second clips. Interview 1 (CEO + CIO) will receive priority editing and be delivered within approximately one (1) week. Remaining deliverables will be available within 7–14 business days of the shoot date. Each edit includes simple lower-third graphics (name/title). Two (2) rounds of revisions are included.
+                                Producer will deliver three (3) multi-cam interview edits (15–20 min each). Interview 1 (CEO + CIO) will receive priority editing and be delivered within approximately one (1) week. Remaining deliverables will be available within 7–14 business days of the shoot date. Each edit includes simple lower-third graphics (name/title). Two (2) rounds of revisions are included. Professional lighting and wireless lavalier microphone equipment is provided on shoot day as part of the production package.
                             </div>
                         </div>
 
                         <div className="clause">
                             <div className="clause-num">5. Additional Services</div>
                             <div className="clause-text">
-                                Any additional videos recorded on shoot day will be billed at the agreed per-episode rate. Add-on services (boom operator, drone footage, dynamic captions, licensed music, additional clips) are available and priced separately as outlined on the proposal page.
+                                Any additional videos recorded on shoot day will be billed at the agreed per-episode rate. Add-on services (boom operator, drone footage, dynamic captions, licensed music) are available and priced separately as outlined on the proposal page.
                             </div>
                         </div>
 
