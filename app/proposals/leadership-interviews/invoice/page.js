@@ -27,8 +27,8 @@ const LINE_ITEMS = [
 ];
 
 const SUBTOTAL = LINE_ITEMS.reduce((s, i) => s + i.amount, 0);
-const DEPOSIT_PERCENT = 50;
-const DEPOSIT = Math.round(SUBTOTAL * DEPOSIT_PERCENT / 100);
+const DEPOSIT_PAID = 3875;
+const REMAINING = SUBTOTAL - DEPOSIT_PAID;
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
 
@@ -44,16 +44,11 @@ export default function InvoicePage() {
         window.print();
     };
 
-    const handlePayment = (type) => {
-        const amount = type === 'deposit' ? DEPOSIT : SUBTOTAL;
-        const description = type === 'deposit'
-            ? 'MediaGeekz — Leadership Interviews (50% Deposit)'
-            : 'MediaGeekz — Leadership Interviews (Full Payment)';
-
+    const handlePayment = () => {
         const params = new URLSearchParams({
-            amount: amount.toString(),
-            desc: description,
-            type,
+            amount: REMAINING.toString(),
+            desc: 'MediaGeekz — Leadership Interviews (Remaining Balance)',
+            type: 'remaining',
         });
 
         window.location.href = `/checkout?${params.toString()}`;
@@ -556,46 +551,37 @@ export default function InvoicePage() {
                             <span className="total-label">Subtotal</span>
                             <span className="total-value">{fmt(SUBTOTAL)}</span>
                         </div>
+                        <div className="total-row">
+                            <span className="total-label" style={{ color: 'var(--teal)' }}>Deposit Paid</span>
+                            <span className="total-value" style={{ color: 'var(--teal)' }}>−{fmt(DEPOSIT_PAID)}</span>
+                        </div>
                         <div className="total-row highlight">
-                            <span className="total-label strong">Total Due</span>
-                            <span className="total-value big">{fmt(SUBTOTAL)}</span>
+                            <span className="total-label strong">Remaining Balance</span>
+                            <span className="total-value big">{fmt(REMAINING)}</span>
                         </div>
                     </div>
 
                     <div className="deposit-note">
-                        <strong>Payment Terms:</strong> A {DEPOSIT_PERCENT}% reservation fee of <strong>{fmt(DEPOSIT)}</strong> is due upon signing to secure the March 26 date. The remaining balance of <strong>{fmt(SUBTOTAL - DEPOSIT)}</strong> is due within 3 business days of final delivery.<br /><br />
+                        <strong>Payment Received:</strong> A deposit of <strong>{fmt(DEPOSIT_PAID)}</strong> has been received — thank you! The remaining balance of <strong>{fmt(REMAINING)}</strong> is due within 3 business days of final delivery.<br /><br />
                         <strong>Rush Delivery:</strong> Interview 1 (CEO + CIO) will be delivered within approximately 1 week. Remaining edits delivered within 7–14 business days.
                     </div>
 
                     {/* ── Payment Actions ── */}
                     <div className="payment-actions no-print">
-                        <div className="payment-title">Secure Your Date</div>
-                        <div className="payment-grid">
+                        <div className="payment-title">Pay Remaining Balance</div>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <button
                                 className="pay-btn deposit"
-                                onClick={() => handlePayment('deposit')}
+                                onClick={() => handlePayment()}
                                 disabled={!!loading}
+                                style={{ width: '100%', maxWidth: 400 }}
                             >
-                                {loading === 'deposit' ? (
+                                {loading ? (
                                     <span className="pay-spinner" />
                                 ) : (
                                     <>
-                                        <span className="pay-label">Pay 50% Deposit</span>
-                                        <span className="pay-amount">{fmt(DEPOSIT)}</span>
-                                    </>
-                                )}
-                            </button>
-                            <button
-                                className="pay-btn full"
-                                onClick={() => handlePayment('full')}
-                                disabled={!!loading}
-                            >
-                                {loading === 'full' ? (
-                                    <span className="pay-spinner" />
-                                ) : (
-                                    <>
-                                        <span className="pay-label">Pay Full Balance</span>
-                                        <span className="pay-amount">{fmt(SUBTOTAL)}</span>
+                                        <span className="pay-label">Pay Remaining Balance</span>
+                                        <span className="pay-amount">{fmt(REMAINING)}</span>
                                     </>
                                 )}
                             </button>
@@ -627,7 +613,7 @@ export default function InvoicePage() {
                         <div className="clause">
                             <div className="clause-num">3. Payment</div>
                             <div className="clause-text">
-                                Total project cost is <strong>{fmt(SUBTOTAL)}</strong>. A 50% reservation fee of <strong>{fmt(DEPOSIT)}</strong> is due upon execution of this agreement. The remaining balance of <strong>{fmt(SUBTOTAL - DEPOSIT)}</strong> is due within three (3) business days of final asset delivery. Payments may be made via bank transfer, credit card, or check.
+                                Total project cost is <strong>{fmt(SUBTOTAL)}</strong>. A deposit of <strong>{fmt(DEPOSIT_PAID)}</strong> has been received. The remaining balance of <strong>{fmt(REMAINING)}</strong> is due within three (3) business days of final asset delivery. Payments may be made via bank transfer, credit card, or check.
                             </div>
                         </div>
 
