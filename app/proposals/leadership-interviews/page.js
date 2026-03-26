@@ -11,20 +11,20 @@ const PACKAGES = [
         name: 'Professional',
         tagline: 'Full package',
         recommended: true,
-        base: 7750,
+        base: 10750,
         crew: [
             { label: 'Lead Cinematographer', detail: 'Full day (9:30 AM–5:00 PM)', amount: 1200 },
             { label: 'Camera Operator B', detail: 'Full day — 2nd angle', amount: 750 },
             { label: 'BTS Photography', detail: 'Up to 100 edited behind-the-scenes photos', amount: 400 },
         ],
         post: [
-            { label: '3× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 4500, per: '$1,500/ep' },
+            { label: '5× Multi-Cam Interview Edits', detail: '15–20 min each, synced + color graded', amount: 7500, per: '$1,500/ep' },
             { label: 'Lighting & Microphone Package', detail: 'Professional interview lighting kit + dual wireless lav system', amount: 900 },
         ],
         included: [
             'Full-day on-location recording',
             '2-man crew + locked-off C-cam (Lead DP + Camera Op)',
-            '3 multi-cam synced interview edits (15–20 min)',
+            '5 multi-cam synced interview edits (15–20 min)',
             'Professional lighting kit + dual wireless lav mics',
             'Professional audio (dual wireless lavs)',
             'Simple lower-third graphics (name/title)',
@@ -584,7 +584,7 @@ export default function LeadershipInterviewsProposal() {
                         Record.<br /><em>Refine.</em><br />Amplify.
                     </h1>
                     <p className="hero-subtitle">
-                        Three executive leadership interviews captured with cinematic multi-cam production — delivered as polished long-form episodes with professional lighting and audio.
+                        Five executive leadership interviews captured with cinematic multi-cam production — delivered as polished long-form episodes with professional lighting and audio.
                     </p>
 
                     <div className="hero-meta">
@@ -640,7 +640,7 @@ export default function LeadershipInterviewsProposal() {
                     <div className="section-header">
                         <div className="section-label">Production Schedule</div>
                         <div className="section-question">March 26, 2026</div>
-                        <h2 className="section-title">One day. Three stories.</h2>
+                        <h2 className="section-title">One day. Five stories.</h2>
                         <p className="section-desc">
                             Every hour is structured to maximize quality and minimize downtime between interviews. We arrive early to dial in lighting and audio so your talent can focus on the conversation.
                         </p>
