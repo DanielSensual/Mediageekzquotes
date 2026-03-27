@@ -16,8 +16,8 @@ const NEGOTIATED_PACKAGES = [
         tagline: 'Raw Production — 3 Crew · Flexible Sessions',
         price: 6500,
         crew: [
-            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 days', total: 5000, detail: 'Creative direction, scene blocking, A-camera + interviews' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting setups, scene roaming' },
+            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 sessions', total: 5000, detail: 'Creative direction, scene blocking, A-camera + interviews' },
+            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '3 sessions', total: 1500, detail: 'B-camera coverage, lighting setups, scene roaming' },
             { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional rotation — sourced by MediaGeekz', free: true },
         ],
         included: [
@@ -30,6 +30,7 @@ const NEGOTIATED_PACKAGES = [
             'Multi-cam synced raw footage delivery',
             'Scene-separated, day-labeled file organization',
             'Private gear room at location (required)',
+            'Social teaser clip ($100 value)',
         ],
         post: ['Organized raw footage (synced, labeled)', 'Basic audio sync to cameras'],
         excluded: ['Edited episodes', 'Color grading', 'Sizzle reel'],
@@ -41,8 +42,8 @@ const NEGOTIATED_PACKAGES = [
         recommended: true,
         price: 9500,
         crew: [
-            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 days', total: 5000, detail: 'Full creative control, A-camera, talent direction' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting tech, scene roaming' },
+            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 sessions', total: 5000, detail: 'Full creative control, A-camera, talent direction' },
+            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 sessions', total: 2500, detail: 'B-camera coverage, lighting tech, scene roaming' },
             { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional — sourced by MediaGeekz', free: true },
             { label: 'Post-Production (Best Editor)', rate: 'Flat', days: '—', total: 2000, detail: 'Our top editor — sizzle reel + selects + color grade' },
         ],
@@ -67,6 +68,7 @@ const NEGOTIATED_PACKAGES = [
             { label: 'Sizzle Reel', detail: 'High-energy 3–5 min promo for pitching networks' },
             { label: 'Cinematic Color Grade', detail: 'Full LUT + grade — gold/black Sensual Movement look' },
             { label: 'Daily Selects', detail: 'Best moments compiled each night for next-day review' },
+            { label: 'Social Teaser Clip', detail: '$100/ea — 30–60s teaser cut for IG/TikTok promo' },
         ],
     },
 ];
