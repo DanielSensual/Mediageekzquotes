@@ -13,23 +13,23 @@ const NEGOTIATED_PACKAGES = [
     {
         id: 'essential',
         name: 'Essential Reality',
-        tagline: 'Raw Production — 3 Crew · 5 Days',
+        tagline: 'Raw Production — 3 Crew · Flexible Sessions',
         price: 6500,
         crew: [
             { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 days', total: 5000, detail: 'Creative direction, scene blocking, A-camera + interviews' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting setups, social floor roaming' },
+            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting setups, scene roaming' },
             { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional rotation — sourced by MediaGeekz', free: true },
         ],
         included: [
-            '40 hours of multi-cam production (Thu–Mon)',
-            '3-person crew on set daily',
+            'Flexible scheduled filming sessions',
+            '3-person crew on set each session',
             'Director / Showrunner managing all scenes',
             'Professional cinema cameras + lenses ($20K+ gear)',
             'Wireless lavalier microphones (8×)',
             'Portable LED lighting for all setups',
             'Multi-cam synced raw footage delivery',
             'Scene-separated, day-labeled file organization',
-            'Private gear room at venue (required)',
+            'Private gear room at location (required)',
         ],
         post: ['Organized raw footage (synced, labeled)', 'Basic audio sync to cameras'],
         excluded: ['Edited episodes', 'Color grading', 'Sizzle reel'],
@@ -37,25 +37,25 @@ const NEGOTIATED_PACKAGES = [
     {
         id: 'complete',
         name: 'Complete Story',
-        tagline: 'Full Production + Our Best Editor',
+        tagline: 'Full Production + Our Best Editor · Flexible Sessions',
         recommended: true,
         price: 9500,
         crew: [
             { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 days', total: 5000, detail: 'Full creative control, A-camera, talent direction' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting tech, social floor roaming' },
+            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 days', total: 2500, detail: 'B-camera coverage, lighting tech, scene roaming' },
             { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional — sourced by MediaGeekz', free: true },
             { label: 'Post-Production (Best Editor)', rate: 'Flat', days: '—', total: 2000, detail: 'Our top editor — sizzle reel + selects + color grade' },
         ],
         included: [
-            '40 hours of multi-cam production (Thu–Mon)',
-            '3-person crew on set daily',
+            'Flexible scheduled filming sessions',
+            '3-person crew on set each session',
             'Director / Showrunner managing all scenes',
             'Professional cinema cameras + lenses ($20K+ gear)',
             'Wireless lavalier microphones (8×)',
             'Full professional lighting (all setups)',
             'Multi-cam synced raw footage delivery',
             'Scene-separated, day-labeled file organization',
-            'Private gear room at venue (required)',
+            'Private gear room at location (required)',
             'Sizzle reel (3–5 min highlight cut)',
             'Color grading — cinematic gold/black look',
             'Broadcast-level audio mixing',
@@ -72,12 +72,12 @@ const NEGOTIATED_PACKAGES = [
 ];
 
 const SCENES = [
-    { icon: '💃', title: 'Social Dancing Floor', desc: 'Multi-cam roaming coverage of social dancing — the heart of every bachata event. Follow featured dancers through the crowd, capturing connection and movement.' },
-    { icon: '🎤', title: 'Confessional Interviews', desc: 'Private 1-on-1 interviews with cast members. Raw reactions, drama, personal stories. Dedicated camera + lighting in a private confessional space.' },
-    { icon: '🏆', title: 'Workshops & Competitions', desc: 'Multi-angle coverage of instructor workshops and Jack & Jill competitions. Close-ups on technique, crowd reactions, and winner reveals.' },
-    { icon: '🌴', title: 'Miami Lifestyle B-Roll', desc: 'Establishing shots of Miami — ocean, skyline, nightlife. Cast arriving, poolside moments, group dinners. The aspirational lifestyle layer.' },
-    { icon: '🎭', title: 'Behind-the-Scenes Drama', desc: 'Roaming camera catches candid moments — friendships, romances forming, backstage energy. The unscripted gold that makes reality TV compelling.' },
-    { icon: '🎶', title: 'Performances & Shows', desc: 'Full multi-cam coverage of stage performances and showcases. A-cam hero on performers, B-cam crowd reactions, C-cam wide establishing shots.' },
+    { icon: '🎤', title: 'Confessional Interviews', desc: 'Private 1-on-1 sit-downs with cast members. Raw reactions, drama, personal stories. Dedicated 2-camera setup with professional lighting in a private space.' },
+    { icon: '💃', title: 'Cast Social Moments', desc: 'Follow cast members as they dance, interact, and connect. Multi-cam roaming captures the chemistry, tension, and real relationships forming on the floor.' },
+    { icon: '🌴', title: 'Miami Lifestyle B-Roll', desc: 'Establishing shots of Miami — ocean, skyline, nightlife districts. Cast arrivals, poolside moments, group dinners, nightlife outings. The aspirational lifestyle layer.' },
+    { icon: '🎭', title: 'Unscripted Drama', desc: 'Roaming cameras catching candid moments — friendships, romances forming, heated conversations, backstage energy. The unscripted gold that makes reality TV compelling.' },
+    { icon: '🍽️', title: 'Group Scenes & Outings', desc: 'Planned group activities — cast dinners, pool parties, nightclub outings, beach sessions. Controlled environments where storylines naturally develop.' },
+    { icon: '🎬', title: 'Scene Setups & ITMs', desc: 'Produced "In The Moment" scenes — cast reactions, reveals, confrontations. Director-guided scenes that create narrative structure for the show.' },
 ];
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
@@ -221,12 +221,12 @@ export default function SensualMovementProposal() {
                     <div className="sm-hero-bg" style={{ transform: `scale(1.1) translateY(${scrollY * 0.15}px)` }} />
                     <div className="sm-hero-overlay" />
                     <div className="hero-badge">Sensual Movement × MediaGeekz</div>
-                    <h1 className="hero-title">Miami<br /><em>Paradise.</em><br />Reality.</h1>
-                    <p className="hero-sub">Multi-camera reality TV production capturing the world of bachata sensual — from the dance floor to the drama — at Miami Paradise Festival, June 2026.</p>
+                    <h1 className="hero-title">Sensual<br /><em>Movement.</em><br />Reality.</h1>
+                    <p className="hero-sub">Multi-camera reality TV production following the world of bachata sensual — the cast, the connections, and the drama — filmed on location in Miami, June 2026.</p>
                     <div className="hero-meta">
-                        <div className="hero-stat"><div className="hs-label">Client</div><div className="hs-value">Sensual Movement</div><div className="hs-detail">Festival Organizer</div></div>
-                        <div className="hero-stat"><div className="hs-label">Event</div><div className="hs-value">Miami Paradise</div><div className="hs-detail">June 2026 · Miami, FL</div></div>
-                        <div className="hero-stat"><div className="hs-label">Production</div><div className="hs-value">40 Hours</div><div className="hs-detail">Thu–Mon · 5 shoot days</div></div>
+                        <div className="hero-stat"><div className="hs-label">Client</div><div className="hs-value">Sensual Movement</div><div className="hs-detail">Reality TV Show</div></div>
+                        <div className="hero-stat"><div className="hs-label">Location</div><div className="hs-value">Miami, FL</div><div className="hs-detail">June 2026</div></div>
+                        <div className="hero-stat"><div className="hs-label">Production</div><div className="hs-value">Flexible Sessions</div><div className="hs-detail">Scheduled filming days</div></div>
                         <div className="hero-stat"><div className="hs-label">Crew</div><div className="hs-value">3-Man Crew</div><div className="hs-detail">Director + 2 Camera/Light</div></div>
                     </div>
                 </div>
@@ -238,7 +238,7 @@ export default function SensualMovementProposal() {
                     <div className="section-header">
                         <div className="s-label">Scene Guide</div>
                         <h2 className="s-title">What makes bachata TV gold</h2>
-                        <p className="s-desc">Reality TV thrives on emotion, conflict, and beauty. A bachata festival delivers all three naturally.</p>
+                        <p className="s-desc">Reality TV thrives on emotion, conflict, and beauty. The bachata world delivers all three naturally — we just capture it.</p>
                     </div>
                     <div className="scope-grid">
                         {SCENES.map((s, i) => (<div className="scope-card" key={i}><div className="scope-icon">{s.icon}</div><h3>{s.title}</h3><p>{s.desc}</p></div>))}
@@ -257,17 +257,17 @@ export default function SensualMovementProposal() {
                 {/* ═══ PRODUCTION SCHEDULE ═══ */}
                 <section className="sm-section reveal">
                     <div className="section-header">
-                        <div className="s-label">Production Schedule</div>
-                        <h2 className="s-title">Five days. Forty hours.</h2>
-                        <p className="s-desc">Wednesday arrival and setup. Cameras roll Thursday through Monday — covering every workshop, social, performance, and candid moment.</p>
+                        <div className="s-label">Production Approach</div>
+                        <h2 className="s-title">Flexible. Scheduled. Story-driven.</h2>
+                        <p className="s-desc">Filming sessions are scheduled around cast availability and story needs — not locked to a fixed event schedule. We focus entirely on the reality TV show as its own project.</p>
                     </div>
                     <div className="timeline">
-                        <div className="tl-block"><div className="tl-time">Wednesday</div><div className="tl-label">Crew Arrival + Location Scout</div><div className="tl-desc">Crew arrives in Miami. Venue walkthrough, confessional room setup, camera placements mapped. Pre-production meeting with Sensual Movement team.</div><div className="tl-loc">📍 Miami · Venue</div></div>
-                        <div className="tl-block"><div className="tl-time">Thursday · Day 1 (8 hrs)</div><div className="tl-label">Festival Opens + Cast Introductions</div><div className="tl-desc">First confessional interviews, cast arrivals, opening workshops. Establish characters and storylines. Evening social dancing — full floor coverage.</div><div className="tl-loc">📍 Main Venue + Social Floor</div></div>
-                        <div className="tl-block"><div className="tl-time">Friday · Day 2 (8 hrs)</div><div className="tl-label">Workshops + Drama Development</div><div className="tl-desc">Intensive workshop coverage, Jack &amp; Jill prelims, poolside B-roll, group dinner scenes. Confessional check-ins with cast.</div><div className="tl-loc">📍 Workshop Rooms + Pool + Social</div></div>
-                        <div className="tl-block"><div className="tl-time">Saturday · Day 3 (10 hrs)</div><div className="tl-label">Peak Night — Performances & Social</div><div className="tl-desc">Main stage performances, competition finals, peak social dancing. Biggest night — all cameras rolling, maximum coverage. Extended hours for late-night socials.</div><div className="tl-loc">📍 Main Stage + Social Floor</div></div>
-                        <div className="tl-block"><div className="tl-time">Sunday · Day 4 (8 hrs)</div><div className="tl-label">Competition Finals + Storyline Resolution</div><div className="tl-desc">Final competitions, closing workshops, cast wrap interviews. Capture storyline resolutions and emotional moments.</div><div className="tl-loc">📍 Full Venue</div></div>
-                        <div className="tl-block"><div className="tl-time">Monday · Day 5 (6 hrs)</div><div className="tl-label">Closing + Final Confessionals</div><div className="tl-desc">Morning-after interviews, farewell scenes, Miami lifestyle B-roll. Final confessionals wrapping each cast member&apos;s arc. Data backup and wrap.</div><div className="tl-loc">📍 Miami · Various</div></div>
+                        <div className="tl-block"><div className="tl-time">Pre-Production</div><div className="tl-label">Planning + Cast Coordination</div><div className="tl-desc">Cast selection finalized, confessional room location secured, scene outlines discussed. Pre-production call with Sensual Movement team to align on storylines and shooting priorities.</div><div className="tl-loc">📍 Remote + On-Site Scout</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 1</div><div className="tl-label">Cast Introductions + First Confessionals</div><div className="tl-desc">Establishing shots, cast arrivals, first confessional interviews. Set up each character&apos;s arc and establish the show&apos;s tone. Cast social interactions filmed.</div><div className="tl-loc">📍 Miami · On Location</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 2</div><div className="tl-label">Storyline Development + Group Scenes</div><div className="tl-desc">Group outings, dinner scenes, poolside B-roll, cast interactions. Confessional check-ins with each cast member. Drama and relationship arcs develop naturally.</div><div className="tl-loc">📍 Various Miami Locations</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 3</div><div className="tl-label">Peak Moments + Night Scenes</div><div className="tl-desc">Nightlife coverage, social dancing, cast in their element. Extended filming for high-energy scenes. Multi-cam capturing every angle of the action.</div><div className="tl-loc">📍 Miami Nightlife + Social</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 4</div><div className="tl-label">Climax + Storyline Resolution</div><div className="tl-desc">Key confrontation or revelation scenes, relationship resolutions, pivotal cast moments. Intense confessional sessions capturing raw emotion.</div><div className="tl-loc">📍 On Location</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 5</div><div className="tl-label">Final Confessionals + Wrap</div><div className="tl-desc">Closing interviews wrapping each cast member&apos;s arc. Farewell scenes, Miami lifestyle B-roll. Data backup, gear wrap, and footage handoff.</div><div className="tl-loc">📍 Miami · Various</div></div>
                     </div>
                 </section>
 
@@ -275,7 +275,7 @@ export default function SensualMovementProposal() {
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/workshop.png')", transform: `translateY(${(scrollY - 2200) * 0.07}px)` }} />
                     <div className="img-panel-overlay" />
-                    <div className="img-panel-content"><div className="img-label">Every <span>Workshop</span> Is a Scene</div><div className="img-sub">Instructor Showcases · Jack & Jill · Competition Coverage</div></div>
+                    <div className="img-panel-content"><div className="img-label">Every <span>Moment</span> Is a Scene</div><div className="img-sub">Cast Interactions · Social Dancing · Group Outings</div></div>
                 </div>
 
                 <div className="divider" />
@@ -338,7 +338,7 @@ export default function SensualMovementProposal() {
                                 <div className="pkg-tag">{pkg.tagline}</div>
                                 <div className="pkg-price-row">
                                     <span className="pkg-amt">{fmt(pkg.price)}</span>
-                                    <span className="pkg-note">40 hours · {pkg.crew.length} roles</span>
+                                    <span className="pkg-note">flexible sessions · {pkg.crew.length} roles</span>
                                 </div>
 
                                 {/* Crew Breakdown */}
@@ -406,7 +406,7 @@ export default function SensualMovementProposal() {
                 <div className="img-panel" style={{ height: '40vh' }}>
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/aerial.png')", transform: `translateY(${(scrollY - 5000) * 0.05}px)` }} />
                     <div className="img-panel-overlay" />
-                    <div className="img-panel-content"><div className="img-label">Miami <span>Paradise</span> Festival</div><div className="img-sub">June 2026 · Multi-Day Reality Production</div></div>
+                    <div className="img-panel-content"><div className="img-label">Filmed On Location in <span>Miami</span></div><div className="img-sub">June 2026 · Reality TV Production</div></div>
                 </div>
 
                 <div className="divider" />
@@ -421,7 +421,7 @@ export default function SensualMovementProposal() {
 
                     <div style={{ maxWidth: 700, border: '1px solid rgba(100,100,80,0.15)', borderRadius: 20, background: 'var(--panel)', padding: '32px 28px' }}>
                         <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, marginBottom: 28, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
-                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production at Miami Paradise Festival, June 2026. 40 hours across 5 shoot days (Thu–Mon) with a 3-person crew. Deliverables include organized, multi-cam synced raw footage. Post-production included in Complete Story package.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production filmed on location in Miami, FL — June 2026. Flexible scheduled filming sessions with a 3-person crew. This is a standalone reality TV project, separate from any event coverage. Deliverables include organized, multi-cam synced raw footage. Post-production included in Complete Story package.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Requirements:</strong> Private lockable gear room provided by client for $20K+ equipment storage. Crew accommodation room provided by client or organizer.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock production dates and crew. Remaining 50% due on wrap day. Cancellation within 14 days forfeits the deposit. Client receives perpetual usage rights. MediaGeekz retains portfolio/reel usage rights unless otherwise agreed.
                         </div>
