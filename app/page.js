@@ -113,24 +113,35 @@ export default function HomePage() {
                     <h3>Client Proposals</h3>
                     <div className="vertical-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
                         {[
-                            { href: '/thread', icon: '🧵', name: 'ThreadLink', desc: 'Brand story + community video production', status: 'Active' },
-                            { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active' },
-                            { href: '/proposals/eventive', icon: '🎪', name: 'Eventive', desc: 'Awards dinner + highlight video', status: 'Active' },
-                            { href: '/proposals/leadership-interviews', icon: '🎙️', name: 'Leadership Interviews', desc: 'Interview series — multi-cam production', status: 'Active' },
-                            { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active' },
-                            { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active' },
-                            { href: '/proposals/wedding-basic', icon: '💒', name: 'Wedding Basic', desc: 'Wedding day cinematic package', status: 'Active' },
+                            { href: '/thread', icon: '🧵', name: 'ThreadLink', desc: 'Brand story + community video production', status: 'Active', total: 12000, paid: 6000 },
+                            { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active', total: 4070, paid: 2035 },
+                            { href: '/proposals/eventive', icon: '🎪', name: 'Eventive', desc: 'Awards dinner + highlight video', status: 'Active', total: 2250, paid: 1125 },
+                            { href: '/proposals/leadership-interviews', icon: '🎙️', name: 'Leadership Interviews', desc: 'Interview series — multi-cam production', status: 'Active', total: 0, paid: 0 },
+                            { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active', total: 0, paid: 0 },
+                            { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active', total: 0, paid: 0 },
+                            { href: '/proposals/wedding-basic', icon: '💒', name: 'Wedding Basic', desc: 'Wedding day cinematic package', status: 'Active', total: 0, paid: 0 },
                         ].map((p, i) => (
                             <a
                                 key={p.href}
                                 href={p.href}
                                 className={`vertical-card-preview ${mounted ? 'card-visible' : ''}`}
-                                style={{ animationDelay: `${150 + i * 100}ms`, textDecoration: 'none' }}
+                                style={{ animationDelay: `${150 + i * 100}ms`, textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                             >
                                 <span className="vc-icon">{p.icon}</span>
                                 <span className="vc-name">{p.name}</span>
-                                <span className="vc-desc">{p.desc}</span>
-                                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#34d399', background: 'rgba(52, 211, 153, 0.1)', padding: '3px 10px', borderRadius: 20, marginTop: 6 }}>{p.status}</span>
+                                <span className="vc-desc" style={{ flexGrow: 1 }}>{p.desc}</span>
+                                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#34d399', background: 'rgba(52, 211, 153, 0.1)', padding: '3px 10px', borderRadius: 20, marginTop: 12 }}>{p.status}</span>
+                                
+                                <div style={{ display: 'flex', gap: 12, marginTop: 16, borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 12, width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted-3)', fontWeight: 700, marginBottom: 2 }}>Charged</span>
+                                        <span style={{ fontSize: 13, color: 'var(--cream)', fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>${p.total ? p.total.toLocaleString() : '0'}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'right' }}>
+                                        <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--muted-3)', fontWeight: 700, marginBottom: 2 }}>Paid</span>
+                                        <span style={{ fontSize: 13, color: 'var(--teal)', fontWeight: 600, fontFamily: "'Outfit', sans-serif" }}>${p.paid ? p.paid.toLocaleString() : '0'}</span>
+                                    </div>
+                                </div>
                                 <span className="vc-arrow">→</span>
                             </a>
                         ))}
