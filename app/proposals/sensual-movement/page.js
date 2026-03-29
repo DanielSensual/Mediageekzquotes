@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 
 const CREW = [
-    { role: 'Director / Showrunner (Daniel)', rate: 1000, detail: 'Creative direction, A-camera, talent direction' },
-    { role: 'Cinematographer', rate: 800, detail: 'Primary camera, cinematic framing, lighting design' },
-    { role: 'B-Camera Operator', rate: 400, detail: 'Secondary angles, roaming coverage, BTS' },
-    { role: 'Audio Engineer', rate: 350, detail: 'Wireless lavs (8×), boom, ambient, live mix' },
+    { role: 'Director / Showrunner (Daniel)', rate: 1000, detail: 'Manages entire production — crew scheduling, scene direction, cast management, shot list execution, A-camera operation' },
+    { role: 'Cinematographer / DP', rate: 800, detail: 'Dedicated camera operator — cinematic framing, lighting design, lens selection, camera movement, visual storytelling' },
+    { role: 'B-Camera Operator', rate: 400, detail: 'Secondary angles, roaming coverage, behind-the-scenes, reaction shots' },
+    { role: 'Audio Engineer', rate: 350, detail: 'Wireless lavs (8×), boom mic, ambient sound, live mixing' },
 ];
 const DAILY_RATE = CREW.reduce((s, c) => s + c.rate, 0);
 
@@ -338,7 +338,7 @@ export default function SensualMovementProposal() {
                     <div className="cfg-card">
                         <div className="cfg-step">01</div>
                         <div className="cfg-title">How many filming days?</div>
-                        <div className="cfg-desc">4-man crew · multi-cam included · all professional gear provided</div>
+                        <div className="cfg-desc">4-man crew · 10–12 hour production days · multi-cam included · cinema drone included · all professional gear provided</div>
                         <div className="day-wrap">
                             <select className="day-sel" value={days} onChange={(e) => setDays(Number(e.target.value))}>
                                 {[1,2,3,4,5,6,7,8,9,10].map(d => (
@@ -353,6 +353,14 @@ export default function SensualMovementProposal() {
                                 <div className="cr-right"><div className="cr-math">{fmt(c.rate)}/day × {days}</div><div className="cr-amt">{fmt(c.rate * days)}</div></div>
                             </div>
                         ))}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0', marginTop: 8, borderTop: '1px solid rgba(100,100,80,0.08)' }}>
+                            <span style={{ fontSize: 11, color: 'var(--gold)' }}>🎥</span>
+                            <span style={{ fontSize: 12, color: 'var(--muted)' }}><strong style={{ color: 'var(--cream)' }}>Cinema Drone</strong> — aerial establishing shots, location reveals, cast arrivals · <span style={{ color: 'var(--gold)', fontWeight: 600 }}>INCLUDED FREE</span></span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 0' }}>
+                            <span style={{ fontSize: 11, color: 'var(--gold)' }}>⏱️</span>
+                            <span style={{ fontSize: 12, color: 'var(--muted)' }}>Each filming day is a <strong style={{ color: 'var(--cream)' }}>10–12 hour production day</strong> — full call-to-wrap coverage</span>
+                        </div>
                         <div className="crew-total-row">
                             <span>Crew Subtotal ({days} {days === 1 ? 'day' : 'days'})</span>
                             <span>{fmt(crewTotal)}</span>
@@ -462,6 +470,38 @@ export default function SensualMovementProposal() {
 
                 <div className="divider" />
 
+                {/* ═══ PENDING SHOT LIST & SCRIPT ═══ */}
+                <section className="sm-section reveal">
+                    <div className="section-header">
+                        <div className="s-label">Pre-Production</div>
+                        <h2 className="s-title">Pending: Shot List & Script</h2>
+                        <p className="s-desc">The following production documents will be finalized collaboratively between MediaGeekz and Sensual Movement prior to the first filming session.</p>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+                        <div className="cfg-card" style={{ borderColor: 'rgba(212,175,55,0.2)' }}>
+                            <div style={{ fontSize: 24, marginBottom: 12 }}>📋</div>
+                            <div className="cfg-title" style={{ fontSize: 18 }}>Master Shot List</div>
+                            <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7, marginTop: 8 }}>Scene-by-scene breakdown of required shots, camera angles, cast combinations, and location-specific setups. Built around the 10 scene types outlined above.</div>
+                            <div style={{ marginTop: 16, padding: '8px 14px', border: '1px solid rgba(212,175,55,0.15)', borderRadius: 10, background: 'rgba(212,175,55,0.04)', fontSize: 11, color: 'var(--gold)', fontWeight: 600, display: 'inline-block' }}>⏳ PENDING — To be finalized pre-production</div>
+                        </div>
+                        <div className="cfg-card" style={{ borderColor: 'rgba(212,175,55,0.2)' }}>
+                            <div style={{ fontSize: 24, marginBottom: 12 }}>📝</div>
+                            <div className="cfg-title" style={{ fontSize: 18 }}>Episode Outline / Script</div>
+                            <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7, marginTop: 8 }}>Loose narrative arc for each of the 8 episodes — cast introductions, key storylines, confessional prompts, climax points, and resolution beats. Structured but flexible for unscripted moments.</div>
+                            <div style={{ marginTop: 16, padding: '8px 14px', border: '1px solid rgba(212,175,55,0.15)', borderRadius: 10, background: 'rgba(212,175,55,0.04)', fontSize: 11, color: 'var(--gold)', fontWeight: 600, display: 'inline-block' }}>⏳ PENDING — To be finalized pre-production</div>
+                        </div>
+                        <div className="cfg-card" style={{ borderColor: 'rgba(212,175,55,0.2)' }}>
+                            <div style={{ fontSize: 24, marginBottom: 12 }}>📍</div>
+                            <div className="cfg-title" style={{ fontSize: 18 }}>Location & Cast Schedule</div>
+                            <div style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.7, marginTop: 8 }}>Day-by-day filming schedule with confirmed locations, cast call times, scene priorities, and backup plans. Coordinated between Director and Sensual Movement.</div>
+                            <div style={{ marginTop: 16, padding: '8px 14px', border: '1px solid rgba(212,175,55,0.15)', borderRadius: 10, background: 'rgba(212,175,55,0.04)', fontSize: 11, color: 'var(--gold)', fontWeight: 600, display: 'inline-block' }}>⏳ PENDING — To be finalized pre-production</div>
+                        </div>
+                    </div>
+                    <div className="pay-note" style={{ marginTop: 24, maxWidth: 700 }}>📌 <strong style={{ color: 'var(--cream)' }}>Note:</strong> All pre-production documents will be developed jointly. The Director (Daniel) manages all crew scheduling, scene coordination, and on-set logistics. The client (Sensual Movement) provides cast access, location details, and story direction input.</div>
+                </section>
+
+                <div className="divider" />
+
                 {/* ═══ AGREEMENT ═══ */}
                 <section className="sm-section reveal">
                     <div className="section-header">
@@ -471,8 +511,8 @@ export default function SensualMovementProposal() {
                     </div>
                     <div style={{ maxWidth: 700, border: '1px solid rgba(100,100,80,0.15)', borderRadius: 20, background: 'var(--panel)', padding: '32px 28px' }}>
                         <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, marginBottom: 28, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
-                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production filmed on location in Miami, FL — June 2026. 4-man crew with flexible scheduled filming sessions. 8 × 1-hour episodes. This is a standalone reality TV project, separate from any event coverage.<br /><br />
-                            <strong style={{ color: 'var(--cream)' }}>Crew:</strong> Director/Showrunner ($1,000/day), Cinematographer ($1,000/day), B-Camera Operator ($400/day), Audio Engineer ($350/day). Multi-camera coverage included.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production filmed on location in Miami, FL — June 2026. 4-man crew with flexible scheduled filming sessions (10–12 hour production days). 8 × 1-hour episodes. Cinema drone included. This is a standalone reality TV project, separate from any event coverage.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Crew:</strong> Director/Showrunner ($1,000/day — manages crew, scheduling, scene direction, A-camera), Cinematographer/DP ($800/day — dedicated camera operator, lighting, visual storytelling), B-Camera Operator ($400/day), Audio Engineer ($350/day). Multi-camera + cinema drone coverage included.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Editing:</strong> {editTier === 'premium' ? 'Premium' : 'Standard'} editing at {fmt(editRate)}/episode × {EPISODES} episodes = {fmt(editTotal)}. Episodes can be paid individually as delivered.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Requirements:</strong> Private lockable gear room provided by client for $20K+ equipment storage. Crew accommodation room provided by client or organizer.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock production dates and crew. Remaining 50% due on wrap day. Episode editing billed separately per episode. Cancellation within 14 days forfeits the deposit. Client receives perpetual usage rights. MediaGeekz retains portfolio/reel usage rights unless otherwise agreed.
@@ -488,7 +528,7 @@ export default function SensualMovementProposal() {
                                 <div className="sig-field">Email</div>
                             </div>
                             <div>
-                                <div className="sig-label">Client — Sensual Movement</div>
+                                <div className="sig-label">Client — Sensual Movement (Brand)</div>
                                 {signed ? (
                                     <>
                                         <div className="sig-preview"><span className="sig-cursive">{sigName}</span></div>
