@@ -1,106 +1,63 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-const STANDARD_RATE = [
-    { label: 'Director / DP (per day)', rate: 1500, days: 5, total: 7500 },
-    { label: 'Camera Operator / Light (per day)', rate: 1500, days: 5, total: 7500 },
-    { label: '3rd Camera / BTS (per day)', rate: 1500, days: 5, total: 7500 },
-    { label: 'Post-Production (edit + color + audio)', rate: 3000, days: 1, total: 3000 },
+const CREW = [
+    { role: 'Director / Showrunner (Daniel)', rate: 1000, detail: 'Creative direction, A-camera, talent direction' },
+    { role: 'Cinematographer', rate: 1000, detail: 'Primary camera, cinematic framing, lighting design' },
+    { role: 'B-Camera Operator', rate: 400, detail: 'Secondary angles, roaming coverage, BTS' },
+    { role: 'Audio Engineer', rate: 350, detail: 'Wireless lavs (8×), boom, ambient, live mix' },
 ];
-const STANDARD_TOTAL = 25500;
+const DAILY_RATE = CREW.reduce((s, c) => s + c.rate, 0);
 
-const NEGOTIATED_PACKAGES = [
-    {
-        id: 'essential',
-        name: 'Essential Reality',
-        tagline: 'Raw Production — 3 Crew · Flexible Sessions',
-        price: 6500,
-        crew: [
-            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 sessions', total: 5000, detail: 'Creative direction, scene blocking, A-camera + interviews' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '3 sessions', total: 1500, detail: 'B-camera coverage, lighting setups, scene roaming' },
-            { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional rotation — sourced by MediaGeekz', free: true },
-        ],
-        included: [
-            'Flexible scheduled filming sessions',
-            '3-person crew on set each session',
-            'Director / Showrunner managing all scenes',
-            'Professional cinema cameras + lenses ($20K+ gear)',
-            'Wireless lavalier microphones (8×)',
-            'Portable LED lighting for all setups',
-            'Multi-cam synced raw footage delivery',
-            'Scene-separated, day-labeled file organization',
-            'Private gear room at location (required)',
-            'Social teaser clip ($100 value)',
-        ],
-        post: ['Organized raw footage (synced, labeled)', 'Basic audio sync to cameras'],
-        excluded: ['Edited episodes', 'Color grading', 'Sizzle reel'],
-    },
-    {
-        id: 'complete',
-        name: 'Complete Story',
-        tagline: 'Full Production + Our Best Editor · Flexible Sessions',
-        recommended: true,
-        price: 9500,
-        crew: [
-            { label: 'Director / Showrunner (Daniel)', rate: '$1,000/day', days: '5 sessions', total: 5000, detail: 'Full creative control, A-camera, talent direction' },
-            { label: 'Camera Operator / Lighting', rate: '$500/day', days: '5 sessions', total: 2500, detail: 'B-camera coverage, lighting tech, scene roaming' },
-            { label: '3rd Videographer (Contracted)', rate: 'Included', days: '—', total: 0, detail: 'C-camera / BTS / confessional — sourced by MediaGeekz', free: true },
-            { label: 'Post-Production (Best Editor)', rate: 'Flat', days: '—', total: 2000, detail: 'Our top editor — sizzle reel + selects + color grade' },
-        ],
-        included: [
-            'Flexible scheduled filming sessions',
-            '3-person crew on set each session',
-            'Director / Showrunner managing all scenes',
-            'Professional cinema cameras + lenses ($20K+ gear)',
-            'Wireless lavalier microphones (8×)',
-            'Full professional lighting (all setups)',
-            'Multi-cam synced raw footage delivery',
-            'Scene-separated, day-labeled file organization',
-            'Private gear room at location (required)',
-            'Sizzle reel (3–5 min highlight cut)',
-            'Color grading — cinematic gold/black look',
-            'Broadcast-level audio mixing',
-            'Daily selects / best-of compilation per day',
-        ],
-        post: ['Sizzle reel (3–5 min)', 'Color graded footage', 'Audio mix + cleanup', 'Daily selects compilations'],
-        excluded: ['Full episode editing (available separately)'],
-        bonuses: [
-            { label: 'Sizzle Reel', detail: 'High-energy 3–5 min promo for pitching networks' },
-            { label: 'Cinematic Color Grade', detail: 'Full LUT + grade — gold/black Sensual Movement look' },
-            { label: 'Daily Selects', detail: 'Best moments compiled each night for next-day review' },
-            { label: 'Social Teaser Clip', detail: '$100/ea — 30–60s teaser cut for IG/TikTok promo' },
-        ],
-    },
+const STD_RATES = [
+    { label: 'Director / DP (per day)', rate: 1500, qty: 5, total: 7500 },
+    { label: 'Cinematographer (per day)', rate: 1500, qty: 5, total: 7500 },
+    { label: 'B-Camera / BTS (per day)', rate: 1500, qty: 5, total: 7500 },
+    { label: 'Audio Engineer (per day)', rate: 1000, qty: 5, total: 5000 },
+    { label: 'Post-Production (8 × 1hr eps)', rate: 2500, qty: 8, total: 20000 },
 ];
+const STD_TOTAL = STD_RATES.reduce((s, r) => s + r.total, 0);
+
+const EPISODES = 8;
+const EDIT_STD = 1000;
+const EDIT_PREM = 1500;
+const TEASER_RATE = 100;
 
 const SCENES = [
-    { icon: '🎤', title: 'Confessional Interviews', desc: 'Private 1-on-1 sit-downs with cast members. Raw reactions, drama, personal stories. Dedicated 2-camera setup with professional lighting in a private space.' },
-    { icon: '💃', title: 'Cast Social Moments', desc: 'Follow cast members as they dance, interact, and connect. Multi-cam roaming captures the chemistry, tension, and real relationships forming on the floor.' },
-    { icon: '🌴', title: 'Miami Lifestyle B-Roll', desc: 'Establishing shots of Miami — ocean, skyline, nightlife districts. Cast arrivals, poolside moments, group dinners, nightlife outings. The aspirational lifestyle layer.' },
-    { icon: '🎭', title: 'Unscripted Drama', desc: 'Roaming cameras catching candid moments — friendships, romances forming, heated conversations, backstage energy. The unscripted gold that makes reality TV compelling.' },
-    { icon: '🍽️', title: 'Group Scenes & Outings', desc: 'Planned group activities — cast dinners, pool parties, nightclub outings, beach sessions. Controlled environments where storylines naturally develop.' },
-    { icon: '🎬', title: 'Scene Setups & ITMs', desc: 'Produced "In The Moment" scenes — cast reactions, reveals, confrontations. Director-guided scenes that create narrative structure for the show.' },
+    { icon: '🎤', title: 'Confessional Interviews', desc: 'Private 1-on-1 sit-downs with cast. Raw reactions, drama, personal stories. 2-camera setup with professional lighting.' },
+    { icon: '💃', title: 'Cast Social Moments', desc: 'Follow cast as they dance, interact, and connect. Multi-cam roaming captures chemistry, tension, and relationships.' },
+    { icon: '🌴', title: 'Miami Lifestyle B-Roll', desc: 'Miami skyline, nightlife, ocean. Cast arrivals, poolside moments, group dinners. The aspirational lifestyle layer.' },
+    { icon: '🎭', title: 'Unscripted Drama', desc: 'Roaming cameras catching candid moments — friendships, romances, heated conversations. Unscripted gold.' },
+    { icon: '🍽️', title: 'Group Scenes & Outings', desc: 'Cast dinners, pool parties, nightclub outings, beach sessions. Controlled environments where storylines develop.' },
+    { icon: '🎬', title: 'Scene Setups & ITMs', desc: 'Produced "In The Moment" scenes — reactions, reveals, confrontations. Director-guided narrative structure.' },
 ];
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
 
 export default function SensualMovementProposal() {
-    const [expandedPkg, setExpandedPkg] = useState('complete');
+    const [days, setDays] = useState(5);
+    const [editTier, setEditTier] = useState('standard');
+    const [teasers, setTeasers] = useState(0);
     const [scrollY, setScrollY] = useState(0);
     const [sigName, setSigName] = useState('');
     const [signed, setSigned] = useState(false);
     const [signedAt, setSignedAt] = useState(null);
 
+    const crewTotal = DAILY_RATE * days;
+    const editRate = editTier === 'premium' ? EDIT_PREM : EDIT_STD;
+    const editTotal = editRate * EPISODES;
+    const teaserTotal = teasers * TEASER_RATE;
+    const grandTotal = crewTotal + editTotal + teaserTotal;
+    const savings = STD_TOTAL - grandTotal;
+
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-            });
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
         }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        const handleScroll = () => setScrollY(window.scrollY);
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => { observer.disconnect(); window.removeEventListener('scroll', handleScroll); };
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        const onScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => { obs.disconnect(); window.removeEventListener('scroll', onScroll); };
     }, []);
 
     const handleSign = () => { if (!sigName.trim()) return; const now = new Date(); setSignedAt(now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + ' at ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })); setSigned(true); };
@@ -165,36 +122,57 @@ export default function SensualMovementProposal() {
                 .std-table td{padding:12px;font-size:13px;color:var(--muted);border-bottom:1px solid rgba(100,100,80,0.08);}
                 .std-table .strike{text-decoration:line-through;opacity:0.45;}
                 .std-table .total-row td{border-top:1px solid rgba(212,175,55,0.2);font-weight:700;color:var(--muted);font-size:15px;}
-                .std-table .total-row .strike{font-family:'Outfit',sans-serif;}
                 .savings-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:12px;margin-top:16px;}
                 .savings-badge .pct{font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;color:var(--gold);}
                 .savings-badge .txt{font-size:12px;color:var(--muted);}
-                .pkgs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;}
-                @media(max-width:860px){.pkgs-grid{grid-template-columns:1fr;}}
-                .pkg{padding:36px 28px;border:1px solid rgba(100,100,80,0.15);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent),var(--panel);transition:border-color 0.3s,transform 0.3s;position:relative;}
-                .pkg:hover{border-color:rgba(212,175,55,0.3);transform:translateY(-4px);}
-                .pkg.rec{border-color:var(--gold);background:radial-gradient(circle at top right,rgba(212,175,55,0.1),transparent 50%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent),rgba(13,11,6,0.96);box-shadow:0 0 50px rgba(212,175,55,0.08);}
-                .pkg-badge{position:absolute;top:-12px;left:28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--shadow);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:5px 16px;border-radius:999px;}
-                .pkg-name{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:4px;}
-                .pkg-tag{color:var(--muted-2);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;}
-                .pkg-price-row{display:flex;align-items:baseline;gap:8px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid rgba(100,100,80,0.15);}
-                .pkg-amt{font-family:'Outfit',sans-serif;font-size:38px;font-weight:700;color:var(--gold);}
-                .pkg-note{color:var(--muted-2);font-size:11px;}
-                .crew-line{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(100,100,80,0.08);}
-                .crew-line:last-child{border-bottom:none;}
-                .crew-left .cl-name{font-size:13px;color:var(--cream);font-weight:500;}
-                .crew-left .cl-detail{font-size:11px;color:var(--muted-2);margin-top:2px;}
-                .crew-right{text-align:right;white-space:nowrap;}
-                .crew-right .cr-rate{font-size:11px;color:var(--muted-2);}
-                .crew-right .cr-total{font-size:14px;color:var(--gold);font-weight:600;}
-                .crew-right .cr-free{font-size:11px;color:rgba(212,175,55,0.6);font-style:italic;}
-                .pkg-features{list-style:none;margin-top:20px;}
-                .pkg-features li{font-size:12px;color:var(--muted);padding:6px 0 6px 22px;position:relative;line-height:1.5;}
-                .pkg-features li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-size:12px;}
-                .pkg-features li.ex{opacity:0.3;}
-                .pkg-features li.ex::before{content:'—';color:var(--muted-3);}
-                .pkg-features li.bonus{color:var(--gold);font-weight:500;}
-                .pkg-features li.bonus::before{content:'★';color:var(--gold);}
+                .cfg-card{padding:32px 28px;border:1px solid rgba(100,100,80,0.15);border-radius:20px;background:var(--panel);margin-bottom:24px;}
+                .cfg-step{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--shadow);font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;margin-bottom:16px;}
+                .cfg-title{font-family:'Outfit',sans-serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:6px;}
+                .cfg-desc{color:var(--muted-2);font-size:13px;margin-bottom:24px;}
+                .day-wrap{position:relative;max-width:380px;margin-bottom:28px;}
+                .day-sel{width:100%;padding:14px 44px 14px 16px;border:1px solid rgba(212,175,55,0.25);border-radius:12px;background:rgba(13,11,6,0.6);color:var(--white);font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;cursor:pointer;appearance:none;-webkit-appearance:none;outline:none;transition:border-color 0.2s;}
+                .day-sel:focus{border-color:var(--gold);}
+                .day-sel option{background:#0d0b06;color:var(--cream);}
+                .day-wrap::after{content:'▾';position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--gold);pointer-events:none;font-size:14px;}
+                .crew-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(100,100,80,0.08);}
+                .crew-row:last-child{border-bottom:none;}
+                .cr-left .cr-role{font-size:13px;color:var(--cream);font-weight:500;}
+                .cr-left .cr-detail{font-size:11px;color:var(--muted-2);margin-top:2px;}
+                .cr-right{text-align:right;white-space:nowrap;}
+                .cr-math{font-size:11px;color:var(--muted-2);}
+                .cr-amt{font-size:14px;color:var(--gold);font-weight:600;}
+                .crew-total-row{display:flex;justify-content:space-between;padding:14px 0 0;margin-top:8px;border-top:1px solid rgba(212,175,55,0.2);}
+                .crew-total-row span:first-child{font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--cream);}
+                .crew-total-row span:last-child{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:var(--gold);}
+                .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+                @media(max-width:640px){.tier-grid{grid-template-columns:1fr;}}
+                .tier-card{padding:24px 20px;border:1px solid rgba(100,100,80,0.15);border-radius:16px;background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.3s;position:relative;}
+                .tier-card:hover{border-color:rgba(212,175,55,0.3);transform:translateY(-2px);}
+                .tier-card.active{border-color:var(--gold);background:rgba(212,175,55,0.06);box-shadow:0 0 30px rgba(212,175,55,0.06);}
+                .tier-badge{position:absolute;top:-10px;right:16px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--shadow);font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:4px 12px;border-radius:999px;}
+                .tier-name{font-family:'Outfit',sans-serif;font-size:18px;font-weight:600;color:var(--white);margin-bottom:4px;}
+                .tier-price{font-family:'Outfit',sans-serif;font-size:24px;font-weight:700;color:var(--gold);margin-bottom:2px;}
+                .tier-ep{font-size:11px;color:var(--muted-2);margin-bottom:10px;}
+                .tier-total{font-size:13px;color:var(--cream);font-weight:500;padding:8px 0;border-top:1px solid rgba(100,100,80,0.1);margin-top:8px;}
+                .tier-desc{font-size:12px;color:var(--muted-2);margin-top:8px;line-height:1.5;}
+                .addon-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;}
+                .addon-left .addon-name{font-size:14px;color:var(--cream);font-weight:500;}
+                .addon-left .addon-detail{font-size:11px;color:var(--muted-2);margin-top:2px;}
+                .addon-right{display:flex;align-items:center;gap:16px;}
+                .addon-price{font-size:13px;color:var(--gold);font-weight:600;}
+                .counter{display:flex;align-items:center;gap:10px;}
+                .counter-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(212,175,55,0.25);background:rgba(13,11,6,0.6);color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-family:'Outfit',sans-serif;}
+                .counter-btn:hover{background:rgba(212,175,55,0.1);border-color:var(--gold);}
+                .counter-val{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:var(--white);min-width:24px;text-align:center;}
+                .summary-panel{margin-top:32px;padding:28px 24px;border:1px solid rgba(212,175,55,0.25);border-radius:20px;background:radial-gradient(circle at top right,rgba(212,175,55,0.06),transparent 50%),var(--panel);}
+                .sum-title{font-family:'Outfit',sans-serif;font-size:18px;font-weight:600;color:var(--white);margin-bottom:16px;}
+                .sum-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(100,100,80,0.08);font-size:14px;}
+                .sum-row .sum-l{color:var(--muted);}
+                .sum-row .sum-r{color:var(--cream);font-weight:500;}
+                .sum-total{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0 0;margin-top:8px;border-top:1px solid rgba(212,175,55,0.2);}
+                .sum-total .sum-tl{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:var(--white);}
+                .sum-total .sum-tv{font-family:'Outfit',sans-serif;font-size:32px;font-weight:700;color:var(--gold);}
+                .pay-note{margin-top:16px;padding:12px 16px;border-radius:10px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.12);font-size:12px;color:var(--muted);line-height:1.6;}
                 .req-box{margin-top:40px;padding:24px;border:1px solid rgba(232,68,108,0.2);border-radius:16px;background:rgba(232,68,108,0.04);}
                 .req-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;color:var(--rose);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
                 .req-desc{font-size:13px;color:var(--muted);line-height:1.7;}
@@ -227,9 +205,9 @@ export default function SensualMovementProposal() {
                     <p className="hero-sub">Multi-camera reality TV production following the world of bachata sensual — the cast, the connections, and the drama — filmed on location in Miami, June 2026.</p>
                     <div className="hero-meta">
                         <div className="hero-stat"><div className="hs-label">Client</div><div className="hs-value">Sensual Movement</div><div className="hs-detail">Reality TV Show</div></div>
-                        <div className="hero-stat"><div className="hs-label">Location</div><div className="hs-value">Miami, FL</div><div className="hs-detail">June 2026</div></div>
+                        <div className="hero-stat"><div className="hs-label">Episodes</div><div className="hs-value">8 × 1 Hour</div><div className="hs-detail">Full season</div></div>
                         <div className="hero-stat"><div className="hs-label">Production</div><div className="hs-value">Flexible Sessions</div><div className="hs-detail">Scheduled filming days</div></div>
-                        <div className="hero-stat"><div className="hs-label">Crew</div><div className="hs-value">3-Man Crew</div><div className="hs-detail">Director + 2 Camera/Light</div></div>
+                        <div className="hero-stat"><div className="hs-label">Crew</div><div className="hs-value">4-Man Crew</div><div className="hs-detail">Director + DP + B-Cam + Audio</div></div>
                     </div>
                 </div>
 
@@ -247,7 +225,6 @@ export default function SensualMovementProposal() {
                     </div>
                 </section>
 
-                {/* ═══ DANCE IMAGE BREAK ═══ */}
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/dance.png')", transform: `translateY(${(scrollY - 1200) * 0.08}px)` }} />
                     <div className="img-panel-overlay" />
@@ -256,24 +233,21 @@ export default function SensualMovementProposal() {
 
                 <div className="divider" />
 
-                {/* ═══ PRODUCTION SCHEDULE ═══ */}
+                {/* ═══ PRODUCTION APPROACH ═══ */}
                 <section className="sm-section reveal">
                     <div className="section-header">
                         <div className="s-label">Production Approach</div>
                         <h2 className="s-title">Flexible. Scheduled. Story-driven.</h2>
-                        <p className="s-desc">Filming sessions are scheduled around cast availability and story needs — not locked to a fixed event schedule. We focus entirely on the reality TV show as its own project.</p>
+                        <p className="s-desc">Filming sessions are scheduled around cast availability and story needs. Our 4-man crew focuses entirely on the reality TV show as its own project — separate from any event coverage.</p>
                     </div>
                     <div className="timeline">
-                        <div className="tl-block"><div className="tl-time">Pre-Production</div><div className="tl-label">Planning + Cast Coordination</div><div className="tl-desc">Cast selection finalized, confessional room location secured, scene outlines discussed. Pre-production call with Sensual Movement team to align on storylines and shooting priorities.</div><div className="tl-loc">📍 Remote + On-Site Scout</div></div>
-                        <div className="tl-block"><div className="tl-time">Session 1</div><div className="tl-label">Cast Introductions + First Confessionals</div><div className="tl-desc">Establishing shots, cast arrivals, first confessional interviews. Set up each character&apos;s arc and establish the show&apos;s tone. Cast social interactions filmed.</div><div className="tl-loc">📍 Miami · On Location</div></div>
-                        <div className="tl-block"><div className="tl-time">Session 2</div><div className="tl-label">Storyline Development + Group Scenes</div><div className="tl-desc">Group outings, dinner scenes, poolside B-roll, cast interactions. Confessional check-ins with each cast member. Drama and relationship arcs develop naturally.</div><div className="tl-loc">📍 Various Miami Locations</div></div>
-                        <div className="tl-block"><div className="tl-time">Session 3</div><div className="tl-label">Peak Moments + Night Scenes</div><div className="tl-desc">Nightlife coverage, social dancing, cast in their element. Extended filming for high-energy scenes. Multi-cam capturing every angle of the action.</div><div className="tl-loc">📍 Miami Nightlife + Social</div></div>
-                        <div className="tl-block"><div className="tl-time">Session 4</div><div className="tl-label">Climax + Storyline Resolution</div><div className="tl-desc">Key confrontation or revelation scenes, relationship resolutions, pivotal cast moments. Intense confessional sessions capturing raw emotion.</div><div className="tl-loc">📍 On Location</div></div>
-                        <div className="tl-block"><div className="tl-time">Session 5</div><div className="tl-label">Final Confessionals + Wrap</div><div className="tl-desc">Closing interviews wrapping each cast member&apos;s arc. Farewell scenes, Miami lifestyle B-roll. Data backup, gear wrap, and footage handoff.</div><div className="tl-loc">📍 Miami · Various</div></div>
+                        <div className="tl-block"><div className="tl-time">Pre-Production</div><div className="tl-label">Planning + Cast Coordination</div><div className="tl-desc">Cast selection, confessional locations, scene outlines. Pre-production call to align on storylines and shooting priorities.</div><div className="tl-loc">📍 Remote + On-Site Scout</div></div>
+                        <div className="tl-block"><div className="tl-time">Session 1</div><div className="tl-label">Cast Introductions + First Confessionals</div><div className="tl-desc">Establishing shots, cast arrivals, first interviews. Set up each character&apos;s arc. 4-camera coverage from the start.</div><div className="tl-loc">📍 Miami · On Location</div></div>
+                        <div className="tl-block"><div className="tl-time">Sessions 2–4</div><div className="tl-label">Storyline Development + Peak Moments</div><div className="tl-desc">Group outings, dinner scenes, nightlife, social dancing, cast interactions. Confessional check-ins. Drama and relationships develop naturally.</div><div className="tl-loc">📍 Various Miami Locations</div></div>
+                        <div className="tl-block"><div className="tl-time">Final Session</div><div className="tl-label">Climax + Final Confessionals + Wrap</div><div className="tl-desc">Key confrontations, resolutions, closing interviews. Miami lifestyle B-roll. Data backup, gear wrap, footage handoff.</div><div className="tl-loc">📍 Miami · Various</div></div>
                     </div>
                 </section>
 
-                {/* ═══ WORKSHOP IMAGE BREAK ═══ */}
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/workshop.png')", transform: `translateY(${(scrollY - 2200) * 0.07}px)` }} />
                     <div className="img-panel-overlay" />
@@ -282,99 +256,135 @@ export default function SensualMovementProposal() {
 
                 <div className="divider" />
 
-                {/* ═══ STANDARD RATES (for reference) ═══ */}
+                {/* ═══ STANDARD RATES (reference) ═══ */}
                 <section className="sm-section reveal">
                     <div className="section-header">
                         <div className="s-label">Standard Rates</div>
                         <h2 className="s-title">Our normal production pricing</h2>
-                        <p className="s-desc">For full transparency — here&apos;s what a 3-crew, 5-day reality production normally costs at our standard day rates.</p>
+                        <p className="s-desc">For full transparency — here&apos;s what a 4-crew, 5-day reality production with 8 edited episodes normally costs at our standard rates.</p>
                     </div>
-
-                    <div style={{ maxWidth: 700, border: '1px solid rgba(100,100,80,0.12)', borderRadius: 16, background: 'var(--panel)', padding: '24px', overflow: 'auto' }}>
+                    <div style={{ maxWidth: 700, border: '1px solid rgba(100,100,80,0.12)', borderRadius: 16, background: 'var(--panel)', padding: 24, overflow: 'auto' }}>
                         <table className="std-table">
-                            <thead><tr><th>Role</th><th>Day Rate</th><th>Days</th><th style={{ textAlign: 'right' }}>Total</th></tr></thead>
+                            <thead><tr><th>Role</th><th>Rate</th><th>Qty</th><th style={{ textAlign: 'right' }}>Total</th></tr></thead>
                             <tbody>
-                                {STANDARD_RATE.map((r, i) => (
-                                    <tr key={i}>
-                                        <td className="strike">{r.label}</td>
-                                        <td className="strike">{fmt(r.rate)}</td>
-                                        <td className="strike">{r.days}</td>
-                                        <td className="strike" style={{ textAlign: 'right' }}>{fmt(r.total)}</td>
-                                    </tr>
-                                ))}
-                                <tr className="total-row">
-                                    <td colSpan="3" className="strike">Standard Total</td>
-                                    <td className="strike" style={{ textAlign: 'right', fontFamily: "'Outfit', sans-serif", fontSize: 20 }}>{fmt(STANDARD_TOTAL)}</td>
-                                </tr>
+                                {STD_RATES.map((r, i) => (<tr key={i}><td className="strike">{r.label}</td><td className="strike">{fmt(r.rate)}</td><td className="strike">{r.qty}</td><td className="strike" style={{ textAlign: 'right' }}>{fmt(r.total)}</td></tr>))}
+                                <tr className="total-row"><td colSpan="3" className="strike">Standard Total</td><td className="strike" style={{ textAlign: 'right', fontFamily: "'Outfit', sans-serif", fontSize: 20 }}>{fmt(STD_TOTAL)}</td></tr>
                             </tbody>
                         </table>
                         <div className="savings-badge">
-                            <span className="pct">Up to 75% off</span>
-                            <span className="txt">Sensual Movement partnership pricing below</span>
+                            <span className="pct">{savings > 0 ? `Save ${fmt(savings)}` : 'Partnership pricing'}</span>
+                            <span className="txt">Sensual Movement special rates below</span>
                         </div>
                     </div>
                 </section>
 
-                {/* ═══ CONFESSIONAL IMAGE BREAK ═══ */}
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/confessional.png')", transform: `translateY(${(scrollY - 3200) * 0.06}px)` }} />
                     <div className="img-panel-overlay" />
-                    <div className="img-panel-content"><div className="img-label">The <span>Confessional</span> Setup</div><div className="img-sub">Where Reality Gets Real — 2-Camera Interview Suite</div></div>
+                    <div className="img-panel-content"><div className="img-label">The <span>Confessional</span> Setup</div><div className="img-sub">Where Reality Gets Real — Multi-Camera Interview Suite</div></div>
                 </div>
 
                 <div className="divider" />
 
-                {/* ═══ NEGOTIATED PRICING ═══ */}
+                {/* ═══ COVERAGE BUILDER ═══ */}
                 <section className="sm-section reveal">
                     <div className="section-header">
-                        <div className="s-label">Sensual Movement Special</div>
-                        <h2 className="s-title">Partnership pricing</h2>
-                        <p className="s-desc">Because we believe in this project — heavily discounted rates exclusive to Sensual Movement. Full professional production, fraction of the cost.</p>
+                        <div className="s-label">Build Your Package</div>
+                        <h2 className="s-title">Customize your coverage</h2>
+                        <p className="s-desc">Select your filming days and editing preferences. Our 4-man crew brings professional multi-camera production to every session. All gear included.</p>
                     </div>
 
-                    <div className="pkgs-grid">
-                        {NEGOTIATED_PACKAGES.map(pkg => (
-                            <div key={pkg.id} className={`pkg ${pkg.recommended ? 'rec' : ''}`}>
-                                {pkg.recommended && <div className="pkg-badge">Recommended</div>}
-                                <div className="pkg-name">{pkg.name}</div>
-                                <div className="pkg-tag">{pkg.tagline}</div>
-                                <div className="pkg-price-row">
-                                    <span className="pkg-amt">{fmt(pkg.price)}</span>
-                                    <span className="pkg-note">flexible sessions · {pkg.crew.length} roles</span>
-                                </div>
-
-                                {/* Crew Breakdown */}
-                                <div style={{ marginBottom: 20 }}>
-                                    <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 12 }}>Crew Breakdown</div>
-                                    {pkg.crew.map((c, i) => (
-                                        <div className="crew-line" key={i}>
-                                            <div className="crew-left">
-                                                <div className="cl-name">{c.label}</div>
-                                                <div className="cl-detail">{c.detail}</div>
-                                            </div>
-                                            <div className="crew-right">
-                                                <div className="cr-rate">{c.rate} × {c.days}</div>
-                                                {c.free ? <div className="cr-free">Included</div> : c.total > 0 ? <div className="cr-total">{fmt(c.total)}</div> : null}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <ul className="pkg-features">
-                                    {pkg.included.map((f, i) => <li key={i}>{f}</li>)}
-                                    {pkg.excluded.map((f, i) => <li key={'x' + i} className="ex">{f}</li>)}
-                                    {pkg.bonuses?.map((b, i) => <li key={'b' + i} className="bonus">{b.label} — {b.detail}</li>)}
-                                </ul>
+                    {/* Step 1: Filming Days */}
+                    <div className="cfg-card">
+                        <div className="cfg-step">01</div>
+                        <div className="cfg-title">How many filming days?</div>
+                        <div className="cfg-desc">4-man crew · multi-cam included · all professional gear provided</div>
+                        <div className="day-wrap">
+                            <select className="day-sel" value={days} onChange={(e) => setDays(Number(e.target.value))}>
+                                {[1,2,3,4,5,6,7,8,9,10].map(d => (
+                                    <option key={d} value={d}>{d} {d === 1 ? 'day' : 'days'} — {fmt(DAILY_RATE * d)}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 12 }}>Crew Breakdown — {fmt(DAILY_RATE)}/day</div>
+                        {CREW.map((c, i) => (
+                            <div className="crew-row" key={i}>
+                                <div className="cr-left"><div className="cr-role">{c.role}</div><div className="cr-detail">{c.detail}</div></div>
+                                <div className="cr-right"><div className="cr-math">{fmt(c.rate)}/day × {days}</div><div className="cr-amt">{fmt(c.rate * days)}</div></div>
                             </div>
                         ))}
+                        <div className="crew-total-row">
+                            <span>Crew Subtotal ({days} {days === 1 ? 'day' : 'days'})</span>
+                            <span>{fmt(crewTotal)}</span>
+                        </div>
                     </div>
 
-                    {/* ── Gear Room Requirement ── */}
+                    {/* Step 2: Episode Editing */}
+                    <div className="cfg-card">
+                        <div className="cfg-step">02</div>
+                        <div className="cfg-title">Episode Editing — 8 × 1-Hour Episodes</div>
+                        <div className="cfg-desc">Professional editing for your complete season. You can pay per episode as they&apos;re completed — no need to pay all at once.</div>
+                        <div className="tier-grid">
+                            <div className={`tier-card ${editTier === 'standard' ? 'active' : ''}`} onClick={() => setEditTier('standard')}>
+                                <div className="tier-name">Standard Editor</div>
+                                <div className="tier-price">{fmt(EDIT_STD)}<span style={{ fontSize: 13, fontWeight: 400, color: 'var(--muted-2)' }}>/episode</span></div>
+                                <div className="tier-total">{EPISODES} episodes × {fmt(EDIT_STD)} = <strong style={{ color: 'var(--gold)' }}>{fmt(EDIT_STD * EPISODES)}</strong></div>
+                                <div className="tier-desc">Professional edit, color correction, audio sync, scene assembly</div>
+                            </div>
+                            <div className={`tier-card ${editTier === 'premium' ? 'active' : ''}`} onClick={() => setEditTier('premium')}>
+                                <div className="tier-badge">UPGRADE</div>
+                                <div className="tier-name">Premium Editor</div>
+                                <div className="tier-price">{fmt(EDIT_PREM)}<span style={{ fontSize: 13, fontWeight: 400, color: 'var(--muted-2)' }}>/episode</span></div>
+                                <div className="tier-total">{EPISODES} episodes × {fmt(EDIT_PREM)} = <strong style={{ color: 'var(--gold)' }}>{fmt(EDIT_PREM * EPISODES)}</strong></div>
+                                <div className="tier-desc">Our best editor — cinematic color grade, sound design, transitions, motion graphics</div>
+                            </div>
+                        </div>
+                        <div className="pay-note">💡 <strong style={{ color: 'var(--cream)' }}>Flexible payment:</strong> Pay per episode as they&apos;re delivered, or split into monthly installments. No need to pay the full editing cost upfront.</div>
+                    </div>
+
+                    {/* Step 3: Add-ons */}
+                    <div className="cfg-card">
+                        <div className="cfg-step">03</div>
+                        <div className="cfg-title">Add-ons</div>
+                        <div className="cfg-desc">Optional extras to maximize your content.</div>
+                        <div className="addon-row">
+                            <div className="addon-left">
+                                <div className="addon-name">Social Teaser Clips</div>
+                                <div className="addon-detail">30–60s teaser cuts for IG Reels / TikTok promo</div>
+                            </div>
+                            <div className="addon-right">
+                                <div className="addon-price">{fmt(TEASER_RATE)}/ea</div>
+                                <div className="counter">
+                                    <button className="counter-btn" onClick={() => setTeasers(Math.max(0, teasers - 1))}>−</button>
+                                    <span className="counter-val">{teasers}</span>
+                                    <button className="counter-btn" onClick={() => setTeasers(teasers + 1)}>+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── Summary ── */}
+                    <div className="summary-panel">
+                        <div className="sum-title">Your Package Summary</div>
+                        <div className="sum-row"><span className="sum-l">4-Man Crew × {days} {days === 1 ? 'day' : 'days'}</span><span className="sum-r">{fmt(crewTotal)}</span></div>
+                        <div className="sum-row"><span className="sum-l">Episode Editing ({EPISODES} × 1hr) — {editTier === 'premium' ? 'Premium' : 'Standard'}</span><span className="sum-r">{fmt(editTotal)}</span></div>
+                        {teasers > 0 && <div className="sum-row"><span className="sum-l">Social Teasers × {teasers}</span><span className="sum-r">{fmt(teaserTotal)}</span></div>}
+                        <div className="sum-total">
+                            <span className="sum-tl">Total Investment</span>
+                            <span className="sum-tv">{fmt(grandTotal)}</span>
+                        </div>
+                        {savings > 0 && (
+                            <div className="savings-badge" style={{ marginTop: 20 }}>
+                                <span className="pct">Save {fmt(savings)}</span>
+                                <span className="txt">vs standard industry rates ({fmt(STD_TOTAL)})</span>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* ── Gear Room ── */}
                     <div className="req-box">
                         <div className="req-title">🔒 Private Gear Room Required</div>
-                        <div className="req-desc">
-                            We are bringing over <strong style={{ color: 'var(--cream)' }}>$20,000+ worth of professional cinema equipment</strong> — cameras, lenses, lighting, audio, stabilizers, and accessories. A private, lockable room at the venue or hotel is required for secure gear storage throughout the production. This room will also serve as our daily staging and charging station.
-                        </div>
+                        <div className="req-desc">We are bringing over <strong style={{ color: 'var(--cream)' }}>$20,000+ worth of professional cinema equipment</strong> — cameras, lenses, lighting, audio, stabilizers, and accessories. A private, lockable room at the venue or hotel is required for secure gear storage. This room also serves as our daily staging and charging station.</div>
                     </div>
 
                     {/* ── Payment Terms ── */}
@@ -390,21 +400,20 @@ export default function SensualMovementProposal() {
                             <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>on wrap day</div>
                         </div>
                         <div style={{ padding: 20, border: '1px solid rgba(212,175,55,0.1)', borderRadius: 14, background: 'var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Delivery</div>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--cream)' }}>7 days</div>
-                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>synced raw footage</div>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Editing</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 700, color: 'var(--cream)' }}>Per Episode</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>pay as delivered</div>
                         </div>
                     </div>
                 </section>
 
-                {/* ═══ POOLSIDE IMAGE BREAK ═══ */}
+                {/* ═══ IMAGE BREAKS ═══ */}
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/poolside.png')", transform: `translateY(${(scrollY - 4500) * 0.06}px)` }} />
                     <div className="img-panel-overlay" />
                     <div className="img-panel-content"><div className="img-label">Miami <span>Lifestyle</span> Coverage</div><div className="img-sub">Poolside · Nightlife · Cast B-Roll</div></div>
                 </div>
 
-                {/* ═══ AERIAL IMAGE BREAK ═══ */}
                 <div className="img-panel" style={{ height: '40vh' }}>
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/sensual-movement/aerial.png')", transform: `translateY(${(scrollY - 5000) * 0.05}px)` }} />
                     <div className="img-panel-overlay" />
@@ -420,14 +429,14 @@ export default function SensualMovementProposal() {
                         <h2 className="s-title">Sign to confirm</h2>
                         <p className="s-desc">By signing below, both parties agree to the scope of work, deliverables, and payment terms outlined in this proposal.</p>
                     </div>
-
                     <div style={{ maxWidth: 700, border: '1px solid rgba(100,100,80,0.15)', borderRadius: 20, background: 'var(--panel)', padding: '32px 28px' }}>
                         <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, marginBottom: 28, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
-                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production filmed on location in Miami, FL — June 2026. Flexible scheduled filming sessions with a 3-person crew. This is a standalone reality TV project, separate from any event coverage. Deliverables include organized, multi-cam synced raw footage. Post-production included in Complete Story package.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Scope:</strong> Multi-camera reality TV production filmed on location in Miami, FL — June 2026. 4-man crew with flexible scheduled filming sessions. 8 × 1-hour episodes. This is a standalone reality TV project, separate from any event coverage.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Crew:</strong> Director/Showrunner ($1,000/day), Cinematographer ($1,000/day), B-Camera Operator ($400/day), Audio Engineer ($350/day). Multi-camera coverage included.<br /><br />
+                            <strong style={{ color: 'var(--cream)' }}>Editing:</strong> {editTier === 'premium' ? 'Premium' : 'Standard'} editing at {fmt(editRate)}/episode × {EPISODES} episodes = {fmt(editTotal)}. Episodes can be paid individually as delivered.<br /><br />
                             <strong style={{ color: 'var(--cream)' }}>Requirements:</strong> Private lockable gear room provided by client for $20K+ equipment storage. Crew accommodation room provided by client or organizer.<br /><br />
-                            <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock production dates and crew. Remaining 50% due on wrap day. Cancellation within 14 days forfeits the deposit. Client receives perpetual usage rights. MediaGeekz retains portfolio/reel usage rights unless otherwise agreed.
+                            <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock production dates and crew. Remaining 50% due on wrap day. Episode editing billed separately per episode. Cancellation within 14 days forfeits the deposit. Client receives perpetual usage rights. MediaGeekz retains portfolio/reel usage rights unless otherwise agreed.
                         </div>
-
                         <div className="sig-grid">
                             <div>
                                 <div className="sig-label">Producer — MediaGeekz</div>
@@ -461,7 +470,6 @@ export default function SensualMovementProposal() {
                             </div>
                         </div>
                     </div>
-
                     <div style={{ maxWidth: 700, textAlign: 'center', marginTop: 32 }}>
                         <a href="mailto:danielcastillo@mediageekz.com?subject=Sensual%20Movement%20Reality%20TV" style={{ color: 'var(--muted-2)', fontSize: 12, textDecoration: 'none' }}>Have questions? ✉ Email us</a>
                     </div>
