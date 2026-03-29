@@ -30,6 +30,10 @@ const SCENES = [
     { icon: '🎭', title: 'Unscripted Drama', desc: 'Roaming cameras catching candid moments — friendships, romances, heated conversations. Unscripted gold.' },
     { icon: '🍽️', title: 'Group Scenes & Outings', desc: 'Cast dinners, pool parties, nightclub outings, beach sessions. Controlled environments where storylines develop.' },
     { icon: '🎬', title: 'Scene Setups & ITMs', desc: 'Produced "In The Moment" scenes — reactions, reveals, confrontations. Director-guided narrative structure.' },
+    { icon: '🔥', title: 'Rehearsal Heat', desc: 'Partnered dance rehearsals where chemistry is tested. Intimate body contact, eye contact, missed steps and breakthroughs. The tension builds on camera.' },
+    { icon: '🌙', title: 'Late Night Confessions', desc: 'After-hours moments when the walls come down. Balcony conversations, rooftop reflections, whispered truths. Raw emotion in low light.' },
+    { icon: '✈️', title: 'Miami Arrival Day', desc: 'Cast lands in Miami. First reactions, hotel check-ins, meeting roommates. Expectations vs reality — the show\'s opening energy.' },
+    { icon: '🏆', title: 'Cast Reunion & Showcase', desc: 'Final group performance or social. Resolutions, last dances, farewell confessionals. The season finale moment that ties every arc together.' },
 ];
 
 const fmt = (n) => '$' + n.toLocaleString('en-US');
@@ -80,26 +84,37 @@ export default function SensualMovementProposal() {
                 .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid rgba(212,175,55,0.3);border-radius:999px;background:rgba(13,11,6,0.8);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;backdrop-filter:blur(12px);margin-bottom:32px;position:relative;z-index:3;}
                 .hero-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 7px rgba(212,175,55,0.15);animation:pd 2s ease-in-out infinite;}
                 @keyframes pd{0%,100%{box-shadow:0 0 0 7px rgba(212,175,55,0.15);}50%{box-shadow:0 0 0 12px rgba(212,175,55,0.06);}}
+                @keyframes goldShimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+                @keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:0.6;}50%{opacity:1;}100%{transform:translateY(-120vh) scale(0.3);opacity:0;}}
+                @keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(212,175,55,0);}50%{box-shadow:0 0 40px rgba(212,175,55,0.08);}}
+                @keyframes countUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+                @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+                @keyframes slideInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
                 .hero-title{font-family:'Outfit',sans-serif;font-size:clamp(42px,7vw,88px);font-weight:700;line-height:0.96;letter-spacing:-0.03em;color:var(--white);margin-bottom:24px;position:relative;z-index:3;}
-                .hero-title em{color:var(--gold);font-style:normal;font-weight:800;background:linear-gradient(135deg,#d4af37,#f0d060);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+                .hero-title em{font-style:normal;font-weight:800;background:linear-gradient(90deg,#d4af37,#f0d060,#e8c84a,#d4af37);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShimmer 6s linear infinite;}
                 .hero-sub{max-width:640px;color:var(--muted);font-size:17px;line-height:1.7;position:relative;z-index:3;margin-bottom:48px;}
                 .hero-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:min(100%,900px);position:relative;z-index:3;}
-                .hero-stat{padding:20px 16px;border:1px solid rgba(212,175,55,0.12);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent),rgba(13,11,6,0.8);backdrop-filter:blur(12px);transition:border-color 0.3s;}
-                .hero-stat:hover{border-color:rgba(212,175,55,0.35);}
+                .hero-stat{padding:20px 16px;border:1px solid rgba(212,175,55,0.12);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent),rgba(13,11,6,0.8);backdrop-filter:blur(12px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);animation:glowPulse 4s ease-in-out infinite;}
+                .hero-stat:nth-child(1){animation-delay:0s;}.hero-stat:nth-child(2){animation-delay:1s;}.hero-stat:nth-child(3){animation-delay:2s;}.hero-stat:nth-child(4){animation-delay:3s;}
+                .hero-stat:hover{border-color:rgba(212,175,55,0.5);transform:translateY(-4px);box-shadow:0 12px 40px rgba(212,175,55,0.1);}
                 .hs-label{color:var(--gold);font-size:9px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;}
                 .hs-value{margin-top:10px;color:var(--white);font-family:'Outfit',sans-serif;font-size:17px;font-weight:600;line-height:1.2;}
                 .hs-detail{margin-top:6px;color:var(--muted);font-size:11px;}
                 @media(max-width:640px){.hero-meta{grid-template-columns:repeat(2,1fr);}}
+                .gold-particle{position:fixed;width:3px;height:3px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:0;opacity:0;animation:floatUp linear infinite;}
                 .divider{width:min(100%,900px);height:1px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.35),rgba(232,68,108,0.2),transparent);opacity:0.72;}
                 .sm-section{max-width:1100px;margin:0 auto;padding:80px 24px;}
                 .section-header{display:grid;gap:14px;margin-bottom:40px;max-width:740px;}
                 .s-label{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;}
                 .s-title{font-family:'Outfit',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:600;line-height:1.05;color:var(--white);}
                 .s-desc{color:var(--muted);font-size:15px;line-height:1.8;max-width:640px;}
-                .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:40px;}
-                .scope-card{padding:28px 24px;border:1px solid rgba(212,175,55,0.12);border-radius:16px;background:var(--panel);transition:border-color 0.3s,transform 0.3s;}
-                .scope-card:hover{border-color:rgba(212,175,55,0.35);transform:translateY(-2px);}
-                .scope-icon{font-size:28px;margin-bottom:14px;}
+                .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px;}
+                .scope-card{padding:28px 24px;border:1px solid rgba(212,175,55,0.12);border-radius:16px;background:var(--panel);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;}
+                .scope-card::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.04),transparent);transition:left 0.6s ease;}
+                .scope-card:hover::before{left:120%;}
+                .scope-card:hover{border-color:rgba(212,175,55,0.4);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.3),0 0 40px rgba(212,175,55,0.06);}
+                .scope-icon{font-size:28px;margin-bottom:14px;transition:transform 0.3s;}
+                .scope-card:hover .scope-icon{transform:scale(1.15);}
                 .scope-card h3{font-family:'Outfit',sans-serif;font-size:18px;font-weight:600;color:var(--white);margin-bottom:8px;}
                 .scope-card p{font-size:13px;color:var(--muted-2);line-height:1.7;}
                 .timeline{position:relative;padding-left:36px;}
@@ -189,13 +204,38 @@ export default function SensualMovementProposal() {
                 .sign-btn:disabled{opacity:0.4;cursor:not-allowed;}
                 .signed-badge{display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:12px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);margin-top:16px;}
                 @media(max-width:640px){.sig-grid{grid-template-columns:1fr;}}
-                .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+                .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
                 .reveal.is-visible{opacity:1;transform:translateY(0);}
+                .reveal.is-visible .scope-card{opacity:0;animation:countUp 0.5s ease forwards;}
+                .reveal.is-visible .scope-card:nth-child(1){animation-delay:0.05s;}
+                .reveal.is-visible .scope-card:nth-child(2){animation-delay:0.1s;}
+                .reveal.is-visible .scope-card:nth-child(3){animation-delay:0.15s;}
+                .reveal.is-visible .scope-card:nth-child(4){animation-delay:0.2s;}
+                .reveal.is-visible .scope-card:nth-child(5){animation-delay:0.25s;}
+                .reveal.is-visible .scope-card:nth-child(6){animation-delay:0.3s;}
+                .reveal.is-visible .scope-card:nth-child(7){animation-delay:0.35s;}
+                .reveal.is-visible .scope-card:nth-child(8){animation-delay:0.4s;}
+                .reveal.is-visible .scope-card:nth-child(9){animation-delay:0.45s;}
+                .reveal.is-visible .scope-card:nth-child(10){animation-delay:0.5s;}
+                .reveal.is-visible .tl-block{opacity:0;animation:slideInLeft 0.5s ease forwards;}
+                .reveal.is-visible .tl-block:nth-child(1){animation-delay:0.1s;}
+                .reveal.is-visible .tl-block:nth-child(2){animation-delay:0.2s;}
+                .reveal.is-visible .tl-block:nth-child(3){animation-delay:0.3s;}
+                .reveal.is-visible .tl-block:nth-child(4){animation-delay:0.4s;}
+                .cfg-card{animation:glowPulse 5s ease-in-out infinite;}
+                .img-panel-bg{transition:filter 0.6s ease;}
+                .img-panel:hover .img-panel-bg{filter:brightness(0.45) saturate(1.1);}
+                .img-panel-content{transition:transform 0.4s ease;}
+                .img-panel:hover .img-panel-content{transform:scale(1.03);}
                 .sm-footer{text-align:center;padding:80px 24px 40px;border-top:1px solid rgba(100,100,80,0.1);}
                 @media print{.no-print{display:none!important;}body{background:white!important;color:#1a1a1a!important;}}
             `}</style>
 
             <div className="page-shell">
+                {/* Floating gold particles */}
+                {[...Array(8)].map((_, i) => (
+                    <div key={i} className="gold-particle" style={{ left: `${10 + i * 12}%`, animationDuration: `${8 + i * 3}s`, animationDelay: `${i * 1.5}s`, width: `${2 + (i % 3)}px`, height: `${2 + (i % 3)}px` }} />
+                ))}
                 {/* ═══ HERO ═══ */}
                 <div className="sm-hero">
                     <div className="sm-hero-bg" style={{ transform: `scale(1.1) translateY(${scrollY * 0.15}px)` }} />
