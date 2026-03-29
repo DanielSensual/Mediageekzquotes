@@ -114,8 +114,8 @@ export default function HomePage() {
                     <div className="vertical-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
                         {[
                             { href: '/thread', icon: '🧵', name: 'ThreadLink', desc: 'Brand story + community video production', status: 'Active', total: 12000, paid: 6000 },
-                            { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active', total: 4070, paid: 2035 },
-                            { href: '/proposals/eventive', icon: '🎪', name: 'Eventive', desc: 'Awards dinner + highlight video', status: 'Active', total: 2250, paid: 1125 },
+                            { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active', total: 4510, paid: 2035 },
+                            { href: '/proposals/eventive', icon: '🎪', name: 'Eventive', desc: 'Awards dinner + highlight video', status: 'Active', total: 2250, paid: 0 },
                             { href: '/proposals/leadership-interviews', icon: '🎙️', name: 'Leadership Interviews', desc: 'Interview series — multi-cam production', status: 'Active', total: 0, paid: 0 },
                             { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active', total: 0, paid: 0 },
                             { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active', total: 0, paid: 0 },
