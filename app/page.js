@@ -115,6 +115,7 @@ export default function HomePage() {
                         {[
                             { href: '/thread', icon: '🧵', name: 'ThreadLink', desc: 'Brand story + community video production', status: 'Active' },
                             { href: '/proposals/easy-denture', icon: '🦷', name: 'Easy Denture', desc: 'Mobile dentistry — raw footage package', status: 'Active' },
+                            { href: '/proposals/eventive', icon: '🎪', name: 'Eventive', desc: 'Awards dinner + highlight video', status: 'Active' },
                             { href: '/proposals/leadership-interviews', icon: '🎙️', name: 'Leadership Interviews', desc: 'Interview series — multi-cam production', status: 'Active' },
                             { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active' },
                             { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active' },
