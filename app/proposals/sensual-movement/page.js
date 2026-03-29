@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const CREW = [
     { role: 'Director / Showrunner (Daniel)', rate: 1000, detail: 'Creative direction, A-camera, talent direction' },
-    { role: 'Cinematographer', rate: 1000, detail: 'Primary camera, cinematic framing, lighting design' },
+    { role: 'Cinematographer', rate: 800, detail: 'Primary camera, cinematic framing, lighting design' },
     { role: 'B-Camera Operator', rate: 400, detail: 'Secondary angles, roaming coverage, BTS' },
     { role: 'Audio Engineer', rate: 350, detail: 'Wireless lavs (8×), boom, ambient, live mix' },
 ];
