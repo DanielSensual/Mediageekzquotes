@@ -120,6 +120,7 @@ export default function HomePage() {
                             { href: '/proposals/veronica-ellyn', icon: '✨', name: 'Veronica Ellyn', desc: 'Creative portrait + brand content', status: 'Active', total: 0, paid: 0 },
                             { href: '/proposals/convention-event', icon: '🎪', name: 'Convention Event', desc: 'Event coverage + highlight reels', status: 'Active', total: 0, paid: 0 },
                             { href: '/proposals/wedding-basic', icon: '💒', name: 'Wedding Basic', desc: 'Wedding day cinematic package', status: 'Active', total: 0, paid: 0 },
+                            { href: '/altavidaevent', icon: '🏊', name: 'Alta Vida Pool Party', desc: 'Event coverage — Jesse Kader', status: 'Active', total: 350, paid: 0 },
                         ].map((p, i) => (
                             <a
                                 key={p.href}
