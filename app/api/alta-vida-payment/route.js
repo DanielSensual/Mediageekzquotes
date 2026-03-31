@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+// Resend instance using a verified sending domain to ensure it is not sandboxed.
+const resend = new Resend(process.env.RESEND_API_KEY || 're_g7kEcaNy_8erguMjnRartZwgK3MUjXX6B');
 
 /* ═══════════════════════════════════════════════════════════════
    Square Process Payment — Alta Vida (Jesse Kader)
@@ -57,6 +61,32 @@ export async function POST(request) {
                 { error: 'Payment failed', details: data.errors || data },
                 { status: response.status }
             );
+        }
+
+        // Send confirmation email
+        try {
+            await resend.emails.send({
+                from: 'MediaGeekz Notifications <notifications@ghostaisystems.com>',
+                to: 'reelestateorlando@gmail.com',
+                subject: `New Payment Received: Alta Vida Pool Party - $${(cents / 100).toFixed(2)}`,
+                html: `
+                    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+                        <h2 style="color: #e8622c;">Payment Successful!</h2>
+                        <p>A new payment was received for the Alta Vida Event Coverage via the invoice portal.</p>
+                        <ul style="background: #f1f5f9; padding: 20px; border-radius: 10px; list-style-type: none;">
+                            <li style="margin-bottom: 8px;"><strong>Amount:</strong> $${(cents / 100).toFixed(2)}</li>
+                            <li style="margin-bottom: 8px;"><strong>Payment ID:</strong> ${data.payment?.id || 'N/A'}</li>
+                            <li style="margin-bottom: 8px;"><strong>Status:</strong> ${data.payment?.status || 'COMPLETED'}</li>
+                            <li><strong>Description:</strong> ${body.note || 'N/A'}</li>
+                        </ul>
+                        <p>You can review this transaction in your Square Dashboard.</p>
+                        ${data.payment?.receipt_url ? `<p><a href="${data.payment.receipt_url}" style="color: #e8622c; text-decoration: none; font-weight: bold;">View Square Receipt →</a></p>` : ''}
+                    </div>
+                `
+            });
+            console.log('Notification email sent for payment:', data.payment?.id);
+        } catch (emailErr) {
+            console.error('Email notification failed for Alta Vida payment:', emailErr);
         }
 
         return NextResponse.json({
