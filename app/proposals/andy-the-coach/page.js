@@ -73,6 +73,10 @@ export default function AndyTheCoach() {
     const [activeQuarter, setActiveQuarter] = useState('culture');
 
     useEffect(() => {
+        document.title = 'Andy The Coach — Blue Collar Business Consultants | MediaGeekz';
+    }, []);
+
+    useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
