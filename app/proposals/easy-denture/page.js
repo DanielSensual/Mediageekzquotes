@@ -141,6 +141,8 @@ export default function EasyDentureProposal() {
     const [sigName, setSigName] = useState('');
     const [signed, setSigned] = useState(false);
     const [signedAt, setSignedAt] = useState(null);
+    const [tipAmount, setTipAmount] = useState(0);
+    const [customTip, setCustomTip] = useState('');
     const printRef = useRef(null);
 
     const handleSign = () => {
@@ -1406,6 +1408,91 @@ export default function EasyDentureProposal() {
                             >
                                 💳 Pay Final Balance $2,475
                             </a>
+
+                            {/* ── Tip Section ── */}
+                            <div style={{ marginTop: 28, padding: '24px 20px', borderRadius: 16, border: '1px solid rgba(232, 98, 44, 0.15)', background: 'rgba(232, 98, 44, 0.04)' }}>
+                                <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6, textAlign: 'center' }}>Show Some Love</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)', textAlign: 'center', marginBottom: 4 }}>Leave a Tip for the Crew ☕</div>
+                                <div style={{ fontSize: 12, color: 'var(--muted-2)', textAlign: 'center', marginBottom: 20, lineHeight: 1.6 }}>
+                                    Tips are optional and go directly to the production crew. We appreciate it!
+                                </div>
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, marginBottom: 16 }}>
+                                    {[
+                                        { label: '5%', amount: Math.round(4510 * 0.05) },
+                                        { label: '10%', amount: Math.round(4510 * 0.10) },
+                                        { label: '15%', amount: Math.round(4510 * 0.15) },
+                                    ].map((opt) => (
+                                        <button
+                                            key={opt.label}
+                                            onClick={() => { setTipAmount(opt.amount); setCustomTip(''); }}
+                                            style={{
+                                                padding: '14px 8px', border: tipAmount === opt.amount && !customTip ? '1.5px solid var(--orange)' : '1px solid rgba(100, 116, 139, 0.2)',
+                                                borderRadius: 12, background: tipAmount === opt.amount && !customTip ? 'rgba(232, 98, 44, 0.12)' : 'var(--panel)',
+                                                cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
+                                            }}
+                                        >
+                                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: tipAmount === opt.amount && !customTip ? 'var(--orange)' : 'var(--cream)' }}>{opt.label}</div>
+                                            <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>${opt.amount}</div>
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => { setTipAmount(0); setCustomTip(customTip || ''); }}
+                                        style={{
+                                            padding: '14px 8px', border: customTip ? '1.5px solid var(--orange)' : '1px solid rgba(100, 116, 139, 0.2)',
+                                            borderRadius: 12, background: customTip ? 'rgba(232, 98, 44, 0.12)' : 'var(--panel)',
+                                            cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
+                                        }}
+                                    >
+                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: customTip ? 'var(--orange)' : 'var(--cream)' }}>Custom</div>
+                                        <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Any $</div>
+                                    </button>
+                                </div>
+
+                                {customTip !== undefined && tipAmount === 0 && (
+                                    <div style={{ marginBottom: 16 }}>
+                                        <div style={{ position: 'relative' }}>
+                                            <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-2)', fontSize: 16, fontWeight: 600 }}>$</span>
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                placeholder="Enter amount"
+                                                value={customTip}
+                                                onChange={(e) => setCustomTip(e.target.value)}
+                                                style={{
+                                                    width: '100%', padding: '14px 14px 14px 28px',
+                                                    border: '1px solid rgba(232, 98, 44, 0.3)', borderRadius: 12,
+                                                    background: 'rgba(15, 23, 42, 0.6)', color: 'var(--white)',
+                                                    fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
+                                                    outline: 'none', transition: 'border-color 0.2s',
+                                                    boxSizing: 'border-box',
+                                                }}
+                                                onFocus={(e) => e.target.style.borderColor = 'var(--orange)'}
+                                                onBlur={(e) => e.target.style.borderColor = 'rgba(232, 98, 44, 0.3)'}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {(tipAmount > 0 || (customTip && parseInt(customTip) > 0)) && (
+                                    <a
+                                        href={`/checkout?amount=${customTip ? parseInt(customTip) : tipAmount}&desc=${encodeURIComponent('Easy Denture — Crew Tip')}`}
+                                        style={{
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                                            width: '100%', padding: '16px 24px', border: 'none', borderRadius: 12, cursor: 'pointer',
+                                            background: 'linear-gradient(135deg, rgba(232, 98, 44, 0.8), rgba(245, 158, 11, 0.8))',
+                                            color: 'var(--white)', fontFamily: "'Outfit', sans-serif",
+                                            fontSize: 15, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                            textDecoration: 'none',
+                                            boxShadow: '0 6px 20px rgba(232, 98, 44, 0.25)',
+                                            transition: 'transform 0.2s, box-shadow 0.2s',
+                                            boxSizing: 'border-box',
+                                        }}
+                                    >
+                                        ☕ Leave ${customTip ? parseInt(customTip) : tipAmount} Tip
+                                    </a>
+                                )}
+                            </div>
 
                             <div style={{ marginTop: 24, padding: '12px 16px', borderRadius: 12, border: '1px solid rgba(255, 255, 255, 0.04)', background: 'rgba(255, 255, 255, 0.02)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                                 <div style={{ textAlign: 'left' }}>
