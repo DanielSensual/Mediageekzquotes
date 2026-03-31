@@ -47,7 +47,9 @@ export default function AltaVidaInvoice() {
     const selectedReel = REEL_OPTIONS[reelSelection];
     const reelTotal = selectedReel.price;
     const SUBTOTAL = BASE_SUBTOTAL + reelTotal;
-    const TOTAL_DUE = SUBTOTAL - DEPOSIT_PAID;
+    const PRODUCTION_FEE_RATE = 0.06;
+    const PRODUCTION_FEE = Math.round(SUBTOTAL * PRODUCTION_FEE_RATE * 100) / 100;
+    const TOTAL_DUE = SUBTOTAL + PRODUCTION_FEE - DEPOSIT_PAID;
 
     const handlePrint = () => {
         window.print();
@@ -789,6 +791,10 @@ export default function AltaVidaInvoice() {
                                 <span className="total-value">{fmt(reelTotal)}</span>
                             </div>
                         )}
+                        <div className="total-row">
+                            <span className="total-label">Production Fee (6%)</span>
+                            <span className="total-value">{fmt(PRODUCTION_FEE)}</span>
+                        </div>
                         <div className="total-row highlight">
                             <span className="total-label strong">Total Due</span>
                             <span className="total-value big">{fmt(TOTAL_DUE)}</span>
@@ -844,7 +850,7 @@ export default function AltaVidaInvoice() {
                         <div className="clause">
                             <div className="clause-num">3. Payment</div>
                             <div className="clause-text">
-                                Total production cost is <strong>{fmt(SUBTOTAL)}</strong>. Payment is due within seven (7) days of invoice date. Payments may be made via credit card, Apple Pay, Google Pay, or check.
+                                Total production cost is <strong>{fmt(TOTAL_DUE)}</strong> (including a 6% production fee). Payment is due within seven (7) days of invoice date. Payments may be made via credit card, Apple Pay, Google Pay, or check.
                             </div>
                         </div>
 
