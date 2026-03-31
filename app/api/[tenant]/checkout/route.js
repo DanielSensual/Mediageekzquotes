@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { isRecoverableDatabaseError } from '@/lib/fallback-data';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
     apiVersion: '2023-10-16',
 });
 

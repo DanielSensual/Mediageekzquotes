@@ -6,7 +6,11 @@
 import { generateADTVInvoice } from '@/lib/adtv-pdf';
 import { NextResponse } from 'next/server';
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 're_3Mq5M6aG_PZsbYABfBEMsJ4NzrkGv72bL';
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+if (!RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not configured — email sending will fail.');
+}
 
 export async function POST(request) {
     try {
