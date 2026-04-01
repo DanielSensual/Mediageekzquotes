@@ -143,6 +143,7 @@ export default function EasyDentureProposal() {
     const [signedAt, setSignedAt] = useState(null);
     const [tipAmount, setTipAmount] = useState(0);
     const [customTip, setCustomTip] = useState('');
+    const [showCustomTip, setShowCustomTip] = useState(false);
     const printRef = useRef(null);
 
     const handleSign = () => {
@@ -1393,31 +1394,26 @@ export default function EasyDentureProposal() {
                                 50% Remaining balance + Drone production charge ($400 + 10% fee). Final footage delivered within 48 hours of payment.
                             </div>
 
-                            <a
-                                href={`/checkout?amount=2475&desc=${encodeURIComponent(`Easy Denture — Final Balance (inc. Drone)`)}`}
-                                style={{
-                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                                    width: '100%', padding: '20px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
-                                    background: 'linear-gradient(135deg, var(--orange), #f59e0b)',
-                                    color: 'var(--white)', fontFamily: "'Outfit', sans-serif",
-                                    fontSize: 18, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
-                                    textDecoration: 'none',
-                                    boxShadow: '0 8px 28px rgba(232, 98, 44, 0.35)',
-                                    transition: 'transform 0.2s, box-shadow 0.2s',
-                                }}
-                            >
-                                💳 Pay Final Balance $2,475
-                            </a>
-
                             {/* ── Tip Section ── */}
-                            <div style={{ marginTop: 28, padding: '24px 20px', borderRadius: 16, border: '1px solid rgba(232, 98, 44, 0.15)', background: 'rgba(232, 98, 44, 0.04)' }}>
+                            <div style={{ marginTop: 0, padding: '24px 20px', borderRadius: 16, border: '1px solid rgba(232, 98, 44, 0.15)', background: 'rgba(232, 98, 44, 0.04)', marginBottom: 20 }}>
                                 <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6, textAlign: 'center' }}>Show Some Love</div>
-                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)', textAlign: 'center', marginBottom: 4 }}>Leave a Tip for the Crew ☕</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)', textAlign: 'center', marginBottom: 4 }}>Add a Tip for the Crew ☕</div>
                                 <div style={{ fontSize: 12, color: 'var(--muted-2)', textAlign: 'center', marginBottom: 20, lineHeight: 1.6 }}>
-                                    Tips are optional and go directly to the production crew. We appreciate it!
+                                    Tips are optional and will be added to your final balance. They go directly to the production crew.
                                 </div>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, marginBottom: 16 }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: 8 }}>
+                                    <button
+                                        onClick={() => { setTipAmount(0); setCustomTip(''); setShowCustomTip(false); }}
+                                        style={{
+                                            padding: '14px 8px', border: tipAmount === 0 && !customTip && !showCustomTip ? '1.5px solid var(--teal)' : '1px solid rgba(100, 116, 139, 0.2)',
+                                            borderRadius: 12, background: tipAmount === 0 && !customTip && !showCustomTip ? 'rgba(45, 212, 191, 0.12)' : 'var(--panel)',
+                                            cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
+                                        }}
+                                    >
+                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: tipAmount === 0 && !customTip && !showCustomTip ? 'var(--teal)' : 'var(--cream)' }}>None</div>
+                                        <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>$0</div>
+                                    </button>
                                     {[
                                         { label: '5%', amount: Math.round(4510 * 0.05) },
                                         { label: '10%', amount: Math.round(4510 * 0.10) },
@@ -1425,7 +1421,7 @@ export default function EasyDentureProposal() {
                                     ].map((opt) => (
                                         <button
                                             key={opt.label}
-                                            onClick={() => { setTipAmount(opt.amount); setCustomTip(''); }}
+                                            onClick={() => { setTipAmount(opt.amount); setCustomTip(''); setShowCustomTip(false); }}
                                             style={{
                                                 padding: '14px 8px', border: tipAmount === opt.amount && !customTip ? '1.5px solid var(--orange)' : '1px solid rgba(100, 116, 139, 0.2)',
                                                 borderRadius: 12, background: tipAmount === opt.amount && !customTip ? 'rgba(232, 98, 44, 0.12)' : 'var(--panel)',
@@ -1437,20 +1433,20 @@ export default function EasyDentureProposal() {
                                         </button>
                                     ))}
                                     <button
-                                        onClick={() => { setTipAmount(0); setCustomTip(customTip || ''); }}
+                                        onClick={() => { setTipAmount(0); setShowCustomTip(true); }}
                                         style={{
-                                            padding: '14px 8px', border: customTip ? '1.5px solid var(--orange)' : '1px solid rgba(100, 116, 139, 0.2)',
-                                            borderRadius: 12, background: customTip ? 'rgba(232, 98, 44, 0.12)' : 'var(--panel)',
+                                            padding: '14px 8px', border: showCustomTip ? '1.5px solid var(--orange)' : '1px solid rgba(100, 116, 139, 0.2)',
+                                            borderRadius: 12, background: showCustomTip ? 'rgba(232, 98, 44, 0.12)' : 'var(--panel)',
                                             cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
                                         }}
                                     >
-                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: customTip ? 'var(--orange)' : 'var(--cream)' }}>Custom</div>
+                                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: showCustomTip ? 'var(--orange)' : 'var(--cream)' }}>Custom</div>
                                         <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Any $</div>
                                     </button>
                                 </div>
 
-                                {customTip !== undefined && tipAmount === 0 && (
-                                    <div style={{ marginBottom: 16 }}>
+                                {showCustomTip && tipAmount === 0 && (
+                                    <div style={{ marginTop: 12 }}>
                                         <div style={{ position: 'relative' }}>
                                             <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-2)', fontSize: 16, fontWeight: 600 }}>$</span>
                                             <input
@@ -1473,26 +1469,32 @@ export default function EasyDentureProposal() {
                                         </div>
                                     </div>
                                 )}
+                            </div>
 
-                                {(tipAmount > 0 || (customTip && parseInt(customTip) > 0)) && (
+                            {(() => {
+                                const effectiveTip = customTip ? parseInt(customTip) || 0 : tipAmount;
+                                const finalAmount = 2475 + effectiveTip;
+                                const descParts = ['Easy Denture — Final Balance (inc. Drone)'];
+                                if (effectiveTip > 0) descParts.push(`+ $${effectiveTip} Crew Tip`);
+                                return (
                                     <a
-                                        href={`/checkout?amount=${customTip ? parseInt(customTip) : tipAmount}&desc=${encodeURIComponent('Easy Denture — Crew Tip')}`}
+                                        href={`/checkout?amount=${finalAmount}&desc=${encodeURIComponent(descParts.join(' '))}&return=${encodeURIComponent('/proposals/easy-denture')}`}
                                         style={{
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                                            width: '100%', padding: '16px 24px', border: 'none', borderRadius: 12, cursor: 'pointer',
-                                            background: 'linear-gradient(135deg, rgba(232, 98, 44, 0.8), rgba(245, 158, 11, 0.8))',
+                                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                                            width: '100%', padding: '20px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
+                                            background: 'linear-gradient(135deg, var(--orange), #f59e0b)',
                                             color: 'var(--white)', fontFamily: "'Outfit', sans-serif",
-                                            fontSize: 15, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                                            fontSize: 18, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
                                             textDecoration: 'none',
-                                            boxShadow: '0 6px 20px rgba(232, 98, 44, 0.25)',
+                                            boxShadow: '0 8px 28px rgba(232, 98, 44, 0.35)',
                                             transition: 'transform 0.2s, box-shadow 0.2s',
-                                            boxSizing: 'border-box',
                                         }}
                                     >
-                                        ☕ Leave ${customTip ? parseInt(customTip) : tipAmount} Tip
+                                        💳 Pay {effectiveTip > 0 ? `$${finalAmount.toLocaleString('en-US')}` : 'Final Balance $2,475'}
+                                        {effectiveTip > 0 && <span style={{ fontSize: 11, fontWeight: 500, opacity: 0.8 }}>(inc. ${effectiveTip} tip)</span>}
                                     </a>
-                                )}
-                            </div>
+                                );
+                            })()}
 
                             <div style={{ marginTop: 24, padding: '12px 16px', borderRadius: 12, border: '1px solid rgba(255, 255, 255, 0.04)', background: 'rgba(255, 255, 255, 0.02)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                                 <div style={{ textAlign: 'left' }}>
@@ -1501,7 +1503,7 @@ export default function EasyDentureProposal() {
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--orange)', textTransform: 'uppercase', marginBottom: 4 }}>Balance Due</div>
-                                    <div style={{ color: 'var(--white)', fontSize: 14, fontWeight: 700 }}>$2,475</div>
+                                    <div style={{ color: 'var(--white)', fontSize: 14, fontWeight: 700 }}>{(() => { const t = customTip ? parseInt(customTip) || 0 : tipAmount; return `$${(2475 + t).toLocaleString('en-US')}`; })()}</div>
                                 </div>
                             </div>
 

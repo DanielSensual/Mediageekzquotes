@@ -16,6 +16,7 @@ function CheckoutContent() {
     const searchParams = useSearchParams();
     const amount = parseFloat(searchParams.get('amount') || '0');
     const desc = searchParams.get('desc') || 'MediaGeekz — Video Production';
+    const returnUrl = searchParams.get('return') || '/';
 
     const cardRef = useRef(null);
     const googlePayBtnRef = useRef(null);
@@ -447,8 +448,8 @@ function CheckoutContent() {
                                     View Receipt →
                                 </a>
                             )}
-                            <a href="/proposals/leadership-interviews/invoice" className="back-link">
-                                ← Return to Invoice
+                            <a href={returnUrl} className="back-link">
+                                ← Return to Proposal
                             </a>
                         </div>
                     ) : (
@@ -511,8 +512,8 @@ function CheckoutContent() {
 
                             {error && <div className="checkout-error">{error}</div>}
                             <div className="secure-note">🔒 Payments processed securely via Square</div>
-                            <a href="/proposals/leadership-interviews/invoice" className="back-link">
-                                ← Back to Invoice
+                            <a href={returnUrl} className="back-link">
+                                ← Back to Proposal
                             </a>
                         </>
                     )}

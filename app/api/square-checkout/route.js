@@ -37,7 +37,7 @@ export async function POST(request) {
                 location_id: LOCATION_ID,
             },
             checkout_options: {
-                redirect_url: redirectUrl || 'https://mediageekz-quotes.vercel.app/proposals/leadership-interviews/invoice',
+                redirect_url: redirectUrl || 'https://mediageekz-quotes.vercel.app/',
                 accepted_payment_methods: {
                     apple_pay: true,
                 },
