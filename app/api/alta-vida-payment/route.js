@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Resend instance using a verified sending domain to ensure it is not sandboxed.
-const resend = new Resend(process.env.RESEND_API_KEY || 're_g7kEcaNy_8erguMjnRartZwgK3MUjXX6B');
+// Resend instance - lazy init to prevent build-time crashes when env var is missing
+let _resend;
+function getResend() {
+    if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY);
+    return _resend;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    Square Process Payment — Alta Vida (Jesse Kader)
@@ -65,7 +69,7 @@ export async function POST(request) {
 
         // Send confirmation email
         try {
-            await resend.emails.send({
+            await getResend().emails.send({
                 from: 'MediaGeekz Notifications <notifications@ghostaisystems.com>',
                 to: 'reelestateorlando@gmail.com',
                 subject: `New Payment Received: Alta Vida Pool Party - $${(cents / 100).toFixed(2)}`,

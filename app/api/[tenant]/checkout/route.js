@@ -7,9 +7,11 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { isRecoverableDatabaseError } from '@/lib/fallback-data';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-    apiVersion: '2023-10-16',
-});
+let _stripe;
+function getStripe() {
+    if (!_stripe) _stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2023-10-16' });
+    return _stripe;
+}
 
 export async function POST(request, { params }) {
     const { tenant: tenantSlug } = await params;
@@ -70,7 +72,7 @@ export async function POST(request, { params }) {
             }
         };
 
-        const session = await stripe.checkout.sessions.create(sessionPayload);
+        const session = await getStripe().checkout.sessions.create(sessionPayload);
 
         return NextResponse.json({ url: session.url, sessionId: session.id });
     } catch (err) {
