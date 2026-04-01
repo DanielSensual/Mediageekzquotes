@@ -13,11 +13,14 @@ build/
 # misc
 .DS_Store
 *.pem
+
+# environment
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.vercel
 
 # debug
 npm-debug.log*
@@ -25,8 +28,16 @@ npm-debug.log*
 # prisma
 prisma/*.db
 
-# test output
+# generated output
+output/
+tmp/
+
+# test artifacts
 test.pdf
 *.pdf
+
+# playwright
+.playwright-cli/
+
+# vercel
 .vercel
-.env.vercel

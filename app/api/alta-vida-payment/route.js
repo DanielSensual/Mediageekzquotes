@@ -13,8 +13,8 @@ function getResend() {
    Dedicated payment route using client's Square account.
    ═══════════════════════════════════════════════════════════════ */
 
-const SQUARE_ACCESS_TOKEN = 'EAAAlwcdWzePJ1huCMQib8GPpVCCh2TH64QX8JxVjw67YrpFGZl1ihdjT-C1kimY';
-const LOCATION_ID = '5BF9GG8J1JQNH';
+const SQUARE_ACCESS_TOKEN = process.env.ALTA_VIDA_SQUARE_ACCESS_TOKEN;
+const LOCATION_ID = process.env.ALTA_VIDA_SQUARE_LOCATION_ID || '5BF9GG8J1JQNH';
 const SQUARE_PAYMENTS_API = 'https://connect.squareup.com/v2/payments';
 
 export async function POST(request) {
