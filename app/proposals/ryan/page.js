@@ -60,14 +60,15 @@ export default function RyanProposal() {
     return (
         <>
             <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
                 :root {
-                    --shadow: #040508;
-                    --navy: #0a0d14;
-                    --panel: rgba(10, 13, 20, 0.88);
+                    --shadow: #030406;
+                    --navy: #080a10;
+                    --panel: rgba(8, 10, 16, 0.92);
                     --border: rgba(220, 165, 80, 0.16);
                     --gold: #dca550;
+                    --gold-bright: #f0b860;
                     --gold-soft: rgba(220, 165, 80, 0.12);
                     --sky: #4a8bcc;
                     --cream: #e2e8f0;
@@ -83,18 +84,36 @@ export default function RyanProposal() {
                     font-family: 'Inter', sans-serif !important;
                     color: var(--cream) !important;
                     background:
-                        radial-gradient(circle at 10% 20%, rgba(220, 165, 80, 0.05), transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(74, 139, 204, 0.04), transparent 40%),
-                        linear-gradient(180deg, #0a0d14 0%, #06080c 50%, #040508 100%) !important;
+                        radial-gradient(circle at 15% 10%, rgba(220, 165, 80, 0.06), transparent 35%),
+                        radial-gradient(circle at 85% 70%, rgba(74, 139, 204, 0.04), transparent 35%),
+                        radial-gradient(circle at 50% 50%, rgba(120, 80, 40, 0.03), transparent 60%),
+                        linear-gradient(180deg, #080a10 0%, #050710 50%, #030406 100%) !important;
                     line-height: 1.6;
                     overflow-x: hidden;
                 }
 
                 body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
-                    background: linear-gradient(90deg, rgba(220,165,80,0.015) 1px, transparent 1px),
-                                linear-gradient(0deg, rgba(74,139,204,0.01) 1px, transparent 1px);
-                    background-size: 100px 100px; opacity: 0.5;
-                    mask-image: radial-gradient(circle at center, black 20%, transparent 75%);
+                    background: linear-gradient(90deg, rgba(220,165,80,0.012) 1px, transparent 1px),
+                                linear-gradient(0deg, rgba(74,139,204,0.008) 1px, transparent 1px);
+                    background-size: 80px 80px; opacity: 0.4;
+                    mask-image: radial-gradient(circle at center, black 15%, transparent 70%);
+                }
+
+                body::after {
+                    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    pointer-events: none; z-index: 0;
+                    background:
+                        radial-gradient(1px 1px at 20% 30%, rgba(220, 165, 80, 0.25), transparent),
+                        radial-gradient(1px 1px at 60% 70%, rgba(220, 165, 80, 0.15), transparent),
+                        radial-gradient(1px 1px at 80% 20%, rgba(180, 140, 80, 0.2), transparent),
+                        radial-gradient(1px 1px at 40% 80%, rgba(220, 165, 80, 0.1), transparent);
+                    background-size: 200px 200px;
+                    animation: drift-particles 20s linear infinite;
+                }
+
+                @keyframes drift-particles {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-200px); }
                 }
 
                 ::selection { background: rgba(220, 165, 80, 0.3); color: var(--white); }
@@ -116,7 +135,7 @@ export default function RyanProposal() {
                 .ed-hero-bg {
                     position: absolute; inset: 0; z-index: 0;
                     background: url('/proposals/ryan/hero.png') center/cover no-repeat;
-                    filter: brightness(0.35) saturate(0.85);
+                    filter: brightness(0.45) saturate(1.1) contrast(1.08);
                     transform: scale(1.1);
                     transition: transform 0.05s linear;
                 }
@@ -124,8 +143,8 @@ export default function RyanProposal() {
                 .ed-hero-overlay {
                     position: absolute; inset: 0; z-index: 1;
                     background:
-                        linear-gradient(180deg, rgba(4, 5, 8, 0.6) 0%, rgba(4, 5, 8, 0.3) 40%, rgba(4, 5, 8, 0.9) 100%),
-                        radial-gradient(ellipse at 50% 20%, rgba(220, 165, 80, 0.1) 0%, transparent 50%);
+                        linear-gradient(180deg, rgba(3, 4, 6, 0.5) 0%, rgba(3, 4, 6, 0.15) 35%, rgba(3, 4, 6, 0.85) 100%),
+                        radial-gradient(ellipse at 50% 25%, rgba(220, 165, 80, 0.12) 0%, transparent 55%);
                 }
 
                 .hero-badge {
@@ -151,17 +170,29 @@ export default function RyanProposal() {
 
                 .hero-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(48px, 8vw, 90px);
-                    font-weight: 700; line-height: 0.96; letter-spacing: -0.02em;
-                    color: var(--white); margin-bottom: 24px;
+                    font-size: clamp(48px, 8vw, 96px);
+                    font-weight: 700; line-height: 0.92; letter-spacing: -0.03em;
+                    color: var(--white); margin-bottom: 28px;
                     position: relative; z-index: 1;
+                    text-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
                 }
 
                 .hero-title em {
                     color: var(--gold); font-style: normal; font-weight: 800;
-                    background: linear-gradient(135deg, #dca550, #f59e0b);
+                    background: linear-gradient(135deg, #dca550 0%, #f0b860 40%, #dca550 100%);
                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
                     background-clip: text;
+                    filter: drop-shadow(0 2px 12px rgba(220, 165, 80, 0.3));
+                }
+
+                .hero-tagline {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: clamp(16px, 2.5vw, 22px);
+                    font-weight: 400; font-style: italic;
+                    color: rgba(220, 165, 80, 0.6);
+                    letter-spacing: 0.12em;
+                    position: relative; z-index: 1;
+                    margin-bottom: 20px;
                 }
 
                 .hero-subtitle {
@@ -375,8 +406,9 @@ export default function RyanProposal() {
                     <h1 className="hero-title">
                         Danny Elfman<br /><em>Doc-Series</em>
                     </h1>
+                    <div className="hero-tagline">Capturing a Legend — Los Angeles, 2026</div>
                     <p className="hero-subtitle">
-                        High-end cinematic production capturing the essence of a legendary composer. Professional on-location cinematography, B-roll, and editorial deliverables in Los Angeles.
+                        A cinematic documentary production honoring one of the most iconic composers in film history. Two-camera crew, on-location in Los Angeles — capturing the artistry, the intensity, and the magic behind the music.
                     </p>
 
                     <div className="hero-meta">
@@ -416,19 +448,19 @@ export default function RyanProposal() {
 
                     <div className="scope-grid">
                         <div className="scope-card" style={{ overflow: 'hidden' }}>
-                            <img className="scope-card-img" src="/proposals/ryan/bts-production.png" alt="A-Cam Operation" />
-                            <h3>🎥 Lead Cinematography</h3>
-                            <p>Primary creative direction and A-cam operation. Focused on narrative storytelling, high-end interview setups, and the overarching visual aesthetic of the doc-series.</p>
+                            <img className="scope-card-img" src="/proposals/ryan/bts-production.png" alt="Cinema camera rig filming on stage" />
+                            <h3>🎥 A-Cam — Cinema Rig</h3>
+                            <p>Primary creative direction with professional cinema camera on gimbal. Focused on narrative storytelling, intimate interview compositions, and the sweeping visual language this doc-series demands.</p>
                         </div>
                         <div className="scope-card" style={{ overflow: 'hidden' }}>
-                            <img className="scope-card-img" src="/proposals/ryan/interview-setup.png" alt="Detail B-Roll" />
-                            <h3>🔍 Macro & B-Roll</h3>
-                            <p>Pro-Tip for the Shoot: Our Second Shooter will prioritize tight "detail" shots—hands on instruments, eyes, micro-expressions. That's where the magic is for a doc-series like this.</p>
+                            <img className="scope-card-img" src="/proposals/ryan/interview-setup.png" alt="Macro detail of hands on orchestral score" />
+                            <h3>🔍 The Details — B-Cam</h3>
+                            <p>Tight macro shots — hands on instruments, fingers on keys, eyes mid-performance, annotations on the score. These are the shots that make a doc-series feel alive. That's where the magic lives.</p>
                         </div>
                         <div className="scope-card" style={{ overflow: 'hidden' }}>
-                            <img className="scope-card-img" src="/proposals/ryan/social-content.png" alt="Post-Production" />
-                            <h3>🎬 Full Edit + Stills</h3>
-                            <p>Complete post-production workflow including the full doc-series edit and professionally edited high-res stills for promotional and editorial usage.</p>
+                            <img className="scope-card-img" src="/proposals/ryan/social-content.png" alt="Professional color grading suite" />
+                            <h3>🎬 Post-Production Suite</h3>
+                            <p>Full editorial and color grading pipeline. The doc-series edit, professionally graded high-res stills, and deliverables crafted to match the cinematic gravity of the subject.</p>
                         </div>
                     </div>
                 </section>
@@ -438,8 +470,8 @@ export default function RyanProposal() {
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/proposals/ryan/studio-session.png')", transform: `translateY(${(scrollY - 1200) * 0.08}px)` }} />
                     <div className="img-panel-overlay" />
                     <div className="img-panel-content">
-                        <div className="img-label">The <span>Magic</span> is in the Details</div>
-                        <div className="img-sub">Los Angeles Production · Danny Elfman Doc-Series</div>
+                        <div className="img-label">Where the <span>Legend</span> Stands</div>
+                        <div className="img-sub">On-Location · Los Angeles · April 2026</div>
                     </div>
                 </div>
 
