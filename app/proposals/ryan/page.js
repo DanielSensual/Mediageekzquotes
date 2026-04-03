@@ -588,7 +588,29 @@ export default function RyanProposal() {
                             {/* Producer — MediaGeekz */}
                             <div>
                                 <div className="sig-label">Producer — MediaGeekz</div>
+
+                                {/* Matt Workman */}
                                 <div style={{ marginBottom: 24 }}>
+                                    <div className="sig-preview">
+                                        <span className="sig-cursive">Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Signature</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>Matt Workman</span>
+                                    </div>
+                                    <div className="sig-field">Printed Name</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>mattworkman@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>April 3, 2026</span>
+                                    </div>
+                                    <div className="sig-field">Date</div>
+                                </div>
+
+                                {/* Daniel Castillo */}
+                                <div>
                                     <div className="sig-preview">
                                         <span className="sig-cursive">Daniel Castillo</span>
                                     </div>
@@ -598,7 +620,11 @@ export default function RyanProposal() {
                                     </div>
                                     <div className="sig-field">Printed Name</div>
                                     <div className="sig-line">
-                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                        <span style={{ fontSize: 11, color: 'var(--muted)' }}>danielcastillo@mediageekz.com</span>
+                                    </div>
+                                    <div className="sig-field">Email</div>
+                                    <div className="sig-line">
+                                        <span style={{ fontSize: 13, color: 'var(--cream)' }}>April 3, 2026</span>
                                     </div>
                                     <div className="sig-field">Date</div>
                                 </div>
