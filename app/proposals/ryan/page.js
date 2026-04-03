@@ -470,15 +470,15 @@ export default function RyanProposal() {
                         <div style={{ display: 'grid', gap: 8, marginBottom: 20 }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', border: '1px solid rgba(74, 139, 204, 0.1)', borderRadius: 12, background: 'rgba(74, 139, 204, 0.03)' }}>
                                 <div>
-                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Director / DP</div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Director / DP — Matt Workman</div>
                                     <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Lead creative and primary camera operation.</div>
                                 </div>
                                 <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$1,500</div>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', border: '1px solid rgba(74, 139, 204, 0.1)', borderRadius: 12, background: 'rgba(74, 139, 204, 0.03)' }}>
                                 <div>
-                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Second Shooter</div>
-                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Additional angles, B-roll, details, and production support.</div>
+                                    <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--cream)' }}>Cinematographer — Daniel Castillo</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 2 }}>Additional angles, B-roll, detail shots, and production support.</div>
                                 </div>
                                 <div style={{ fontSize: 14, color: 'var(--cream)', fontWeight: 600 }}>$1,000</div>
                             </div>
