@@ -686,16 +686,11 @@ export default function RyanProposal() {
                         </div>
 
                     {/* ── Payment Terms ── */}
-                    <div style={{ maxWidth: 740, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginTop: 24 }}>
+                    <div style={{ maxWidth: 740, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 24 }}>
                         <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Deposit</div>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--gold)' }}>50%</div>
+                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Payment</div>
+                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--gold)' }}>Full Upfront</div>
                             <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>to lock shoot date</div>
-                        </div>
-                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Balance</div>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>50%</div>
-                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>on wrap day</div>
                         </div>
                         <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
                             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Delivery</div>
@@ -707,7 +702,7 @@ export default function RyanProposal() {
                     {/* ── Terms Block ── */}
                     <div style={{ maxWidth: 740, marginTop: 20, fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
                         <strong style={{ color: 'var(--cream)' }}>Scope:</strong> This engagement covers <strong style={{ color: 'var(--cream)' }}>production day (April 9th), travel (April 8th), full video edit, and photo deliverables</strong>. Post-production delivery follows standard Midnight Creative turnaround times.<br /><br />
-                        <strong style={{ color: 'var(--cream)' }}>Terms:</strong> 50% deposit to lock the shoot date. Remaining 50% due on wrap. Cancellation within 48 hours forfeits the deposit. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered content. MediaGeekz retains portfolio usage rights unless otherwise agreed.<br /><br />
+                        <strong style={{ color: 'var(--cream)' }}>Terms:</strong> Full payment due upon approval to lock the shoot date. Cancellation within 48 hours of shoot date forfeits payment. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered content. MediaGeekz retains portfolio usage rights unless otherwise agreed.<br /><br />
                         <strong style={{ color: 'var(--cream)' }}>Travel:</strong> Flights covered separately by client via points. The $500 travel line item covers ground transportation, per diem, and crew logistics in Los Angeles.
                     </div>
 
@@ -717,15 +712,15 @@ export default function RyanProposal() {
                             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 12 }}>Secure Payment</div>
 
                             {(() => {
-                                const depositAmount = Math.round(finalTotal / 2);
-                                const descParts = ['Elfman Doc-Series — 50% Deposit'];
+                                const payAmount = finalTotal;
+                                const descParts = ['Elfman Doc-Series — Full Payment'];
                                 if (addonTotal > 0) {
                                     const selectedAddons = ADDONS.filter(a => addons[a.id]).map(a => a.label).join(', ');
                                     descParts.push(`(inc. ${selectedAddons})`);
                                 }
                                 return (
                                     <a
-                                        href={`/checkout?amount=${depositAmount}&desc=${encodeURIComponent(descParts.join(' '))}&return=${encodeURIComponent('/proposals/ryan')}`}
+                                        href={`/checkout?amount=${payAmount}&desc=${encodeURIComponent(descParts.join(' '))}&return=${encodeURIComponent('/proposals/ryan')}`}
                                         style={{
                                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10,
                                             width: '100%', padding: '20px 32px', border: 'none', borderRadius: 14, cursor: 'pointer',
@@ -737,21 +732,10 @@ export default function RyanProposal() {
                                             transition: 'transform 0.2s, box-shadow 0.2s',
                                         }}
                                     >
-                                        💳 Pay 50% Deposit — {fmt(depositAmount)}
+                                        💳 Pay {fmt(payAmount)} — Lock Production
                                     </a>
                                 );
                             })()}
-
-                            <div style={{ marginTop: 24, padding: '12px 16px', borderRadius: 12, border: '1px solid rgba(255, 255, 255, 0.04)', background: 'rgba(255, 255, 255, 0.02)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                                <div style={{ textAlign: 'left' }}>
-                                    <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--muted-2)', textTransform: 'uppercase', marginBottom: 4 }}>Deposit (50%)</div>
-                                    <div style={{ color: 'var(--gold)', fontSize: 14, fontWeight: 600 }}>{fmt(Math.round(finalTotal / 2))}</div>
-                                </div>
-                                <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontSize: 9, fontWeight: 700, color: 'var(--muted-2)', textTransform: 'uppercase', marginBottom: 4 }}>Balance (50%)</div>
-                                    <div style={{ color: 'var(--white)', fontSize: 14, fontWeight: 700 }}>{fmt(Math.ceil(finalTotal / 2))}</div>
-                                </div>
-                            </div>
 
                             <div style={{ marginTop: 16, fontSize: 11, color: 'rgba(139, 150, 165, 0.5)' }}>
                                 🔒 Payments processed securely via Square · Card, Apple Pay, Google Pay
