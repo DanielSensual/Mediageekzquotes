@@ -717,24 +717,11 @@ export default function RyanProposal() {
                             </div>
                         </div>
 
-                    {/* ── Payment Terms ── */}
-                    <div style={{ maxWidth: 740, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 24 }}>
-                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Payment</div>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--gold)' }}>Full Upfront</div>
-                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>to lock shoot date</div>
-                        </div>
-                        <div style={{ padding: 16, border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
-                            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-2)', marginBottom: 6 }}>Delivery</div>
-                            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--cream)' }}>Standard</div>
-                            <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 4 }}>Midnight Creative turnaround</div>
-                        </div>
-                    </div>
 
                     {/* ── Terms Block ── */}
-                    <div style={{ maxWidth: 740, marginTop: 20, fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
+                    <div style={{ maxWidth: 740, marginTop: 24, fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.8, padding: '14px 16px', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
                         <strong style={{ color: 'var(--cream)' }}>Scope:</strong> This engagement covers <strong style={{ color: 'var(--cream)' }}>production day (April 9th), travel (April 8th), full video edit, and photo deliverables</strong>. Post-production delivery follows standard Midnight Creative turnaround times.<br /><br />
-                        <strong style={{ color: 'var(--cream)' }}>Terms:</strong> Full payment due upon approval to lock the shoot date. Cancellation within 48 hours of shoot date forfeits payment. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered content. MediaGeekz retains portfolio usage rights unless otherwise agreed.<br /><br />
+                        <strong style={{ color: 'var(--cream)' }}>Terms:</strong> Payment due upon approval to lock the shoot date. Cancellation within 48 hours of shoot date forfeits payment. Rescheduling is free with 72+ hours notice. Client receives perpetual usage rights on all delivered content. MediaGeekz retains portfolio usage rights unless otherwise agreed.<br /><br />
                         <strong style={{ color: 'var(--cream)' }}>Travel:</strong> Flights covered separately by client via points. The $500 travel line item covers ground transportation, per diem, and crew logistics in Los Angeles.
                     </div>
 
