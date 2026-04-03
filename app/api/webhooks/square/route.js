@@ -91,6 +91,7 @@ export async function POST(request) {
             const payment = event.data?.object?.payment;
             if (payment) {
                 await sendNotification(payment);
+                await notifyHydra(payment);
             }
         }
 
@@ -98,6 +99,31 @@ export async function POST(request) {
     } catch (err) {
         console.error('[Webhook] Handler error:', err);
         return NextResponse.json({ error: 'Webhook processing error' }, { status: 500 });
+    }
+}
+
+async function notifyHydra(payment) {
+    const hydraUrl = process.env.HYDRA_WEBHOOK_URL;
+    if (!hydraUrl) return;
+
+    try {
+        const amount = (payment.amount_money?.amount / 100).toFixed(2);
+        const note = payment.note || 'No description';
+
+        await fetch(hydraUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                source: 'SquarePaymentWebhook',
+                event: 'payment.completed',
+                amount: amount,
+                note: note,
+                receiptUrl: payment.receipt_url || '#',
+            }),
+        });
+        console.log('[Webhook] Successfully pinged HYDRA with payment update.');
+    } catch (err) {
+        console.error('[Webhook] Failed to ping HYDRA:', err);
     }
 }
 
