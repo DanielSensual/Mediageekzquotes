@@ -1008,7 +1008,7 @@ export default function ThreadLink() {
                     {/* Shoot Day Overview Cards */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 40 }}>
                         {[
-                            { label: 'Date', value: 'April 19', sub: 'Saturday', icon: '📅' },
+                            { label: 'Date', value: 'April 19', sub: 'Sunday', icon: '📅' },
                             { label: 'Location', value: 'ThreadLink HQ', sub: 'Clermont, FL', icon: '📍' },
                             { label: 'Load In', value: '8:00 AM', sub: 'Crew call time', icon: '🚛' },
                             { label: 'First Shot', value: '9:30 AM', sub: 'Cameras rolling', icon: '🎬' },
