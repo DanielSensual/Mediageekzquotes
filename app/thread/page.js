@@ -1259,7 +1259,7 @@ export default function ThreadLink() {
                             { label: 'Duration', value: '1:20–1:30', icon: '⏱' },
                             { label: 'Word Count', value: '~140 words', icon: '📝' },
                             { label: 'Tone', value: 'Warm & Chill', icon: '☀️' },
-                            { label: 'Speaker', value: 'William (VO)', icon: '🎤' },
+                            { label: 'Speaker', value: 'TBD', icon: '🎤' },
                             { label: 'Music', value: 'Acoustic / Indie', icon: '🎵' },
                         ].map((d, i) => (
                             <div key={i} style={{ padding: '14px 12px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
