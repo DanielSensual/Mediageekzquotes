@@ -47,7 +47,7 @@ export async function POST(req) {
                 headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     from: 'MediaGeekz Proposals <proposals@mediageekz.com>',
-                    to: ['danielcastillowild@gmail.com'],
+                    to: ['mattworkman@mediageekz.com', 'danielcastillo@mediageekz.com'],
                     subject,
                     html: htmlBody,
                 }),

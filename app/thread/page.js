@@ -1527,6 +1527,157 @@ export default function ThreadLink() {
 
                 <div className="divider" />
 
+                {/* ═══ WARDROBE & STYLING ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Wardrobe &amp; Styling</div>
+                        <div className="section-question">What should everyone wear?</div>
+                        <h2 className="section-title">On-Camera Style Guide</h2>
+                        <p className="section-desc">
+                            Simple guidelines so the team looks cohesive without looking like a uniform. Natural, intentional, camera-ready.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 28 }}>
+                        {[
+                            { icon: '✅', title: 'Do Wear', items: ['Solid colors (navy, charcoal, olive, cream, burgundy)', 'Clean, well-fitted clothing', 'Layering — blazer over tee is great', 'Brand colors subtly (ThreadLink indigo accents)', 'Comfortable shoes (you\'ll be standing)'] },
+                            { icon: '❌', title: 'Avoid', items: ['Bright white (blows out on camera)', 'Thin stripes or small patterns (moiré effect)', 'Large visible logos (Nike, Adidas, etc.)', 'Neon or overly saturated colors', 'Wrinkled or ill-fitting clothing'] },
+                            { icon: '💡', title: 'Pro Tips', items: ['Iron/steam everything the night before', 'Bring a backup outfit to set', 'Minimal jewelry — it catches light/mic', 'Glasses are fine (we manage reflections)', 'Haircut/grooming 3+ days before, not day-of'] },
+                        ].map((col, i) => (
+                            <div key={i} style={{ padding: '20px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, background: 'var(--panel)' }}>
+                                <div style={{ fontSize: 22, marginBottom: 10 }}>{col.icon}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--white)', marginBottom: 14 }}>{col.title}</div>
+                                {col.items.map((item, j) => (
+                                    <div key={j} style={{ fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.6, paddingLeft: 12, position: 'relative', marginBottom: 6 }}>
+                                        <span style={{ position: 'absolute', left: 0, color: 'var(--muted-3)' }}>→</span> {item}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ padding: '16px 20px', border: '1px solid rgba(99,102,241,0.1)', borderRadius: 12, background: 'rgba(99,102,241,0.03)' }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 6 }}>Overall Vibe</div>
+                        <div style={{ fontSize: 13, color: 'var(--cream)', lineHeight: 1.7 }}>
+                            Think &ldquo;smart casual Friday at a design studio.&rdquo; You want to look like yourself on a good day — not a stock photo. Authenticity &gt; polish.
+                        </div>
+                    </div>
+                </section>
+
+                <FeedbackBar section="Wardrobe & Styling" />
+
+                <div className="divider" />
+
+                {/* ═══ CLIENT PREP CHECKLIST ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Prep Checklist</div>
+                        <div className="section-question">What does ThreadLink need ready?</div>
+                        <h2 className="section-title">Before Shoot Day</h2>
+                        <p className="section-desc">
+                            A quick rundown of what we need from your side to make the day smooth. Most of this is stuff you already have — just making sure it&apos;s visible and accessible.
+                        </p>
+                    </div>
+
+                    <div style={{ marginBottom: 28 }}>
+                        {[
+                            { cat: 'Office Environment', status: 'Required', items: [
+                                { task: 'Clean & tidy the main workspace — clear clutter, wipe surfaces', done: false },
+                                { task: 'Conference room set up for meeting scenes (chairs, clean table)', done: false },
+                                { task: 'Screens on and displaying ThreadLink work / client sites', done: false },
+                                { task: 'Good overhead lighting — replace any dead bulbs', done: false },
+                                { task: 'Temp set to comfortable (no sweating under lights)', done: false },
+                            ]},
+                            { cat: 'Brand Materials', status: 'Required', items: [
+                                { task: 'ThreadLink business cards (stacks, not singles)', done: false },
+                                { task: 'Any printed brand collateral (brochures, postcards)', done: false },
+                                { task: 'Branded swag if available (mugs, shirts, stickers)', done: false },
+                                { task: 'Logo files on screen for digital shots', done: false },
+                            ]},
+                            { cat: 'People', status: 'Important', items: [
+                                { task: 'Confirm who will be on camera — minimum 3 people recommended', done: false },
+                                { task: 'Share this style guide with everyone appearing on camera', done: false },
+                                { task: 'No scheduling conflicts 8am–6pm on shoot day', done: false },
+                                { task: 'Light breakfast/snacks available (we bring energy, you bring coffee ☕)', done: false },
+                            ]},
+                            { cat: 'Technical', status: 'Nice to Have', items: [
+                                { task: 'WiFi password for crew (for reference uploads)', done: false },
+                                { task: 'Parking spots reserved near entrance for gear load-in', done: false },
+                                { task: 'Key/access for early morning entry (crew arrives 8am)', done: false },
+                            ]},
+                        ].map((group, i) => (
+                            <div key={i} style={{ marginBottom: 20 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)' }}>{group.cat}</div>
+                                    <div style={{ fontSize: 9, padding: '2px 8px', borderRadius: 4, background: group.status === 'Required' ? 'rgba(232,118,74,0.15)' : 'rgba(99,102,241,0.1)', color: group.status === 'Required' ? 'var(--orange)' : 'var(--muted-2)', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{group.status}</div>
+                                </div>
+                                {group.items.map((item, j) => (
+                                    <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '8px 14px', marginBottom: 4, borderRadius: 8, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                                        <div style={{ width: 18, height: 18, borderRadius: 4, border: '1.5px solid rgba(255,255,255,0.15)', flexShrink: 0, marginTop: 1 }} />
+                                        <div style={{ fontSize: 12, color: 'var(--cream)', lineHeight: 1.6 }}>{item.task}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <FeedbackBar section="Prep Checklist" />
+
+                <div className="divider" />
+
+                {/* ═══ POST-PRODUCTION TIMELINE ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Post-Production</div>
+                        <div className="section-question">What happens after we wrap?</div>
+                        <h2 className="section-title">From Raw Footage to Final Film</h2>
+                        <p className="section-desc">
+                            A clear timeline of what to expect after shoot day. We handle everything — you just review and approve.
+                        </p>
+                    </div>
+
+                    <div className="sd-schedule" style={{ marginBottom: 32 }}>
+                        {[
+                            { week: 'Week 1', title: 'Selects & Assembly', desc: 'We review all footage, pull the best takes, and build a rough assembly edit with music and VO placement. You\'ll receive a private link to the rough cut for initial gut-check feedback.', status: 'In Progress' },
+                            { week: 'Week 2', title: 'Fine Cut & Color', desc: 'Full color grade (warm, golden tones). Sound design layered in. Music bed locked. Pacing refined. This is where the film starts to feel cinematic.', status: 'Upcoming' },
+                            { week: 'Week 3', title: 'Review Round 1', desc: 'You receive the fine cut for detailed feedback. We accommodate up to 2 rounds of revisions — timing, text changes, music swaps, pacing adjustments.', status: 'Upcoming' },
+                            { week: 'Week 4', title: 'Final Delivery', desc: 'Master file delivered in 4K ProRes + H.264 web-optimized. Social cuts (vertical 9:16 for Reels/TikTok, square 1:1) delivered alongside. All files via shared Google Drive.', status: 'Upcoming' },
+                        ].map((phase, i) => (
+                            <div key={i} className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className={`sd-dot ${i === 0 ? 'green' : ''}`} />
+                                    <div className="sd-time">{phase.week}</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className={`sd-phase ${i === 0 ? 'shoot' : ''}`}>{phase.status}</div>
+                                    <div className="sd-title">{phase.title}</div>
+                                    <div className="sd-desc">{phase.desc}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10, marginBottom: 20 }}>
+                        {[
+                            { label: 'Final Deliverables', value: '4K + Social Cuts', icon: '🎬' },
+                            { label: 'Revision Rounds', value: '2 Included', icon: '🔄' },
+                            { label: 'Delivery Format', value: 'Google Drive', icon: '📁' },
+                            { label: 'Turnaround', value: '~4 Weeks', icon: '⏱' },
+                        ].map((d, i) => (
+                            <div key={i} style={{ padding: '14px 12px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                                <div style={{ fontSize: 18, marginBottom: 4 }}>{d.icon}</div>
+                                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 3 }}>{d.label}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 13, fontWeight: 700, color: 'var(--white)' }}>{d.value}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <FeedbackBar section="Post-Production" />
+
+                <div className="divider" />
+
                 {/* ═══ BTS IMAGE BREAK ═══ */}
                 <div className="img-panel">
                     <div className="img-panel-bg" style={{ backgroundImage: "url('/thread/production-bts.png')", transform: `translateY(${(scrollY - 2000) * 0.08}px)` }} />
