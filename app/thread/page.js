@@ -1034,7 +1034,7 @@ export default function ThreadLink() {
                             </div>
                             <div className="treatment-caption">
                                 <div className="treatment-type">Aerial · Drone</div>
-                                Aerial Reveal — Downtown Oviedo at golden hour
+                                Aerial Reveal — Downtown Winter Garden at golden hour
                             </div>
                         </div>
                         <div className="treatment-card">
@@ -1104,7 +1104,7 @@ export default function ThreadLink() {
                         {[
                             { icon: '🏢', title: 'The Office', desc: 'Tight shots, bokeh, slider between desks. Indigo RGB LEDs for brand color. Small space made cinematic.' },
                             { icon: '🤝', title: 'Conference Room', desc: 'Discovery meetings, strategy sessions. Depth for interviews. Whiteboard removed, tables moveable.' },
-                            { icon: '🌅', title: 'Downtown Oviedo', desc: 'Recognizable local texture in the background. 2–3 quick seconds, not center stage. Pending location approval.' },
+                            { icon: '🌅', title: 'Downtown Winter Garden', desc: 'Plant Street — recognizable local texture in the background. 2–3 quick seconds, not center stage. Pending location approval.' },
                             { icon: '🏡', title: 'Client Businesses', desc: 'On-site at client locations — showing the team embedded in the real world, not behind a screen.' },
                         ].map((loc, i) => (
                             <div key={i} style={{ padding: '20px', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: 16, background: 'var(--panel)' }}>
@@ -1262,7 +1262,7 @@ export default function ThreadLink() {
                                 <div className="sd-content">
                                     <div className="sd-phase shoot">Shooting</div>
                                     <div className="sd-title">Scene Block 5 — Golden Hour & Exteriors</div>
-                                    <div className="sd-desc">Exterior shots of the ThreadLink office at golden hour. Building signage, parking lot arrival, team walking out. Downtown Oviedo if approved — local storefronts for community texture. Drone coverage if add-on is selected.</div>
+                                    <div className="sd-desc">Exterior shots of the ThreadLink office at golden hour. Building signage, parking lot arrival, team walking out. Downtown Winter Garden if approved — Plant Street storefronts for local texture. Drone coverage if add-on is selected.</div>
                                     <div className="sd-shots">
                                         <span className="sd-shot-tag">Office Exterior</span>
                                         <span className="sd-shot-tag">Golden Hour</span>
@@ -1402,7 +1402,7 @@ export default function ThreadLink() {
                         <div className="script-block">
                             <div className="script-time-badge">0:00 – 0:08</div>
                             <div className="script-beat">Open — Clermont</div>
-                            <div className="script-broll">Golden hour Clermont — downtown Oviedo, storefronts, people walking. Slow gimbal move.</div>
+                            <div className="script-broll">Golden hour Clermont — downtown Plant Street, storefronts, people walking. Slow gimbal move.</div>
                             <div className="script-vo">
                                 &ldquo;Clermont&rsquo;s kind of a small-town-that&rsquo;s-not-so-small-anymore, you know?&rdquo;<br />
                                 &ldquo;And that&rsquo;s what makes it exciting.&rdquo;
