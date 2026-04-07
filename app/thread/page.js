@@ -743,7 +743,7 @@ export default function ThreadLink() {
                             </div>
                             <div className="hero-stat">
                                 <div className="hero-stat-label">Shoot Date</div>
-                                <div className="hero-stat-value">Mid-April</div>
+                                <div className="hero-stat-value">April 19</div>
                                 <div className="hero-stat-detail">Weekend shoot</div>
                             </div>
                             <div className="hero-stat">
@@ -1008,7 +1008,7 @@ export default function ThreadLink() {
                     {/* Shoot Day Overview Cards */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 40 }}>
                         {[
-                            { label: 'Date', value: 'Mid-April', sub: 'TBD — Weekend', icon: '📅' },
+                            { label: 'Date', value: 'April 19', sub: 'Saturday', icon: '📅' },
                             { label: 'Location', value: 'ThreadLink HQ', sub: 'Clermont, FL', icon: '📍' },
                             { label: 'Load In', value: '8:00 AM', sub: 'Crew call time', icon: '🚛' },
                             { label: 'First Shot', value: '9:30 AM', sub: 'Cameras rolling', icon: '🎬' },
