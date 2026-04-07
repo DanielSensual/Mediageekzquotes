@@ -498,6 +498,104 @@ export default function ThreadLink() {
                 .equip-card ul li { font-size: 11px; color: var(--muted-2); padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
                 .equip-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 10px; }
 
+                /* ── Shoot Day Schedule ── */
+                .sd-schedule { display: grid; gap: 0; margin-top: 32px; position: relative; }
+                .sd-schedule::before {
+                    content: ''; position: absolute; left: 28px; top: 28px; bottom: 28px;
+                    width: 2px; background: linear-gradient(180deg, var(--orange), var(--teal), rgba(99,102,241,0.2));
+                }
+
+                .sd-block {
+                    display: grid; grid-template-columns: 56px 1fr; gap: 20px;
+                    padding: 20px 0; position: relative;
+                }
+
+                .sd-time-col {
+                    display: flex; flex-direction: column; align-items: center; position: relative;
+                }
+
+                .sd-dot {
+                    width: 14px; height: 14px; border-radius: 50%;
+                    background: var(--orange); border: 3px solid var(--shadow);
+                    box-shadow: 0 0 0 5px rgba(99,102,241,0.12);
+                    position: relative; z-index: 2;
+                }
+
+                .sd-dot.teal { background: var(--teal); box-shadow: 0 0 0 5px rgba(167,139,250,0.12); }
+                .sd-dot.green { background: var(--green); box-shadow: 0 0 0 5px rgba(34,197,94,0.12); }
+
+                .sd-time {
+                    font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700;
+                    color: var(--muted); margin-top: 6px; white-space: nowrap;
+                }
+
+                .sd-content {
+                    padding: 20px 24px; border: 1px solid rgba(255,255,255,0.06);
+                    border-radius: 16px; background: var(--panel);
+                    transition: border-color 0.3s, transform 0.3s;
+                }
+
+                .sd-content:hover { border-color: rgba(99,102,241,0.25); transform: translateX(4px); }
+
+                .sd-phase {
+                    font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+                    padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 10px;
+                }
+
+                .sd-phase.setup { background: rgba(99,102,241,0.12); color: var(--orange); }
+                .sd-phase.shoot { background: rgba(34,197,94,0.12); color: var(--green); }
+                .sd-phase.wrap { background: rgba(167,139,250,0.12); color: var(--teal); }
+
+                .sd-title {
+                    font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700;
+                    color: var(--white); margin-bottom: 6px;
+                }
+
+                .sd-desc { font-size: 12px; color: var(--muted-2); line-height: 1.7; }
+
+                .sd-shots {
+                    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;
+                }
+
+                .sd-shot-tag {
+                    padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 600;
+                    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+                    color: var(--cream);
+                }
+
+                /* ── Shot List Cards ── */
+                .shot-grid {
+                    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 14px; margin-top: 28px;
+                }
+
+                .shot-card {
+                    padding: 24px 20px; border: 1px solid rgba(255,255,255,0.06);
+                    border-radius: 16px; background: var(--panel);
+                    transition: border-color 0.3s, transform 0.3s;
+                }
+
+                .shot-card:hover { border-color: rgba(99,102,241,0.25); transform: translateY(-3px); }
+
+                .shot-num {
+                    font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800;
+                    color: rgba(99,102,241,0.15); line-height: 1; margin-bottom: 8px;
+                }
+
+                .shot-name {
+                    font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700;
+                    color: var(--white); margin-bottom: 6px;
+                }
+
+                .shot-setup { font-size: 11px; color: var(--orange); font-weight: 600; margin-bottom: 6px; }
+                .shot-desc { font-size: 12px; color: var(--muted-2); line-height: 1.7; }
+
+                @media (max-width: 640px) {
+                    .sd-schedule::before { left: 24px; }
+                    .sd-block { grid-template-columns: 48px 1fr; gap: 14px; }
+                    .shot-grid { grid-template-columns: 1fr; }
+                }
+
                 /* ── Deliverables Grid ── */
                 .del-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
 
@@ -852,6 +950,252 @@ export default function ThreadLink() {
 
                 <div className="divider" />
 
+                {/* ═══ SHOOT DAY DIRECTION ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Shoot Day Direction</div>
+                        <div className="section-question">Production schedule & B-roll treatment</div>
+                        <h2 className="section-title">Day of Shoot</h2>
+                        <p className="section-desc">
+                            A full production day capturing ThreadLink in its element — the workspace, the process, the team energy. Every shot is designed to feel organic and cinematic.
+                        </p>
+                    </div>
+
+                    {/* Shoot Day Overview Cards */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 40 }}>
+                        {[
+                            { label: 'Date', value: 'Mid-April', sub: 'TBD — Weekend', icon: '📅' },
+                            { label: 'Location', value: 'ThreadLink HQ', sub: 'Clermont, FL', icon: '📍' },
+                            { label: 'Load In', value: '8:00 AM', sub: 'Crew call time', icon: '🚛' },
+                            { label: 'First Shot', value: '9:30 AM', sub: 'Cameras rolling', icon: '🎬' },
+                            { label: 'Wrap', value: '6:00 PM', sub: 'Full day shoot', icon: '🎬' },
+                            { label: 'Format', value: 'B-Roll Heavy', sub: 'Cinematic office', icon: '📹' },
+                        ].map((d, i) => (
+                            <div key={i} style={{ padding: '18px 16px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, background: 'var(--panel)', textAlign: 'center' }}>
+                                <div style={{ fontSize: 20, marginBottom: 6 }}>{d.icon}</div>
+                                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 4 }}>{d.label}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 15, fontWeight: 700, color: 'var(--white)' }}>{d.value}</div>
+                                <div style={{ fontSize: 10, color: 'var(--muted-2)', marginTop: 2 }}>{d.sub}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Production Schedule */}
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 20 }}>Production Schedule</div>
+                        <div className="sd-schedule">
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot" />
+                                    <div className="sd-time">8:00 AM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase setup">Setup</div>
+                                    <div className="sd-title">Load-In & Technical Setup</div>
+                                    <div className="sd-desc">Crew arrives. Unload camera, grip, and lighting packages. Scout the office for best angles, identify hero positions (desks, conference room, exterior). Set up dual Sony FX3 bodies, LED panels, RGB accent lights for brand color. Test audio levels.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Camera Setup</span>
+                                        <span className="sd-shot-tag">Lighting Rig</span>
+                                        <span className="sd-shot-tag">Audio Check</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot green" />
+                                    <div className="sd-time">9:30 AM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase shoot">Shooting</div>
+                                    <div className="sd-title">Scene Block 1 — Morning Workflow</div>
+                                    <div className="sd-desc">Capture the team arriving and settling in. Coffee in hand, screens lighting up, the natural energy of a creative studio starting its day. Focus on tight detail shots — fingers on keyboard, cursor on screen, Figma boards loading.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Desk B-Roll</span>
+                                        <span className="sd-shot-tag">Screen OTS</span>
+                                        <span className="sd-shot-tag">Detail Inserts</span>
+                                        <span className="sd-shot-tag">Coffee Moment</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot green" />
+                                    <div className="sd-time">11:00 AM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase shoot">Shooting</div>
+                                    <div className="sd-title">Scene Block 2 — The Design Process</div>
+                                    <div className="sd-desc">Apple Pencil on iPad in motion. Designers moving between Figma and Webflow. Over-the-shoulder shots of creative layouts being built, stylescapes being reviewed. Slider moves between workstations. This is the core of the film — the craft.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Apple Pencil / iPad</span>
+                                        <span className="sd-shot-tag">Figma Workflow</span>
+                                        <span className="sd-shot-tag">Slider Moves</span>
+                                        <span className="sd-shot-tag">Tight Hand Work</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot teal" />
+                                    <div className="sd-time">12:30 PM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase wrap">Break</div>
+                                    <div className="sd-title">Lunch & Reset</div>
+                                    <div className="sd-desc">Team breaks while crew repositions for afternoon scenes. Adjust lighting setups for conference room and exterior shots. Review morning footage selects.</div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot green" />
+                                    <div className="sd-time">1:30 PM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase shoot">Shooting</div>
+                                    <div className="sd-title">Scene Block 3 — Team Collaboration</div>
+                                    <div className="sd-desc">Conference room strategy sessions. Team gathered around a screen reviewing client work. Natural conversations — not scripted. Wide shots establish the space, tight shots capture genuine reactions and creative energy. Whiteboard brainstorming if applicable.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Conference Wide</span>
+                                        <span className="sd-shot-tag">Team Reactions</span>
+                                        <span className="sd-shot-tag">Strategy Session</span>
+                                        <span className="sd-shot-tag">Client Review</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot green" />
+                                    <div className="sd-time">3:00 PM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase shoot">Shooting</div>
+                                    <div className="sd-title">Scene Block 4 — Brand in the Wild</div>
+                                    <div className="sd-desc">Subtle brand placement shots. ThreadLink logo on screen matching real-world collateral. Business cards, printed materials, branded assets in the environment. The "Screen to Street" concept — digital work becoming tangible.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Brand Collateral</span>
+                                        <span className="sd-shot-tag">Logo Reveals</span>
+                                        <span className="sd-shot-tag">Print Materials</span>
+                                        <span className="sd-shot-tag">Environmental</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot green" />
+                                    <div className="sd-time">4:30 PM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase shoot">Shooting</div>
+                                    <div className="sd-title">Scene Block 5 — Golden Hour & Exteriors</div>
+                                    <div className="sd-desc">Exterior shots of the ThreadLink office at golden hour. Building signage, parking lot arrival, team walking out. Downtown Winter Garden if scheduled — Plant Street storefronts for local texture. Drone coverage if add-on is selected.</div>
+                                    <div className="sd-shots">
+                                        <span className="sd-shot-tag">Office Exterior</span>
+                                        <span className="sd-shot-tag">Golden Hour</span>
+                                        <span className="sd-shot-tag">Downtown B-Roll</span>
+                                        <span className="sd-shot-tag">Drone (optional)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="sd-block">
+                                <div className="sd-time-col">
+                                    <div className="sd-dot teal" />
+                                    <div className="sd-time">6:00 PM</div>
+                                </div>
+                                <div className="sd-content">
+                                    <div className="sd-phase wrap">Wrap</div>
+                                    <div className="sd-title">Wrap & Equipment Strike</div>
+                                    <div className="sd-desc">Final review of shot list. Confirm all scenes covered. Break down equipment, pack out. Transfer media cards to backup drives. Crew wraps for the day.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* B-Roll Shot List */}
+                    <div style={{ marginBottom: 48 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 8 }}>Detailed B-Roll Shot List</div>
+                        <div style={{ fontSize: 12, color: 'var(--muted-2)', marginBottom: 20, lineHeight: 1.7 }}>Every shot planned for maximum editorial flexibility in post-production.</div>
+                        <div className="shot-grid">
+                            {[
+                                { num: '01', name: 'Slider Desk Pass', setup: 'A-Cam · Slider · Low Angle', desc: 'Smooth slider move between workstations — camera glides past two designers at their desks. Shallow depth of field, bokeh of RGB LED accents in background. Sets the cinematic tone.' },
+                                { num: '02', name: 'Apple Pencil Insert', setup: 'B-Cam · Macro Lens · Handheld', desc: 'Extreme close-up of Apple Pencil tip touching iPad surface. Drawing strokes, brush adjustments, color picker. The creative tool in motion — detail that sells craftsmanship.' },
+                                { num: '03', name: 'Over-the-Shoulder Code', setup: 'A-Cam · 85mm · Tripod', desc: 'OTS of developer/designer working in Webflow or code editor. Screen fills the background (bokeh), shoulder and hands framed tight. Shows the technical depth.' },
+                                { num: '04', name: 'Team Huddle Wide', setup: 'A-Cam · 24mm · Steadicam', desc: 'Conference room establishing shot. Team gathered around a screen or whiteboard. Natural conversation energy, not posed. Steadicam orbit from door entry to 3/4 view.' },
+                                { num: '05', name: 'Coffee & Conversation', setup: 'B-Cam · 50mm · Handheld', desc: 'Two team members talking casually — maybe reviewing a phone, pointing at a screen. Coffee cups visible. The human connection moment that makes the film feel real.' },
+                                { num: '06', name: 'Screen to Print Match', setup: 'A-Cam · Macro → Wide Pull', desc: 'Logo on screen, then match cut to the same logo on a business card or wall sign. The "screen to street" concept in one sequence. Rack focus from screen to physical collateral.' },
+                                { num: '07', name: 'Keyboard Typing Detail', setup: 'B-Cam · Macro · Top-Down', desc: 'Overhead or low-angle shot of hands typing — rapid creative work. RGB-lit keys, shallow depth. Quick editorial cut that drives pace and energy in the final edit.' },
+                                { num: '08', name: 'Window Light Portrait', setup: 'A-Cam · 85mm · Natural Light', desc: 'William at his desk, natural window light. Not looking at camera — engaged in work. Shallow depth, warm tone. The founder in his element. Hero shot for thumbnails and social.' },
+                                { num: '09', name: 'Office Exterior Golden', setup: 'A-Cam · 35mm · Gimbal', desc: 'Gimbal walk-up to the ThreadLink office entrance at golden hour. Door opens, camera follows into the space. Establishes location and brand presence. Magic-hour light.' },
+                                { num: '10', name: 'Rapid Fire Montage Cuts', setup: 'Both Cams · Mixed · Handheld', desc: 'Quick 1-2 second inserts: mouse clicking, pen writing notes, phone notifications, team fist bump, laughing at screen. The montage fuel that makes the final cut dynamic.' },
+                            ].map((shot, i) => (
+                                <div key={i} className="shot-card">
+                                    <div className="shot-num">{shot.num}</div>
+                                    <div className="shot-name">{shot.name}</div>
+                                    <div className="shot-setup">{shot.setup}</div>
+                                    <div className="shot-desc">{shot.desc}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Crew Assignments */}
+                    <div style={{ marginBottom: 32 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 20 }}>Crew Assignments</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
+                            <div style={{ padding: '24px 20px', border: '1px solid rgba(99,102,241,0.15)', borderRadius: 16, background: 'rgba(99,102,241,0.04)' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>🎬</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>Matt Workman</div>
+                                <div style={{ fontSize: 12, color: 'var(--orange)', fontWeight: 600, marginBottom: 8 }}>Director / Lead DP — A-Camera</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>Creative direction for every shot. Operates primary camera (Sony FX3) on slider, gimbal, and tripod. Calls shots, manages pacing, and ensures every frame matches the cinematic vision.</div>
+                            </div>
+                            <div style={{ padding: '24px 20px', border: '1px solid rgba(167,139,250,0.15)', borderRadius: 16, background: 'rgba(167,139,250,0.04)' }}>
+                                <div style={{ fontSize: 24, marginBottom: 10 }}>🎯</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 18, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>Daniel Castillo</div>
+                                <div style={{ fontSize: 12, color: 'var(--teal)', fontWeight: 600, marginBottom: 8 }}>Producer / Cinematographer — B-Camera</div>
+                                <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.7 }}>Production logistics and B-camera operation. Handles detail inserts, macro work, and handheld coverage. Manages gear, lighting setups, and ensures the schedule stays on track.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Gear Checklist */}
+                    <div>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 20 }}>Camera & Gear Package</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
+                            {[
+                                { cat: 'Camera Bodies', items: ['Sony FX3 × 2', 'S-Cinetone + S-Log3', 'CFexpress Type A media'] },
+                                { cat: 'Lenses', items: ['Sony 24mm f/1.4 GM', 'Sony 50mm f/1.2 GM', 'Sony 85mm f/1.4 GM', 'Macro lens (detail inserts)'] },
+                                { cat: 'Grip & Movement', items: ['Motorized slider (120cm)', 'DJI RS4 Pro gimbal', 'Manfrotto fluid head tripod'] },
+                                { cat: 'Lighting', items: ['Aputure 300d III key light', 'Nanlite Forza 60 fill', 'RGB LED accent panels', 'Light stands + modifiers'] },
+                                { cat: 'Audio', items: ['Rode Wireless Pro × 2', 'Rode NTG5 shotgun mic', 'Zoom F3 field recorder'] },
+                                { cat: 'Support', items: ['V-mount batteries', 'Monitor (SmallHD)', 'Pelican cases × 4', 'Backup media cards'] },
+                            ].map((g, i) => (
+                                <div key={i} style={{ padding: '18px 16px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                                    <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 10 }}>{g.cat}</div>
+                                    {g.items.map((item, j) => (
+                                        <div key={j} style={{ fontSize: 11, color: 'var(--muted)', padding: '3px 0 3px 16px', position: 'relative', lineHeight: 1.5 }}>
+                                            <span style={{ position: 'absolute', left: 0, color: 'var(--orange)', fontSize: 10 }}>→</span>
+                                            {item}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Prepared By */}
+                    <div style={{ marginTop: 40, padding: '20px 24px', border: '1px solid rgba(99,102,241,0.12)', borderRadius: 16, background: 'rgba(99,102,241,0.03)', textAlign: 'center' }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Prepared By</div>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--white)' }}>MediaGeekz</div>
+                        <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 4 }}>Orlando, FL · mediageekz.com · 321-666-5228</div>
+                    </div>
+                </section>
+
                 {/* ═══ REFERENCE VIDEO ═══ */}
                 <section className="video-section reveal">
                     <div className="section-header">
@@ -885,7 +1229,8 @@ export default function ThreadLink() {
                     </div>
                 </div>
 
-                {/* ═══ INVESTMENT / PRICING ═══ */}
+                {/* ═══ INVESTMENT / PRICING ═══ — HIDDEN PER CLIENT REQUEST */}
+                {false && <>
                 <section className="th-section reveal">
                     <div className="section-header">
                         <div className="section-label">Investment</div>
@@ -1106,6 +1451,7 @@ export default function ThreadLink() {
                         );
                     })()}
                 </section>
+                </>}
 
                 <div className="divider" />
 
