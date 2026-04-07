@@ -72,10 +72,77 @@ export default function ThreadLink() {
     const [activePhase, setActivePhase] = useState('pre-production');
     const [scrollY, setScrollY] = useState(0);
     const [selectedAddOns, setSelectedAddOns] = useState([]);
+    const [feedbackState, setFeedbackState] = useState({});
+    const [toastMsg, setToastMsg] = useState(null);
 
     const toggleAddOn = (id) => {
         setSelectedAddOns(prev =>
             prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+        );
+    };
+
+    const sendFeedback = async (section, reaction, comment) => {
+        setFeedbackState(prev => ({ ...prev, [section]: { ...prev[section], sending: true } }));
+        try {
+            await fetch('/api/thread-feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ section, reaction, comment, timestamp: new Date().toISOString() }),
+            });
+            setFeedbackState(prev => ({ ...prev, [section]: { sent: true, reaction } }));
+            setToastMsg(`Feedback sent for ${section}!`);
+            setTimeout(() => setToastMsg(null), 3000);
+        } catch (e) {
+            console.error(e);
+            setFeedbackState(prev => ({ ...prev, [section]: { ...prev[section], sending: false } }));
+        }
+    };
+
+    const FeedbackBar = ({ section }) => {
+        const state = feedbackState[section] || {};
+        const [open, setOpen] = useState(false);
+        const [comment, setComment] = useState('');
+
+        if (state.sent) {
+            return (
+                <div className="fb-bar fb-sent">
+                    <span className="fb-check">✓</span> Thanks for the feedback on <strong>{section}</strong>
+                </div>
+            );
+        }
+
+        return (
+            <div className="fb-bar">
+                <div className="fb-row">
+                    <span className="fb-label">How does this section feel?</span>
+                    <div className="fb-reactions">
+                        {[
+                            { key: 'love', emoji: '❤️', tip: 'Love it' },
+                            { key: 'like', emoji: '👍', tip: 'Looks good' },
+                            { key: 'change', emoji: '✏️', tip: 'Needs changes' },
+                        ].map(r => (
+                            <button key={r.key} className={`fb-btn ${state.reaction === r.key ? 'active' : ''}`}
+                                onClick={() => {
+                                    if (r.key === 'change') { setOpen(true); setFeedbackState(prev => ({ ...prev, [section]: { reaction: r.key } })); }
+                                    else sendFeedback(section, r.key, '');
+                                }}
+                                disabled={state.sending}
+                                title={r.tip}
+                            >{r.emoji}</button>
+                        ))}
+                        <button className="fb-comment-toggle" onClick={() => setOpen(!open)} title="Add a comment">💬</button>
+                    </div>
+                </div>
+                {open && (
+                    <div className="fb-comment-area">
+                        <textarea className="fb-textarea" placeholder={`Any notes on the ${section.toLowerCase()} section...`}
+                            value={comment} onChange={e => setComment(e.target.value)} rows={3} />
+                        <button className="fb-send" onClick={() => sendFeedback(section, state.reaction || 'comment', comment)}
+                            disabled={state.sending || !comment.trim()}
+                        >{state.sending ? 'Sending...' : 'Send Feedback'}</button>
+                    </div>
+                )}
+            </div>
         );
     };
 
@@ -640,6 +707,63 @@ export default function ThreadLink() {
 
                 .alt-line span { color: var(--muted-3); font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 4px; font-style: normal; }
 
+                /* ── Feedback Bar ── */
+                .fb-bar {
+                    margin: 20px 0 8px; padding: 14px 18px;
+                    border: 1px solid rgba(99,102,241,0.1); border-radius: 14px;
+                    background: rgba(99,102,241,0.03);
+                    transition: all 0.3s;
+                }
+                .fb-bar:hover { border-color: rgba(99,102,241,0.2); }
+                .fb-sent { text-align: center; color: var(--teal); font-size: 13px; font-weight: 500; }
+                .fb-sent strong { color: var(--white); }
+                .fb-check { display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--teal); color: #000; font-size: 12px; line-height: 20px; text-align: center; margin-right: 8px; font-weight: 700; }
+                .fb-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+                .fb-label { font-size: 12px; color: var(--muted-2); font-weight: 500; }
+                .fb-reactions { display: flex; gap: 6px; align-items: center; }
+                .fb-btn {
+                    width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08);
+                    background: rgba(255,255,255,0.03); cursor: pointer; font-size: 16px;
+                    display: flex; align-items: center; justify-content: center;
+                    transition: all 0.2s;
+                }
+                .fb-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.1); border-color: var(--orange); }
+                .fb-btn.active { background: rgba(232,118,74,0.15); border-color: var(--orange); transform: scale(1.15); }
+                .fb-btn:disabled { opacity: 0.5; cursor: wait; }
+                .fb-comment-toggle {
+                    width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);
+                    background: transparent; cursor: pointer; font-size: 14px;
+                    display: flex; align-items: center; justify-content: center;
+                    transition: all 0.2s;
+                }
+                .fb-comment-toggle:hover { background: rgba(255,255,255,0.06); }
+                .fb-comment-area { margin-top: 12px; }
+                .fb-textarea {
+                    width: 100%; padding: 10px 14px; border-radius: 10px;
+                    border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.3);
+                    color: var(--cream); font-size: 13px; font-family: 'Inter', sans-serif;
+                    resize: vertical; min-height: 60px; outline: none;
+                    transition: border-color 0.2s;
+                }
+                .fb-textarea:focus { border-color: var(--orange); }
+                .fb-textarea::placeholder { color: var(--muted-3); }
+                .fb-send {
+                    margin-top: 8px; padding: 8px 20px; border-radius: 8px;
+                    border: none; background: var(--orange); color: #000;
+                    font-size: 12px; font-weight: 700; cursor: pointer;
+                    letter-spacing: 0.05em; transition: all 0.2s;
+                }
+                .fb-send:hover { filter: brightness(1.1); transform: translateY(-1px); }
+                .fb-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+                .fb-toast {
+                    position: fixed; bottom: 24px; right: 24px; padding: 12px 20px;
+                    background: var(--teal); color: #000; border-radius: 10px;
+                    font-size: 13px; font-weight: 600; z-index: 9999;
+                    animation: fbToastIn 0.3s ease-out;
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+                }
+                @keyframes fbToastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
                 /* ── Deliverables Grid ── */
                 .del-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
 
@@ -992,6 +1116,8 @@ export default function ThreadLink() {
                     </div>
                 </section>
 
+                <FeedbackBar section="Creative Treatment" />
+
                 <div className="divider" />
 
                 {/* ═══ SHOOT DAY DIRECTION ═══ */}
@@ -1240,6 +1366,8 @@ export default function ThreadLink() {
                     </div>
                 </section>
 
+                <FeedbackBar section="Shoot Day Direction" />
+
                 <div className="divider" />
 
                 {/* ═══ VOICEOVER SCRIPT ═══ */}
@@ -1373,6 +1501,8 @@ export default function ThreadLink() {
                         </div>
                     </div>
                 </section>
+
+                <FeedbackBar section="Voiceover Script" />
 
                 {/* ═══ REFERENCE VIDEO ═══ */}
                 <section className="video-section reveal">
@@ -1671,6 +1801,8 @@ export default function ThreadLink() {
                     <div className="footer-logo">MediaGeekz × ThreadLink</div>
                     <div className="footer-tagline">Creative partnership. Community roots.</div>
                 </div>
+
+                {toastMsg && <div className="fb-toast">{toastMsg}</div>}
             </div>
         </>
     );
