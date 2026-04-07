@@ -596,6 +596,50 @@ export default function ThreadLink() {
                     .shot-grid { grid-template-columns: 1fr; }
                 }
 
+                /* ── Script Section ── */
+                .script-block {
+                    position: relative; padding: 24px 24px 24px 32px;
+                    border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+                    background: var(--panel); margin-bottom: 16px;
+                    border-left: 3px solid rgba(99,102,241,0.3);
+                    transition: border-color 0.3s, transform 0.3s;
+                }
+                .script-block:hover { border-left-color: var(--orange); transform: translateX(4px); }
+
+                .script-time-badge {
+                    display: inline-block; padding: 3px 10px; border-radius: 6px;
+                    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+                    background: rgba(99,102,241,0.12); color: var(--orange);
+                    margin-bottom: 8px; font-family: 'Outfit', sans-serif;
+                }
+
+                .script-beat {
+                    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
+                    color: var(--white); margin-bottom: 6px;
+                }
+
+                .script-broll {
+                    font-size: 11px; color: var(--teal); font-weight: 500;
+                    margin-bottom: 10px; font-style: italic; line-height: 1.5;
+                }
+
+                .script-vo {
+                    font-size: 14px; color: var(--cream); line-height: 1.8;
+                    font-style: italic; font-family: 'Outfit', sans-serif;
+                    font-weight: 300;
+                }
+
+                .script-vo strong { font-weight: 500; color: var(--white); }
+
+                .alt-line {
+                    padding: 12px 16px; border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 10px; background: rgba(255,255,255,0.02);
+                    font-size: 12px; color: var(--muted-2); line-height: 1.6;
+                    font-style: italic;
+                }
+
+                .alt-line span { color: var(--muted-3); font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 4px; font-style: normal; }
+
                 /* ── Deliverables Grid ── */
                 .del-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
 
@@ -1193,6 +1237,140 @@ export default function ThreadLink() {
                         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 6 }}>Prepared By</div>
                         <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700, color: 'var(--white)' }}>MediaGeekz</div>
                         <div style={{ fontSize: 11, color: 'var(--muted-2)', marginTop: 4 }}>Orlando, FL · mediageekz.com · 321-666-5228</div>
+                    </div>
+                </section>
+
+                <div className="divider" />
+
+                {/* ═══ VOICEOVER SCRIPT ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Voiceover Script</div>
+                        <div className="section-question">The words that carry the film</div>
+                        <h2 className="section-title">&ldquo;The Neighbors&rdquo;</h2>
+                        <p className="section-desc">
+                            A warm, grounded voiceover that feels like a friend telling you what they do over coffee. Not a pitch — a story about a studio that shows up for its community.
+                        </p>
+                    </div>
+
+                    {/* Script overview cards */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10, marginBottom: 36 }}>
+                        {[
+                            { label: 'Duration', value: '1:20–1:30', icon: '⏱' },
+                            { label: 'Word Count', value: '~140 words', icon: '📝' },
+                            { label: 'Tone', value: 'Warm & Chill', icon: '☀️' },
+                            { label: 'Speaker', value: 'William (VO)', icon: '🎤' },
+                            { label: 'Music', value: 'Acoustic / Indie', icon: '🎵' },
+                        ].map((d, i) => (
+                            <div key={i} style={{ padding: '14px 12px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, background: 'var(--panel)', textAlign: 'center' }}>
+                                <div style={{ fontSize: 18, marginBottom: 4 }}>{d.icon}</div>
+                                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--muted-3)', marginBottom: 3 }}>{d.label}</div>
+                                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 13, fontWeight: 700, color: 'var(--white)' }}>{d.value}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Script beats */}
+                    <div style={{ marginBottom: 40 }}>
+                        <div className="script-block">
+                            <div className="script-time-badge">0:00 – 0:08</div>
+                            <div className="script-beat">Open — Clermont</div>
+                            <div className="script-broll">Golden hour Clermont — downtown Plant Street, storefronts, people walking. Slow gimbal move.</div>
+                            <div className="script-vo">
+                                &ldquo;Clermont&rsquo;s kind of a small-town-that&rsquo;s-not-so-small-anymore, you know?&rdquo;<br />
+                                &ldquo;And that&rsquo;s what makes it exciting.&rdquo;
+                            </div>
+                        </div>
+
+                        <div className="script-block">
+                            <div className="script-time-badge">0:08 – 0:22</div>
+                            <div className="script-beat">Who We Are</div>
+                            <div className="script-broll">Office door opens, morning light, team settling in. Coffee. Screens waking up. Casual energy. Smiles, someone greeting a teammate.</div>
+                            <div className="script-vo">
+                                &ldquo;We&rsquo;re ThreadLink. We&rsquo;re a design studio.&rdquo;<br />
+                                &ldquo;But... really, we&rsquo;re just a group of people who grew up here&rdquo;<br />
+                                &ldquo;and want to see it keep growing.&rdquo;<br /><br />
+                                &ldquo;We build websites. We build brands.&rdquo;<br />
+                                &ldquo;For the businesses that build our neighborhoods.&rdquo;
+                            </div>
+                        </div>
+
+                        <div className="script-block">
+                            <div className="script-time-badge">0:22 – 0:40</div>
+                            <div className="script-beat">The People We Work With</div>
+                            <div className="script-broll">Scroll through real client sites on screen — Pain Free Orlando, South Lake Chamber, Renovation Outdoors. Team reviewing client work in conference room — relaxed, laughing.</div>
+                            <div className="script-vo">
+                                &ldquo;Doctors who moved to Clermont to start something new.&rdquo;<br />
+                                &ldquo;A scholarship fund that helps EMTs finish school.&rdquo;<br />
+                                &ldquo;The chamber of commerce. The homeschool co-op.&rdquo;<br />
+                                &ldquo;The landscaper who just wants his work to speak for itself.&rdquo;<br /><br />
+                                &ldquo;These aren&rsquo;t just clients. They&rsquo;re our neighbors.&rdquo;
+                            </div>
+                        </div>
+
+                        <div className="script-block">
+                            <div className="script-time-badge">0:40 – 0:58</div>
+                            <div className="script-beat">The Craft</div>
+                            <div className="script-broll">Apple Pencil on iPad, Figma workflow, slider passes between desks. Logo on screen matching a real business card — screen to street.</div>
+                            <div className="script-vo">
+                                &ldquo;So when we sit down to design —&rdquo;<br />
+                                &ldquo;it&rsquo;s not about making something look cool.&rdquo;<br />
+                                &ldquo;It&rsquo;s about making something that feels like <strong>them</strong>.&rdquo;<br /><br />
+                                &ldquo;Their story. Their colors. Their people.&rdquo;<br />
+                                &ldquo;We just help it all make sense.&rdquo;
+                            </div>
+                        </div>
+
+                        <div className="script-block">
+                            <div className="script-time-badge">0:58 – 1:20</div>
+                            <div className="script-beat">Close</div>
+                            <div className="script-broll">Wide shot of team at work, golden window light. William at desk, not looking at camera. Exterior office at golden hour. ThreadLink logo fades in.</div>
+                            <div className="script-vo">
+                                &ldquo;We&rsquo;re not trying to be the biggest studio.&rdquo;<br />
+                                &ldquo;We just want to be the one you trust.&rdquo;<br /><br />
+                                &ldquo;<strong>ThreadLink.</strong>&rdquo;<br />
+                                &ldquo;Clermont, Florida.&rdquo;
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Alt lines */}
+                    <div style={{ marginBottom: 32 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 14 }}>Alt Lines — Editorial Flexibility</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 10 }}>
+                            {[
+                                { swap: 'Open Alt', line: '"I used to drive past these businesses every day before I started designing for them."' },
+                                { swap: 'Who We Are Alt', line: '"We didn\'t start ThreadLink to win awards — but we did. Twice."' },
+                                { swap: 'Neighbors Alt', line: '"You can\'t build a brand for someone you don\'t understand. So we start by listening."' },
+                                { swap: 'Craft Alt', line: '"Every color, every font, every pixel — it\'s on purpose."' },
+                                { swap: 'Close Alt 1', line: '"Purpose-driven design. Community roots. That\'s the thread."' },
+                                { swap: 'Close Alt 2', line: '"Built here. For here. And for wherever you\'re growing next."' },
+                            ].map((a, i) => (
+                                <div key={i} className="alt-line">
+                                    <span>{a.swap}</span>
+                                    {a.line}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Production notes */}
+                    <div style={{ padding: '20px 20px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, background: 'var(--panel)' }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--teal)', marginBottom: 12 }}>Production Notes</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
+                            {[
+                                { label: 'VO Style', val: 'Natural, not announcer — like talking to a friend. Pauses are OK.' },
+                                { label: 'Music Bed', val: 'Warm acoustic guitar, subtle piano, soft percussion build. Artlist: "indie documentary warm"' },
+                                { label: 'Sound Design', val: 'Quiet office ambience, keyboard taps, coffee pour, laughter — lived-in, not sterile' },
+                                { label: 'Color Grade', val: 'Warm, golden, lifted shadows. Skin tones natural. Approachable, not overly cinematic.' },
+                                { label: 'vs. Reference', val: 'Reference is confident & punchy. This is warm & grounded. Same structure, different soul.' },
+                            ].map((n, i) => (
+                                <div key={i} style={{ padding: '10px 12px', borderRadius: 8, background: 'rgba(255,255,255,0.02)' }}>
+                                    <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 4 }}>{n.label}</div>
+                                    <div style={{ fontSize: 11, color: 'var(--muted-2)', lineHeight: 1.6 }}>{n.val}</div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </section>
 
