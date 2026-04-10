@@ -1092,6 +1092,105 @@ export default function ThreadLink() {
 
                 <div className="divider" />
 
+                {/* ═══ SCENE-BY-SCENE BREAKDOWN ═══ */}
+                <section className="th-section reveal">
+                    <div className="section-header">
+                        <div className="section-label">Scene Breakdown</div>
+                        <div className="section-question">What we're capturing in each scene</div>
+                        <h2 className="section-title">Scene-by-Scene Shot List</h2>
+                        <p className="section-desc">
+                            Every scene planned out — this is exactly what we'll be shooting on set. Each scene is designed to flow together in the final edit.
+                        </p>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16 }}>
+                        {[
+                            { num: '01', title: 'Scene 1', cards: 2, image: '/thread/scenes/gemini_lk.jpg', desc: 'start the scene with camera angeld up and immediatly pans down as they create the hook to grab the attention of the commercial. walking towards cam and they stop at a point to where the cam turns quickly left to transition to next scene.' },
+                            { num: '02', title: 'Scene 2', cards: 2, image: '/thread/scenes/gemini_70r_2.png', desc: 'camera pans quickly from the right side to left as will talks to cam about their prcess and what they offer.' },
+                            { num: '03', title: 'Scene 3', cards: 2, image: '/thread/scenes/gemini_lk_2.jpg', desc: 'cut to unique probe lens shot of camera sliding down the keyboard as the employee types.' },
+                            { num: '04', title: 'Scene 4', cards: 2, image: '/thread/scenes/img2297.jpg', desc: 'cut to a wide tripod shot of her on the computer focused. here i can slowly zoom in on post.' },
+                            { num: '05', title: 'Scene 5', cards: 2, image: '/thread/scenes/chatgpt.png', desc: 'cut to the girl looking at cam as if its the computer and we add a green screen effect of everything she is working on for the client left and right of her. If this scene doesnt work we simply make the initial shots of her on the computer and we add images there of what shes working on left and right as back up.' },
+                            { num: '06', title: 'Scene 6', cards: 2, image: '/thread/scenes/img2298.jpg', desc: 'cut to creativity and design. for their clients, we can use an ipad or any tools they use to create.' },
+                            { num: '07', title: 'Scene 7', cards: 2, image: '/thread/scenes/img2301.jpg', desc: 'cut to macro shots of the tools they use.' },
+                            { num: '08', title: 'Scene 8', cards: 2, image: '/thread/scenes/img2302.jpg', desc: 'cut to the actual images, websites, and designs they have made for their clients. we fade in and out their top work and results.' },
+                            { num: '09', title: 'Scene 9', cards: 2, image: '/thread/scenes/img2304.jpg', desc: 'these are just more shots of results' },
+                            { num: '10', title: 'Scene 10', cards: 2, image: '/thread/scenes/img2300.jpg', desc: 'fade in and out their best work.' },
+                            { num: '11', title: 'Scene 11', cards: 2, image: '/thread/scenes/gemini_70r_2.png', desc: 'cut back to will saying a final line about how your time is importnt to us and how they works fast to ensure they are taken care of since this line of work is always movignfaster than ever.' },
+                            { num: '12', title: 'Scene 12', cards: 2, image: '/thread/scenes/img2299.jpg', desc: 'as will is tlaking that last line show either a clock of someones watch and the hand turns to show the time, then add transition to the boardroom' },
+                            { num: '13', title: 'Scene 13', cards: 2, image: '/thread/scenes/gemini_lk_4.jpg', desc: 'We cut to the boardroom and feschyn is now talking to the cam at the end of the table. with everyone else listening. we could possibly have images behind will silair to this image and sloly push in the shot and a safety shot on the tripod.' },
+                            { num: '14', title: 'Scene 14', cards: 2, image: '/thread/scenes/gemini_r55.png', desc: 'cut to tight shot of a couple of the people listening.' },
+                            { num: '15', title: 'Scene 15', cards: 2, image: '/thread/scenes/img2296.jpg', desc: 'cut to a tight shot of one of them messaging talking about how they communicate with you super fast. and ensure every detail is taken care of.' },
+                            { num: '17', title: 'Scene 17', cards: 2, image: '/thread/scenes/gemini_8qp.png', desc: 'cut to will and feschyn next to him looking sideways talking down a hallway and cut as they turn their heads and cam is straight looking at them, nd they are in winter garden doing their last line about supporting the community and excited to work together.' },
+                            { num: '18', title: 'Scene 18', cards: 2, image: '/thread/scenes/gemini_8qp.png', desc: 'they are in winter garden doing their last line about supporting the community and excited to work together. or this can be any other spot within the office.' },
+                            { num: '18b', title: 'Scene 18', cards: 2, image: '/thread/scenes/gemini_w5c.png', desc: 'and with scene of drone shot and logo of threadlink pops up and then screen goes black with logo still there.' },
+                        ].map((scene, i) => (
+                            <div key={i} style={{
+                                padding: '20px',
+                                border: '1px solid rgba(255,255,255,0.06)',
+                                borderRadius: 18,
+                                background: 'var(--panel)',
+                                transition: 'all 0.35s ease',
+                                position: 'relative',
+                                overflow: 'hidden',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 16
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(99,102,241,0.3)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                            >
+                                {/* Scene number watermark */}
+                                <div style={{
+                                    position: 'absolute', top: -8, right: 12,
+                                    fontFamily: "'Outfit', sans-serif", fontSize: 72, fontWeight: 900,
+                                    color: 'rgba(99,102,241,0.06)', lineHeight: 1, pointerEvents: 'none', zIndex: 0
+                                }}>{scene.title.split(' ')[1]}</div>
+
+                                <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div style={{
+                                        fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 700,
+                                        color: 'var(--white)', lineHeight: 1.3,
+                                    }}>{scene.title}</div>
+                                    <div style={{ fontSize: 10, color: 'var(--muted-3)', fontWeight: 600 }}>
+                                        {scene.cards} {scene.cards === 1 ? 'card' : 'cards'}
+                                    </div>
+                                </div>
+
+                                <div style={{ 
+                                    width: '100%', 
+                                    height: '180px', 
+                                    position: 'relative', 
+                                    borderRadius: 8, 
+                                    overflow: 'hidden',
+                                    zIndex: 1,
+                                    flexShrink: 0
+                                }}>
+                                    <img 
+                                        src={scene.image} 
+                                        alt={scene.title} 
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                    />
+                                </div>
+
+                                <div style={{
+                                    fontSize: 12, color: 'var(--muted-2)', lineHeight: 1.75, position: 'relative', zIndex: 1
+                                }}>{scene.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div style={{ marginTop: 28, padding: '20px 24px', border: '1px solid rgba(99,102,241,0.12)', borderRadius: 16, background: 'rgba(99,102,241,0.03)', borderLeft: '3px solid var(--orange)' }}>
+                        <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 14, fontWeight: 400, color: 'var(--cream)', lineHeight: 1.7, fontStyle: 'italic' }}>
+                            &quot;This scene list is your blueprint for shoot day. Every scene is designed to capture a different facet of ThreadLink — from the raw creative process to the team energy to the community connection. We'll move through these in order on set.&quot;
+                        </div>
+                        <div style={{ marginTop: 10, fontSize: 11, color: 'var(--muted-2)', fontWeight: 600 }}>— MediaGeekz Production Team</div>
+                    </div>
+                </section>
+
+                <FeedbackBar section="Scene Breakdown" />
+
+                <div className="divider" />
+
                 {/* ═══ LOCATIONS ═══ */}
                 <section className="th-section reveal">
                     <div className="section-header">
